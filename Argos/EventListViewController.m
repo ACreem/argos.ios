@@ -34,6 +34,7 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.title = @"Latest";
     
     // Register the Cell class to use for table cells.
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
