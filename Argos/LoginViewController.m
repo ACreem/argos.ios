@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#import "EventListViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController ()
@@ -42,9 +43,8 @@
     NSString* emailValue = [_emailField text];
     NSLog(@"%@", emailValue);
     
-    //MasterViewController *masterViewController = [[MasterViewController alloc] init];
-    //[self.navigationController pushViewController:masterViewController animated:YES];
-    
+    EventListViewController *elvc = [[EventListViewController alloc] init];
+    [self.navigationController pushViewController:elvc animated:YES];
 }
 
 - (void)setupUI

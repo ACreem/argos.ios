@@ -19,6 +19,7 @@
 		F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
 		F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1405C4518973C4C00A4819D /* InfoPlist.strings */; };
 		F1405C4918973C4C00A4819D /* ArgosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1405C4818973C4C00A4819D /* ArgosTests.m */; };
+		F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F144F4C318973FBB00A43388 /* EventListViewController.m */; };
 		F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F18F218918973CBE0069CA93 /* LoginViewController.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -52,6 +53,8 @@
 		F1405C4418973C4C00A4819D /* ArgosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArgosTests-Info.plist"; sourceTree = "<group>"; };
 		F1405C4618973C4C00A4819D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F1405C4818973C4C00A4819D /* ArgosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArgosTests.m; sourceTree = "<group>"; };
+		F144F4C218973FBB00A43388 /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
+		F144F4C318973FBB00A43388 /* EventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListViewController.m; sourceTree = "<group>"; };
 		F18F218818973CBE0069CA93 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F18F218918973CBE0069CA93 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,9 +120,11 @@
 			isa = PBXGroup;
 			children = (
 				F1405C3218973C4C00A4819D /* AppDelegate.h */,
+				F1405C3318973C4C00A4819D /* AppDelegate.m */,
 				F18F218818973CBE0069CA93 /* LoginViewController.h */,
 				F18F218918973CBE0069CA93 /* LoginViewController.m */,
-				F1405C3318973C4C00A4819D /* AppDelegate.m */,
+				F144F4C218973FBB00A43388 /* EventListViewController.h */,
+				F144F4C318973FBB00A43388 /* EventListViewController.m */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
 				F1405C2A18973C4C00A4819D /* Supporting Files */,
 			);
@@ -286,6 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
+				F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
 				F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */,
 			);
