@@ -8,11 +8,15 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
+#import "ReachabilityManager.h"
 
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // Instiatiate network reachability monitor.
+    [ReachabilityManager sharedManager];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     LoginViewController *lvc = [[LoginViewController alloc] init];

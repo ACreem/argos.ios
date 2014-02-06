@@ -20,6 +20,8 @@
 		F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1405C4518973C4C00A4819D /* InfoPlist.strings */; };
 		F1405C4918973C4C00A4819D /* ArgosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1405C4818973C4C00A4819D /* ArgosTests.m */; };
 		F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F144F4C318973FBB00A43388 /* EventListViewController.m */; };
+		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
+		F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F14603B618A4288400A85E0F /* ReachabilityManager.m */; };
 		F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F18F218918973CBE0069CA93 /* LoginViewController.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -55,6 +57,9 @@
 		F1405C4818973C4C00A4819D /* ArgosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArgosTests.m; sourceTree = "<group>"; };
 		F144F4C218973FBB00A43388 /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
 		F144F4C318973FBB00A43388 /* EventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListViewController.m; sourceTree = "<group>"; };
+		F14603B318A41FB100A85E0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		F14603B518A4288400A85E0F /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
+		F14603B618A4288400A85E0F /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
 		F18F218818973CBE0069CA93 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		F18F218918973CBE0069CA93 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */,
 				F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */,
 				F1405C2818973C4C00A4819D /* UIKit.framework in Frameworks */,
 				F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */,
@@ -107,6 +113,7 @@
 		F1405C2218973C4C00A4819D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F14603B318A41FB100A85E0F /* SystemConfiguration.framework */,
 				F1405C2318973C4C00A4819D /* Foundation.framework */,
 				F1405C2518973C4C00A4819D /* CoreGraphics.framework */,
 				F1405C2718973C4C00A4819D /* UIKit.framework */,
@@ -121,6 +128,8 @@
 			children = (
 				F1405C3218973C4C00A4819D /* AppDelegate.h */,
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
+				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
+				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
 				F18F218818973CBE0069CA93 /* LoginViewController.h */,
 				F18F218918973CBE0069CA93 /* LoginViewController.m */,
 				F144F4C218973FBB00A43388 /* EventListViewController.h */,
@@ -291,6 +300,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
+				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
 				F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
 				F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */,
