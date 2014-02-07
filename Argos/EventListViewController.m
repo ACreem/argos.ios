@@ -38,13 +38,8 @@
     
     _manager = [AFHTTPRequestOperationManager manager];
     _events = [[NSMutableArray alloc] init];
-    [_manager GET:@"http://localhost:5000/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
-        [_events addObjectsFromArray:responseObject];
-        [self.tableView reloadData];
-        self.dateLastUpdated = [NSDate date];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+    
+    [self loadData];
     
     // Setup Pull-To-Refresh
     if (self.refreshHeaderView == nil) {
@@ -57,6 +52,27 @@
         [self.tableView addSubview:view];
         self.refreshHeaderView = view;
     }
+}
+
+- (void)loadData
+{
+    [_manager GET:@"http://localhost:5000/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
+        
+        // Filter out existing items.
+        NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];
+        [newItems removeObjectsInArray:_events];
+        
+        [_events addObjectsFromArray:newItems];
+        [self.tableView reloadData];
+        
+        self.dateLastUpdated = [NSDate date];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
@@ -164,7 +180,8 @@
 	//  should be calling your tableviews data source model to reload
 	//  put here just for demo
 	self.reloading = YES;
-    [self.tableView reloadData];
+    [self loadData];
+    [self doneLoadingTableViewData];
 }
 
 - (void)doneLoadingTableViewData{
