@@ -20,10 +20,21 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     LoginViewController *lvc = [[LoginViewController alloc] init];
+    
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:lvc];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+        [NSDictionary dictionaryWithObjectsAndKeys:
+            [UIColor whiteColor], NSForegroundColorAttributeName,
+            [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0], NSFontAttributeName,
+            nil]];
+    
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = self.navigationController;
     [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
