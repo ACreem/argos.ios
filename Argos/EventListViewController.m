@@ -54,6 +54,11 @@
         self.refreshHeaderView = view;
     }
     
+    
+    // Set cell separator to full width, if necessary.
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
 }
 
 - (void)loadData
@@ -155,7 +160,7 @@
         {
             UIButton* button = [[cell rightUtilityButtons] objectAtIndex:index];
             if (button.tag != 1) {
-                [button setImage:[UIImage imageNamed:@"watching"] forState:UIControlStateNormal];
+                [button setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
                 [button setTag:1];
             } else {
                 [button setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];

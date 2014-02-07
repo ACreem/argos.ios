@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "IIViewDeckController.h"
 
-@interface MenuViewController : UITableViewController
+@interface MenuViewController : UITableViewController <IIViewDeckControllerDelegate>
 
 @end

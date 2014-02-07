@@ -35,8 +35,21 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.viewDeckController.delegate = self;
+    
     // Register the Cell class to use for table cells.
     [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
+    
+    self.tableView.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];
+    
+    // Hide empty cells
+    self.tableView.tableFooterView = [UIView new];
+    
+    // Set cell separator to full width, if necessary.
+    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
+        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
+    }
+    [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
     _items = [[NSMutableArray alloc] initWithObjects:@"Latest", @"Watching", @"Settings", nil];
     [self.tableView reloadData];
@@ -48,7 +61,7 @@
     
     // Bump the menu view down to fit the status bar underlayer.
     CGRect frame = [[self view] frame];
-    frame.size.height -= 20;
+    //frame.size.height -= 20;
     frame.origin.y = 20;
     [[self view] setFrame:frame];
     
@@ -83,8 +96,16 @@
     // Configure the cell...
     NSString *title = [_items objectAtIndex:indexPath.row];
     cell.textLabel.text = title;
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
+    cell.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];
+    cell.textLabel.textColor = [UIColor colorWithRed:0.929 green:0.929 blue:0.929 alpha:1.0];
+    cell.imageView.image = [UIImage imageNamed:[title lowercaseString]];
     
     return cell;
+}
+
+- (void)viewDeckController:(IIViewDeckController *)viewDeckController didChangeOffset:(CGFloat)offset orientation:(IIViewDeckOffsetOrientation)orientation panning:(BOOL)panning {
+    NSLog(@"%f", offset);
 }
 
 /*
