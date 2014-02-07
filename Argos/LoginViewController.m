@@ -30,6 +30,7 @@
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:YES];
+    _manager = [AFHTTPRequestOperationManager manager];
     [self setupUI];
 }
 
@@ -39,11 +40,26 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void)loginButtonPressed:(id)sender
+- (void)facebookLoginButtonPressed:(id)sender
 {
-    NSString* emailValue = [_emailField text];
-    NSLog(@"%@", emailValue);
-    
+    // Implement oauth flow
+    [self postLogin];
+}
+
+- (void)twitterLoginButtonPressed:(id)sender
+{
+    // Implement oauth flow
+    [self postLogin];
+}
+
+- (void)googleLoginButtonPressed:(id)sender
+{
+    // Implement oauth flow
+    [self postLogin];
+}
+
+- (void)postLogin
+{
     EventListViewController *elvc = [[EventListViewController alloc] init];
     [self.navigationController pushViewController:elvc animated:YES];
 }
@@ -53,46 +69,34 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     CGFloat screenWidth = screenRect.size.width;
     CGFloat screenHeight = screenRect.size.height;
-    CGFloat buttonWidth = 100;
-    CGFloat buttonHeight = 100;
+    CGFloat buttonWidth = 200;
+    CGFloat buttonHeight = 50;
+    CGFloat buttonMargin = 25;
     
-    // Create login button
-    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    loginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, screenHeight - buttonHeight*2, buttonWidth, buttonHeight);
-    [loginButton setTitle:@"Login" forState:UIControlStateNormal];
-    [loginButton addTarget:self action:@selector(loginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
-    [self.view addSubview:loginButton];
+    // Create login buttons
+    UIButton *facebookLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    facebookLoginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, screenHeight/2 - buttonHeight/2, buttonWidth, buttonHeight);
+    [facebookLoginButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
+    [facebookLoginButton setBackgroundColor:[UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0]];
+    [facebookLoginButton setTintColor:[UIColor whiteColor]];
+    [facebookLoginButton addTarget:self action:@selector(facebookLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:facebookLoginButton];
     
-    // Create text fields
-    CGFloat fieldWidth = 200;
-    CGFloat fieldHeight = 50;
-    _emailField = [[UITextField alloc] initWithFrame:CGRectMake(screenWidth/2 - fieldWidth/2, fieldHeight*2, fieldWidth, fieldHeight)];
-    _emailField.delegate = self;
-    _emailField.placeholder = @"email";
-    _emailField.borderStyle = UITextBorderStyleLine;
-    _emailField.layer.borderColor = [[UIColor grayColor] CGColor];
-    _emailField.layer.borderWidth = 1.0;
-    [self.view addSubview:_emailField];
+    UIButton *twitterLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    twitterLoginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, facebookLoginButton.frame.origin.y - (buttonMargin + buttonHeight), buttonWidth, buttonHeight);
+    [twitterLoginButton setTitle:@"Login with Twitter" forState:UIControlStateNormal];
+    [twitterLoginButton setBackgroundColor:[UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0]];
+    [twitterLoginButton setTintColor:[UIColor whiteColor]];
+    [twitterLoginButton addTarget:self action:@selector(twitterLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:twitterLoginButton];
     
-    _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(screenWidth/2 - fieldWidth/2, _emailField.frame.origin.y + (fieldHeight * 2), fieldWidth, fieldHeight)];
-    _passwordField.delegate = self;
-    _passwordField.secureTextEntry = YES;
-    _passwordField.placeholder = @"password";
-    _passwordField.borderStyle = UITextBorderStyleLine;
-    _passwordField.layer.borderColor = [[UIColor grayColor] CGColor];
-    _passwordField.layer.borderWidth = 1.0;
-    [self.view addSubview:_passwordField];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    return NO;
-}
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
-    [_emailField resignFirstResponder];
-    [_passwordField resignFirstResponder];
+    UIButton *googleLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    googleLoginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, facebookLoginButton.frame.origin.y + (buttonMargin + buttonHeight), buttonWidth, buttonHeight);
+    [googleLoginButton setTitle:@"Login with Google" forState:UIControlStateNormal];
+    [googleLoginButton setBackgroundColor:[UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0]];
+    [googleLoginButton setTintColor:[UIColor whiteColor]];
+    [googleLoginButton addTarget:self action:@selector(googleLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:googleLoginButton];
 }
 
 @end
