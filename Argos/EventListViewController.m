@@ -53,6 +53,7 @@
         [self.tableView addSubview:view];
         self.refreshHeaderView = view;
     }
+    
 }
 
 - (void)loadData

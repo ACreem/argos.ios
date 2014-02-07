@@ -6,8 +6,11 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "EventListViewController.h"
+#import "IIViewDeckController.h"
+#import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface LoginViewController ()
@@ -61,7 +64,33 @@
 - (void)postLogin
 {
     EventListViewController *elvc = [[EventListViewController alloc] init];
-    [self.navigationController pushViewController:elvc animated:YES];
+    
+    // Add background for the status bar, so the pull menu transition looks better.
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+    view.backgroundColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate.window addSubview:view];
+    
+    // Create the navigation controller for the rest of the application.
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:elvc];
+    navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    navigationController.navigationBar.translucent = NO;
+    navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [navigationController.navigationBar setTitleTextAttributes:
+        [NSDictionary dictionaryWithObjectsAndKeys:
+            [UIColor whiteColor], NSForegroundColorAttributeName,
+            [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0], NSFontAttributeName,
+            nil]];
+         
+    MenuViewController* menuController = [[MenuViewController alloc] init];
+    
+    // Create the pull menu controller.
+    IIViewDeckController* deckController = [[IIViewDeckController alloc]
+                                             initWithCenterViewController:navigationController
+                                             leftViewController:menuController
+                                             rightViewController:nil];
+    
+    [self.navigationController pushViewController:deckController animated:YES];
 }
 
 - (void)setupUI
