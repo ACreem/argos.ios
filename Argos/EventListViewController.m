@@ -33,7 +33,6 @@
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Latest";
     
@@ -42,10 +41,22 @@
     [_manager GET:@"http://localhost:5000/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
         [_events addObjectsFromArray:responseObject];
         [self.tableView reloadData];
+        self.dateLastUpdated = [NSDate date];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
     }];
     
+    // Setup Pull-To-Refresh
+    if (self.refreshHeaderView == nil) {
+        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc]
+                                           initWithFrame:CGRectMake(0.0f,
+                                                                    0.0f - self.tableView.bounds.size.height,
+                                                                    self.view.frame.size.width,
+                                                                    self.tableView.bounds.size.height)];
+        view.delegate = self;
+        [self.tableView addSubview:view];
+        self.refreshHeaderView = view;
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -143,6 +154,60 @@
         default:
             break;
     }
+}
+
+#pragma mark -
+#pragma mark Data Source Loading / Reloading Methods
+
+- (void)reloadTableViewDataSource{
+    
+	//  should be calling your tableviews data source model to reload
+	//  put here just for demo
+	self.reloading = YES;
+    [self.tableView reloadData];
+}
+
+- (void)doneLoadingTableViewData{
+	//  model should call this when its done loading
+	self.reloading = NO;
+	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+}
+
+#pragma mark -
+#pragma mark UIScrollViewDelegate Methods
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
+    
+	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
+    
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    
+	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
+    
+}
+
+
+#pragma mark -
+#pragma mark EGORefreshTableHeaderDelegate Methods
+
+- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+    
+	[self performSelectorOnMainThread:@selector(reloadTableViewDataSource) withObject:nil waitUntilDone:NO];
+    
+}
+
+- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
+    
+	return self.reloading; // should return if data source model is reloading
+    
+}
+
+- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
+    
+	return self.dateLastUpdated; // should return date data source was last changed
+    
 }
 
 /*
