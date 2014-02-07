@@ -18,13 +18,16 @@ PODS:
   - AFNetworking/UIKit (2.1.0):
     - AFNetworking/NSURLConnection
   - Reachability (3.1.1)
+  - SWTableViewCell (0.2.3)
 
 DEPENDENCIES:
   - AFNetworking
   - Reachability
+  - SWTableViewCell
 
 SPEC CHECKSUMS:
   AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  SWTableViewCell: 270c3758a84547b1cad43d70b72203b3003ce27b
 
 COCOAPODS: 0.29.0

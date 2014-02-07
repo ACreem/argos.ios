@@ -7,6 +7,7 @@
 //
 
 #import "EventListViewController.h"
+#import "SWTableViewCell.h"
 
 @interface EventListViewController () {
     NSMutableArray *_events;
@@ -35,9 +36,6 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Latest";
-    
-    // Register the Cell class to use for table cells.
-    [self.tableView registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
     
     _manager = [AFHTTPRequestOperationManager manager];
     _events = [[NSMutableArray alloc] init];
@@ -73,13 +71,78 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    SWTableViewCell *cell = (SWTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    
+    if (cell == nil) {
+        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
+        NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+        
+        [rightUtilityButtons sw_addUtilityButtonWithColor:
+            [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
+            icon:[UIImage imageNamed:@"favorite"]];
+        
+        [rightUtilityButtons sw_addUtilityButtonWithColor:
+            [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
+            icon:[UIImage imageNamed:@"watch"]];
+        
+        [rightUtilityButtons sw_addUtilityButtonWithColor:
+            [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
+            icon:[UIImage imageNamed:@"share"]];
+        
+        cell = [[SWTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+                                        reuseIdentifier:CellIdentifier
+                                        containingTableView:tableView
+                                        leftUtilityButtons:leftUtilityButtons
+                                        rightUtilityButtons:rightUtilityButtons];
+        cell.delegate = self;
+    }
     
     // Configure the cell...
     NSDictionary *tempDict = [_events objectAtIndex:indexPath.row];
     cell.textLabel.text = [tempDict objectForKey:@"title"];
     
     return cell;
+}
+
+#pragma mark - SWTableViewDelegate
+- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
+    switch (index) {
+        case 0:
+        {
+            UIButton* button = [[cell rightUtilityButtons] objectAtIndex:index];
+            if (button.tag != 1) {
+                [button setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
+                [button setTag:1];
+            } else {
+                [button setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
+                [button setTag:0];
+            }
+            
+            //[cell hideUtilityButtonsAnimated:YES];
+            break;
+        }
+        case 1:
+        {
+            UIButton* button = [[cell rightUtilityButtons] objectAtIndex:index];
+            if (button.tag != 1) {
+                [button setImage:[UIImage imageNamed:@"watching"] forState:UIControlStateNormal];
+                [button setTag:1];
+            } else {
+                [button setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
+                [button setTag:0];
+            }
+            
+            //[cell hideUtilityButtonsAnimated:YES];
+            break;
+        }
+        case 2:
+        {
+            NSLog(@"share");
+        }
+        default:
+            break;
+    }
 }
 
 /*
