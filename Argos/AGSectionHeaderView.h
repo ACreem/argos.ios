@@ -1,5 +1,5 @@
 //
-//  SectionHeaderView.h
+//  AGSectionHeaderView.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/7/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface SectionHeaderView : UIView
+@interface AGSectionHeaderView : UIView
 
 - (id)initWithTitle:(NSString*)title withOrigin:(CGPoint)origin;
 

@@ -10,4 +10,7 @@
 
 @interface EventDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+@property (strong, nonatomic) UIScrollView *scrollView;
+@property (strong, nonatomic) UIImageView *headerImageView;
+
 @end

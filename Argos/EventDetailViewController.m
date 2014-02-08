@@ -7,7 +7,8 @@
 //
 
 #import "EventDetailViewController.h"
-#import "SectionHeaderView.h"
+#import "AGSectionHeaderView.h"
+#import "AGTextButton.h"
 #import "ArgosClient.h"
 
 @interface EventDetailViewController () {
@@ -19,15 +20,6 @@
 
 @implementation EventDetailViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -37,20 +29,20 @@
     
     float textPaddingHorizontal = 16.0;
     float textPaddingVertical = 8.0;
+    float headerImageHeight = 220.0;
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    UIScrollView *scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height)];
-    scrollView.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];
+    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height)];
+    _scrollView.bounces = NO;
     
     // Header image
-    UIImageView *headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
-    headerImageView.frame = [[UIScreen mainScreen] bounds];
-    headerImageView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, 220.0);
-    [scrollView addSubview:headerImageView];
+    _headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
+    _headerImageView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, headerImageHeight);
+    [self.view addSubview:_headerImageView];
     
     
     // Summary view
-    UIView *summaryView = [[UIView alloc] initWithFrame:CGRectMake(bounds.origin.x, headerImageView.bounds.size.height, bounds.size.width, 400.0)];
+    UIView *summaryView = [[UIView alloc] initWithFrame:CGRectMake(bounds.origin.x, _headerImageView.bounds.size.height, bounds.size.width, 400.0)];
     summaryView.backgroundColor = [UIColor whiteColor];
     UILabel *summaryTitle = [[UILabel alloc] initWithFrame:CGRectMake(textPaddingHorizontal, textPaddingVertical, bounds.size.width - (textPaddingHorizontal*2), 20.0)];
     summaryTitle.text = @"SUMMARY";
@@ -65,34 +57,41 @@
     summary.lineBreakMode = NSLineBreakByWordWrapping;
     [summary sizeToFit];
     [summaryView addSubview:summary];
-    [scrollView addSubview:summaryView];
+    
+    // Story button
+    AGTextButton *storyButton = [AGTextButton buttonWithTitle:@"View the full story"];
+    CGRect buttonFrame = storyButton.frame;
+    buttonFrame.origin.x = bounds.size.width/2 - storyButton.bounds.size.width/2;
+    buttonFrame.origin.y = summary.frame.origin.y + summary.frame.size.height + textPaddingVertical*2;
+    storyButton.frame = buttonFrame;
+    
+    [summaryView addSubview:storyButton];
+    [summaryView sizeToFit];
+    
+    [_scrollView addSubview:summaryView];
+    
     
     // Article list header
-    SectionHeaderView *sectionHeader = [[SectionHeaderView alloc] initWithTitle:@"Sourced Articles" withOrigin:CGPointMake(bounds.origin.x, summaryView.bounds.origin.y + summaryView.bounds.size.height)];
-    [scrollView addSubview:sectionHeader];
-    
+    AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Sourced Articles" withOrigin:CGPointMake(bounds.origin.x, summaryView.bounds.origin.y + summaryView.bounds.size.height)];
+    [_scrollView addSubview:sectionHeader];
     
     _articleList = [[UITableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
     _articleList.delegate = self;
     _articleList.dataSource = self;
+    _articleList.scrollEnabled = NO;
     [_articleList registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
     // Set cell separator to full width, if necessary.
     if ([_articleList respondsToSelector:@selector(setSeparatorInset:)]) {
         [_articleList setSeparatorInset:UIEdgeInsetsZero];
     }
-    [scrollView addSubview:_articleList];
+    [_scrollView addSubview:_articleList];
     
     _articles = [[NSMutableArray alloc] init];
     [self loadData];
     
-    // Auto size scroll view height.
-    CGFloat scrollViewHeight = 0.0f;
-    for (UIView* view in scrollView.subviews) {
-        scrollViewHeight += view.frame.size.height;
-    }
-    [scrollView setContentSize:(CGSizeMake(bounds.size.width, scrollViewHeight))];
     
-    [self.view addSubview:scrollView];
+   
+    [self.view addSubview:_scrollView];
 }
 
 - (void)loadData
@@ -106,12 +105,33 @@
         [_articles addObjectsFromArray:newItems];
         [_articleList reloadData];
         
+        [self adjustScrollViewHeight];
+        
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Error: %@", error);
         
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }];
+}
+
+- (void)adjustScrollViewHeight
+{
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    
+    // Auto size the table view.
+    CGRect tableViewFrame = _articleList.frame;
+    tableViewFrame.size.height = _articleList.contentSize.height;
+    _articleList.frame = tableViewFrame;
+    
+    // Auto size scroll view height.
+    // Start at 220 to accomodate for header image spacing.
+    CGFloat scrollViewHeight = _headerImageView.bounds.size.height;
+    for (UIView* view in _scrollView.subviews) {
+        scrollViewHeight += view.frame.size.height;
+    }
+    [_scrollView setContentSize:(CGSizeMake(bounds.size.width, scrollViewHeight))];
+ 
 }
 
 - (void)didReceiveMemoryWarning
