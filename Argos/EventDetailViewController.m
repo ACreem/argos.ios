@@ -10,11 +10,12 @@
 #import "AGSectionHeaderView.h"
 #import "AGTextButton.h"
 #import "AGSummaryView.h"
+#import "AGArticleTableView.h"
 #import "ArgosClient.h"
 
 @interface EventDetailViewController () {
-    NSMutableArray *_articles;
-    UITableView *_articleList;
+    CGRect bounds;
+    AGArticleTableView *_articleList;
 }
 
 @end
@@ -25,24 +26,13 @@
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"Event";
     
     float textPaddingVertical = 8.0;
-    float headerImageHeight = 220.0;
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    
-    _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height)];
-    _scrollView.bounces = NO;
-    
-    // Header image
-    _headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
-    _headerImageView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, headerImageHeight);
-    [self.view addSubview:_headerImageView];
-    
+    bounds = [[UIScreen mainScreen] bounds];
     
     // Summary view
-    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, _headerImageView.bounds.size.height);
+    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerImageView.bounds.size.height);
     NSString *summaryText = @"Kerry meets with prince Saud al-Faisal for Syrian peace talks. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
     AGSummaryView *summaryView = [[AGSummaryView alloc] initWithOrigin:summaryOrigin withText:summaryText];
     
@@ -56,30 +46,17 @@
     [summaryView addSubview:storyButton];
     [summaryView sizeToFit];
     
-    [_scrollView addSubview:summaryView];
+    [self.scrollView addSubview:summaryView];
     
     
     // Article list header
     AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Sourced Articles" withOrigin:CGPointMake(bounds.origin.x, summaryView.bounds.origin.y + summaryView.bounds.size.height)];
-    [_scrollView addSubview:sectionHeader];
+    [self.scrollView addSubview:sectionHeader];
     
-    _articleList = [[UITableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
-    _articleList.delegate = self;
-    _articleList.dataSource = self;
-    _articleList.scrollEnabled = NO;
-    [_articleList registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
-    // Set cell separator to full width, if necessary.
-    if ([_articleList respondsToSelector:@selector(setSeparatorInset:)]) {
-        [_articleList setSeparatorInset:UIEdgeInsetsZero];
-    }
-    [_scrollView addSubview:_articleList];
+    _articleList = [[AGArticleTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
+    [self.scrollView addSubview:_articleList];
     
-    _articles = [[NSMutableArray alloc] init];
     [self loadArticleData];
-    
-    
-   
-    [self.view addSubview:_scrollView];
 }
 
 - (void)loadArticleData
@@ -88,11 +65,12 @@
         
         // Filter out existing items.
         NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];
-        [newItems removeObjectsInArray:_articles];
+        [newItems removeObjectsInArray:_articleList.articles];
         
-        [_articles addObjectsFromArray:newItems];
+        [_articleList.articles addObjectsFromArray:newItems];
         [_articleList reloadData];
         
+        [_articleList sizeToFit];
         [self adjustScrollViewHeight];
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -101,69 +79,6 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }];
-}
-
-- (void)adjustScrollViewHeight
-{
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    
-    // Auto size the table view.
-    CGRect tableViewFrame = _articleList.frame;
-    tableViewFrame.size.height = _articleList.contentSize.height;
-    _articleList.frame = tableViewFrame;
-    
-    // Auto size scroll view height.
-    // Start at 220 to accomodate for header image spacing.
-    CGFloat scrollViewHeight = _headerImageView.bounds.size.height;
-    for (UIView* view in _scrollView.subviews) {
-        scrollViewHeight += view.frame.size.height;
-    }
-    [_scrollView setContentSize:(CGSizeMake(bounds.size.width, scrollViewHeight))];
- 
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Table View Delegate Methods
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    // Return the number of sections.
-    return 1;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    return _articles.count;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Should push to web view for the article.
-    //[self.navigationController pushViewController:[[EventDetailViewController alloc] init] animated:YES];
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    
-    // Configure the cell...
-    NSDictionary *tempDict = [_articles objectAtIndex:indexPath.row];
-    cell.textLabel.text = [tempDict objectForKey:@"title"];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.imageView.image = [UIImage imageNamed:@"sample"];
-    
-    return cell;
 }
 
 @end

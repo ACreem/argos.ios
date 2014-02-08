@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGDetailViewController.h"
 
-@interface EventDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
-
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UIImageView *headerImageView;
+@interface EventDetailViewController : AGDetailViewController
 
 @end
