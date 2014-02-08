@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface EventDetailViewController : UIViewController
+@interface EventDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end

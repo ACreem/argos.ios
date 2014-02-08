@@ -9,6 +9,7 @@
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
 #import "SWTableViewCell.h"
+#import "ArgosClient.h"
 
 @interface EventListViewController () {
     NSMutableArray *_events;
@@ -38,7 +39,6 @@
     self.navigationItem.hidesBackButton = YES;
     self.navigationItem.title = @"Latest";
     
-    _manager = [AFHTTPRequestOperationManager manager];
     _events = [[NSMutableArray alloc] init];
     
     [self loadData];
@@ -64,7 +64,7 @@
 
 - (void)loadData
 {
-    [_manager GET:@"http://localhost:5000/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
+    [[ArgosClient sharedClient] GET:@"/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
         
         // Filter out existing items.
         NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];
@@ -149,7 +149,6 @@
     [self.navigationController pushViewController:[[EventDetailViewController alloc] init] animated:YES];
 }
 
-
 #pragma mark - SWTableViewDelegate
 - (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
     switch (index) {
@@ -190,8 +189,7 @@
     }
 }
 
-#pragma mark -
-#pragma mark Data Source Loading / Reloading Methods
+#pragma mark - Data Source Loading / Reloading Methods
 
 - (void)reloadTableViewDataSource{
     
@@ -208,8 +206,7 @@
 	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
 }
 
-#pragma mark -
-#pragma mark UIScrollViewDelegate Methods
+#pragma mark - UIScrollViewDelegate Methods
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
     
@@ -224,8 +221,7 @@
 }
 
 
-#pragma mark -
-#pragma mark EGORefreshTableHeaderDelegate Methods
+#pragma mark - EGORefreshTableHeaderDelegate Methods
 
 - (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
     

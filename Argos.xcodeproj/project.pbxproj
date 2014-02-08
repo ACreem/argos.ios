@@ -26,6 +26,7 @@
 		F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F18F218918973CBE0069CA93 /* LoginViewController.m */; };
 		F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB366E18A590C400A81857 /* EventDetailViewController.m */; };
 		F1AB367218A5BB1400A81857 /* SectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB367118A5BB1400A81857 /* SectionHeaderView.m */; };
+		F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8FD4A18A5FA84003201BF /* ArgosClient.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,8 @@
 		F1AB366E18A590C400A81857 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		F1AB367018A5BB1400A81857 /* SectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SectionHeaderView.h; sourceTree = "<group>"; };
 		F1AB367118A5BB1400A81857 /* SectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SectionHeaderView.m; sourceTree = "<group>"; };
+		F1D8FD4918A5FA84003201BF /* ArgosClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosClient.h; sourceTree = "<group>"; };
+		F1D8FD4A18A5FA84003201BF /* ArgosClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,14 +142,15 @@
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
+				F1D8FD4918A5FA84003201BF /* ArgosClient.h */,
+				F1D8FD4A18A5FA84003201BF /* ArgosClient.m */,
 				F18F218818973CBE0069CA93 /* LoginViewController.h */,
 				F18F218918973CBE0069CA93 /* LoginViewController.m */,
 				F144F4C218973FBB00A43388 /* EventListViewController.h */,
 				F144F4C318973FBB00A43388 /* EventListViewController.m */,
 				F1AB366D18A590C400A81857 /* EventDetailViewController.h */,
 				F1AB366E18A590C400A81857 /* EventDetailViewController.m */,
-				F1AB367018A5BB1400A81857 /* SectionHeaderView.h */,
-				F1AB367118A5BB1400A81857 /* SectionHeaderView.m */,
+				F1D8FD4818A5EE00003201BF /* Views */,
 				F17FA8F618A55AF1006FD699 /* MenuViewController.h */,
 				F17FA8F718A55AF1006FD699 /* MenuViewController.m */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
@@ -182,6 +186,15 @@
 				F1405C4518973C4C00A4819D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F1D8FD4818A5EE00003201BF /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1AB367018A5BB1400A81857 /* SectionHeaderView.h */,
+				F1AB367118A5BB1400A81857 /* SectionHeaderView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,6 +338,7 @@
 				F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */,
 				F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */,
 				F1AB367218A5BB1400A81857 /* SectionHeaderView.m in Sources */,
+				F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

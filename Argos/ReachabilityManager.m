@@ -11,7 +11,7 @@
 
 @implementation ReachabilityManager
 
-#pragma mark Default manager
+#pragma mark - Default manager
 + (ReachabilityManager *)sharedManager {
     static ReachabilityManager *_sharedManager = nil;
     static dispatch_once_t onceToken;
@@ -22,7 +22,7 @@
     return _sharedManager;
 }
 
-#pragma mark Memory Management
+#pragma mark - Memory Management
 - (void)dealloc {
     // Stop notifier
     if (_reachability) {
@@ -30,7 +30,7 @@
     }
 }
 
-#pragma mark Class Methods
+#pragma mark - Class Methods
 + (BOOL)isReachable {
     return [[[ReachabilityManager sharedManager] reachability] isReachable];
 }
@@ -44,7 +44,7 @@
     return ![[[ReachabilityManager sharedManager] reachability] isReachableViaWiFi];
 }
 
-# pragma mark Private Initialization
+# pragma mark - Private Initialization
 - (id)init {
     self = [super init];
     if (self) {
