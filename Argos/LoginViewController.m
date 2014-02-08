@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "EventListViewController.h"
-#import "IIViewDeckController.h"
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -34,6 +33,7 @@
     
     [self.navigationController setNavigationBarHidden:YES];
     _manager = [AFHTTPRequestOperationManager manager];
+    
     [self setupUI];
 }
 
@@ -71,26 +71,10 @@
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate.window addSubview:view];
     
-    // Create the navigation controller for the rest of the application.
-    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:elvc];
-    navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
-    navigationController.navigationBar.translucent = NO;
-    navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [navigationController.navigationBar setTitleTextAttributes:
-        [NSDictionary dictionaryWithObjectsAndKeys:
-            [UIColor whiteColor], NSForegroundColorAttributeName,
-            [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0], NSFontAttributeName,
-            nil]];
-         
     MenuViewController* menuController = [[MenuViewController alloc] init];
+    appDelegate.deckController.leftController = menuController;
     
-    // Create the pull menu controller.
-    IIViewDeckController* deckController = [[IIViewDeckController alloc]
-                                             initWithCenterViewController:navigationController
-                                             leftViewController:menuController
-                                             rightViewController:nil];
-    
-    [self.navigationController pushViewController:deckController animated:YES];
+    [self.navigationController pushViewController:elvc animated:YES];
 }
 
 - (void)setupUI
