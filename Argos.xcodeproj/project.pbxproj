@@ -27,6 +27,7 @@
 		F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB366E18A590C400A81857 /* EventDetailViewController.m */; };
 		F1AB367218A5BB1400A81857 /* AGSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB367118A5BB1400A81857 /* AGSectionHeaderView.m */; };
 		F1C11DD618A6D3AD007F2B47 /* AGTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */; };
+		F1C11DD918A6DB11007F2B47 /* AGSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */; };
 		F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8FD4A18A5FA84003201BF /* ArgosClient.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,8 @@
 		F1AB367118A5BB1400A81857 /* AGSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSectionHeaderView.m; sourceTree = "<group>"; };
 		F1C11DD418A6D3AD007F2B47 /* AGTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTextButton.h; sourceTree = "<group>"; };
 		F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTextButton.m; sourceTree = "<group>"; };
+		F1C11DD718A6DB11007F2B47 /* AGSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSummaryView.h; sourceTree = "<group>"; };
+		F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSummaryView.m; sourceTree = "<group>"; };
 		F1D8FD4918A5FA84003201BF /* ArgosClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosClient.h; sourceTree = "<group>"; };
 		F1D8FD4A18A5FA84003201BF /* ArgosClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -198,6 +201,8 @@
 				F1AB367118A5BB1400A81857 /* AGSectionHeaderView.m */,
 				F1C11DD418A6D3AD007F2B47 /* AGTextButton.h */,
 				F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */,
+				F1C11DD718A6DB11007F2B47 /* AGSummaryView.h */,
+				F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -336,6 +341,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1C11DD618A6D3AD007F2B47 /* AGTextButton.m in Sources */,
+				F1C11DD918A6DB11007F2B47 /* AGSummaryView.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F17FA8F818A55AF1006FD699 /* MenuViewController.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,

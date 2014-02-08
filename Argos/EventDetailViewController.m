@@ -9,6 +9,7 @@
 #import "EventDetailViewController.h"
 #import "AGSectionHeaderView.h"
 #import "AGTextButton.h"
+#import "AGSummaryView.h"
 #import "ArgosClient.h"
 
 @interface EventDetailViewController () {
@@ -27,7 +28,6 @@
     self.view.backgroundColor = [UIColor whiteColor];
     self.navigationItem.title = @"Event";
     
-    float textPaddingHorizontal = 16.0;
     float textPaddingVertical = 8.0;
     float headerImageHeight = 220.0;
     CGRect bounds = [[UIScreen mainScreen] bounds];
@@ -42,27 +42,15 @@
     
     
     // Summary view
-    UIView *summaryView = [[UIView alloc] initWithFrame:CGRectMake(bounds.origin.x, _headerImageView.bounds.size.height, bounds.size.width, 400.0)];
-    summaryView.backgroundColor = [UIColor whiteColor];
-    UILabel *summaryTitle = [[UILabel alloc] initWithFrame:CGRectMake(textPaddingHorizontal, textPaddingVertical, bounds.size.width - (textPaddingHorizontal*2), 20.0)];
-    summaryTitle.text = @"SUMMARY";
-    summaryTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-    summaryTitle.textColor = [UIColor colorWithRed:0.573 green:0.58 blue:0.592 alpha:1.0];
-    [summaryView addSubview:summaryTitle];
-    
-    UILabel *summary = [[UILabel alloc] initWithFrame:CGRectMake(textPaddingHorizontal, summaryTitle.bounds.origin.y + summaryTitle.bounds.size.height + textPaddingVertical*2, bounds.size.width - (textPaddingHorizontal*2), 200.0)];
-    summary.text = @"Kerry meets with prince Saud al-Faisal for Syrian peace talks. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
-    summary.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-    summary.numberOfLines = 0;
-    summary.lineBreakMode = NSLineBreakByWordWrapping;
-    [summary sizeToFit];
-    [summaryView addSubview:summary];
+    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, _headerImageView.bounds.size.height);
+    NSString *summaryText = @"Kerry meets with prince Saud al-Faisal for Syrian peace talks. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
+    AGSummaryView *summaryView = [[AGSummaryView alloc] initWithOrigin:summaryOrigin withText:summaryText];
     
     // Story button
     AGTextButton *storyButton = [AGTextButton buttonWithTitle:@"View the full story"];
     CGRect buttonFrame = storyButton.frame;
     buttonFrame.origin.x = bounds.size.width/2 - storyButton.bounds.size.width/2;
-    buttonFrame.origin.y = summary.frame.origin.y + summary.frame.size.height + textPaddingVertical*2;
+    buttonFrame.origin.y = summaryView.summaryLabel.frame.origin.y + summaryView.summaryLabel.frame.size.height + textPaddingVertical*2;
     storyButton.frame = buttonFrame;
     
     [summaryView addSubview:storyButton];
@@ -87,14 +75,14 @@
     [_scrollView addSubview:_articleList];
     
     _articles = [[NSMutableArray alloc] init];
-    [self loadData];
+    [self loadArticleData];
     
     
    
     [self.view addSubview:_scrollView];
 }
 
-- (void)loadData
+- (void)loadArticleData
 {
     [[ArgosClient sharedClient] GET:@"/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
         
