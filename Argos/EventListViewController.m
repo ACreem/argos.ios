@@ -40,7 +40,6 @@
     self.navigationItem.title = @"Latest";
     
     _events = [[NSMutableArray alloc] init];
-    
     [self loadData];
     
     // Setup Pull-To-Refresh

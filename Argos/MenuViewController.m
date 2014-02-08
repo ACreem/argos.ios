@@ -9,7 +9,8 @@
 #import "MenuViewController.h"
 
 @interface MenuViewController () {
-    NSMutableArray *_items;
+    NSMutableArray *_feeds;
+    NSMutableArray *_settings;
 }
 
 @end
@@ -45,13 +46,17 @@
     // Hide empty cells
     self.tableView.tableFooterView = [UIView new];
     
+    // Disable scrolling
+    self.tableView.scrollEnabled = NO;
+    
     // Set cell separator to full width, if necessary.
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
-    _items = [[NSMutableArray alloc] initWithObjects:@"Latest", @"Watching", @"Settings", nil];
+    _feeds = [[NSMutableArray alloc] initWithObjects:@"Latest", @"Watching", nil];
+    _settings = [[NSMutableArray alloc] initWithObjects:@"Settings", nil];
     [self.tableView reloadData];
 }
 
@@ -80,12 +85,33 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return 2;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UIView *viewHeader=  [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 36)];
+    viewHeader.backgroundColor = [UIColor colorWithRed:0.127 green:0.139 blue:0.178 alpha:1.0];
+    
+    UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, tableView.frame.size.width - 14, 28)];
+    sectionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
+    sectionLabel.textColor = [UIColor colorWithRed:0.522 green:0.533 blue:0.557 alpha:1.0];
+    
+    if (section == 0) {
+        sectionLabel.text = @"FEEDS";
+    } else {
+        sectionLabel.text = @"SETTINGS";
+    }
+    [viewHeader addSubview:sectionLabel];
+    return viewHeader;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return _items.count;
+    if (section == 0) {
+        return _feeds.count;
+    } else {
+        return _settings.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -94,7 +120,12 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
-    NSString *title = [_items objectAtIndex:indexPath.row];
+    NSString* title = @"";
+    if (indexPath.section == 0) {
+        title = [_feeds objectAtIndex:indexPath.row];
+    } else {
+        title = [_settings objectAtIndex:indexPath.row];
+    }
     cell.textLabel.text = title;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
     cell.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];

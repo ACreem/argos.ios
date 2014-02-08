@@ -8,9 +8,11 @@
 
 #import "EventDetailViewController.h"
 #import "SectionHeaderView.h"
+#import "ArgosClient.h"
 
 @interface EventDetailViewController () {
     NSMutableArray *_articles;
+    UITableView *_articleList;
 }
 
 @end
@@ -70,15 +72,18 @@
     [scrollView addSubview:sectionHeader];
     
     
-    UITableView *articleList = [[UITableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
-    articleList.delegate = self;
-    articleList.dataSource = self;
-    [articleList registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
+    _articleList = [[UITableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
+    _articleList.delegate = self;
+    _articleList.dataSource = self;
+    [_articleList registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
     // Set cell separator to full width, if necessary.
-    if ([articleList respondsToSelector:@selector(setSeparatorInset:)]) {
-        [articleList setSeparatorInset:UIEdgeInsetsZero];
+    if ([_articleList respondsToSelector:@selector(setSeparatorInset:)]) {
+        [_articleList setSeparatorInset:UIEdgeInsetsZero];
     }
-    [scrollView addSubview:articleList];
+    [scrollView addSubview:_articleList];
+    
+    _articles = [[NSMutableArray alloc] init];
+    [self loadData];
     
     // Auto size scroll view height.
     CGFloat scrollViewHeight = 0.0f;
@@ -88,6 +93,25 @@
     [scrollView setContentSize:(CGSizeMake(bounds.size.width, scrollViewHeight))];
     
     [self.view addSubview:scrollView];
+}
+
+- (void)loadData
+{
+    [[ArgosClient sharedClient] GET:@"/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
+        
+        // Filter out existing items.
+        NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];
+        [newItems removeObjectsInArray:_articles];
+        
+        [_articles addObjectsFromArray:newItems];
+        [_articleList reloadData];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Error: %@", error);
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [alert show];
+    }];
 }
 
 - (void)didReceiveMemoryWarning
