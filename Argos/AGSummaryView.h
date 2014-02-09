@@ -12,7 +12,8 @@
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *summaryLabel;
+@property (strong, nonatomic) UILabel *timeLabel;
 
-- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText;
+- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSString*)updatedAt;
 
 @end

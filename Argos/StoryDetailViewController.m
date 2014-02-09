@@ -31,12 +31,13 @@
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerImageView.bounds.size.height);
     NSString *summaryText = @"Kerry meets with prince Saud al-Faisal for Syrian peace talks. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
-    self.summaryView = [[AGSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText];
+    self.summaryView = [[AGSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:@""];
     [self.summaryView sizeToFit];
     [self.scrollView addSubview:self.summaryView];
     
     // Event list header
     AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.bounds.origin.y + self.summaryView.bounds.size.height)];
+    
     [self.scrollView addSubview:sectionHeader];
     
     _eventList = [[AGEmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];

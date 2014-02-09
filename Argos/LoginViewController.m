@@ -90,7 +90,7 @@
     UIButton *facebookLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     facebookLoginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, screenHeight/2 - buttonHeight/2, buttonWidth, buttonHeight);
     [facebookLoginButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
-    [facebookLoginButton setBackgroundColor:[UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0]];
+    [facebookLoginButton setBackgroundColor:[UIColor colorWithRed:0.263 green:0.376 blue:0.612 alpha:1.0]];
     [facebookLoginButton setTintColor:[UIColor whiteColor]];
     [facebookLoginButton addTarget:self action:@selector(facebookLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:facebookLoginButton];
@@ -98,7 +98,7 @@
     UIButton *twitterLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     twitterLoginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, facebookLoginButton.frame.origin.y - (buttonMargin + buttonHeight), buttonWidth, buttonHeight);
     [twitterLoginButton setTitle:@"Login with Twitter" forState:UIControlStateNormal];
-    [twitterLoginButton setBackgroundColor:[UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0]];
+    [twitterLoginButton setBackgroundColor:[UIColor colorWithRed:0 green:0.69 blue:0.929 alpha:1.0]];
     [twitterLoginButton setTintColor:[UIColor whiteColor]];
     [twitterLoginButton addTarget:self action:@selector(twitterLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:twitterLoginButton];
@@ -106,7 +106,7 @@
     UIButton *googleLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     googleLoginButton.frame = CGRectMake(screenWidth/2 - buttonWidth/2, facebookLoginButton.frame.origin.y + (buttonMargin + buttonHeight), buttonWidth, buttonHeight);
     [googleLoginButton setTitle:@"Login with Google" forState:UIControlStateNormal];
-    [googleLoginButton setBackgroundColor:[UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0]];
+    [googleLoginButton setBackgroundColor:[UIColor colorWithRed:0.827 green:0.243 blue:0.165 alpha:1.0]];
     [googleLoginButton setTintColor:[UIColor whiteColor]];
     [googleLoginButton addTarget:self action:@selector(googleLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:googleLoginButton];
