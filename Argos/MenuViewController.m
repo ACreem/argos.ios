@@ -128,11 +128,14 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) {
-        if (indexPath.row == 1) {
-            [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" endpoint:@"/events"] animated:YES];
-            [self.viewDeckController closeLeftViewAnimated:YES];
+        switch (indexPath.row) {
+            case 0:
+                [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Latest" endpoint:@"/events"] animated:YES];
+            case 1:
+                [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" endpoint:@"/events"] animated:YES];
         }
     }
+    [self.viewDeckController closeLeftViewAnimated:YES];
 }
 
 - (void)viewDeckController:(IIViewDeckController *)viewDeckController didChangeOffset:(CGFloat)offset orientation:(IIViewDeckOffsetOrientation)orientation panning:(BOOL)panning {

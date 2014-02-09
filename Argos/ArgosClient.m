@@ -8,7 +8,7 @@
 
 #import "ArgosClient.h"
 
-static NSString * const ArgosAPIBaseURLString = @"http://localhost:5000/";
+static NSString * const ArgosAPIBaseURLString = @"http://192.168.1.131:5000/";
 
 @implementation ArgosClient
 

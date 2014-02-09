@@ -1,5 +1,5 @@
 //
-//  AGTableView.h
+//  AGEmbeddedTableView.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
+@interface AGEmbeddedTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *items;
 

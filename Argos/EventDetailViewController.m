@@ -10,12 +10,12 @@
 #import "StoryDetailViewController.h"
 #import "AGSectionHeaderView.h"
 #import "AGTextButton.h"
-#import "AGTableView.h"
+#import "AGEmbeddedTableView.h"
 #import "ArgosClient.h"
 
 @interface EventDetailViewController () {
     CGRect bounds;
-    AGTableView *_articleList;
+    AGEmbeddedTableView *_articleList;
 }
 
 @end
@@ -51,10 +51,10 @@
     
     
     // Article list header
-    AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Sourced Articles" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.bounds.origin.y + self.summaryView.bounds.size.height)];
+    AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Articles" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.bounds.origin.y + self.summaryView.bounds.size.height)];
     [self.scrollView addSubview:sectionHeader];
     
-    _articleList = [[AGTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
+    _articleList = [[AGEmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
     [self.scrollView addSubview:_articleList];
     
     [self loadArticleData];

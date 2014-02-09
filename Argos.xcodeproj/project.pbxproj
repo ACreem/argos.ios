@@ -29,7 +29,7 @@
 		F1C11DD618A6D3AD007F2B47 /* AGTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */; };
 		F1C11DD918A6DB11007F2B47 /* AGSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */; };
 		F1C11DDC18A6E09B007F2B47 /* AGDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DDB18A6E09B007F2B47 /* AGDetailViewController.m */; };
-		F1C11DDF18A6E3EE007F2B47 /* AGTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DDE18A6E3EE007F2B47 /* AGTableView.m */; };
+		F1C11DDF18A6E3EE007F2B47 /* AGEmbeddedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DDE18A6E3EE007F2B47 /* AGEmbeddedTableView.m */; };
 		F1C11DE218A6F51F007F2B47 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */; };
 		F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8FD4A18A5FA84003201BF /* ArgosClient.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
@@ -83,8 +83,8 @@
 		F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSummaryView.m; sourceTree = "<group>"; };
 		F1C11DDA18A6E09B007F2B47 /* AGDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGDetailViewController.h; sourceTree = "<group>"; };
 		F1C11DDB18A6E09B007F2B47 /* AGDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDetailViewController.m; sourceTree = "<group>"; };
-		F1C11DDD18A6E3EE007F2B47 /* AGTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTableView.h; sourceTree = "<group>"; };
-		F1C11DDE18A6E3EE007F2B47 /* AGTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTableView.m; sourceTree = "<group>"; };
+		F1C11DDD18A6E3EE007F2B47 /* AGEmbeddedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEmbeddedTableView.h; sourceTree = "<group>"; };
+		F1C11DDE18A6E3EE007F2B47 /* AGEmbeddedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEmbeddedTableView.m; sourceTree = "<group>"; };
 		F1C11DE018A6F51F007F2B47 /* StoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDetailViewController.h; sourceTree = "<group>"; };
 		F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDetailViewController.m; sourceTree = "<group>"; };
 		F1D8FD4918A5FA84003201BF /* ArgosClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosClient.h; sourceTree = "<group>"; };
@@ -224,8 +224,8 @@
 				F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */,
 				F1C11DDA18A6E09B007F2B47 /* AGDetailViewController.h */,
 				F1C11DDB18A6E09B007F2B47 /* AGDetailViewController.m */,
-				F1C11DDD18A6E3EE007F2B47 /* AGTableView.h */,
-				F1C11DDE18A6E3EE007F2B47 /* AGTableView.m */,
+				F1C11DDD18A6E3EE007F2B47 /* AGEmbeddedTableView.h */,
+				F1C11DDE18A6E3EE007F2B47 /* AGEmbeddedTableView.m */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -370,7 +370,7 @@
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
 				F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
-				F1C11DDF18A6E3EE007F2B47 /* AGTableView.m in Sources */,
+				F1C11DDF18A6E3EE007F2B47 /* AGEmbeddedTableView.m in Sources */,
 				F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */,
 				F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */,
 				F1C11DDC18A6E09B007F2B47 /* AGDetailViewController.m in Sources */,

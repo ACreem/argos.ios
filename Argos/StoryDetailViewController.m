@@ -8,12 +8,12 @@
 
 #import "StoryDetailViewController.h"
 #import "AGSectionHeaderView.h"
-#import "AGTableView.h"
+#import "AGEmbeddedTableView.h"
 #import "ArgosClient.h"
 
 @interface StoryDetailViewController () {
     CGRect bounds;
-    AGTableView *_eventList;
+    AGEmbeddedTableView *_eventList;
 }
 
 @end
@@ -39,7 +39,7 @@
     AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.bounds.origin.y + self.summaryView.bounds.size.height)];
     [self.scrollView addSubview:sectionHeader];
     
-    _eventList = [[AGTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
+    _eventList = [[AGEmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
     [self.scrollView addSubview:_eventList];
     
     [self loadArticleData];

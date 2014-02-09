@@ -7,9 +7,11 @@
 //
 
 #import "AGDetailViewController.h"
+#import <QuartzCore/QuartzCore.h>
 
 @interface AGDetailViewController () {
     CGRect bounds;
+    UIView *_gradientView;
 }
 
 @end
@@ -39,6 +41,15 @@
     _headerImageView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, headerImageHeight);
     [self.view addSubview:_headerImageView];
     
+    // Gradient image overlay
+    _gradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, headerImageHeight)];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = _gradientView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
+    [_gradientView.layer insertSublayer:gradient atIndex:0];
+    _gradientView.alpha = 0.0;
+    [_headerImageView addSubview:_gradientView];
+    
     [self.view addSubview:_scrollView];
 }
 
@@ -61,6 +72,9 @@
     CGRect imageFrame = _headerImageView.frame;
     imageFrame.origin.y = -y/6;
     _headerImageView.frame = imageFrame;
+    
+    // Gradient opacity
+    _gradientView.alpha = y/bounds.size.height;
 }
 
 @end

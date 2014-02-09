@@ -1,14 +1,14 @@
 //
-//  AGArticleTableView.m
+//  AGEmbeddedTableView.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGTableView.h"
+#import "AGEmbeddedTableView.h"
 
-@implementation AGTableView
+@implementation AGEmbeddedTableView
 
 - (id)initWithFrame:(CGRect)frame
 {
