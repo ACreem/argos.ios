@@ -209,16 +209,32 @@
 			children = (
 				F18F218818973CBE0069CA93 /* LoginViewController.h */,
 				F18F218918973CBE0069CA93 /* LoginViewController.m */,
+				F17FA8F618A55AF1006FD699 /* MenuViewController.h */,
+				F17FA8F718A55AF1006FD699 /* MenuViewController.m */,
+				F1C11DF618A7639A007F2B47 /* Stories */,
+				F1C11DF518A7638C007F2B47 /* Events */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		F1C11DF518A7638C007F2B47 /* Events */ = {
+			isa = PBXGroup;
+			children = (
 				F144F4C218973FBB00A43388 /* EventListViewController.h */,
 				F144F4C318973FBB00A43388 /* EventListViewController.m */,
 				F1AB366D18A590C400A81857 /* EventDetailViewController.h */,
 				F1AB366E18A590C400A81857 /* EventDetailViewController.m */,
+			);
+			name = Events;
+			sourceTree = "<group>";
+		};
+		F1C11DF618A7639A007F2B47 /* Stories */ = {
+			isa = PBXGroup;
+			children = (
 				F1C11DE018A6F51F007F2B47 /* StoryDetailViewController.h */,
 				F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */,
-				F17FA8F618A55AF1006FD699 /* MenuViewController.h */,
-				F17FA8F718A55AF1006FD699 /* MenuViewController.m */,
 			);
-			name = "View Controllers";
+			name = Stories;
 			sourceTree = "<group>";
 		};
 		F1D8FD4818A5EE00003201BF /* Classes */ = {

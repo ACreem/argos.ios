@@ -37,6 +37,7 @@
     
     // Event list header
     AGSectionHeaderView *sectionHeader = [[AGSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.bounds.origin.y + self.summaryView.bounds.size.height)];
+    
     [self.scrollView addSubview:sectionHeader];
     
     _eventList = [[AGEmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];

@@ -75,6 +75,44 @@
     
     // Gradient opacity
     _gradientView.alpha = y*1.5/bounds.size.height;
+    
+    
+    // Sticky header
+    // Look for the header that needs to be stuck.
+    AGSectionHeaderView* selectedHeader;
+    for (UIView* header in self.scrollView.subviews) {
+        if ([header isKindOfClass:[AGSectionHeaderView class]]) {
+            if (y > header.frame.origin.y) {
+                selectedHeader = (AGSectionHeaderView*)header;
+            }
+        }
+    }
+    
+    // If a new header to stick was found, swap it.
+    if (selectedHeader) {
+        [selectedHeader removeFromSuperview];
+        
+        // Restore old header to position in UIScrollView
+        self.stuckSectionHeaderView.frame = self.stuckSectionHeaderViewFrame;
+        [self.stuckSectionHeaderView removeFromSuperview];
+        [self.scrollView addSubview:self.stuckSectionHeaderView];
+        
+        // Setup new header
+        CGRect headerFrame = selectedHeader.frame;
+        self.stuckSectionHeaderView = selectedHeader;
+        self.stuckSectionHeaderViewFrame = headerFrame;
+        headerFrame.origin = CGPointMake(0, 0);
+        selectedHeader.frame = headerFrame;
+        [self.view addSubview:selectedHeader];
+        
+    // Otherwise, check if it's a header that needs to be removed.
+    } else {
+        if (y < self.stuckSectionHeaderViewFrame.origin.y) {
+            self.stuckSectionHeaderView.frame = self.stuckSectionHeaderViewFrame;
+            [self.stuckSectionHeaderView removeFromSuperview];
+            [self.scrollView addSubview:self.stuckSectionHeaderView];
+        }
+    }
 }
 
 @end
