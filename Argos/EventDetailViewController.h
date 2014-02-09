@@ -11,4 +11,6 @@
 
 @interface EventDetailViewController : AGDetailViewController
 
+- (EventDetailViewController*)initWithEventId:(NSInteger)eventId title:(NSString*)title;
+
 @end

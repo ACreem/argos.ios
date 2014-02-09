@@ -8,7 +8,7 @@
 
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
-#import "SWTableViewCell.h"
+#import "AGEventTableViewCell.h"
 #import "ArgosClient.h"
 
 @interface EventListViewController () {
@@ -98,11 +98,13 @@
     return _events.count;
 }
 
+
+# pragma mark - Cell setup
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    SWTableViewCell *cell = (SWTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    AGEventTableViewCell *cell = (AGEventTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
         NSMutableArray *leftUtilityButtons = [NSMutableArray new];
@@ -120,28 +122,44 @@
             [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
             icon:[UIImage imageNamed:@"share"]];
         
-        cell = [[SWTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[AGEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                         reuseIdentifier:CellIdentifier
                                         containingTableView:tableView
                                         leftUtilityButtons:leftUtilityButtons
                                         rightUtilityButtons:rightUtilityButtons];
         cell.delegate = self;
+        
+        // Adjust cell height
+        [cell setCellHeight:[self rowHeightForIndexPath:indexPath]];
     }
     
     // Configure the cell...
     NSDictionary *tempDict = [_events objectAtIndex:indexPath.row];
     cell.textLabel.text = [tempDict objectForKey:@"title"];
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
     cell.imageView.image = [UIImage imageNamed:@"sample"];
+    
+    cell.timeLabel.text = [utils dateDiff:[tempDict objectForKey:@"updated_at"]];
     
     return cell;
 }
 
+#pragma mark - Cell height
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self rowHeightForIndexPath:indexPath];
+}
+
+- (CGFloat)rowHeightForIndexPath:(NSIndexPath *)indexPath {
+    return 60;
+}
+
+#pragma mark - Cell trigger
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.navigationController pushViewController:[[EventDetailViewController alloc] init] animated:YES];
+    NSDictionary *tempDict = [_events objectAtIndex:indexPath.row];
+    NSInteger eventId = [[tempDict objectForKey:@"id"] intValue];
+    NSString *title = [tempDict objectForKey:@"title"];
+    [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEventId:eventId title:title] animated:YES];
 }
 
 #pragma mark - SWTableViewDelegate

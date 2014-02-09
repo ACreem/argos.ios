@@ -74,7 +74,7 @@
     _headerImageView.frame = imageFrame;
     
     // Gradient opacity
-    _gradientView.alpha = y/bounds.size.height;
+    _gradientView.alpha = y*1.5/bounds.size.height;
 }
 
 @end
