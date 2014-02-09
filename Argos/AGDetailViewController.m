@@ -20,6 +20,10 @@
 {
     [super viewDidLoad];
     
+    // Hack to do back buttons w/o text.
+	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
+                                                                             style:UIBarButtonItemStylePlain target:nil action:nil];
+    
     float headerImageHeight = 220.0;
     bounds = [[UIScreen mainScreen] bounds];
     
@@ -28,6 +32,7 @@
     // Scroll view
     _scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, bounds.size.height)];
     _scrollView.bounces = NO;
+    _scrollView.delegate = self;
     
     // Header image
     _headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
@@ -36,7 +41,6 @@
     
     [self.view addSubview:_scrollView];
 }
-
 
 - (void)adjustScrollViewHeight
 {
@@ -47,6 +51,16 @@
         scrollViewHeight += view.frame.size.height;
     }
     [_scrollView setContentSize:(CGSizeMake(bounds.size.width, scrollViewHeight))];
+}
+
+#pragma mark - UIScrollView delegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    // Parallax
+    float y = scrollView.contentOffset.y;
+    CGRect imageFrame = _headerImageView.frame;
+    imageFrame.origin.y = -y/6;
+    _headerImageView.frame = imageFrame;
 }
 
 @end

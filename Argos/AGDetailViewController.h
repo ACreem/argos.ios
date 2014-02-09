@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AGSummaryView.h"
 
-@interface AGDetailViewController : UIViewController
+@interface AGDetailViewController : UIViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIImageView *headerImageView;
+@property (strong, nonatomic) AGSummaryView *summaryView;
 
 - (void)adjustScrollViewHeight;
 

@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGArticleTableView.h"
+#import "AGTableView.h"
 
-@implementation AGArticleTableView
+@implementation AGTableView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -24,7 +24,7 @@
             [self setSeparatorInset:UIEdgeInsetsZero];
         }
         
-        _articles = [[NSMutableArray alloc] init];
+        _items = [[NSMutableArray alloc] init];
     }
     return self;
 }
@@ -40,7 +40,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _articles.count;
+    return _items.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -57,7 +57,7 @@
     
     
     // Configure the cell...
-    NSDictionary *tempDict = [_articles objectAtIndex:indexPath.row];
+    NSDictionary *tempDict = [_items objectAtIndex:indexPath.row];
     cell.textLabel.text = [tempDict objectForKey:@"title"];
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
     cell.textLabel.numberOfLines = 0;
