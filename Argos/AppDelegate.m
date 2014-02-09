@@ -38,6 +38,7 @@
                              initWithCenterViewController:self.navigationController
                              leftViewController:nil
                              rightViewController:nil];
+    self.deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
     
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = self.deckController;

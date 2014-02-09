@@ -13,6 +13,6 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *summaryLabel;
 
-- (id)initWithOrigin:(CGPoint)origin withText:(NSString*)summaryText;
+- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText;
 
 @end

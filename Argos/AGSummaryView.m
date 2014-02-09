@@ -10,7 +10,7 @@
 
 @implementation AGSummaryView
 
-- (id)initWithOrigin:(CGPoint)origin withText:(NSString*)summaryText
+- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText
 {
     float paddingX = 16.0;
     float paddingY = 8.0;

@@ -63,7 +63,7 @@
 
 - (void)postLogin
 {
-    EventListViewController *elvc = [[EventListViewController alloc] init];
+    EventListViewController *elvc = [[EventListViewController alloc] initWithTitle:@"Latest" endpoint:@"/events"];
     
     // Add background for the status bar, so the pull menu transition looks better.
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];

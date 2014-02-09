@@ -13,17 +13,19 @@
 
 @interface EventListViewController () {
     NSMutableArray *_events;
+    NSString *_endpoint;
 }
 
 @end
 
 @implementation EventListViewController
 
-- (id)initWithStyle:(UITableViewStyle)style
+- (id)initWithTitle:(NSString*)title endpoint:(NSString*)endpoint
 {
-    self = [super initWithStyle:style];
+    self = [super init];
     if (self) {
-        // Custom initialization
+        self.navigationItem.title = title;
+        _endpoint = endpoint;
     }
     return self;
 }
@@ -38,7 +40,6 @@
  
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.title = @"Latest";
     
     _events = [[NSMutableArray alloc] init];
     [self loadData];
@@ -64,7 +65,7 @@
 
 - (void)loadData
 {
-    [[ArgosClient sharedClient] GET:@"/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
+    [[ArgosClient sharedClient] GET:_endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
         
         // Filter out existing items.
         NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];

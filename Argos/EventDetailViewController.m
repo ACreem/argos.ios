@@ -34,7 +34,7 @@
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerImageView.bounds.size.height);
     NSString *summaryText = @"Kerry meets with prince Saud al-Faisal for Syrian peace talks. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
-    self.summaryView = [[AGSummaryView alloc] initWithOrigin:summaryOrigin withText:summaryText];
+    self.summaryView = [[AGSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText];
     
     // Story button
     AGTextButton *storyButton = [AGTextButton buttonWithTitle:@"View the full story"];

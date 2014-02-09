@@ -15,4 +15,6 @@
 @property (strong, nonatomic) NSDate* dateLastUpdated;
 @property (assign, nonatomic) BOOL reloading;
 
+- (id)initWithTitle:(NSString*)title endpoint:(NSString*)endpoint;
+
 @end
