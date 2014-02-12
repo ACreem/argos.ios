@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
 		F1405C2818973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
@@ -49,6 +50,7 @@
 /* Begin PBXFileReference section */
 		4C8E5860754E44B8B98A352E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1405C2518973C4C00A4819D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -156,6 +158,7 @@
 		F1405C2918973C4C00A4819D /* Argos */ = {
 			isa = PBXGroup;
 			children = (
+				F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */,
 				F1405C3218973C4C00A4819D /* AppDelegate.h */,
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
@@ -396,6 +399,7 @@
 				F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */,
 				F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */,
 				F1C11DDC18A6E09B007F2B47 /* AGDetailViewController.m in Sources */,
+				F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */,
 				F1C11DE218A6F51F007F2B47 /* StoryDetailViewController.m in Sources */,
 				F1AB367218A5BB1400A81857 /* AGSectionHeaderView.m in Sources */,
 				F1C11DF118A75669007F2B47 /* AGEventTableViewCell.m in Sources */,
@@ -621,6 +625,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */,
+			);
+			currentVersion = F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */;
+			path = ArgosModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F1405C1818973C4C00A4819D /* Project object */;
 }
