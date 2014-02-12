@@ -9,7 +9,7 @@
 #import "StoryDetailViewController.h"
 #import "AGSectionHeaderView.h"
 #import "AGEmbeddedTableView.h"
-#import "ArgosClient.h"
+//#import "ArgosClient.h"
 
 @interface StoryDetailViewController () {
     CGRect bounds;
@@ -48,6 +48,7 @@
 
 - (void)loadArticleData
 {
+    /*
     [[ArgosClient sharedClient] GET:@"/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
         
         // Filter out existing items.
@@ -66,6 +67,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }];
+     */
 }
 
 @end

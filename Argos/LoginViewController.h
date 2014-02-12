@@ -7,10 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AFHTTPRequestOperationManager.h"
+//#import "AFHTTPRequestOperationManager.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 
-@property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
+//@property (strong, nonatomic) AFHTTPRequestOperationManager *manager;
 
 @end

@@ -11,7 +11,7 @@
 #import "AGSectionHeaderView.h"
 #import "AGTextButton.h"
 #import "AGEmbeddedTableView.h"
-#import "ArgosClient.h"
+//#import "ArgosClient.h"
 
 @interface EventDetailViewController () {
     CGRect bounds;
@@ -44,6 +44,7 @@
 
 - (void)getEvent
 {
+    /*
     [[ArgosClient sharedClient] GET:[NSString stringWithFormat:@"/events/%i", _eventId]  parameters:nil success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
         
         _event = responseObject;
@@ -57,6 +58,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }];
+     */
 }
 
 - (void)setupView

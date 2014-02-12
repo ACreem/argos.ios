@@ -33,7 +33,6 @@
 		F1C11DE218A6F51F007F2B47 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */; };
 		F1C11DEB18A71B1A007F2B47 /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DEA18A71B1A007F2B47 /* utils.m */; };
 		F1C11DF118A75669007F2B47 /* AGEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DF018A75669007F2B47 /* AGEventTableViewCell.m */; };
-		F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8FD4A18A5FA84003201BF /* ArgosClient.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -93,8 +92,6 @@
 		F1C11DEA18A71B1A007F2B47 /* utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
 		F1C11DEF18A75669007F2B47 /* AGEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEventTableViewCell.h; sourceTree = "<group>"; };
 		F1C11DF018A75669007F2B47 /* AGEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEventTableViewCell.m; sourceTree = "<group>"; };
-		F1D8FD4918A5FA84003201BF /* ArgosClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosClient.h; sourceTree = "<group>"; };
-		F1D8FD4A18A5FA84003201BF /* ArgosClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,8 +160,6 @@
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
-				F1D8FD4918A5FA84003201BF /* ArgosClient.h */,
-				F1D8FD4A18A5FA84003201BF /* ArgosClient.m */,
 				F1C11DE918A71B1A007F2B47 /* utils.h */,
 				F1C11DEA18A71B1A007F2B47 /* utils.m */,
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
@@ -404,7 +399,6 @@
 				F1C11DE218A6F51F007F2B47 /* StoryDetailViewController.m in Sources */,
 				F1AB367218A5BB1400A81857 /* AGSectionHeaderView.m in Sources */,
 				F1C11DF118A75669007F2B47 /* AGEventTableViewCell.m in Sources */,
-				F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

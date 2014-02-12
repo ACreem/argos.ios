@@ -9,7 +9,7 @@
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
 #import "AGEventTableViewCell.h"
-#import "ArgosClient.h"
+//#import "ArgosClient.h"
 
 @interface EventListViewController () {
     NSMutableArray *_events;
@@ -65,6 +65,7 @@
 
 - (void)loadData
 {
+    /*
     [[ArgosClient sharedClient] GET:_endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
         
         // Filter out existing items.
@@ -82,6 +83,7 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [alert show];
     }];
+     */
 }
 
 #pragma mark - Table view data source

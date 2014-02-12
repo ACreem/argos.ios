@@ -32,7 +32,7 @@
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:YES];
-    _manager = [AFHTTPRequestOperationManager manager];
+    //_manager = [AFHTTPRequestOperationManager manager];
     
     [self setupUI];
 }
