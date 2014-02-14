@@ -54,9 +54,8 @@
 {
     [super viewWillAppear:animated];
     
-    // Bump the menu view down to fit the status bar underlayer.
+    // Bump the menu view down to fit the status bar underneath.
     CGRect frame = [[self view] frame];
-    //frame.size.height -= 20;
     frame.origin.y = 20;
     [[self view] setFrame:frame];
     
@@ -64,13 +63,8 @@
     self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -137,6 +131,8 @@
     }
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
+
+#pragma mark - IIViewDeckControllerDelegate
 
 - (void)viewDeckController:(IIViewDeckController *)viewDeckController didChangeOffset:(CGFloat)offset orientation:(IIViewDeckOffsetOrientation)orientation panning:(BOOL)panning {
     NSLog(@"%f", offset);
