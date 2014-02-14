@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "ARObjectManager.h"
 #import "LoginViewController.h"
 #import "ReachabilityManager.h"
 
@@ -17,9 +18,32 @@
     // Instiatiate network reachability monitor.
     [ReachabilityManager sharedManager];
     
+    // Setup RestKit.
+    NSError *error = nil;
+    NSURL *modelURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ArgosModel" ofType:@"momd"]];
+    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
+    
+    // Initialize the Core Data stack
+    [managedObjectStore createPersistentStoreCoordinator];
+    
+    NSPersistentStore __unused *persistentStore = [managedObjectStore addInMemoryPersistentStore:&error];
+    NSAssert(persistentStore, @"Failed to add persistent store: %@", error);
+    
+    [managedObjectStore createManagedObjectContexts];
+    
+    // Set the default store shared instance
+    [RKManagedObjectStore setDefaultStore:managedObjectStore];
+    
+    ARObjectManager* objectManager = [ARObjectManager objectManagerWithManagedObjectStore:managedObjectStore];
+    
+    [RKObjectManager setSharedManager:objectManager];
+    // End RestKit setup.
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     LoginViewController *lvc = [[LoginViewController alloc] init];
+    lvc.managedObjectContext = managedObjectStore.mainQueueManagedObjectContext;
     
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:lvc];
     self.navigationController.view.backgroundColor = [UIColor whiteColor];

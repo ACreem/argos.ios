@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AGDetailViewController.h"
+#import "ARDetailViewController.h"
+#import "Event.h"
 
-@interface EventDetailViewController : AGDetailViewController
+@interface EventDetailViewController : ARDetailViewController
 
-- (EventDetailViewController*)initWithEventId:(NSInteger)eventId title:(NSString*)title;
+- (EventDetailViewController*)initWithEvent:(Event*)event;
 
 @end

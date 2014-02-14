@@ -1,5 +1,5 @@
 //
-//  AGEventTableViewCell.h
+//  AREventTableViewCell.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/9/14.
@@ -8,7 +8,7 @@
 
 #import "SWTableViewCell.h"
 
-@interface AGEventTableViewCell : SWTableViewCell
+@interface AREventTableViewCell : SWTableViewCell
 
 @property (strong, nonatomic) UILabel *timeLabel;
 

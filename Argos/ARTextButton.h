@@ -1,5 +1,5 @@
 //
-//  AGTextButton.h
+//  ARTextButton.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGTextButton : UIButton
+@interface ARTextButton : UIButton
 
-+ (AGTextButton*)buttonWithTitle:(NSString*)title;
++ (ARTextButton*)buttonWithTitle:(NSString*)title;
 
 @end

@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGDetailViewController.h"
+#import "ARDetailViewController.h"
 
-@interface StoryDetailViewController : AGDetailViewController
+@interface StoryDetailViewController : ARDetailViewController
 
 @end

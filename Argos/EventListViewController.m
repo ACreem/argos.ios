@@ -8,11 +8,10 @@
 
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
-#import "AGEventTableViewCell.h"
-//#import "ArgosClient.h"
+#import "AREventTableViewCell.h"
+#import "Event.h"
 
 @interface EventListViewController () {
-    NSMutableArray *_events;
     NSString *_endpoint;
 }
 
@@ -41,72 +40,52 @@
     [self.navigationController setNavigationBarHidden:NO animated:YES];
     self.navigationItem.hidesBackButton = YES;
     
-    _events = [[NSMutableArray alloc] init];
-    [self loadData];
-    
-    // Setup Pull-To-Refresh
-    if (self.refreshHeaderView == nil) {
-        EGORefreshTableHeaderView *view = [[EGORefreshTableHeaderView alloc]
-                                           initWithFrame:CGRectMake(0.0f,
-                                                                    0.0f - self.tableView.bounds.size.height,
-                                                                    self.view.frame.size.width,
-                                                                    self.tableView.bounds.size.height)];
-        view.delegate = self;
-        [self.tableView addSubview:view];
-        self.refreshHeaderView = view;
-    }
-    
-    
     // Set cell separator to full width, if necessary.
     if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
         [self.tableView setSeparatorInset:UIEdgeInsetsZero];
     }
+    
+    // Setup Pull-To-Refresh
+    UIRefreshControl *refreshControl = [UIRefreshControl new];
+    [refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
+    self.refreshControl = refreshControl;
+    
+    [self loadData];
+    [self.refreshControl beginRefreshing];
 }
 
 - (void)loadData
 {
-    /*
-    [[ArgosClient sharedClient] GET:_endpoint parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
-        
-        // Filter out existing items.
-        NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];
-        [newItems removeObjectsInArray:_events];
-        
-        [_events addObjectsFromArray:newItems];
-        [self.tableView reloadData];
-        
-        self.dateLastUpdated = [NSDate date];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alert show];
+    [[RKObjectManager sharedManager] getObjectsAtPath:@"/events" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSLog(@"Fetched count %d",[self.fetchedResultsController.fetchedObjects count]);
+        NSLog(@"success");
+        [self.refreshControl endRefreshing];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        [self.refreshControl endRefreshing];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
     }];
-     */
 }
 
-#pragma mark - Table view data source
+#pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    // Return the number of sections.
-    return 1;
+    return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return _events.count;
+    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
+    return [sectionInfo numberOfObjects];
 }
 
-
-# pragma mark - Cell setup
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
     
-    AGEventTableViewCell *cell = (AGEventTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    AREventTableViewCell *cell = (AREventTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (cell == nil) {
         NSMutableArray *leftUtilityButtons = [NSMutableArray new];
@@ -124,7 +103,7 @@
             [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
             icon:[UIImage imageNamed:@"share"]];
         
-        cell = [[AGEventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
+        cell = [[AREventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                         reuseIdentifier:CellIdentifier
                                         containingTableView:tableView
                                         leftUtilityButtons:leftUtilityButtons
@@ -136,16 +115,14 @@
     }
     
     // Configure the cell...
-    NSDictionary *tempDict = [_events objectAtIndex:indexPath.row];
-    cell.textLabel.text = [tempDict objectForKey:@"title"];
+    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = event.title;
     cell.imageView.image = [UIImage imageNamed:@"sample"];
-    
-    cell.timeLabel.text = [utils dateDiff:[tempDict objectForKey:@"updated_at"]];
+    cell.timeLabel.text = [utils dateDiff:event.updatedAt];
     
     return cell;
 }
 
-#pragma mark - Cell height
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [self rowHeightForIndexPath:indexPath];
@@ -155,13 +132,10 @@
     return 60;
 }
 
-#pragma mark - Cell trigger
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSDictionary *tempDict = [_events objectAtIndex:indexPath.row];
-    NSInteger eventId = [[tempDict objectForKey:@"id"] intValue];
-    NSString *title = [tempDict objectForKey:@"title"];
-    [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEventId:eventId title:title] animated:YES];
+    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
 }
 
 #pragma mark - SWTableViewDelegate
@@ -204,57 +178,120 @@
     }
 }
 
-#pragma mark - Data Source Loading / Reloading Methods
 
-- (void)reloadTableViewDataSource{
+#pragma mark - NSFetchedResultsControllerDelegate
+
+- (NSFetchedResultsController *)fetchedResultsController
+{
+    if (_fetchedResultsController != nil) {
+        return _fetchedResultsController;
+    }
     
-	//  should be calling your tableviews data source model to reload
-	//  put here just for demo
-	self.reloading = YES;
-    [self loadData];
-    [self doneLoadingTableViewData];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    // Edit the entity name as appropriate.
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    // Set the batch size to a suitable number.
+    [fetchRequest setFetchBatchSize:20];
+    
+    // Edit the sort key as appropriate.
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
+    NSArray *sortDescriptors = @[sortDescriptor];
+    
+    [fetchRequest setSortDescriptors:sortDescriptors];
+    
+    // Edit the section name key path and cache name if appropriate.
+    // nil for section name key path means "no sections".
+    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
+    aFetchedResultsController.delegate = self;
+    self.fetchedResultsController = aFetchedResultsController;
+    
+	NSError *error = nil;
+	if (![self.fetchedResultsController performFetch:&error]) {
+        // Replace this implementation with code to handle the error appropriately.
+        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
+	    abort();
+	}
+    
+    return _fetchedResultsController;
 }
 
-- (void)doneLoadingTableViewData{
-	//  model should call this when its done loading
-	self.reloading = NO;
-	[_refreshHeaderView egoRefreshScrollViewDataSourceDidFinishedLoading:self.tableView];
+/*
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView beginUpdates];
 }
 
-#pragma mark - UIScrollViewDelegate Methods
-
-- (void)scrollViewDidScroll:(UIScrollView *)scrollView{
-    
-	[_refreshHeaderView egoRefreshScrollViewDidScroll:scrollView];
-    
+- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
+           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
+{
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
+       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
+      newIndexPath:(NSIndexPath *)newIndexPath
+{
+    UITableView *tableView = self.tableView;
     
-	[_refreshHeaderView egoRefreshScrollViewDidEndDragging:scrollView];
-    
+    switch(type) {
+        case NSFetchedResultsChangeInsert:
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeDelete:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+            
+        case NSFetchedResultsChangeUpdate:
+            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
+            break;
+            
+        case NSFetchedResultsChangeMove:
+            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
+            break;
+    }
 }
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    [self.tableView endUpdates];
+}
+*/
 
-#pragma mark - EGORefreshTableHeaderDelegate Methods
+ // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
+ 
+ - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+ {
+ // In the simplest, most efficient, case, reload the table view.
+ [self.tableView reloadData];
+ }
 
-- (void)egoRefreshTableHeaderDidTriggerRefresh:(EGORefreshTableHeaderView*)view{
+- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
+{
+    /*
+    RKGGist *gist = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = gist.titleText;
+    cell.detailTextLabel.text = gist.subtitleText;
+     */
     
-	[self performSelectorOnMainThread:@selector(reloadTableViewDataSource) withObject:nil waitUntilDone:NO];
-    
+    // Configure the cell...
+    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    cell.textLabel.text = event.title;
+    cell.imageView.image = [UIImage imageNamed:@"sample"];
 }
 
-- (BOOL)egoRefreshTableHeaderDataSourceIsLoading:(EGORefreshTableHeaderView*)view{
-    
-	return self.reloading; // should return if data source model is reloading
-    
-}
-
-- (NSDate*)egoRefreshTableHeaderDataSourceLastUpdated:(EGORefreshTableHeaderView*)view{
-    
-	return self.dateLastUpdated; // should return date data source was last changed
-    
-}
 
 
 @end

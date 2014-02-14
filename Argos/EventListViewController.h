@@ -7,13 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "EGORefreshTableHeaderView.h"
+#import "SWTableViewCell.h"
 
-@interface EventListViewController : UITableViewController <EGORefreshTableHeaderDelegate>
+@interface EventListViewController : UITableViewController <SWTableViewCellDelegate, NSFetchedResultsControllerDelegate>
 
-@property (strong, nonatomic) EGORefreshTableHeaderView *refreshHeaderView;
-@property (strong, nonatomic) NSDate* dateLastUpdated;
-@property (assign, nonatomic) BOOL reloading;
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
+@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
 - (id)initWithTitle:(NSString*)title endpoint:(NSString*)endpoint;
 

@@ -10,6 +10,6 @@
 
 @interface utils : NSObject
 
-+(NSString *)dateDiff:(NSString *)origDate;
++(NSString *)dateDiff:(NSDate *)origDate;
 
 @end
