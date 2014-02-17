@@ -2,7 +2,7 @@
 //  Story.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/12/14.
+//  Created by Francis Tseng on 2/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -14,11 +14,12 @@
 @interface Story : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createdAt;
-@property (nonatomic, retain) NSNumber * storyId;
 @property (nonatomic, retain) id image;
+@property (nonatomic, retain) NSNumber * storyId;
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * updatedAt;
+@property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSSet *events;
 @end
 

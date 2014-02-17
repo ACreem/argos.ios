@@ -2,14 +2,14 @@
 //  Event.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/12/14.
+//  Created by Francis Tseng on 2/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Article;
+@class Article, Story;
 
 @interface Event : NSManagedObject
 
@@ -20,8 +20,8 @@
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * updatedAt;
-@property (nonatomic, retain) NSManagedObject *stories;
 @property (nonatomic, retain) NSSet *articles;
+@property (nonatomic, retain) NSSet *stories;
 @end
 
 @interface Event (CoreDataGeneratedAccessors)
@@ -30,5 +30,10 @@
 - (void)removeArticlesObject:(Article *)value;
 - (void)addArticles:(NSSet *)values;
 - (void)removeArticles:(NSSet *)values;
+
+- (void)addStoriesObject:(Story *)value;
+- (void)removeStoriesObject:(Story *)value;
+- (void)addStories:(NSSet *)values;
+- (void)removeStories:(NSSet *)values;
 
 @end

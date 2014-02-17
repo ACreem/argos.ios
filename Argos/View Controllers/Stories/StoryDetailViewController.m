@@ -42,7 +42,7 @@
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    [[RKObjectManager sharedManager] getObject:_story path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"failure");

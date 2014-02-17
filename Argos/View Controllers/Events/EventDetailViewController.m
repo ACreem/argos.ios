@@ -98,7 +98,9 @@
 
 - (void)viewStory:(id)sender
 {
-    [self.navigationController pushViewController:[[StoryDetailViewController alloc] init] animated:YES];
+    Story* story = [[_event.stories allObjects] firstObject];
+    NSLog(@"%@", story);
+    [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 
 @end

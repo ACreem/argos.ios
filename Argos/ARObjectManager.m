@@ -39,6 +39,7 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                       @"created_at":     @"createdAt"};
     NSDictionary *storyMappings   = @{
                                       @"id":             @"storyId",
+                                      @"url":            @"jsonUrl",
                                       @"title":          @"title",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
@@ -52,9 +53,9 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                         @"articles":    @{
                                                             @"entity":      @"Article",
                                                             @"mappings":    articleMappings},
-                                        @"story":       @{
-                                                            @"entity":  @"Story",
-                                                            @"mappings": storyMappings}}
+                                        @"stories":       @{
+                                                            @"entity":      @"Story",
+                                                            @"mappings":    storyMappings}}
                              mappings:eventMappings];
     
     [objectManager setupEntityForName:@"Article"
