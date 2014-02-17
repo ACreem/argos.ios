@@ -1,5 +1,5 @@
 //
-//  AGSummaryView.h
+//  ARSummaryView.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
@@ -8,12 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface AGSummaryView : UIView
+@interface ARSummaryView : UIView
 
 @property (strong, nonatomic) UILabel *titleLabel;
-@property (strong, nonatomic) UILabel *summaryLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
+@property (strong, nonatomic) UITextView *summaryTextView;
 
-- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSString*)updatedAt;
+- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt;
 
 @end

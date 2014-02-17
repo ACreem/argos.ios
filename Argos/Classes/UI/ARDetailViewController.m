@@ -1,22 +1,22 @@
 //
-//  AGDetailViewController.m
+//  ARDetailViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGDetailViewController.h"
+#import "ARDetailViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
-@interface AGDetailViewController () {
+@interface ARDetailViewController () {
     CGRect bounds;
     UIView *_gradientView;
 }
 
 @end
 
-@implementation AGDetailViewController
+@implementation ARDetailViewController
 
 - (void)viewDidLoad
 {
@@ -57,11 +57,12 @@
 {
     // Auto size scroll view height.
     // Starting height accomodates for header image spacing.
-    CGFloat scrollViewHeight = _headerImageView.bounds.size.height;
+    float h = 0;
     for (UIView* view in _scrollView.subviews) {
-        scrollViewHeight += view.frame.size.height;
+        float fh = view.frame.origin.y + view.frame.size.height;
+        h = MAX(h, fh);
     }
-    [_scrollView setContentSize:(CGSizeMake(bounds.size.width, scrollViewHeight))];
+    [_scrollView setContentSize:(CGSizeMake(bounds.size.width, h + _headerImageView.frame.size.height))];
 }
 
 #pragma mark - UIScrollView delegate
@@ -79,11 +80,11 @@
     
     // Sticky header
     // Look for the header that needs to be stuck.
-    AGSectionHeaderView* selectedHeader;
+    ARSectionHeaderView* selectedHeader;
     for (UIView* header in self.scrollView.subviews) {
-        if ([header isKindOfClass:[AGSectionHeaderView class]]) {
+        if ([header isKindOfClass:[ARSectionHeaderView class]]) {
             if (y > header.frame.origin.y) {
-                selectedHeader = (AGSectionHeaderView*)header;
+                selectedHeader = (ARSectionHeaderView*)header;
             }
         }
     }

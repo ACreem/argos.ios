@@ -1,5 +1,5 @@
 //
-//  AGDetailViewController.h
+//  ARDetailViewController.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
@@ -7,17 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AGSummaryView.h"
-#import "AGSectionHeaderView.h"
+#import "ARSummaryView.h"
+#import "ARSectionHeaderView.h"
 
-@interface AGDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface ARDetailViewController : UIViewController <UIScrollViewDelegate>
 
 @property (strong, nonatomic) UIScrollView *scrollView;
 @property (strong, nonatomic) UIImageView *headerImageView;
-@property (strong, nonatomic) AGSummaryView *summaryView;
+@property (strong, nonatomic) ARSummaryView *summaryView;
 
 // For keeping track of sticky headers.
-@property (strong, nonatomic) AGSectionHeaderView *stuckSectionHeaderView;
+@property (strong, nonatomic) ARSectionHeaderView *stuckSectionHeaderView;
 @property (nonatomic) CGRect stuckSectionHeaderViewFrame;
 
 - (void)adjustScrollViewHeight;

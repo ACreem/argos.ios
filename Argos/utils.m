@@ -10,15 +10,11 @@
 
 @implementation utils
 
-+(NSString *)dateDiff:(NSString *)origDate {
++(NSString *)dateDiff:(NSDate *)origDate {
+    // Based off of:
     // https://stackoverflow.com/a/932130/1097920
-    // Updated to work with isoformat dates.
-    NSDateFormatter *df = [[NSDateFormatter alloc] init];
-    [df setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [df setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.S"];
-    NSDate *convertedDate = [df dateFromString:origDate];
     NSDate *todayDate = [NSDate date];
-    double ti = [convertedDate timeIntervalSinceDate:todayDate];
+    double ti = [origDate timeIntervalSinceDate:todayDate];
     ti = ti * -1;
     if(ti < 1) {
     	return @"never";

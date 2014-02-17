@@ -1,39 +1,47 @@
 PODS:
-  - AFNetworking (2.1.0):
-    - AFNetworking/NSURLConnection
-    - AFNetworking/NSURLSession
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-    - AFNetworking/UIKit
-  - AFNetworking/NSURLConnection (2.1.0):
-    - AFNetworking/Reachability
-    - AFNetworking/Security
-    - AFNetworking/Serialization
-  - AFNetworking/NSURLSession (2.1.0):
-    - AFNetworking/NSURLConnection
-  - AFNetworking/Reachability (2.1.0)
-  - AFNetworking/Security (2.1.0)
-  - AFNetworking/Serialization (2.1.0)
-  - AFNetworking/UIKit (2.1.0):
-    - AFNetworking/NSURLConnection
-  - EGOTableViewPullRefresh (0.1.0)
+  - AFNetworking (1.3.3)
+  - ISO8601DateFormatterValueTransformer (0.5.0):
+    - RKValueTransformers (~> 1.0.0)
   - Reachability (3.1.1)
+  - RestKit (0.22.0):
+    - RestKit/Core
+  - RestKit/Core (0.22.0):
+    - RestKit/CoreData
+    - RestKit/Network
+    - RestKit/ObjectMapping
+  - RestKit/CoreData (0.22.0)
+  - RestKit/Network (0.22.0):
+    - AFNetworking (~> 1.3.0)
+    - RestKit/ObjectMapping
+    - RestKit/Support
+    - SOCKit
+  - RestKit/ObjectMapping (0.22.0):
+    - ISO8601DateFormatterValueTransformer (~> 0.5.0)
+    - RestKit/Support
+    - RKValueTransformers (~> 1.0.1)
+  - RestKit/Support (0.22.0):
+    - TransitionKit (= 2.0.0)
+  - RKValueTransformers (1.0.1)
+  - SOCKit (1.1)
   - SWTableViewCell (0.2.3)
+  - TransitionKit (2.0.0)
   - ViewDeck (2.2.11)
 
 DEPENDENCIES:
-  - AFNetworking
-  - EGOTableViewPullRefresh
   - Reachability
+  - RestKit
   - SWTableViewCell
   - ViewDeck (~> 2.2.11)
 
 SPEC CHECKSUMS:
-  AFNetworking: c7d7901a83f631414c7eda1737261f696101a5cd
-  EGOTableViewPullRefresh: 6ba637ce6dd3186b503d2d91e6b3a08a26d650f5
+  AFNetworking: 61fdd49e2ffe6380378df37b3b6e70630bb9dd66
+  ISO8601DateFormatterValueTransformer: d0af1f50a9df42db72d7418db31938b8473e0af8
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
+  RestKit: dc107a0aa4f962575ad0385bac5b3c5e4f591f4e
+  RKValueTransformers: 1562d458b9c9d59ce777bfc5982f2e1aef2e9182
+  SOCKit: 2f3bc4d07910de12dcc202815e07db68a3802581
   SWTableViewCell: 270c3758a84547b1cad43d70b72203b3003ce27b
+  TransitionKit: 433284465abacdc07852d7db6dd0cc075010059a
   ViewDeck: b5eddc8559b0e47259ab7addbf2de6768061f139
 
 COCOAPODS: 0.29.0

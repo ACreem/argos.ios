@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
 		F1405C2818973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
@@ -19,21 +20,24 @@
 		F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
 		F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1405C4518973C4C00A4819D /* InfoPlist.strings */; };
 		F1405C4918973C4C00A4819D /* ArgosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1405C4818973C4C00A4819D /* ArgosTests.m */; };
-		F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F144F4C318973FBB00A43388 /* EventListViewController.m */; };
 		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
 		F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F14603B618A4288400A85E0F /* ReachabilityManager.m */; };
-		F17FA8F818A55AF1006FD699 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F17FA8F718A55AF1006FD699 /* MenuViewController.m */; };
-		F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F18F218918973CBE0069CA93 /* LoginViewController.m */; };
-		F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB366E18A590C400A81857 /* EventDetailViewController.m */; };
-		F1AB367218A5BB1400A81857 /* AGSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB367118A5BB1400A81857 /* AGSectionHeaderView.m */; };
-		F1C11DD618A6D3AD007F2B47 /* AGTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */; };
-		F1C11DD918A6DB11007F2B47 /* AGSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */; };
-		F1C11DDC18A6E09B007F2B47 /* AGDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DDB18A6E09B007F2B47 /* AGDetailViewController.m */; };
-		F1C11DDF18A6E3EE007F2B47 /* AGEmbeddedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DDE18A6E3EE007F2B47 /* AGEmbeddedTableView.m */; };
-		F1C11DE218A6F51F007F2B47 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */; };
+		F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ARObjectManager.m */; };
+		F1601C1818ACA9B300C89590 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C1718ACA9B300C89590 /* Event.m */; };
+		F1601C1E18ACA9B300C89590 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C1D18ACA9B300C89590 /* Story.m */; };
+		F1601C2118ADA2F000C89590 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2018ADA2F000C89590 /* Article.m */; };
+		F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2318ADBA7400C89590 /* LoginViewController.m */; };
+		F1601C2718ADBA7400C89590 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2518ADBA7400C89590 /* MenuViewController.m */; };
+		F1601C2C18ADBA7F00C89590 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2818ADBA7F00C89590 /* EventDetailViewController.m */; };
+		F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2918ADBA7F00C89590 /* EventListViewController.m */; };
+		F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2F18ADBA8800C89590 /* StoryDetailViewController.m */; };
+		F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3218ADBA9500C89590 /* ARDetailViewController.m */; };
+		F1601C3E18ADBA9500C89590 /* AREmbeddedTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3418ADBA9500C89590 /* AREmbeddedTableView.m */; };
+		F1601C3F18ADBA9500C89590 /* AREventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3618ADBA9500C89590 /* AREventTableViewCell.m */; };
+		F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */; };
+		F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3A18ADBA9500C89590 /* ARSummaryView.m */; };
+		F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3C18ADBA9500C89590 /* ARTextButton.m */; };
 		F1C11DEB18A71B1A007F2B47 /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DEA18A71B1A007F2B47 /* utils.m */; };
-		F1C11DF118A75669007F2B47 /* AGEventTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DF018A75669007F2B47 /* AGEventTableViewCell.m */; };
-		F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8FD4A18A5FA84003201BF /* ArgosClient.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +54,7 @@
 /* Begin PBXFileReference section */
 		4C8E5860754E44B8B98A352E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1405C2518973C4C00A4819D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -66,35 +71,41 @@
 		F1405C4418973C4C00A4819D /* ArgosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArgosTests-Info.plist"; sourceTree = "<group>"; };
 		F1405C4618973C4C00A4819D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F1405C4818973C4C00A4819D /* ArgosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArgosTests.m; sourceTree = "<group>"; };
-		F144F4C218973FBB00A43388 /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
-		F144F4C318973FBB00A43388 /* EventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventListViewController.m; sourceTree = "<group>"; };
 		F14603B318A41FB100A85E0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F14603B518A4288400A85E0F /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
 		F14603B618A4288400A85E0F /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
-		F17FA8F618A55AF1006FD699 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
-		F17FA8F718A55AF1006FD699 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
-		F18F218818973CBE0069CA93 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
-		F18F218918973CBE0069CA93 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		F1AB366D18A590C400A81857 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
-		F1AB366E18A590C400A81857 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
-		F1AB367018A5BB1400A81857 /* AGSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSectionHeaderView.h; sourceTree = "<group>"; };
-		F1AB367118A5BB1400A81857 /* AGSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSectionHeaderView.m; sourceTree = "<group>"; };
-		F1C11DD418A6D3AD007F2B47 /* AGTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGTextButton.h; sourceTree = "<group>"; };
-		F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGTextButton.m; sourceTree = "<group>"; };
-		F1C11DD718A6DB11007F2B47 /* AGSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGSummaryView.h; sourceTree = "<group>"; };
-		F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGSummaryView.m; sourceTree = "<group>"; };
-		F1C11DDA18A6E09B007F2B47 /* AGDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGDetailViewController.h; sourceTree = "<group>"; };
-		F1C11DDB18A6E09B007F2B47 /* AGDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGDetailViewController.m; sourceTree = "<group>"; };
-		F1C11DDD18A6E3EE007F2B47 /* AGEmbeddedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEmbeddedTableView.h; sourceTree = "<group>"; };
-		F1C11DDE18A6E3EE007F2B47 /* AGEmbeddedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEmbeddedTableView.m; sourceTree = "<group>"; };
-		F1C11DE018A6F51F007F2B47 /* StoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDetailViewController.h; sourceTree = "<group>"; };
-		F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryDetailViewController.m; sourceTree = "<group>"; };
+		F1601C0718ABDC3800C89590 /* ARObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARObjectManager.h; sourceTree = "<group>"; };
+		F1601C0818ABDC3800C89590 /* ARObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARObjectManager.m; sourceTree = "<group>"; };
+		F1601C1618ACA9B300C89590 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Event.h; path = Classes/Models/Event.h; sourceTree = "<group>"; };
+		F1601C1718ACA9B300C89590 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Classes/Models/Event.m; sourceTree = "<group>"; };
+		F1601C1C18ACA9B300C89590 /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Story.h; path = Classes/Models/Story.h; sourceTree = "<group>"; };
+		F1601C1D18ACA9B300C89590 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Story.m; path = Classes/Models/Story.m; sourceTree = "<group>"; };
+		F1601C1F18ADA2F000C89590 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = Classes/Models/Article.h; sourceTree = "<group>"; };
+		F1601C2018ADA2F000C89590 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = Classes/Models/Article.m; sourceTree = "<group>"; };
+		F1601C2218ADBA7400C89590 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginViewController.h; path = "View Controllers/LoginViewController.h"; sourceTree = "<group>"; };
+		F1601C2318ADBA7400C89590 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginViewController.m; path = "View Controllers/LoginViewController.m"; sourceTree = "<group>"; };
+		F1601C2418ADBA7400C89590 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuViewController.h; path = "View Controllers/MenuViewController.h"; sourceTree = "<group>"; };
+		F1601C2518ADBA7400C89590 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuViewController.m; path = "View Controllers/MenuViewController.m"; sourceTree = "<group>"; };
+		F1601C2818ADBA7F00C89590 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventDetailViewController.m; path = "View Controllers/Events/EventDetailViewController.m"; sourceTree = "<group>"; };
+		F1601C2918ADBA7F00C89590 /* EventListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventListViewController.m; path = "View Controllers/Events/EventListViewController.m"; sourceTree = "<group>"; };
+		F1601C2A18ADBA7F00C89590 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventDetailViewController.h; path = "View Controllers/Events/EventDetailViewController.h"; sourceTree = "<group>"; };
+		F1601C2B18ADBA7F00C89590 /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventListViewController.h; path = "View Controllers/Events/EventListViewController.h"; sourceTree = "<group>"; };
+		F1601C2E18ADBA8800C89590 /* StoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryDetailViewController.h; path = "View Controllers/Stories/StoryDetailViewController.h"; sourceTree = "<group>"; };
+		F1601C2F18ADBA8800C89590 /* StoryDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryDetailViewController.m; path = "View Controllers/Stories/StoryDetailViewController.m"; sourceTree = "<group>"; };
+		F1601C3118ADBA9500C89590 /* ARDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARDetailViewController.h; path = Classes/UI/ARDetailViewController.h; sourceTree = "<group>"; };
+		F1601C3218ADBA9500C89590 /* ARDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARDetailViewController.m; path = Classes/UI/ARDetailViewController.m; sourceTree = "<group>"; };
+		F1601C3318ADBA9500C89590 /* AREmbeddedTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AREmbeddedTableView.h; path = Classes/UI/AREmbeddedTableView.h; sourceTree = "<group>"; };
+		F1601C3418ADBA9500C89590 /* AREmbeddedTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AREmbeddedTableView.m; path = Classes/UI/AREmbeddedTableView.m; sourceTree = "<group>"; };
+		F1601C3518ADBA9500C89590 /* AREventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AREventTableViewCell.h; path = Classes/UI/AREventTableViewCell.h; sourceTree = "<group>"; };
+		F1601C3618ADBA9500C89590 /* AREventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AREventTableViewCell.m; path = Classes/UI/AREventTableViewCell.m; sourceTree = "<group>"; };
+		F1601C3718ADBA9500C89590 /* ARSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSectionHeaderView.h; path = Classes/UI/ARSectionHeaderView.h; sourceTree = "<group>"; };
+		F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSectionHeaderView.m; path = Classes/UI/ARSectionHeaderView.m; sourceTree = "<group>"; };
+		F1601C3918ADBA9500C89590 /* ARSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSummaryView.h; path = Classes/UI/ARSummaryView.h; sourceTree = "<group>"; };
+		F1601C3A18ADBA9500C89590 /* ARSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSummaryView.m; path = Classes/UI/ARSummaryView.m; sourceTree = "<group>"; };
+		F1601C3B18ADBA9500C89590 /* ARTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARTextButton.h; path = Classes/UI/ARTextButton.h; sourceTree = "<group>"; };
+		F1601C3C18ADBA9500C89590 /* ARTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARTextButton.m; path = Classes/UI/ARTextButton.m; sourceTree = "<group>"; };
 		F1C11DE918A71B1A007F2B47 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
 		F1C11DEA18A71B1A007F2B47 /* utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
-		F1C11DEF18A75669007F2B47 /* AGEventTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AGEventTableViewCell.h; sourceTree = "<group>"; };
-		F1C11DF018A75669007F2B47 /* AGEventTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AGEventTableViewCell.m; sourceTree = "<group>"; };
-		F1D8FD4918A5FA84003201BF /* ArgosClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosClient.h; sourceTree = "<group>"; };
-		F1D8FD4A18A5FA84003201BF /* ArgosClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosClient.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,12 +170,13 @@
 		F1405C2918973C4C00A4819D /* Argos */ = {
 			isa = PBXGroup;
 			children = (
+				F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */,
 				F1405C3218973C4C00A4819D /* AppDelegate.h */,
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
+				F1601C0718ABDC3800C89590 /* ARObjectManager.h */,
+				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
-				F1D8FD4918A5FA84003201BF /* ArgosClient.h */,
-				F1D8FD4A18A5FA84003201BF /* ArgosClient.m */,
 				F1C11DE918A71B1A007F2B47 /* utils.h */,
 				F1C11DEA18A71B1A007F2B47 /* utils.m */,
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
@@ -204,13 +216,45 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F1601C0518AB5A1B00C89590 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				F1601C3118ADBA9500C89590 /* ARDetailViewController.h */,
+				F1601C3218ADBA9500C89590 /* ARDetailViewController.m */,
+				F1601C3318ADBA9500C89590 /* AREmbeddedTableView.h */,
+				F1601C3418ADBA9500C89590 /* AREmbeddedTableView.m */,
+				F1601C3518ADBA9500C89590 /* AREventTableViewCell.h */,
+				F1601C3618ADBA9500C89590 /* AREventTableViewCell.m */,
+				F1601C3718ADBA9500C89590 /* ARSectionHeaderView.h */,
+				F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */,
+				F1601C3918ADBA9500C89590 /* ARSummaryView.h */,
+				F1601C3A18ADBA9500C89590 /* ARSummaryView.m */,
+				F1601C3B18ADBA9500C89590 /* ARTextButton.h */,
+				F1601C3C18ADBA9500C89590 /* ARTextButton.m */,
+			);
+			name = UI;
+			sourceTree = "<group>";
+		};
+		F1601C0618ABDC2300C89590 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1601C1C18ACA9B300C89590 /* Story.h */,
+				F1601C1D18ACA9B300C89590 /* Story.m */,
+				F1601C1F18ADA2F000C89590 /* Article.h */,
+				F1601C2018ADA2F000C89590 /* Article.m */,
+				F1601C1618ACA9B300C89590 /* Event.h */,
+				F1601C1718ACA9B300C89590 /* Event.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		F1C11DE318A6FE56007F2B47 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F18F218818973CBE0069CA93 /* LoginViewController.h */,
-				F18F218918973CBE0069CA93 /* LoginViewController.m */,
-				F17FA8F618A55AF1006FD699 /* MenuViewController.h */,
-				F17FA8F718A55AF1006FD699 /* MenuViewController.m */,
+				F1601C2218ADBA7400C89590 /* LoginViewController.h */,
+				F1601C2318ADBA7400C89590 /* LoginViewController.m */,
+				F1601C2418ADBA7400C89590 /* MenuViewController.h */,
+				F1601C2518ADBA7400C89590 /* MenuViewController.m */,
 				F1C11DF618A7639A007F2B47 /* Stories */,
 				F1C11DF518A7638C007F2B47 /* Events */,
 			);
@@ -220,10 +264,10 @@
 		F1C11DF518A7638C007F2B47 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				F144F4C218973FBB00A43388 /* EventListViewController.h */,
-				F144F4C318973FBB00A43388 /* EventListViewController.m */,
-				F1AB366D18A590C400A81857 /* EventDetailViewController.h */,
-				F1AB366E18A590C400A81857 /* EventDetailViewController.m */,
+				F1601C2B18ADBA7F00C89590 /* EventListViewController.h */,
+				F1601C2918ADBA7F00C89590 /* EventListViewController.m */,
+				F1601C2A18ADBA7F00C89590 /* EventDetailViewController.h */,
+				F1601C2818ADBA7F00C89590 /* EventDetailViewController.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";
@@ -231,8 +275,8 @@
 		F1C11DF618A7639A007F2B47 /* Stories */ = {
 			isa = PBXGroup;
 			children = (
-				F1C11DE018A6F51F007F2B47 /* StoryDetailViewController.h */,
-				F1C11DE118A6F51F007F2B47 /* StoryDetailViewController.m */,
+				F1601C2E18ADBA8800C89590 /* StoryDetailViewController.h */,
+				F1601C2F18ADBA8800C89590 /* StoryDetailViewController.m */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -240,18 +284,8 @@
 		F1D8FD4818A5EE00003201BF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				F1AB367018A5BB1400A81857 /* AGSectionHeaderView.h */,
-				F1AB367118A5BB1400A81857 /* AGSectionHeaderView.m */,
-				F1C11DD418A6D3AD007F2B47 /* AGTextButton.h */,
-				F1C11DD518A6D3AD007F2B47 /* AGTextButton.m */,
-				F1C11DD718A6DB11007F2B47 /* AGSummaryView.h */,
-				F1C11DD818A6DB11007F2B47 /* AGSummaryView.m */,
-				F1C11DDA18A6E09B007F2B47 /* AGDetailViewController.h */,
-				F1C11DDB18A6E09B007F2B47 /* AGDetailViewController.m */,
-				F1C11DDD18A6E3EE007F2B47 /* AGEmbeddedTableView.h */,
-				F1C11DDE18A6E3EE007F2B47 /* AGEmbeddedTableView.m */,
-				F1C11DEF18A75669007F2B47 /* AGEventTableViewCell.h */,
-				F1C11DF018A75669007F2B47 /* AGEventTableViewCell.m */,
+				F1601C0618ABDC2300C89590 /* Models */,
+				F1601C0518AB5A1B00C89590 /* UI */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -389,22 +423,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1C11DD618A6D3AD007F2B47 /* AGTextButton.m in Sources */,
-				F1C11DD918A6DB11007F2B47 /* AGSummaryView.m in Sources */,
+				F1601C3E18ADBA9500C89590 /* AREmbeddedTableView.m in Sources */,
+				F1601C2118ADA2F000C89590 /* Article.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
+				F1601C1E18ACA9B300C89590 /* Story.m in Sources */,
 				F1C11DEB18A71B1A007F2B47 /* utils.m in Sources */,
-				F17FA8F818A55AF1006FD699 /* MenuViewController.m in Sources */,
+				F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
-				F144F4C418973FBB00A43388 /* EventListViewController.m in Sources */,
+				F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
-				F1C11DDF18A6E3EE007F2B47 /* AGEmbeddedTableView.m in Sources */,
-				F18F218A18973CBE0069CA93 /* LoginViewController.m in Sources */,
-				F1AB366F18A590C400A81857 /* EventDetailViewController.m in Sources */,
-				F1C11DDC18A6E09B007F2B47 /* AGDetailViewController.m in Sources */,
-				F1C11DE218A6F51F007F2B47 /* StoryDetailViewController.m in Sources */,
-				F1AB367218A5BB1400A81857 /* AGSectionHeaderView.m in Sources */,
-				F1C11DF118A75669007F2B47 /* AGEventTableViewCell.m in Sources */,
-				F1D8FD4B18A5FA84003201BF /* ArgosClient.m in Sources */,
+				F1601C1818ACA9B300C89590 /* Event.m in Sources */,
+				F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */,
+				F1601C2C18ADBA7F00C89590 /* EventDetailViewController.m in Sources */,
+				F1601C3F18ADBA9500C89590 /* AREventTableViewCell.m in Sources */,
+				F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */,
+				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
+				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,
+				F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */,
+				F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */,
+				F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */,
+				F1601C2718ADBA7400C89590 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -627,6 +665,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */,
+			);
+			currentVersion = F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */;
+			path = ArgosModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = F1405C1818973C4C00A4819D /* Project object */;
 }

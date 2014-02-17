@@ -1,14 +1,14 @@
 //
-//  AGSectionHeaderView.m
+//  ARSectionHeaderView.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/7/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGSectionHeaderView.h"
+#import "ARSectionHeaderView.h"
 
-@implementation AGSectionHeaderView
+@implementation ARSectionHeaderView
 
 - (id)initWithTitle:(NSString*)title withOrigin:(CGPoint)origin
 {

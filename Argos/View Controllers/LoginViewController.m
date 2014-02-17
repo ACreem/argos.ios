@@ -18,29 +18,13 @@
 
 @implementation LoginViewController
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-    if (self) {
-        // Custom initialization
-    }
-    return self;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:YES];
-    _manager = [AFHTTPRequestOperationManager manager];
     
     [self setupUI];
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void)facebookLoginButtonPressed:(id)sender
@@ -64,13 +48,15 @@
 - (void)postLogin
 {
     EventListViewController *elvc = [[EventListViewController alloc] initWithTitle:@"Latest" endpoint:@"/events"];
+    elvc.managedObjectContext = self.managedObjectContext;
     
-    // Add background for the status bar, so the pull menu transition looks better.
+    // Add background for the status bar, so the slide-out menu transition looks better.
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
     view.backgroundColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate.window addSubview:view];
     
+    // Setup the slide-out menu.
     MenuViewController* menuController = [[MenuViewController alloc] init];
     appDelegate.deckController.leftController = menuController;
     

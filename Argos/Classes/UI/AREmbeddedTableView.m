@@ -1,14 +1,15 @@
 //
-//  AGEmbeddedTableView.m
+//  AREmbeddedTableView.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/8/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGEmbeddedTableView.h"
+#import "AREmbeddedTableView.h"
+#import "Article.h"
 
-@implementation AGEmbeddedTableView
+@implementation AREmbeddedTableView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -57,8 +58,8 @@
     
     
     // Configure the cell...
-    NSDictionary *tempDict = [_items objectAtIndex:indexPath.row];
-    cell.textLabel.text = [tempDict objectForKey:@"title"];
+    Article *article = [_items objectAtIndex:indexPath.row];
+    cell.textLabel.text = article.title;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;

@@ -1,14 +1,14 @@
 //
-//  AGEventTableViewCell.m
+//  AREventTableViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AGEventTableViewCell.h"
+#import "AREventTableViewCell.h"
 
-@implementation AGEventTableViewCell
+@implementation AREventTableViewCell
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier containingTableView:(UITableView *)containingTableView leftUtilityButtons:(NSArray *)leftUtilityButtons rightUtilityButtons:(NSArray *)rightUtilityButtons
 {

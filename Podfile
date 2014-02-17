@@ -1,5 +1,4 @@
-pod 'AFNetworking'
 pod 'Reachability'
 pod 'SWTableViewCell'
-pod 'EGOTableViewPullRefresh'
 pod 'ViewDeck', '~> 2.2.11'
+pod 'RestKit'
