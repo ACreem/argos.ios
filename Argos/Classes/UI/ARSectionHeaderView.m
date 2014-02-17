@@ -16,8 +16,7 @@
     CGRect frame = CGRectMake(origin.x, origin.y, bounds.size.width, 40.0);
     self = [super initWithFrame:frame];
     if (self) {
-        //self.backgroundColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
-        self.backgroundColor = [UIColor colorWithRed:0.831 green:0.494 blue:0.251 alpha:1.0];
+        self.backgroundColor = [UIColor secondaryColor];
         UILabel *sectionTitle = [[UILabel alloc] initWithFrame:CGRectMake(12.0, 0, self.bounds.size.width - 24.0, self.bounds.size.height)];
         sectionTitle.text = title;
         sectionTitle.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];

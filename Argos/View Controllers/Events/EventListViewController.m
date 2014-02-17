@@ -116,7 +116,7 @@
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = event.title;
     cell.imageView.image = [UIImage imageNamed:@"sample"];
-    cell.timeLabel.text = [utils dateDiff:event.updatedAt];
+    cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
     
     return cell;
 }

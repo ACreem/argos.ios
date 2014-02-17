@@ -27,7 +27,7 @@
                                                                 20.0)];
         _titleLabel.text = @"SUMMARY";
         _titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        _titleLabel.textColor = [UIColor colorWithRed:0.573 green:0.58 blue:0.592 alpha:1.0];
+        _titleLabel.textColor = [UIColor mutedColor];
         [self addSubview:_titleLabel];
         
         // Setup time ago
@@ -35,10 +35,10 @@
                                                                paddingY,
                                                                bounds.size.width - (paddingX*2),
                                                                20.0)];
-        _timeLabel.text = [utils dateDiff:updatedAt];
+        _timeLabel.text = [NSDate dateDiff:updatedAt];
         _timeLabel.textAlignment = NSTextAlignmentRight;
         _timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
-        _timeLabel.textColor = [UIColor colorWithRed:0.573 green:0.58 blue:0.592 alpha:1.0];
+        _timeLabel.textColor = [UIColor mutedColor];
         [self addSubview:_timeLabel];
         
         // Setup summary text

@@ -15,5 +15,6 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import <RestKit/RestKit.h>
-    #import "utils.h"
+    #import "UIColor+ArgosColors.h"
+    #import "NSDate+DateUtils.h"
 #endif

@@ -19,35 +19,17 @@
     [ReachabilityManager sharedManager];
     
     // Setup RestKit.
-    NSError *error = nil;
-    NSURL *modelURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ArgosModel" ofType:@"momd"]];
-    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
-    RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
-    
-    // Initialize the Core Data stack
-    [managedObjectStore createPersistentStoreCoordinator];
-    
-    NSPersistentStore __unused *persistentStore = [managedObjectStore addInMemoryPersistentStore:&error];
-    NSAssert(persistentStore, @"Failed to add persistent store: %@", error);
-    
-    [managedObjectStore createManagedObjectContexts];
-    
-    // Set the default store shared instance
-    [RKManagedObjectStore setDefaultStore:managedObjectStore];
-    
-    ARObjectManager* objectManager = [ARObjectManager objectManagerWithManagedObjectStore:managedObjectStore];
-    
-    [RKObjectManager setSharedManager:objectManager];
-    // End RestKit setup.
+    NSManagedObjectContext* moc = [self setupRestKit];
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     LoginViewController *lvc = [[LoginViewController alloc] init];
-    lvc.managedObjectContext = managedObjectStore.mainQueueManagedObjectContext;
+    lvc.managedObjectContext = moc;
     
+    // Setup the navigation controller.
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:lvc];
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    self.navigationController.navigationBar.barTintColor = [UIColor primaryColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:
@@ -96,11 +78,38 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    
+    // Save core data.
     NSError *executeError = nil;
     NSManagedObjectContext *managedObjCtx = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     if(![managedObjCtx saveToPersistentStore:&executeError]) {
         NSLog(@"Failed to save to data store");
     }
+}
+
+- (NSManagedObjectContext*)setupRestKit
+{
+    NSError *error = nil;
+    NSURL *modelURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ArgosModel" ofType:@"momd"]];
+    NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
+    RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
+    
+    // Initialize the Core Data stack.
+    [managedObjectStore createPersistentStoreCoordinator];
+    
+    NSPersistentStore __unused *persistentStore = [managedObjectStore addInMemoryPersistentStore:&error];
+    NSAssert(persistentStore, @"Failed to add persistent store: %@", error);
+    
+    [managedObjectStore createManagedObjectContexts];
+    
+    // Set the default store shared instance.
+    [RKManagedObjectStore setDefaultStore:managedObjectStore];
+    
+    // Setup the object manager.
+    ARObjectManager* objectManager = [ARObjectManager objectManagerWithManagedObjectStore:managedObjectStore];
+    [RKObjectManager setSharedManager:objectManager];
+    
+    return managedObjectStore.mainQueueManagedObjectContext;
 }
 
 @end

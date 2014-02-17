@@ -1,14 +1,14 @@
 //
-//  utils.h
+//  NSDate+DateUtils.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/8/14.
+//  Created by Francis Tseng on 2/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 
-@interface utils : NSObject
+@interface NSDate (DateUtils)
 
 +(NSString *)dateDiff:(NSDate *)origDate;
 

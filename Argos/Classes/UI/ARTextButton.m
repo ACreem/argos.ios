@@ -20,9 +20,9 @@
     button.frame = CGRectMake(0, 0,
                                    button.frame.size.width + 20,
                                    button.frame.size.height);
-    button.tintColor = [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0];
+    button.tintColor = [UIColor actionColor];
     [[button layer] setBorderWidth:1.0];
-    [[button layer] setBorderColor:[UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0].CGColor];
+    [[button layer] setBorderColor:[UIColor actionColor].CGColor];
     [[button layer] setCornerRadius:4.0];
     return button;
 }

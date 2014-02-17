@@ -37,7 +37,8 @@
 		F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */; };
 		F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3A18ADBA9500C89590 /* ARSummaryView.m */; };
 		F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3C18ADBA9500C89590 /* ARTextButton.m */; };
-		F1C11DEB18A71B1A007F2B47 /* utils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C11DEA18A71B1A007F2B47 /* utils.m */; };
+		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
+		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -104,8 +105,10 @@
 		F1601C3A18ADBA9500C89590 /* ARSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSummaryView.m; path = Classes/UI/ARSummaryView.m; sourceTree = "<group>"; };
 		F1601C3B18ADBA9500C89590 /* ARTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARTextButton.h; path = Classes/UI/ARTextButton.h; sourceTree = "<group>"; };
 		F1601C3C18ADBA9500C89590 /* ARTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARTextButton.m; path = Classes/UI/ARTextButton.m; sourceTree = "<group>"; };
-		F1C11DE918A71B1A007F2B47 /* utils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = utils.h; sourceTree = "<group>"; };
-		F1C11DEA18A71B1A007F2B47 /* utils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = utils.m; sourceTree = "<group>"; };
+		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
+		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
+		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
+		F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateUtils.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,8 +180,10 @@
 				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
-				F1C11DE918A71B1A007F2B47 /* utils.h */,
-				F1C11DEA18A71B1A007F2B47 /* utils.m */,
+				F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */,
+				F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */,
+				F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */,
+				F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */,
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
 				F1D8FD4818A5EE00003201BF /* Classes */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
@@ -427,11 +432,11 @@
 				F1601C2118ADA2F000C89590 /* Article.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1601C1E18ACA9B300C89590 /* Story.m in Sources */,
-				F1C11DEB18A71B1A007F2B47 /* utils.m in Sources */,
 				F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
 				F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
+				F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */,
 				F1601C1818ACA9B300C89590 /* Event.m in Sources */,
 				F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */,
 				F1601C2C18ADBA7F00C89590 /* EventDetailViewController.m in Sources */,
@@ -442,6 +447,7 @@
 				F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */,
 				F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */,
 				F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */,
+				F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */,
 				F1601C2718ADBA7400C89590 /* MenuViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

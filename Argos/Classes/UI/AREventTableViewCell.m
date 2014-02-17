@@ -25,7 +25,7 @@
         // Create time ago label
         self.timeLabel = [[UILabel alloc] init];
         self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:9.0];
-        self.timeLabel.textColor = [UIColor colorWithRed:0.573 green:0.58 blue:0.592 alpha:1.0];
+        self.timeLabel.textColor = [UIColor mutedColor];
         self.timeLabel.textAlignment = NSTextAlignmentRight;
         [self.contentView addSubview:self.timeLabel];
     }
