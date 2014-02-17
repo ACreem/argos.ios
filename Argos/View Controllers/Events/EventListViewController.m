@@ -57,8 +57,6 @@
 - (void)loadData
 {
     [[RKObjectManager sharedManager] getObjectsAtPath:@"/events" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"Fetched count %d",[self.fetchedResultsController.fetchedObjects count]);
-        NSLog(@"success");
         [self.refreshControl endRefreshing];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         [self.refreshControl endRefreshing];
@@ -280,12 +278,6 @@
 
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
-    /*
-    RKGGist *gist = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = gist.titleText;
-    cell.detailTextLabel.text = gist.subtitleText;
-     */
-    
     // Configure the cell...
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = event.title;

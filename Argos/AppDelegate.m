@@ -96,6 +96,11 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    NSError *executeError = nil;
+    NSManagedObjectContext *managedObjCtx = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
+    if(![managedObjCtx saveToPersistentStore:&executeError]) {
+        NSLog(@"Failed to save to data store");
+    }
 }
 
 @end

@@ -264,10 +264,10 @@
 		F1C11DF518A7638C007F2B47 /* Events */ = {
 			isa = PBXGroup;
 			children = (
-				F1601C2818ADBA7F00C89590 /* EventDetailViewController.m */,
+				F1601C2B18ADBA7F00C89590 /* EventListViewController.h */,
 				F1601C2918ADBA7F00C89590 /* EventListViewController.m */,
 				F1601C2A18ADBA7F00C89590 /* EventDetailViewController.h */,
-				F1601C2B18ADBA7F00C89590 /* EventListViewController.h */,
+				F1601C2818ADBA7F00C89590 /* EventDetailViewController.m */,
 			);
 			name = Events;
 			sourceTree = "<group>";

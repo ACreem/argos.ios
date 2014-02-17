@@ -9,65 +9,77 @@
 #import "StoryDetailViewController.h"
 #import "ARSectionHeaderView.h"
 #import "AREmbeddedTableView.h"
-//#import "ArgosClient.h"
+#import "Event.h"
 
 @interface StoryDetailViewController () {
-    CGRect bounds;
-    AREmbeddedTableView *_eventList;
+    Story *_story;
+    AREmbeddedTableView *_storyList;
 }
 
 @end
 
 @implementation StoryDetailViewController
 
+- (StoryDetailViewController*)initWithStory:(Story*)story;
+{
+    self = [super init];
+    if (self) {
+        // Load requested event
+        self.navigationItem.title = story.title;
+        _story = story;
+    }
+    return self;
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Syrian Peace";
+    [self setupView];
+}
+
+- (void)setupView
+{
+    CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    bounds = [[UIScreen mainScreen] bounds];
+    [[RKObjectManager sharedManager] getObject:_story path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSLog(@"success");
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
+    
+    for (Event* event in _story.events) {
+        [[RKObjectManager sharedManager] getObject:event path:event.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            _storyList.items = [NSMutableArray arrayWithArray:[_story.events allObjects]];
+            [_storyList reloadData];
+            [_storyList sizeToFit];
+            [self adjustScrollViewHeight];
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
+    
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerImageView.bounds.size.height);
-    NSString *summaryText = @"Kerry meets with prince Saud al-Faisal for Syrian peace talks. Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.";
-    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:@""];
-    [self.summaryView sizeToFit];
+    NSString *summaryText = _story.summary;
+    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:_story.updatedAt];
+    
     [self.scrollView addSubview:self.summaryView];
     
-    // Event list header
-    ARSectionHeaderView *sectionHeader = [[ARSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.bounds.origin.y + self.summaryView.bounds.size.height)];
     
+    // Event list header
+    ARSectionHeaderView *sectionHeader = [[ARSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height)];
     [self.scrollView addSubview:sectionHeader];
     
-    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
-    [self.scrollView addSubview:_eventList];
+    _storyList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
     
-    [self loadArticleData];
-}
-
-- (void)loadArticleData
-{
-    /*
-    [[ArgosClient sharedClient] GET:@"/events" parameters:nil success:^(AFHTTPRequestOperation *operation, NSArray *responseObject) {
-        
-        // Filter out existing items.
-        NSMutableArray *newItems = [NSMutableArray arrayWithArray:responseObject];
-        [newItems removeObjectsInArray:_eventList.items];
-        
-        [_eventList.items addObjectsFromArray:newItems];
-        [_eventList reloadData];
-        
-        [_eventList sizeToFit];
-        [self adjustScrollViewHeight];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No network connection" message:@"Unable to reach home" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
-        [alert show];
-    }];
-     */
+    
+    [_storyList reloadData];
+    [self.scrollView addSubview:_storyList];
+    [_storyList sizeToFit];
+    
+    [self adjustScrollViewHeight];
 }
 
 @end

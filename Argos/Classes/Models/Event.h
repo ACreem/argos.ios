@@ -16,6 +16,7 @@
 @property (nonatomic, retain) NSDate * createdAt;
 @property (nonatomic, retain) NSNumber * eventId;
 @property (nonatomic, retain) id image;
+@property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * updatedAt;

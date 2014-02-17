@@ -7,7 +7,10 @@
 //
 
 #import "ARDetailViewController.h"
+#import "Story.h"
 
 @interface StoryDetailViewController : ARDetailViewController
+
+- (StoryDetailViewController*)initWithStory:(Story*)story;
 
 @end

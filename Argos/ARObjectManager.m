@@ -32,6 +32,7 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                       @"created_at":     @"createdAt"};
     NSDictionary *eventMappings   = @{
                                       @"id":             @"eventId",
+                                      @"url":            @"jsonUrl",
                                       @"title":          @"title",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
@@ -48,9 +49,12 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                 class:[Event class]
                            identifier:@"eventId"
                         relationships:@{
-                                        @"articles":  @{
-                                                        @"entity":      @"Article",
-                                                        @"mappings":    articleMappings}}
+                                        @"articles":    @{
+                                                            @"entity":      @"Article",
+                                                            @"mappings":    articleMappings},
+                                        @"story":       @{
+                                                            @"entity":  @"Story",
+                                                            @"mappings": storyMappings}}
                              mappings:eventMappings];
     
     [objectManager setupEntityForName:@"Article"
@@ -64,7 +68,10 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                           pathPattern:@"/stories"
                                 class:[Story class]
                            identifier:@"storyId"
-                        relationships:nil
+                        relationships:@{
+                                        @"events":    @{
+                                                @"entity":      @"Event",
+                                                @"mappings":    eventMappings}}
                              mappings:storyMappings];
     return objectManager;
 }

@@ -14,6 +14,7 @@
 
 @dynamic createdAt;
 @dynamic eventId;
+@dynamic jsonUrl;
 @dynamic image;
 @dynamic summary;
 @dynamic title;

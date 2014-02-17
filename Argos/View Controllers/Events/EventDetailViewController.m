@@ -14,7 +14,6 @@
 #import "Article.h"
 
 @interface EventDetailViewController () {
-    CGRect bounds;
     Event *_event;
     AREmbeddedTableView *_articleList;
 }
@@ -44,21 +43,25 @@
 - (void)setupView
 {
     float textPaddingVertical = 8.0;
-    bounds = [[UIScreen mainScreen] bounds];
-    
-    for (Article* a in _event.articles) {
-        [[RKObjectManager sharedManager] getObject:a path:a.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            NSLog(@"success");
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
+    CGRect bounds = [[UIScreen mainScreen] bounds];
     
     [[RKObjectManager sharedManager] getObject:_event path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"failure");
     }];
+    
+    for (Article* article in _event.articles) {
+        [[RKObjectManager sharedManager] getObject:article path:article.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            _articleList.items = [NSMutableArray arrayWithArray:[_event.articles allObjects]];
+            [_articleList reloadData];
+            [_articleList sizeToFit];
+            [self adjustScrollViewHeight];
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
+
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerImageView.bounds.size.height);
@@ -85,18 +88,11 @@
     
     _articleList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
     
-    // Filter out existing items.
-    /*
-    NSMutableArray *newItems = [NSMutableArray arrayWithArray:_event[@"members"]];
-    [newItems removeObjectsInArray:_articleList.items];
     
-    [_articleList.items addObjectsFromArray:newItems];
     [_articleList reloadData];
-    
     [self.scrollView addSubview:_articleList];
-    
     [_articleList sizeToFit];
-     */
+    
     [self adjustScrollViewHeight];
 }
 
