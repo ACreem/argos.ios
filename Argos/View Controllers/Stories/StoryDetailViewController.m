@@ -37,6 +37,9 @@
 {
     [super viewDidLoad];
     
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
+    self.navigationItem.rightBarButtonItem = shareButton;
+    
     [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
         [self setupView];
@@ -92,6 +95,11 @@
     [_storyList sizeToFit];
     
     [self adjustScrollViewHeight];
+}
+
+- (void)share:(id)sender
+{
+    NSLog(@"shared");
 }
 
 @end
