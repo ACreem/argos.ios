@@ -17,6 +17,15 @@
                 text-decoration: none;
             }
         </style>
+        <script type='text/javascript'>
+            function objc(entity_id) {
+                var iframe = document.createElement("IFRAME");
+                iframe.setAttribute("src", "objc:"+entity_id);
+                document.documentElement.appendChild(iframe);
+                iframe.parentNode.removeChild(iframe);
+                iframe = null;
+            }
+        </script>
     </head>
     <p>{{summary}}</p>
 </body>

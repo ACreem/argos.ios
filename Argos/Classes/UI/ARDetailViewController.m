@@ -11,6 +11,8 @@
 #import "AREmbeddedTableView.h"
 #import "GPUImage.h"
 #import <QuartzCore/QuartzCore.h>
+#import "Entity.h"
+#import "EntityDetailViewController.h"
 
 @interface ARDetailViewController () {
     CGRect _bounds;
@@ -110,20 +112,20 @@
 
 - (NSString*)processSummary:(NSString*)summaryText withEntities:(NSSet*)entities
 {
-    // Extract the names from each Entity.
-    // They are sorted by length (longest first) so when replacing them in the summary text,
+    // Entities are sorted by length (longest first) so when replacing them in the summary text,
     // the larger names are captured first. Then names are replaced taking into account their spaces.
     // Combined, this avoids situations with nested `a` tags.
     // For instance, "UN Convention" might become "<a href='#'><a href='#'>UN</a> Convention</a>".
     // Instead, " UN Convention" as a whole is captured: "<a href='#'>UN Convention</a>",
     // and then " UN" can't be captured since it has no space on the left anymore.
-    NSArray* entitiesNames = [[entities allObjects] valueForKey:@"name"];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"length" ascending:YES];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    [entitiesNames sortedArrayUsingDescriptors:sortDescriptors];
+    NSArray* sortedEntities = [[entities allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSNumber *first = [NSNumber numberWithInt:[[(Entity*)obj1 name] length]];
+        NSNumber *second = [NSNumber numberWithInt:[[(Entity*)obj2 name] length]];
+        return [first compare:second];
+    }];
     
-    for (NSString* name in entitiesNames) {
-        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", name] withString:[NSString stringWithFormat:@" <a href='#'>%@</a>", name]];
+    for (Entity* entity in sortedEntities) {
+        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
     }
     return summaryText;
 }
@@ -218,5 +220,18 @@
     }
 }
 
+
+# pragma mark - ARSummaryViewDelegate
+- (void)viewEntity:(NSString*)entityId
+{
+    NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Entity" inManagedObjectContext:moc];
+    Entity* entity = [[Entity alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+    [[RKObjectManager sharedManager] getObject:entity path:[NSString stringWithFormat:@"/entities/%@", entityId] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [self.navigationController pushViewController:[[EntityDetailViewController alloc] initWithEntity:entity] animated:YES];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
+}
 
 @end

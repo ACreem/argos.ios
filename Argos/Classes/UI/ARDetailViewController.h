@@ -10,14 +10,15 @@
 #import "ARSummaryView.h"
 #import "ARScrollView.h"
 
-@interface ARDetailViewController : UIViewController <UIScrollViewDelegate>
+@interface ARDetailViewController : UIViewController <UIScrollViewDelegate, ARSummaryViewDelegate>
 
 @property (strong, nonatomic) ARScrollView *scrollView;
 @property (strong, nonatomic) ARSummaryView *summaryView;
 @property (strong, nonatomic) UIView *headerView;
 @property (strong, nonatomic) NSString *viewTitle;
 
-- (void) setupTitle;
+- (void)setupTitle;
+- (void)viewEntity:(NSString*)entityId;
 - (NSString*)processSummary:(NSString*)summaryText withEntities:(NSSet*)entities;
 
 

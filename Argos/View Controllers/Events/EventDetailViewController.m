@@ -115,6 +115,7 @@
     // Summary view
     CGPoint summaryOrigin = CGPointMake(_bounds.origin.x, self.headerView.bounds.size.height);
     self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_summaryText updatedAt:_event.updatedAt];
+    self.summaryView.delegate = self;
     [self setupStories];
     [self.scrollView addSubview:self.summaryView];
 

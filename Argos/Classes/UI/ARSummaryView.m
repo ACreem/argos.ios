@@ -159,9 +159,35 @@
     frame.size = fittingSize;
     aWebView.frame = frame;
     
+    // Disable long touch in the web view.
+    [aWebView stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none'; document.body.style.KhtmlUserSelect='none'"];
+    
     // Resize the summary view.
     [self sizeToFit];
 }
+
+// For calling Objective-C from the UIWebView's Javascript.
+- (BOOL)webView:(UIWebView *)aWebView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
+{
+    NSString *requestString = [[request URL] absoluteString];
+    if ([requestString hasPrefix:@"objc:"]) {
+        
+        // Extract the selector name from the URL
+        NSArray *components = [requestString componentsSeparatedByString:@":"];
+        NSString *entityId = [components objectAtIndex:1];
+        
+        // Call the given selector
+        [_delegate performSelector:@selector(viewEntity:) withObject:entityId];
+        
+        // Cancel the location change
+        return NO;
+    }
+    
+    // Accept this location change
+    return YES;
+}
+
+
 
 
 @end
