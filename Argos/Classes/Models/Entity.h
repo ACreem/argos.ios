@@ -18,6 +18,7 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *stories;
+@property (nonatomic, retain) NSDate * updatedAt;
 @end
 
 @interface Entity (CoreDataGeneratedAccessors)

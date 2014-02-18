@@ -12,7 +12,7 @@
 #import "Story.h"
 #import "Entity.h"
 
-static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
+static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
 
 @implementation ARObjectManager
 
@@ -48,7 +48,8 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
     NSDictionary *entityMappings  = @{
                                       @"slug":           @"entityId",
                                       @"url":            @"jsonUrl",
-                                      @"name":           @"name"};
+                                      @"name":           @"name",
+                                      @"updated_at":     @"updatedAt"};
     
     [objectManager setupEntityForName:@"Event"
                           pathPattern:@"/events"
@@ -91,9 +92,6 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                 class:[Entity class]
                            identifier:@"entityId"
                         relationships:@{
-                                        @"events":    @{
-                                                        @"entity":      @"Event",
-                                                        @"mappings":    eventMappings},
                                         @"stories":   @{
                                                         @"entity":      @"Story",
                                                         @"mappings":    storyMappings}}

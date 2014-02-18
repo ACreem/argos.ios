@@ -18,5 +18,6 @@
 @dynamic name;
 @dynamic events;
 @dynamic stories;
+@dynamic updatedAt;
 
 @end

@@ -12,6 +12,7 @@
         <attribute name="entityId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="entities" inverseEntity="Event" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="entities" inverseEntity="Story" syncable="YES"/>
     </entity>
