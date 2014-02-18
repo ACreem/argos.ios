@@ -1,26 +1,22 @@
 //
-//  Story.m
+//  Entity.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "Story.h"
 #import "Entity.h"
 #import "Event.h"
+#import "Story.h"
 
 
-@implementation Story
+@implementation Entity
 
-@dynamic createdAt;
-@dynamic image;
+@dynamic entityId;
 @dynamic jsonUrl;
-@dynamic storyId;
-@dynamic summary;
-@dynamic title;
-@dynamic updatedAt;
+@dynamic name;
 @dynamic events;
-@dynamic entities;
+@dynamic stories;
 
 @end

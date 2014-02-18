@@ -10,6 +10,7 @@
 #import "Event.h"
 #import "Article.h"
 #import "Story.h"
+#import "Entity.h"
 
 static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
 
@@ -44,6 +45,10 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
                                       @"created_at":     @"createdAt"};
+    NSDictionary *entityMappings  = @{
+                                      @"slug":           @"entityId",
+                                      @"url":            @"jsonUrl",
+                                      @"name":           @"name"};
     
     [objectManager setupEntityForName:@"Event"
                           pathPattern:@"/events"
@@ -51,11 +56,14 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                            identifier:@"eventId"
                         relationships:@{
                                         @"articles":    @{
-                                                            @"entity":      @"Article",
-                                                            @"mappings":    articleMappings},
-                                        @"stories":       @{
-                                                            @"entity":      @"Story",
-                                                            @"mappings":    storyMappings}}
+                                                          @"entity":      @"Article",
+                                                          @"mappings":    articleMappings},
+                                        @"stories":     @{
+                                                          @"entity":      @"Story",
+                                                          @"mappings":    storyMappings},
+                                        @"entities":    @{
+                                                          @"entity":      @"Entity",
+                                                          @"mappings":    entityMappings}}
                              mappings:eventMappings];
     
     [objectManager setupEntityForName:@"Article"
@@ -70,10 +78,27 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                 class:[Story class]
                            identifier:@"storyId"
                         relationships:@{
-                                        @"events":    @{
-                                                @"entity":      @"Event",
-                                                @"mappings":    eventMappings}}
+                                        @"events":      @{
+                                                          @"entity":      @"Event",
+                                                          @"mappings":    eventMappings},
+                                        @"entities":    @{
+                                                          @"entity":      @"Entity",
+                                                          @"mappings":    entityMappings}}
                              mappings:storyMappings];
+    
+    [objectManager setupEntityForName:@"Entity"
+                          pathPattern:@"/entities"
+                                class:[Entity class]
+                           identifier:@"entityId"
+                        relationships:@{
+                                        @"events":    @{
+                                                        @"entity":      @"Event",
+                                                        @"mappings":    eventMappings},
+                                        @"stories":   @{
+                                                        @"entity":      @"Story",
+                                                        @"mappings":    storyMappings}}
+                             mappings:eventMappings];
+    
     return objectManager;
 }
 

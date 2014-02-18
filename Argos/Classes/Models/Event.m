@@ -8,6 +8,7 @@
 
 #import "Event.h"
 #import "Article.h"
+#import "Entity.h"
 #import "Story.h"
 
 
@@ -21,6 +22,7 @@
 @dynamic title;
 @dynamic updatedAt;
 @dynamic articles;
+@dynamic entities;
 @dynamic stories;
 
 @end

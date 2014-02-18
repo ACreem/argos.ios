@@ -8,6 +8,13 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="articles" inverseEntity="Event" syncable="YES"/>
     </entity>
+    <entity name="Entity" representedClassName="Entity" syncable="YES">
+        <attribute name="entityId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="entities" inverseEntity="Event" syncable="YES"/>
+        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="entities" inverseEntity="Story" syncable="YES"/>
+    </entity>
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -17,6 +24,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="event" inverseEntity="Article" syncable="YES"/>
+        <relationship name="entities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity" inverseName="events" inverseEntity="Entity" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="events" inverseEntity="Story" syncable="YES"/>
     </entity>
     <entity name="Story" representedClassName="Story" syncable="YES">
@@ -27,10 +35,12 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
+        <relationship name="entities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entity" inverseName="stories" inverseEntity="Entity" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="stories" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>
         <element name="Article" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Entity" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Story" positionX="0" positionY="0" width="0" height="0"/>
     </elements>

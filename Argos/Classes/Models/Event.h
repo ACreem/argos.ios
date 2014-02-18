@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Article, Story;
+@class Article, Entity, Story;
 
 @interface Event : NSManagedObject
 
@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) NSSet *articles;
+@property (nonatomic, retain) NSSet *entities;
 @property (nonatomic, retain) NSSet *stories;
 @end
 
@@ -30,6 +31,11 @@
 - (void)removeArticlesObject:(Article *)value;
 - (void)addArticles:(NSSet *)values;
 - (void)removeArticles:(NSSet *)values;
+
+- (void)addEntitiesObject:(Entity *)value;
+- (void)removeEntitiesObject:(Entity *)value;
+- (void)addEntities:(NSSet *)values;
+- (void)removeEntities:(NSSet *)values;
 
 - (void)addStoriesObject:(Story *)value;
 - (void)removeStoriesObject:(Story *)value;
