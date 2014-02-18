@@ -27,7 +27,6 @@
     if (self) {
         // Load requested story
         self.navigationItem.title = @"Story";
-        _title = story.title;
         _story = story;
     }
     return self;
@@ -36,9 +35,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
-    self.navigationItem.rightBarButtonItem = shareButton;
     
     [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
@@ -73,7 +69,7 @@
     
     // Title view
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, bounds.origin.y, bounds.size.width - 32.0, self.headerImageView.bounds.size.height)];
-    titleLabel.text = _title;
+    titleLabel.text = _story.title;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20];
     titleLabel.numberOfLines = 0;
@@ -96,11 +92,6 @@
     [_eventList sizeToFit];
     
     [self adjustScrollViewHeight];
-}
-
-- (void)share:(id)sender
-{
-    NSLog(@"shared");
 }
 
 @end

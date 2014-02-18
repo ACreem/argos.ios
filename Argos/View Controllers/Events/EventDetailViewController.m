@@ -49,9 +49,6 @@
     float textPaddingVertical = 8.0;
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
-    self.navigationItem.rightBarButtonItem = shareButton;
-    
     [[RKObjectManager sharedManager] getObject:_event path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -149,11 +146,6 @@
 {
     Story* story = [[_event.stories allObjects] firstObject];
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
-}
-
-- (void)share:(id)sender
-{
-    NSLog(@"shared");
 }
 
 @end

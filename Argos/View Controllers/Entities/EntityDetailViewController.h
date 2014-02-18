@@ -7,7 +7,10 @@
 //
 
 #import "ARDetailViewController.h"
+#import "Entity.h"
 
 @interface EntityDetailViewController : ARDetailViewController
+
+- (EntityDetailViewController*)initWithEntity:(Entity*)entity;
 
 @end

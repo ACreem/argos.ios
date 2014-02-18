@@ -28,6 +28,11 @@
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                              style:UIBarButtonItemStylePlain target:nil action:nil];
     
+    
+    // Share button.
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"share"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
+    self.navigationItem.rightBarButtonItem = shareButton;
+    
     float headerImageHeight = 220.0;
     bounds = [[UIScreen mainScreen] bounds];
     
@@ -138,6 +143,11 @@
             [self.scrollView addSubview:self.stuckSectionHeaderView];
         }
     }
+}
+
+- (void)share:(id)sender
+{
+    NSLog(@"shared");
 }
 
 @end
