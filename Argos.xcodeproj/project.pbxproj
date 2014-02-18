@@ -39,6 +39,15 @@
 		F1C6D6D218B2D13100129552 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6D118B2D13100129552 /* Article.m */; };
 		F1C6D6D518B2D13100129552 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6D418B2D13100129552 /* Event.m */; };
 		F1C6D6D818B2D13100129552 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6D718B2D13100129552 /* Story.m */; };
+		F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */; };
+		F1C6D6E518B2E29500129552 /* KlinicSlabBoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DC18B2E29500129552 /* KlinicSlabBoldIt.otf */; };
+		F1C6D6E618B2E29500129552 /* KlinicSlabBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DD18B2E29500129552 /* KlinicSlabBook.otf */; };
+		F1C6D6E718B2E29500129552 /* KlinicSlabBookIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DE18B2E29500129552 /* KlinicSlabBookIt.otf */; };
+		F1C6D6E818B2E29500129552 /* KlinicSlabLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DF18B2E29500129552 /* KlinicSlabLight.otf */; };
+		F1C6D6E918B2E29500129552 /* KlinicSlabLightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E018B2E29500129552 /* KlinicSlabLightIt.otf */; };
+		F1C6D6EA18B2E29500129552 /* KlinicSlabMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E118B2E29500129552 /* KlinicSlabMedium.otf */; };
+		F1C6D6EB18B2E29500129552 /* KlinicSlabMediumIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E218B2E29500129552 /* KlinicSlabMediumIt.otf */; };
+		F1C6D6EC18B2E29500129552 /* Personal Use License.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E318B2E29500129552 /* Personal Use License.txt */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -109,6 +118,15 @@
 		F1C6D6D418B2D13100129552 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Event.m; path = Classes/Models/Event.m; sourceTree = "<group>"; };
 		F1C6D6D618B2D13100129552 /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Story.h; path = Classes/Models/Story.h; sourceTree = "<group>"; };
 		F1C6D6D718B2D13100129552 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Story.m; path = Classes/Models/Story.m; sourceTree = "<group>"; };
+		F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBold.otf; sourceTree = "<group>"; };
+		F1C6D6DC18B2E29500129552 /* KlinicSlabBoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBoldIt.otf; sourceTree = "<group>"; };
+		F1C6D6DD18B2E29500129552 /* KlinicSlabBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBook.otf; sourceTree = "<group>"; };
+		F1C6D6DE18B2E29500129552 /* KlinicSlabBookIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBookIt.otf; sourceTree = "<group>"; };
+		F1C6D6DF18B2E29500129552 /* KlinicSlabLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabLight.otf; sourceTree = "<group>"; };
+		F1C6D6E018B2E29500129552 /* KlinicSlabLightIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabLightIt.otf; sourceTree = "<group>"; };
+		F1C6D6E118B2E29500129552 /* KlinicSlabMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabMedium.otf; sourceTree = "<group>"; };
+		F1C6D6E218B2E29500129552 /* KlinicSlabMediumIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabMediumIt.otf; sourceTree = "<group>"; };
+		F1C6D6E318B2E29500129552 /* Personal Use License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Personal Use License.txt"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -187,6 +205,7 @@
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
 				F1D8FD4818A5EE00003201BF /* Classes */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
+				F1C6D6D918B2E29500129552 /* Fonts */,
 				F1405C2A18973C4C00A4819D /* Supporting Files */,
 			);
 			path = Argos;
@@ -286,6 +305,30 @@
 			name = Stories;
 			sourceTree = "<group>";
 		};
+		F1C6D6D918B2E29500129552 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				F1C6D6DA18B2E29500129552 /* klinic */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		F1C6D6DA18B2E29500129552 /* klinic */ = {
+			isa = PBXGroup;
+			children = (
+				F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */,
+				F1C6D6DC18B2E29500129552 /* KlinicSlabBoldIt.otf */,
+				F1C6D6DD18B2E29500129552 /* KlinicSlabBook.otf */,
+				F1C6D6DE18B2E29500129552 /* KlinicSlabBookIt.otf */,
+				F1C6D6DF18B2E29500129552 /* KlinicSlabLight.otf */,
+				F1C6D6E018B2E29500129552 /* KlinicSlabLightIt.otf */,
+				F1C6D6E118B2E29500129552 /* KlinicSlabMedium.otf */,
+				F1C6D6E218B2E29500129552 /* KlinicSlabMediumIt.otf */,
+				F1C6D6E318B2E29500129552 /* Personal Use License.txt */,
+			);
+			path = klinic;
+			sourceTree = "<group>";
+		};
 		F1D8FD4818A5EE00003201BF /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,7 +419,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1405C2E18973C4C00A4819D /* InfoPlist.strings in Resources */,
+				F1C6D6EB18B2E29500129552 /* KlinicSlabMediumIt.otf in Resources */,
+				F1C6D6E518B2E29500129552 /* KlinicSlabBoldIt.otf in Resources */,
+				F1C6D6EA18B2E29500129552 /* KlinicSlabMedium.otf in Resources */,
+				F1C6D6EC18B2E29500129552 /* Personal Use License.txt in Resources */,
+				F1C6D6E618B2E29500129552 /* KlinicSlabBook.otf in Resources */,
+				F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */,
 				F1405C3618973C4C00A4819D /* Images.xcassets in Resources */,
+				F1C6D6E918B2E29500129552 /* KlinicSlabLightIt.otf in Resources */,
+				F1C6D6E818B2E29500129552 /* KlinicSlabLight.otf in Resources */,
+				F1C6D6E718B2E29500129552 /* KlinicSlabBookIt.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

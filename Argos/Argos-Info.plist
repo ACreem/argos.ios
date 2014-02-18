@@ -36,6 +36,17 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>KlinicSlabBold.otf</string>
+		<string>KlinicSlabBoldIt.otf</string>
+		<string>KlinicSlabBook.otf</string>
+		<string>KlinicSlabBookIt.otf</string>
+		<string>KlinicSlabLight.otf</string>
+		<string>KlinicSlabLightIt.otf</string>
+		<string>KlinicSlabMedium.otf</string>
+		<string>KlinicSlabMediumIt.otf</string>
+	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>

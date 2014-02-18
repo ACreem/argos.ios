@@ -54,7 +54,16 @@
     _headerImageViewBlurred.alpha = 0.0;
     [self.view addSubview:_headerImageViewBlurred];
     
-    // Gradient image overlay
+    // Text gradient (so the text is readable)
+    UIView *textGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, headerImageHeight)];
+    CAGradientLayer *textGradient = [CAGradientLayer layer];
+    textGradient.frame = textGradientView.bounds;
+    textGradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
+    [textGradientView.layer insertSublayer:textGradient atIndex:0];
+    textGradientView.alpha = 0.4;
+    [self.view addSubview:textGradientView];
+    
+    // Gradient image overlay (for scrolling)
     _gradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, headerImageHeight)];
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = _gradientView.bounds;
