@@ -20,6 +20,8 @@
 		F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
 		F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1405C4518973C4C00A4819D /* InfoPlist.strings */; };
 		F1405C4918973C4C00A4819D /* ArgosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1405C4818973C4C00A4819D /* ArgosTests.m */; };
+		F143295C18B30A7B00A76D97 /* SummaryTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = F143295B18B30A7B00A76D97 /* SummaryTemplate.html */; };
+		F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F143295E18B30FF500A76D97 /* ARScrollView.m */; };
 		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
 		F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F14603B618A4288400A85E0F /* ReachabilityManager.m */; };
 		F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ARObjectManager.m */; };
@@ -83,6 +85,9 @@
 		F1405C4418973C4C00A4819D /* ArgosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArgosTests-Info.plist"; sourceTree = "<group>"; };
 		F1405C4618973C4C00A4819D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F1405C4818973C4C00A4819D /* ArgosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArgosTests.m; sourceTree = "<group>"; };
+		F143295B18B30A7B00A76D97 /* SummaryTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = SummaryTemplate.html; sourceTree = "<group>"; };
+		F143295D18B30FF500A76D97 /* ARScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARScrollView.h; path = Classes/UI/ARScrollView.h; sourceTree = "<group>"; };
+		F143295E18B30FF500A76D97 /* ARScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARScrollView.m; path = Classes/UI/ARScrollView.m; sourceTree = "<group>"; };
 		F14603B318A41FB100A85E0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		F14603B518A4288400A85E0F /* ReachabilityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReachabilityManager.h; sourceTree = "<group>"; };
 		F14603B618A4288400A85E0F /* ReachabilityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReachabilityManager.m; sourceTree = "<group>"; };
@@ -200,6 +205,7 @@
 				F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */,
 				F1405C3218973C4C00A4819D /* AppDelegate.h */,
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
+				F143295B18B30A7B00A76D97 /* SummaryTemplate.html */,
 				F1601C0718ABDC3800C89590 /* ARObjectManager.h */,
 				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
@@ -251,6 +257,8 @@
 			children = (
 				F1601C3118ADBA9500C89590 /* ARDetailViewController.h */,
 				F1601C3218ADBA9500C89590 /* ARDetailViewController.m */,
+				F143295D18B30FF500A76D97 /* ARScrollView.h */,
+				F143295E18B30FF500A76D97 /* ARScrollView.m */,
 				F1601C3318ADBA9500C89590 /* AREmbeddedTableView.h */,
 				F1601C3418ADBA9500C89590 /* AREmbeddedTableView.m */,
 				F1601C3518ADBA9500C89590 /* AREventTableViewCell.h */,
@@ -437,6 +445,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1405C2E18973C4C00A4819D /* InfoPlist.strings in Resources */,
+				F143295C18B30A7B00A76D97 /* SummaryTemplate.html in Resources */,
 				F1C6D6EB18B2E29500129552 /* KlinicSlabMediumIt.otf in Resources */,
 				F1C6D6E518B2E29500129552 /* KlinicSlabBoldIt.otf in Resources */,
 				F1C6D6EA18B2E29500129552 /* KlinicSlabMedium.otf in Resources */,
@@ -512,6 +521,7 @@
 				F1601C3F18ADBA9500C89590 /* AREventTableViewCell.m in Sources */,
 				F1C6D6F618B2F4AC00129552 /* Event.m in Sources */,
 				F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */,
+				F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */,
 				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
 				F1C6D6FC18B2F4AC00129552 /* Article.m in Sources */,
 				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,

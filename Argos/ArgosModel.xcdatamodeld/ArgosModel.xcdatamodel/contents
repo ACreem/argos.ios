@@ -35,7 +35,7 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="entities" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Entity" inverseName="stories" inverseEntity="Entity" syncable="YES"/>
+        <relationship name="entities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity" inverseName="stories" inverseEntity="Entity" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="stories" inverseEntity="Event" syncable="YES"/>
     </entity>
     <elements>

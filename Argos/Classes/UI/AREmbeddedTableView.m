@@ -11,12 +11,21 @@
 #import "Story.h"
 #import "Event.h"
 
+@interface AREmbeddedTableView () {
+    NSString* _title;
+}
+
+@end
+
 @implementation AREmbeddedTableView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame title:(NSString*)title
 {
     self = [super initWithFrame:frame];
     if (self) {
+        
+        _title = title;
+        
         self.delegate = self;
         self.dataSource = self;
         self.scrollEnabled = NO;
@@ -32,7 +41,16 @@
     return self;
 }
 
-#pragma mark - Table View Delegate Methods
+#pragma mark - UITableViewDelegate
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    _headerView = [[ARSectionHeaderView alloc] initWithTitle:_title withOrigin:CGPointMake(0, 0)];
+    return _headerView;
+}
+
+-(float)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -80,6 +98,8 @@
     
     return cell;
 }
+
+# pragma mark - UIView
 
 - (void)sizeToFit {
     // Auto size the table view.

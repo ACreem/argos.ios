@@ -97,7 +97,7 @@ static NSString * const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
                                         @"stories":   @{
                                                         @"entity":      @"Story",
                                                         @"mappings":    storyMappings}}
-                             mappings:eventMappings];
+                             mappings:entityMappings];
     
     return objectManager;
 }

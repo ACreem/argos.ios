@@ -8,18 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "ARSummaryView.h"
-#import "ARSectionHeaderView.h"
+#import "ARScrollView.h"
 
 @interface ARDetailViewController : UIViewController <UIScrollViewDelegate>
 
-@property (strong, nonatomic) UIScrollView *scrollView;
-@property (strong, nonatomic) UIImageView *headerImageView;
+@property (strong, nonatomic) ARScrollView *scrollView;
 @property (strong, nonatomic) ARSummaryView *summaryView;
+@property (strong, nonatomic) UIView *headerView;
+@property (strong, nonatomic) NSString *viewTitle;
 
-// For keeping track of sticky headers.
-@property (strong, nonatomic) ARSectionHeaderView *stuckSectionHeaderView;
-@property (nonatomic) CGRect stuckSectionHeaderViewFrame;
+- (void) setupTitle;
+- (NSString*)processSummary:(NSString*)summaryText withEntities:(NSSet*)entities;
 
-- (void)adjustScrollViewHeight;
 
 @end

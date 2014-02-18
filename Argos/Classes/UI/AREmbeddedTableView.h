@@ -7,11 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARSectionHeaderView.h"
 
 @interface AREmbeddedTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) NSMutableArray *items;
+@property (strong, nonatomic) ARSectionHeaderView *headerView;
 
-- (void)sizeToFit;
+- (id)initWithFrame:(CGRect)frame title:(NSString*)title;
 
 @end

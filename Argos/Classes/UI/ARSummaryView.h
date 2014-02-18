@@ -8,11 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ARSummaryView : UIView
+@interface ARSummaryView : UIView <UIWebViewDelegate>
 
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
-@property (strong, nonatomic) UITextView *summaryTextView;
+@property (strong, nonatomic) UIWebView *summaryWebView;
 
 - (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt;
 

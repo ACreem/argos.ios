@@ -10,11 +10,12 @@
 #import "ARSectionHeaderView.h"
 #import "AREmbeddedTableView.h"
 #import "Event.h"
+#import "Entity.h"
 
 @interface StoryDetailViewController () {
     Story *_story;
-    NSString *_title;
     AREmbeddedTableView *_eventList;
+    NSString *_summaryText;
 }
 
 @end
@@ -27,6 +28,7 @@
     if (self) {
         // Load requested story
         self.navigationItem.title = @"Story";
+        self.viewTitle = story.title;
         _story = story;
     }
     return self;
@@ -37,61 +39,60 @@
     [super viewDidLoad];
     
     [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"success");
-        [self setupView];
+
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         NSLog(@"failure");
     }];
+    
+    // Fetch entities.
+    // The view is setup once this is complete.
+    __block NSUInteger fetched_entity_count = 0;
+    for (Entity* entity in _story.entities) {
+        [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_entity_count++;
+            
+            if (fetched_entity_count == [_story.entities count]) {
+                _summaryText = [self processSummary:_story.summary withEntities:_story.entities];
+                [self setupView];
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
+    
 }
 
 - (void)setupView
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
+    [self setupTitle];
+    
     for (Event* event in _story.events) {
         [[RKObjectManager sharedManager] getObject:event path:event.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             _eventList.items = [NSMutableArray arrayWithArray:[_story.events allObjects]];
             [_eventList reloadData];
             [_eventList sizeToFit];
-            [self adjustScrollViewHeight];
+            [self.scrollView sizeToFit];
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];
     }
     
-    
     // Summary view
-    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerImageView.bounds.size.height);
-    NSString *summaryText = _story.summary;
-    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:_story.updatedAt];
+    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
+    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_summaryText updatedAt:_story.updatedAt];
     
     [self.scrollView addSubview:self.summaryView];
     
-    // Title view
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, bounds.origin.y, bounds.size.width - 32.0, self.headerImageView.bounds.size.height)];
-    titleLabel.text = _story.title;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20];
-    titleLabel.numberOfLines = 0;
-    [titleLabel sizeToFit];
-    CGRect titleFrame = titleLabel.frame;
-    titleFrame.origin.y = self.headerImageView.bounds.size.height - titleLabel.frame.size.height - 8.0;
-    titleLabel.frame = titleFrame;
-    [self.scrollView addSubview:titleLabel];
-    
-    
-    // Event list header
-    ARSectionHeaderView *sectionHeader = [[ARSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height)];
-    [self.scrollView addSubview:sectionHeader];
-    
-    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
-    
+    CGPoint eventListOrigin = CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
+    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, eventListOrigin.y, bounds.size.width, 200.0) title:@"Events"];
     
     [_eventList reloadData];
     [self.scrollView addSubview:_eventList];
     [_eventList sizeToFit];
     
-    [self adjustScrollViewHeight];
+    [self.scrollView sizeToFit];
 }
 
 @end

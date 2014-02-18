@@ -2,7 +2,7 @@
 //  Story.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/17/14.
+//  Created by Francis Tseng on 2/18/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -21,7 +21,7 @@
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) NSSet *events;
-@property (nonatomic, retain) Entity *entities;
+@property (nonatomic, retain) NSSet *entities;
 @end
 
 @interface Story (CoreDataGeneratedAccessors)
@@ -30,5 +30,10 @@
 - (void)removeEventsObject:(Event *)value;
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
+
+- (void)addEntitiesObject:(Entity *)value;
+- (void)removeEntitiesObject:(Entity *)value;
+- (void)addEntities:(NSSet *)values;
+- (void)removeEntities:(NSSet *)values;
 
 @end
