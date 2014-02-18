@@ -87,7 +87,7 @@
     [self.scrollView addSubview:self.summaryView];
     
     // Title view
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, bounds.origin.y, bounds.size.width - 16.0, self.headerImageView.bounds.size.height)];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, bounds.origin.y, bounds.size.width - 32.0, self.headerImageView.bounds.size.height)];
     titleLabel.text = _title;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20];
