@@ -178,7 +178,6 @@
 
 
 #pragma mark - NSFetchedResultsControllerDelegate
-
 - (NSFetchedResultsController *)fetchedResultsController
 {
     if (_fetchedResultsController != nil) {

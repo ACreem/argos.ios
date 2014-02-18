@@ -7,7 +7,7 @@
 //
 
 #import "EntityDetailViewController.h"
-#import "ARSectionHeaderView.h"
+#import "StoryDetailViewController.h"
 #import "AREmbeddedTableView.h"
 #import "Story.h"
 
@@ -44,22 +44,10 @@
     }];
 }
 
+#pragma mark - Setup
 - (void)setupView
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    
-    [self setupTitle];
-    
-    for (Story* story in _entity.stories) {
-        [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            _mentionList.items = [NSMutableArray arrayWithArray:[_entity.stories allObjects]];
-            [_mentionList reloadData];
-            [_mentionList sizeToFit];
-            [self.scrollView sizeToFit];
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
@@ -73,12 +61,60 @@
     // Mentions (story) list header
     CGPoint mentionListOrigin = CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
     _mentionList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, mentionListOrigin.y, bounds.size.width, 200.0) title:[NSString stringWithFormat:@"Stories mentioning %@", _entity.name]];
+    _mentionList.delegate = self;
+    _mentionList.dataSource = self;
     
     [_mentionList reloadData];
     [self.scrollView addSubview:_mentionList];
     [_mentionList sizeToFit];
+    [self fetchMentions];
     
     [self.scrollView sizeToFit];
+}
+
+- (void)fetchMentions
+{
+    NSLog(@"fetching mentions");
+    for (Story* story in _entity.stories) {
+        [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            [_mentionList reloadData];
+            [_mentionList sizeToFit];
+            [self.scrollView sizeToFit];
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(AREmbeddedTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Story *story = [[_entity.stories allObjects] objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
+}
+
+#pragma mark - UITableViewDataSource
+- (UITableViewCell *)tableView:(AREmbeddedTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // Configure the cell...
+    Story *story = [[_entity.stories allObjects] objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = story.title;
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.imageView.image = [UIImage imageNamed:@"sample"];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(AREmbeddedTableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _entity.stories.count;
 }
 
 

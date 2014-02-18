@@ -9,9 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "ARSectionHeaderView.h"
 
-@interface AREmbeddedTableView : UITableView <UITableViewDelegate, UITableViewDataSource>
+@interface AREmbeddedTableView : UITableView
 
-@property (strong, nonatomic) NSMutableArray *items;
+@property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) ARSectionHeaderView *headerView;
 
 - (id)initWithFrame:(CGRect)frame title:(NSString*)title;

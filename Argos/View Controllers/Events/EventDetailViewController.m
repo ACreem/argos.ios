@@ -8,9 +8,10 @@
 
 #import "EventDetailViewController.h"
 #import "StoryDetailViewController.h"
+#import "ArticleWebViewController.h"
 #import "ARSectionHeaderView.h"
-#import "ARTextButton.h"
 #import "AREmbeddedTableView.h"
+#import "ARTextButton.h"
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
@@ -18,7 +19,6 @@
 @interface EventDetailViewController () {
     Event *_event;
     CGRect _bounds;
-    NSString *_summaryText;
     AREmbeddedTableView *_articleList;
     AREmbeddedTableView *_storyList;
 }
@@ -39,18 +39,100 @@
     return self;
 }
 
-// NOTE this could use quite a bit of refactoring.
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    // Update the event.
-    [[RKObjectManager sharedManager] getObject:_event path:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"success");
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"failure");
-    }];
+    _bounds = [[UIScreen mainScreen] bounds];
     
+    // Summary view
+    CGPoint summaryOrigin = CGPointMake(0, self.headerView.bounds.size.height);
+    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_event.summary updatedAt:_event.updatedAt];
+    self.summaryView.delegate = self;
+    [self setupStories];
+    [self.scrollView addSubview:self.summaryView];
+    
+    [self fetchEntities];
+    [self setupArticles];
+    
+    [self.scrollView sizeToFit];
+}
+
+
+#pragma mark - Setup
+- (void)setupStories
+{
+    float textPaddingVertical = 8.0;
+    if ([_event.stories count] == 1) {
+        // Story button
+        // Show only if this event belongs to only one story.
+        ARTextButton *storyButton = [ARTextButton buttonWithTitle:@"View the full story"];
+        CGRect buttonFrame = storyButton.frame;
+        buttonFrame.origin.x = _bounds.size.width/2 - storyButton.bounds.size.width/2;
+        buttonFrame.origin.y = textPaddingVertical*2;
+        
+        UIView *actionsView = [[UIView alloc] initWithFrame:CGRectMake(0, self.summaryView.summaryWebView.frame.origin.y + self.summaryView.summaryWebView.frame.size.height, _bounds.size.width, buttonFrame.size.height + textPaddingVertical*2)];
+        storyButton.frame = buttonFrame;
+        [storyButton addTarget:self action:@selector(viewStory:) forControlEvents:UIControlEventTouchUpInside];
+        [actionsView addSubview:storyButton];
+        
+        [self.summaryView addSubview:actionsView];
+        
+        // Otherwise show a list of stories.
+    } else {
+        _storyList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(0, self.summaryView.frame.origin.y + self.summaryView.frame.size.height, _bounds.size.width, 200.0) title:@"Stories"];
+        _storyList.delegate = self;
+        _storyList.dataSource = self;
+        
+        [_storyList reloadData];
+        [self.scrollView addSubview:_storyList];
+        [_storyList sizeToFit];
+    }
+    [self fetchStories];
+    [self.summaryView sizeToFit];
+}
+
+- (void)fetchStories
+{
+    // Fetch stories.
+    __block NSUInteger fetched_story_count = 0;
+    for (Story* story in _event.stories) {
+        [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_story_count++;
+            
+            if (fetched_story_count == [_event.stories count] && _storyList) {
+                [_storyList reloadData];
+                [_storyList sizeToFit];
+                [self.scrollView sizeToFit];
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
+}
+
+- (void)setupArticles
+{
+    CGPoint articleListOrigin;
+    if (_storyList) {
+        articleListOrigin = CGPointMake(0, _storyList.frame.origin.y + _storyList.frame.size.height);
+    } else {
+        articleListOrigin = CGPointMake(0, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
+    }
+    
+    _articleList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(0, articleListOrigin.y, _bounds.size.width, 200.0) title:@"Articles"];
+    _articleList.delegate = self;
+    _articleList.dataSource = self;
+    
+    [_articleList reloadData];
+    [self.scrollView addSubview:_articleList];
+    [_articleList sizeToFit];
+    
+    [self fetchArticles];
+}
+
+- (void)fetchArticles
+{
     // Fetch articles.
     // Need to keep track of how many articles have been fetched.
     // Note this is not the best way since it is possible that the number
@@ -61,7 +143,6 @@
             fetched_article_count++;
             
             if (fetched_article_count == [_event.articles count]) {
-                _articleList.items = [NSMutableArray arrayWithArray:[_event.articles allObjects]];
                 [_articleList reloadData];
                 [_articleList sizeToFit];
                 [self.scrollView sizeToFit];
@@ -70,113 +151,81 @@
             NSLog(@"failure");
         }];
     }
-    
-    // Fetch stories.
-    __block NSUInteger fetched_story_count = 0;
-    for (Story* story in _event.stories) {
-        [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_story_count++;
-            
-            if (fetched_story_count == [_event.stories count]) {
-                _storyList.items = [NSMutableArray arrayWithArray:[_event.stories allObjects]];
-                [_storyList reloadData];
-                [_storyList sizeToFit];
-                [self.scrollView sizeToFit];
-            }
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
-    
+}
+
+- (void)fetchEntities
+{
     // Fetch entities.
-    // The view is setup once this is complete.
     __block NSUInteger fetched_entity_count = 0;
     for (Entity* entity in _event.entities) {
         [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_entity_count++;
             
             if (fetched_entity_count == [_event.entities count]) {
-                _summaryText = [self processSummary:_event.summary withEntities:_event.entities];
-                [self setupView];
+                [self.summaryView setText:_event.summary withEntities:_event.entities];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];
     }
-    
 }
 
-- (void)setupView
-{
-    _bounds = [[UIScreen mainScreen] bounds];
-    
-    [self setupTitle];
-    
-    // Summary view
-    CGPoint summaryOrigin = CGPointMake(_bounds.origin.x, self.headerView.bounds.size.height);
-    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_summaryText updatedAt:_event.updatedAt];
-    self.summaryView.delegate = self;
-    [self setupStories];
-    [self.scrollView addSubview:self.summaryView];
 
-    [self setupArticles];
-    
-    [self.scrollView sizeToFit];
-}
-
+#pragma mark - Actions
 - (void)viewStory:(id)sender
 {
-    // Right now just fetching the first story.
+    // Called if there is one story.
     Story* story = [[_event.stories allObjects] firstObject];
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 
-- (void)setupStories
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(AREmbeddedTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // Story button
-    // Show only if this event belongs to only one story.
-    
-    float textPaddingVertical = 8.0;
-    if ([_event.stories count] == 1) {
-        ARTextButton *storyButton = [ARTextButton buttonWithTitle:@"View the full story"];
-        CGRect buttonFrame = storyButton.frame;
-        buttonFrame.origin.x = _bounds.size.width/2 - storyButton.bounds.size.width/2;
-        buttonFrame.origin.y = textPaddingVertical*2;
-        
-        UIView *actionsView = [[UIView alloc] initWithFrame:CGRectMake(_bounds.origin.x, self.summaryView.summaryWebView.frame.origin.y + self.summaryView.summaryWebView.frame.size.height, _bounds.size.width, buttonFrame.size.height + textPaddingVertical*2)];
-        storyButton.frame = buttonFrame;
-        [storyButton addTarget:self action:@selector(viewStory:) forControlEvents:UIControlEventTouchUpInside];
-        [actionsView addSubview:storyButton];
-        
-        [self.summaryView addSubview:actionsView];
-        
-        // Otherwise show a list of stories.
+    // Create web view for the Article.
+    if (tableView == _articleList) {
+        Article *article = [[_event.articles allObjects] objectAtIndex:indexPath.row];
+        ArticleWebViewController *webView = [[ArticleWebViewController alloc] initWithURL:article.extUrl];
+        [self.navigationController pushViewController:webView animated:YES];
     } else {
-        _storyList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(_bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height, _bounds.size.width, 200.0) title:@"Stories"];
         
-        _storyList.items = [NSMutableArray arrayWithArray:[_event.stories allObjects]];
-        [_storyList reloadData];
-        [self.scrollView addSubview:_storyList];
-        [_storyList sizeToFit];
     }
-    [self.summaryView sizeToFit];
 }
 
-- (void)setupArticles
+#pragma mark - UITableViewDataSource
+- (UITableViewCell *)tableView:(AREmbeddedTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    CGPoint articleListOrigin;
-    if (_storyList) {
-        articleListOrigin = CGPointMake(_bounds.origin.x, _storyList.frame.origin.y + _storyList.frame.size.height);
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    // Configure the cell...
+    NSString* title;
+    if (tableView == _articleList) {
+        Article *article = [[_event.articles allObjects] objectAtIndex:indexPath.row];
+        title = article.title;
     } else {
-        articleListOrigin = CGPointMake(_bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
+        Story *story = [[_event.stories allObjects] objectAtIndex:indexPath.row];
+        title = story.title;
     }
     
-    _articleList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(_bounds.origin.x, articleListOrigin.y, _bounds.size.width, 200.0) title:@"Articles"];
+    cell.textLabel.text = title;
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.imageView.image = [UIImage imageNamed:@"sample"];
     
-    _articleList.items = [NSMutableArray arrayWithArray:[_event.articles allObjects]];
-    [_articleList reloadData];
-    [self.scrollView addSubview:_articleList];
-    [_articleList sizeToFit];
+    return cell;
+}
+
+- (NSInteger)tableView:(AREmbeddedTableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    if (tableView == _articleList) {
+        return _event.articles.count;
+    } else {
+        return _event.stories.count;
+    }
 }
 
 @end

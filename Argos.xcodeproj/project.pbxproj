@@ -36,6 +36,7 @@
 		F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */; };
 		F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3A18ADBA9500C89590 /* ARSummaryView.m */; };
 		F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3C18ADBA9500C89590 /* ARTextButton.m */; };
+		F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148CD18B3E6A800948933 /* ArticleWebViewController.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
 		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */; };
@@ -115,6 +116,8 @@
 		F1601C3A18ADBA9500C89590 /* ARSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSummaryView.m; path = Classes/UI/ARSummaryView.m; sourceTree = "<group>"; };
 		F1601C3B18ADBA9500C89590 /* ARTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARTextButton.h; path = Classes/UI/ARTextButton.h; sourceTree = "<group>"; };
 		F1601C3C18ADBA9500C89590 /* ARTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARTextButton.m; path = Classes/UI/ARTextButton.m; sourceTree = "<group>"; };
+		F16148CC18B3E6A800948933 /* ArticleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleWebViewController.h; path = "View Controllers/Articles/ArticleWebViewController.h"; sourceTree = "<group>"; };
+		F16148CD18B3E6A800948933 /* ArticleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleWebViewController.m; path = "View Controllers/Articles/ArticleWebViewController.m"; sourceTree = "<group>"; };
 		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
@@ -288,6 +291,15 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
+		F16148CB18B3DEAE00948933 /* Articles */ = {
+			isa = PBXGroup;
+			children = (
+				F16148CC18B3E6A800948933 /* ArticleWebViewController.h */,
+				F16148CD18B3E6A800948933 /* ArticleWebViewController.m */,
+			);
+			name = Articles;
+			sourceTree = "<group>";
+		};
 		F1C11DE318A6FE56007F2B47 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -295,6 +307,7 @@
 				F1601C2318ADBA7400C89590 /* LoginViewController.m */,
 				F1601C2418ADBA7400C89590 /* MenuViewController.h */,
 				F1601C2518ADBA7400C89590 /* MenuViewController.m */,
+				F16148CB18B3DEAE00948933 /* Articles */,
 				F1C6D6ED18B2F32A00129552 /* Entities */,
 				F1C11DF618A7639A007F2B47 /* Stories */,
 				F1C11DF518A7638C007F2B47 /* Events */,
@@ -507,6 +520,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */,
 				F1601C3E18ADBA9500C89590 /* AREmbeddedTableView.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */,

@@ -7,7 +7,7 @@
 //
 
 #import "StoryDetailViewController.h"
-#import "ARSectionHeaderView.h"
+#import "EventDetailViewController.h"
 #import "AREmbeddedTableView.h"
 #import "Event.h"
 #import "Entity.h"
@@ -15,7 +15,6 @@
 @interface StoryDetailViewController () {
     Story *_story;
     AREmbeddedTableView *_eventList;
-    NSString *_summaryText;
 }
 
 @end
@@ -38,39 +37,51 @@
 {
     [super viewDidLoad];
     
-    [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"failure");
-    }];
+    CGRect bounds = [[UIScreen mainScreen] bounds];
     
+    // Summary view
+    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
+    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_story.summary updatedAt:_story.updatedAt];
+    self.summaryView.delegate = self;
+    [self.scrollView addSubview:self.summaryView];
+    
+    CGPoint eventListOrigin = CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
+    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, eventListOrigin.y, bounds.size.width, 200.0) title:@"Events"];
+    _eventList.delegate = self;
+    _eventList.dataSource = self;
+    
+    [_eventList reloadData];
+    [self.scrollView addSubview:_eventList];
+    [_eventList sizeToFit];
+    [self fetchEvents];
+    
+    [self.scrollView sizeToFit];
+    
+    [self fetchEntities];
+}
+
+#pragma mark - Setup
+- (void)fetchEntities
+{
     // Fetch entities.
-    // The view is setup once this is complete.
     __block NSUInteger fetched_entity_count = 0;
     for (Entity* entity in _story.entities) {
         [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_entity_count++;
             
             if (fetched_entity_count == [_story.entities count]) {
-                _summaryText = [self processSummary:_story.summary withEntities:_story.entities];
-                [self setupView];
+                [self.summaryView setText:_story.summary withEntities:_story.entities];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];
     }
-    
 }
 
-- (void)setupView
+- (void)fetchEvents
 {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    
-    [self setupTitle];
-    
     for (Event* event in _story.events) {
         [[RKObjectManager sharedManager] getObject:event path:event.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            _eventList.items = [NSMutableArray arrayWithArray:[_story.events allObjects]];
             [_eventList reloadData];
             [_eventList sizeToFit];
             [self.scrollView sizeToFit];
@@ -78,21 +89,37 @@
             NSLog(@"failure");
         }];
     }
+}
+
+#pragma mark - UITableViewDelegate
+- (void)tableView:(AREmbeddedTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
+}
+
+#pragma mark - UITableViewDataSource
+- (UITableViewCell *)tableView:(AREmbeddedTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
     
-    // Summary view
-    CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
-    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_summaryText updatedAt:_story.updatedAt];
-    self.summaryView.delegate = self;
-    [self.scrollView addSubview:self.summaryView];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    CGPoint eventListOrigin = CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
-    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, eventListOrigin.y, bounds.size.width, 200.0) title:@"Events"];
+    // Configure the cell...
+    Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
     
-    [_eventList reloadData];
-    [self.scrollView addSubview:_eventList];
-    [_eventList sizeToFit];
+    cell.textLabel.text = event.title;
+    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+    cell.textLabel.numberOfLines = 0;
+    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    cell.imageView.image = [UIImage imageNamed:@"sample"];
     
-    [self.scrollView sizeToFit];
+    return cell;
+}
+
+- (NSInteger)tableView:(AREmbeddedTableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return _story.events.count;
 }
 
 @end

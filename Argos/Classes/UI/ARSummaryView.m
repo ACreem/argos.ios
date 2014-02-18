@@ -7,6 +7,7 @@
 //
 
 #import "ARSummaryView.h"
+#import "Entity.h"
 
 @implementation ARSummaryView
 
@@ -56,10 +57,7 @@
                                                                         bounds.size.width - (paddingX*2),
                                                                         200.0)];
         _summaryWebView.delegate = self;
-        NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
-        NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-        NSString* summaryHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
-        [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+        [self setText:summaryText withEntities:nil];
         _summaryWebView.scrollView.scrollEnabled = NO;
         _summaryWebView.scrollView.bounces = NO;
         [self addSubview:_summaryWebView];
@@ -67,6 +65,30 @@
         [self sizeToFit];
     }
     return self;
+}
+
+- (void)setText:(NSString*)summaryText withEntities:(NSSet*)entities
+{
+    // Entities are sorted by length (longest first) so when replacing them in the summary text,
+    // the larger names are captured first. Then names are replaced taking into account their spaces.
+    // Combined, this avoids situations with nested `a` tags.
+    // For instance, "UN Convention" might become "<a href='#'><a href='#'>UN</a> Convention</a>".
+    // Instead, " UN Convention" as a whole is captured: "<a href='#'>UN Convention</a>",
+    // and then " UN" can't be captured since it has no space on the left anymore.
+    NSArray* sortedEntities = [[entities allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSNumber *first = [NSNumber numberWithInt:[[(Entity*)obj1 name] length]];
+        NSNumber *second = [NSNumber numberWithInt:[[(Entity*)obj2 name] length]];
+        return [first compare:second];
+    }];
+    
+    for (Entity* entity in sortedEntities) {
+        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
+    }
+    
+    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
+    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    NSString* summaryHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
+    [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
 
 - (UIButton*)buttonWithAction:(SEL)selector imageNamed:(NSString*)imageName

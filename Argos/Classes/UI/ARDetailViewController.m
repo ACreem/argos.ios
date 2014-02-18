@@ -93,9 +93,11 @@
     
     [self.view addSubview:_headerView];
     [self.view addSubview:_scrollView];
+    
+    [self setupTitle];
 }
 
-- (void) setupTitle
+- (void)setupTitle
 {
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, _bounds.origin.y, _bounds.size.width - 32.0, self.headerView.bounds.size.height)];
     titleLabel.text = _viewTitle;
@@ -110,25 +112,7 @@
     [self.scrollView addSubview:titleLabel];
 }
 
-- (NSString*)processSummary:(NSString*)summaryText withEntities:(NSSet*)entities
-{
-    // Entities are sorted by length (longest first) so when replacing them in the summary text,
-    // the larger names are captured first. Then names are replaced taking into account their spaces.
-    // Combined, this avoids situations with nested `a` tags.
-    // For instance, "UN Convention" might become "<a href='#'><a href='#'>UN</a> Convention</a>".
-    // Instead, " UN Convention" as a whole is captured: "<a href='#'>UN Convention</a>",
-    // and then " UN" can't be captured since it has no space on the left anymore.
-    NSArray* sortedEntities = [[entities allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSNumber *first = [NSNumber numberWithInt:[[(Entity*)obj1 name] length]];
-        NSNumber *second = [NSNumber numberWithInt:[[(Entity*)obj2 name] length]];
-        return [first compare:second];
-    }];
-    
-    for (Entity* entity in sortedEntities) {
-        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
-    }
-    return summaryText;
-}
+
 
 # pragma mark - Actions
 - (void)share:(id)sender
@@ -137,7 +121,50 @@
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
 }
 
-#pragma mark - UIScrollView delegate
+#pragma mark - UITableViewDelegate
+- (UIView *)tableView:(AREmbeddedTableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    tableView.headerView = [[ARSectionHeaderView alloc] initWithTitle:tableView.title withOrigin:CGPointMake(0, 0)];
+    return tableView.headerView;
+}
+
+-(CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 40;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+
+#pragma mark - UITableViewDataSource
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+    
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+    return 1;
+}
+
+#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
     // Parallax
