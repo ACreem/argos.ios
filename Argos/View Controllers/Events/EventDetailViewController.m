@@ -15,6 +15,7 @@
 
 @interface EventDetailViewController () {
     Event *_event;
+    NSString *_title;
     AREmbeddedTableView *_articleList;
 }
 
@@ -27,7 +28,8 @@
     self = [super init];
     if (self) {
         // Load requested event
-        self.navigationItem.title = event.title;
+        self.navigationItem.title = @"Event";
+        _title = event.title;
         _event = event;
     }
     return self;
@@ -80,6 +82,17 @@
     [self.summaryView sizeToFit];
     
     [self.scrollView addSubview:self.summaryView];
+    
+    // Title view
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, bounds.origin.y, bounds.size.width - 16.0, self.headerImageView.bounds.size.height)];
+    titleLabel.text = _title;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.numberOfLines = 0;
+    [titleLabel sizeToFit];
+    CGRect titleFrame = titleLabel.frame;
+    titleFrame.origin.y = self.headerImageView.bounds.size.height - titleLabel.frame.size.height - textPaddingVertical;
+    titleLabel.frame = titleFrame;
+    [self.scrollView addSubview:titleLabel];
     
     
     // Article list header

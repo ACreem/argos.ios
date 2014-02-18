@@ -7,11 +7,13 @@
 //
 
 #import "ARDetailViewController.h"
+#import "GPUImage.h"
 #import <QuartzCore/QuartzCore.h>
 
 @interface ARDetailViewController () {
     CGRect bounds;
-    UIView *_gradientView;
+    UIView* _gradientView;
+    UIImageView* _headerImageViewBlurred;
 }
 
 @end
@@ -37,9 +39,20 @@
     _scrollView.delegate = self;
     
     // Header image
-    _headerImageView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"sample"]];
+    UIImage* headerImage = [UIImage imageNamed:@"sample"];
+    _headerImageView = [[UIImageView alloc] initWithImage:headerImage];
     _headerImageView.frame = CGRectMake(bounds.origin.x, bounds.origin.y, bounds.size.width, headerImageHeight);
     [self.view addSubview:_headerImageView];
+    
+    // Header image blur
+    GPUImageGaussianBlurFilter* filter =[[GPUImageGaussianBlurFilter alloc] init];
+    filter.blurRadiusAsFractionOfImageHeight = 0.7;
+    filter.blurRadiusAsFractionOfImageWidth = 0.7;
+    UIImage* blurred = [filter imageByFilteringImage:headerImage];
+    _headerImageViewBlurred = [[UIImageView alloc] initWithImage:blurred];
+    _headerImageViewBlurred.frame = _headerImageView.frame;
+    _headerImageViewBlurred.alpha = 0.0;
+    [self.view addSubview:_headerImageViewBlurred];
     
     // Gradient image overlay
     _gradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, headerImageHeight)];
@@ -48,7 +61,7 @@
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
     [_gradientView.layer insertSublayer:gradient atIndex:0];
     _gradientView.alpha = 0.0;
-    [_headerImageView addSubview:_gradientView];
+    [self.view addSubview:_gradientView];
     
     [self.view addSubview:_scrollView];
 }
@@ -73,9 +86,11 @@
     CGRect imageFrame = _headerImageView.frame;
     imageFrame.origin.y = -y/6;
     _headerImageView.frame = imageFrame;
+    _headerImageViewBlurred.frame = imageFrame;
     
-    // Gradient opacity
+    // Gradient and blur opacity
     _gradientView.alpha = y*1.5/bounds.size.height;
+    _headerImageViewBlurred.alpha = y*4/bounds.size.height;
     
     
     // Sticky header

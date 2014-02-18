@@ -13,6 +13,7 @@
 
 @interface StoryDetailViewController () {
     Story *_story;
+    NSString *_title;
     AREmbeddedTableView *_storyList;
 }
 
@@ -24,8 +25,9 @@
 {
     self = [super init];
     if (self) {
-        // Load requested event
-        self.navigationItem.title = story.title;
+        // Load requested story
+        self.navigationItem.title = @"Story";
+        _title = story.title;
         _story = story;
     }
     return self;
@@ -35,18 +37,17 @@
 {
     [super viewDidLoad];
     
-    [self setupView];
+    [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSLog(@"success");
+        [self setupView];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
 }
 
 - (void)setupView
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    
-    [[RKObjectManager sharedManager] getObject:_story path:_story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"success");
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"failure");
-    }];
     
     for (Event* event in _story.events) {
         [[RKObjectManager sharedManager] getObject:event path:event.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
@@ -66,6 +67,17 @@
     self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:_story.updatedAt];
     
     [self.scrollView addSubview:self.summaryView];
+    
+    // Title view
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, bounds.origin.y, bounds.size.width - 16.0, self.headerImageView.bounds.size.height)];
+    titleLabel.text = _title;
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.numberOfLines = 0;
+    [titleLabel sizeToFit];
+    CGRect titleFrame = titleLabel.frame;
+    titleFrame.origin.y = self.headerImageView.bounds.size.height - titleLabel.frame.size.height - 8.0;
+    titleLabel.frame = titleFrame;
+    [self.scrollView addSubview:titleLabel];
     
     
     // Event list header
