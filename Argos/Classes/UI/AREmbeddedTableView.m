@@ -8,6 +8,8 @@
 
 #import "AREmbeddedTableView.h"
 #import "Article.h"
+#import "Story.h"
+#import "Event.h"
 
 @implementation AREmbeddedTableView
 
@@ -58,8 +60,19 @@
     
     
     // Configure the cell...
-    Article *article = [_items objectAtIndex:indexPath.row];
-    cell.textLabel.text = article.title;
+    id item = [_items objectAtIndex:indexPath.row];
+    NSString *title;
+    if ([item isKindOfClass:[Story class]]) {
+        Story *item_ = (Story*)item;
+        title = item_.title;
+    } else if ([item isKindOfClass:[Event class]]) {
+        Event *item_ = (Event*)item;
+        title = item_.title;
+    } else {
+        Article *item_ = (Article*)item;
+        title = item_.title;
+    }
+    cell.textLabel.text = title;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
     cell.textLabel.numberOfLines = 0;
     cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;

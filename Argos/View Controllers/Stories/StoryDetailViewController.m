@@ -14,7 +14,7 @@
 @interface StoryDetailViewController () {
     Story *_story;
     NSString *_title;
-    AREmbeddedTableView *_storyList;
+    AREmbeddedTableView *_eventList;
 }
 
 @end
@@ -54,9 +54,9 @@
     
     for (Event* event in _story.events) {
         [[RKObjectManager sharedManager] getObject:event path:event.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            _storyList.items = [NSMutableArray arrayWithArray:[_story.events allObjects]];
-            [_storyList reloadData];
-            [_storyList sizeToFit];
+            _eventList.items = [NSMutableArray arrayWithArray:[_story.events allObjects]];
+            [_eventList reloadData];
+            [_eventList sizeToFit];
             [self adjustScrollViewHeight];
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
@@ -88,12 +88,12 @@
     ARSectionHeaderView *sectionHeader = [[ARSectionHeaderView alloc] initWithTitle:@"Events" withOrigin:CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height)];
     [self.scrollView addSubview:sectionHeader];
     
-    _storyList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
+    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, sectionHeader.frame.origin.y + sectionHeader.frame.size.height, bounds.size.width, 200.0)];
     
     
-    [_storyList reloadData];
-    [self.scrollView addSubview:_storyList];
-    [_storyList sizeToFit];
+    [_eventList reloadData];
+    [self.scrollView addSubview:_eventList];
+    [_eventList sizeToFit];
     
     [self adjustScrollViewHeight];
 }
