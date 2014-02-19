@@ -23,6 +23,7 @@
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:YES];
+    self.view.backgroundColor = [UIColor primaryColor];
     
     [self setupUI];
 }
