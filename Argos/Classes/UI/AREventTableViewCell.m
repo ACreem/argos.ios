@@ -18,7 +18,7 @@
              leftUtilityButtons:leftUtilityButtons
             rightUtilityButtons:rightUtilityButtons];
     if (self) {
-        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
+        self.textLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:14.0];
         self.textLabel.numberOfLines = 0;
         self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
         

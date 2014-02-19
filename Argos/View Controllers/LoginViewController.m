@@ -79,6 +79,7 @@
     [facebookLoginButton setTitle:@"Login with Facebook" forState:UIControlStateNormal];
     [facebookLoginButton setBackgroundColor:[UIColor colorWithRed:0.263 green:0.376 blue:0.612 alpha:1.0]];
     [facebookLoginButton setTintColor:[UIColor whiteColor]];
+    [[facebookLoginButton layer] setCornerRadius:4.0];
     [facebookLoginButton addTarget:self action:@selector(facebookLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:facebookLoginButton];
     
@@ -88,6 +89,7 @@
     [twitterLoginButton setBackgroundColor:[UIColor colorWithRed:0 green:0.69 blue:0.929 alpha:1.0]];
     [twitterLoginButton setTintColor:[UIColor whiteColor]];
     [twitterLoginButton addTarget:self action:@selector(twitterLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [[twitterLoginButton layer] setCornerRadius:4.0];
     [self.view addSubview:twitterLoginButton];
     
     UIButton *googleLoginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
@@ -96,6 +98,7 @@
     [googleLoginButton setBackgroundColor:[UIColor colorWithRed:0.827 green:0.243 blue:0.165 alpha:1.0]];
     [googleLoginButton setTintColor:[UIColor whiteColor]];
     [googleLoginButton addTarget:self action:@selector(googleLoginButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [[googleLoginButton layer] setCornerRadius:4.0];
     [self.view addSubview:googleLoginButton];
 }
 

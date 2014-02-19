@@ -87,7 +87,7 @@
     textGradient.frame = textGradientView.bounds;
     textGradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
     [textGradientView.layer insertSublayer:textGradient atIndex:0];
-    textGradientView.alpha = 0.4;
+    textGradientView.alpha = 0.6;
     [_headerView addSubview:textGradientView];
     
     // Gradient image overlay (for scrolling)
@@ -104,7 +104,7 @@
     _loadedItems = 0;
     _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     _progressView.frame = CGRectMake(0, 0, _bounds.size.width, 20);
-    _progressView.tintColor = [UIColor actionColor];
+    _progressView.tintColor = [UIColor secondaryColor];
     _progressView.trackTintColor = [UIColor mutedColor];
     [_scrollView addSubview:_progressView];
     
