@@ -10,6 +10,7 @@
 #import "ARSectionHeaderView.h"
 #import "AREmbeddedTableView.h"
 #import "ARShareViewController.h"
+#import "ARFontViewController.h"
 #import "GPUImage.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Entity.h"
@@ -29,8 +30,9 @@
     UIView *_stuckSectionHeaderSuperview;
     CGRect _stuckSectionHeaderViewFrame;
     
-    WYPopoverController *_sharePopoverController;
+    WYPopoverController *_popoverController;
     ARShareViewController *_shareViewController;
+    ARFontViewController *_fontViewController;
 }
 
 @end
@@ -143,18 +145,18 @@
 - (void)share:(id)sender
 {
     _shareViewController = [[ARShareViewController alloc] init];
-    _sharePopoverController = [[WYPopoverController alloc] initWithContentViewController:_shareViewController];
-    _sharePopoverController.delegate = self;
-    [_sharePopoverController setPopoverContentSize:CGSizeMake(44, 220)];
-    [_sharePopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
+    _popoverController = [[WYPopoverController alloc] initWithContentViewController:_shareViewController];
+    _popoverController.delegate = self;
+    [_popoverController setPopoverContentSize:CGSizeMake(44, 220)];
+    [_popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
 }
 - (void)font:(id)sender
 {
-    _shareViewController = [[ARShareViewController alloc] init];
-    _sharePopoverController = [[WYPopoverController alloc] initWithContentViewController:_shareViewController];
-    _sharePopoverController.delegate = self;
-    [_sharePopoverController setPopoverContentSize:CGSizeMake(44, 200)];
-    [_sharePopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
+    _fontViewController = [[ARFontViewController alloc] init];
+    _popoverController = [[WYPopoverController alloc] initWithContentViewController:_fontViewController];
+    _popoverController.delegate = self;
+    [_popoverController setPopoverContentSize:CGSizeMake(_fontViewController.view.frame.size.width, _fontViewController.view.frame.size.height)];
+    [_popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
 }
 - (void)favorite:(id)sender
 {
