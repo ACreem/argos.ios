@@ -55,7 +55,7 @@
     UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
     UIBarButtonItem *watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
     UIBarButtonItem *favoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_favorite"] style:UIBarButtonItemStylePlain target:self action:@selector(favorite:)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, watchButton, item, fontButton, item, favoriteButton, item, nil];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, favoriteButton, item, fontButton, item, watchButton, item, nil];
     
     
     float headerImageHeight = 220.0;
