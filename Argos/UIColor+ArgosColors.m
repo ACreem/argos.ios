@@ -12,7 +12,8 @@
 
 + (UIColor*)primaryColor
 {
-    return [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    //return [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    return [UIColor colorWithRed:0.125 green:0.137 blue:0.176 alpha:1.0];
 }
 
 + (UIColor*)secondaryColor

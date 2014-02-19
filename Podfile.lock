@@ -27,6 +27,7 @@ PODS:
   - SWTableViewCell (0.2.3)
   - TransitionKit (2.0.0)
   - ViewDeck (2.2.11)
+  - WYPopoverController (0.2.0)
 
 DEPENDENCIES:
   - GPUImage
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - RestKit
   - SWTableViewCell
   - ViewDeck (~> 2.2.11)
+  - WYPopoverController
 
 SPEC CHECKSUMS:
   AFNetworking: 61fdd49e2ffe6380378df37b3b6e70630bb9dd66
@@ -46,5 +48,6 @@ SPEC CHECKSUMS:
   SWTableViewCell: 270c3758a84547b1cad43d70b72203b3003ce27b
   TransitionKit: 433284465abacdc07852d7db6dd0cc075010059a
   ViewDeck: b5eddc8559b0e47259ab7addbf2de6768061f139
+  WYPopoverController: 5f0f2621d1485b8bdd3cc5e0e5b1bf83c8e649f0
 
 COCOAPODS: 0.29.0

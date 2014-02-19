@@ -9,6 +9,7 @@
 #import "ARDetailViewController.h"
 #import "ARSectionHeaderView.h"
 #import "AREmbeddedTableView.h"
+#import "ARShareViewController.h"
 #import "GPUImage.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Entity.h"
@@ -27,6 +28,9 @@
     ARSectionHeaderView *_stuckSectionHeaderView;
     UIView *_stuckSectionHeaderSuperview;
     CGRect _stuckSectionHeaderViewFrame;
+    
+    WYPopoverController *_sharePopoverController;
+    ARShareViewController *_shareViewController;
 }
 
 @end
@@ -52,6 +56,7 @@
     UIBarButtonItem *watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
     UIBarButtonItem *favoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_favorite"] style:UIBarButtonItemStylePlain target:self action:@selector(favorite:)];
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, watchButton, item, fontButton, item, favoriteButton, item, nil];
+    
     
     float headerImageHeight = 220.0;
     _bounds = [[UIScreen mainScreen] bounds];
@@ -104,12 +109,17 @@
     _loadedItems = 0;
     _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
     _progressView.frame = CGRectMake(0, 0, _bounds.size.width, 20);
-    _progressView.tintColor = [UIColor secondaryColor];
+    _progressView.tintColor = [UIColor actionColor];
     _progressView.trackTintColor = [UIColor mutedColor];
     [_scrollView addSubview:_progressView];
     
     [self setupTitle];
     [self.view addSubview:_scrollView];
+    
+    // Style the popovers.
+    WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
+    popoverAppearance.tintColor = [UIColor primaryColor];
+    popoverAppearance.outerCornerRadius = 0;
 }
 
 - (void)setupTitle
@@ -132,13 +142,19 @@
 # pragma mark - Actions
 - (void)share:(id)sender
 {
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+    _shareViewController = [[ARShareViewController alloc] init];
+    _sharePopoverController = [[WYPopoverController alloc] initWithContentViewController:_shareViewController];
+    _sharePopoverController.delegate = self;
+    [_sharePopoverController setPopoverContentSize:CGSizeMake(44, 220)];
+    [_sharePopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
 }
 - (void)font:(id)sender
 {
-    [NSException raise:NSInternalInconsistencyException
-                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+    _shareViewController = [[ARShareViewController alloc] init];
+    _sharePopoverController = [[WYPopoverController alloc] initWithContentViewController:_shareViewController];
+    _sharePopoverController.delegate = self;
+    [_sharePopoverController setPopoverContentSize:CGSizeMake(44, 200)];
+    [_sharePopoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
 }
 - (void)favorite:(id)sender
 {
@@ -293,6 +309,19 @@
         }
     }
 }
+
+# pragma mark - WYPopoverControllerDelegate
+- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
+{
+    return YES;
+}
+
+- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
+{
+    controller.delegate = nil;
+    controller = nil;
+}
+
 
 
 # pragma mark - ARSummaryViewDelegate

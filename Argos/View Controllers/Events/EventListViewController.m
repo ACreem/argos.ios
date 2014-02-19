@@ -97,10 +97,6 @@
             [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
             icon:[UIImage imageNamed:@"watch"]];
         
-        [rightUtilityButtons sw_addUtilityButtonWithColor:
-            [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
-            icon:[UIImage imageNamed:@"share"]];
-        
         cell = [[AREventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                         reuseIdentifier:CellIdentifier
                                         containingTableView:tableView

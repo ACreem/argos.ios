@@ -53,7 +53,7 @@
     
     // Add background for the status bar, so the slide-out menu transition looks better.
     UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-    view.backgroundColor = [UIColor colorWithRed:0.133 green:0.22 blue:0.286 alpha:1.0];
+    view.backgroundColor = [UIColor primaryColor];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate.window addSubview:view];
     
