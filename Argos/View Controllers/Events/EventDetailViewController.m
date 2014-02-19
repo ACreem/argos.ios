@@ -33,7 +33,6 @@
     self = [super init];
     if (self) {
         // Load requested event
-        self.navigationItem.title = @"Event";
         self.viewTitle = event.title;
         _event = event;
     }

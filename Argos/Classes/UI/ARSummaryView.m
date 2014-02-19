@@ -33,22 +33,6 @@
         _timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
         _timeLabel.textColor = [UIColor mutedColor];
         [headerView addSubview:_timeLabel];
-        
-        // Setup action buttons
-        UIButton* favoriteButton = [self buttonWithAction:@selector(favorite:) imageNamed:@"favorite"];
-        CGRect favoriteFrame = favoriteButton.frame;
-        favoriteFrame.origin.x = bounds.size.width - paddingX - favoriteButton.imageView.frame.size.width;
-        favoriteFrame.origin.y = paddingY;
-        favoriteButton.frame = favoriteFrame;
-        [headerView addSubview:favoriteButton];
-        
-        UIButton* watchButton = [self buttonWithAction:@selector(watch:) imageNamed:@"watch"];
-        CGRect watchFrame = watchButton.frame;
-        watchFrame.origin.x = favoriteButton.frame.origin.x - paddingX*2;
-        watchFrame.origin.y = paddingY;
-        watchButton.frame = watchFrame;
-        [headerView addSubview:watchButton];
-        
         [self addSubview:headerView];
         
         // Setup summary text
@@ -97,44 +81,6 @@
     NSString* summaryHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
     [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
-
-- (UIButton*)buttonWithAction:(SEL)selector imageNamed:(NSString*)imageName
-{
-    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    UIImage* image = [UIImage imageNamed:imageName];
-    [button setImage:image forState:UIControlStateNormal];
-    [button addTarget:self action:selector forControlEvents:UIControlEventTouchUpInside];
-    [button sizeToFit];
-    return button;
-}
-
-# pragma mark - Actions
-
-- (void)favorite:(id)sender
-{
-    NSLog(@"favorited");
-    UIButton *button = (UIButton*)sender;
-    if (button.tag != 1) {
-        [button setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
-        [button setTag:1];
-    } else {
-        [button setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
-        [button setTag:0];
-    }
-}
-- (void)watch:(id)sender
-{
-    NSLog(@"watched");
-    UIButton *button = (UIButton*)sender;
-    if (button.tag != 1) {
-        [button setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
-        [button setTag:1];
-    } else {
-        [button setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
-        [button setTag:0];
-    }
-}
-
 
 # pragma mark - UIView
 

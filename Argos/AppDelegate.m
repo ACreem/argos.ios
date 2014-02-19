@@ -37,6 +37,10 @@
             [UIColor whiteColor], NSForegroundColorAttributeName,
             [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0], NSFontAttributeName,
             nil]];
+    
+    // Custom back button image.
+    [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"nav_back"]];
+    [self.navigationController.navigationBar setBackIndicatorTransitionMaskImage:[UIImage imageNamed:@"nav_back"]];
  
     
     // Create the pull menu controller.

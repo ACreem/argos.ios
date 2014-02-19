@@ -42,9 +42,16 @@
                                                                              style:UIBarButtonItemStylePlain target:nil action:nil];
     
     
-    // Share button.
+    // Navigation buttons.
+    // (Padding)
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                          target:nil
+                                                                          action:nil];
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
-    self.navigationItem.rightBarButtonItem = shareButton;
+    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
+    UIBarButtonItem *watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+    UIBarButtonItem *favoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_favorite"] style:UIBarButtonItemStylePlain target:self action:@selector(favorite:)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, watchButton, item, fontButton, item, favoriteButton, item, nil];
     
     float headerImageHeight = 220.0;
     _bounds = [[UIScreen mainScreen] bounds];
@@ -127,6 +134,35 @@
 {
     [NSException raise:NSInternalInconsistencyException
                 format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+- (void)font:(id)sender
+{
+    [NSException raise:NSInternalInconsistencyException
+                format:@"You must override %@ in a subclass", NSStringFromSelector(_cmd)];
+}
+- (void)favorite:(id)sender
+{
+    NSLog(@"favorited");
+    UIBarButtonItem *button = (UIBarButtonItem*)sender;
+    if (button.tag != 1) {
+        button.image = [UIImage imageNamed:@"nav_favorited"];
+        [button setTag:1];
+    } else {
+        button.image = [UIImage imageNamed:@"nav_favorite"];
+        [button setTag:0];
+    }
+}
+- (void)watch:(id)sender
+{
+    NSLog(@"watched");
+    UIBarButtonItem *button = (UIBarButtonItem*)sender;
+    if (button.tag != 1) {
+        button.image = [UIImage imageNamed:@"nav_watched"];
+        [button setTag:1];
+    } else {
+        button.image = [UIImage imageNamed:@"nav_watch"];
+        [button setTag:0];
+    }
 }
 
 #pragma mark - UITableViewDelegate
