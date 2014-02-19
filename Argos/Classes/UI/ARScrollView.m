@@ -25,6 +25,7 @@
     
     self = [super initWithFrame:frame];
     _yOffset = yOffset;
+    self.showsVerticalScrollIndicator = NO;
     return self;
 }
 
@@ -32,24 +33,8 @@
 
 - (void)sizeToFit
 {
-    // Directly overriding `sizeToFit` instead of `sizeThatFits:` since
-    // we want to set the content size of the view, rather than its frame size.
-    
-    float h = 0;
-    
-    for (UIView *v in [self subviews]) {
-        float fh = v.frame.origin.y + v.frame.size.height;
-        h = MAX(fh, h);
-    }
-    [self setContentSize:(CGSizeMake(self.frame.size.width, h + _yOffset))];
-}
-
-// This is called on scroll and when one if its subviews changes size.
-- (void)layoutSubviews
-{
-    [super layoutSubviews];
-    
     // Calculate positions of subviews.
+    // Assumes vertical layout of all top-level subviews.
     // NB: Make sure all padding is implemented as part of a view's SIZE,
     // NOT its ORIGIN.
     // E.g. if you have a view you want to have 16pt vertical padding between itself
@@ -57,17 +42,21 @@
     // its origin 16pt further down. You may need to wrap padded views in subviews (though
     // often this works to the benefit of view organization/encapsulation).
     // NOTE: this does not call `sizeToFit`, if you need it, call it manually.
-    float yOffset = NAN;
+    float yOffset = _yOffset;
     for (UIView *v in [self subviews]) {
         CGRect frame = v.frame;
-        float oy = frame.origin.y;
-        if (isnan(yOffset)) {
-            yOffset = oy;
-        }
         frame.origin.y = yOffset;
-        yOffset += frame.size.height;
         v.frame = frame;
+        yOffset += frame.size.height;
     }
+    
+    // Directly overriding `sizeToFit` instead of `sizeThatFits:` since
+    // we want to set the content size of the view, rather than its frame size.
+    CGRect contentRect = CGRectZero;
+    for (UIView *view in self.subviews)
+        contentRect = CGRectUnion(contentRect, view.frame);
+    contentRect.size.height += _yOffset;
+    self.contentSize = contentRect.size;
 }
 
 @end

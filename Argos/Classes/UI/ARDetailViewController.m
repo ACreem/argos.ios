@@ -18,9 +18,10 @@
     CGRect _bounds;
     
     // For image scrolling effects.
-    UIView* _gradientView;
-    UIImageView* _headerImageViewBlurred;
-    UIImageView* _headerImageView;
+    UIView *_gradientView;
+    UIImageView *_headerImageViewBlurred;
+    UIImageView *_headerImageView;
+    UILabel *_titleLabel;
     
     // For keeping track of sticky headers.
     ARSectionHeaderView *_stuckSectionHeaderView;
@@ -51,7 +52,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
     
     // Scroll view
-    _scrollView = [[ARScrollView alloc] initWithFrame:CGRectMake(_bounds.origin.x, _bounds.origin.y, _bounds.size.width, _bounds.size.height) verticalOffset:headerImageHeight];
+    _scrollView = [[ARScrollView alloc] initWithFrame:_bounds verticalOffset:headerImageHeight];
     _scrollView.bounces = NO;
     _scrollView.delegate = self;
     
@@ -92,24 +93,23 @@
     [_headerView addSubview:_gradientView];
     
     [self.view addSubview:_headerView];
-    [self.view addSubview:_scrollView];
-    
     [self setupTitle];
+    [self.view addSubview:_scrollView];
 }
 
 - (void)setupTitle
 {
-    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, _bounds.origin.y, _bounds.size.width - 32.0, self.headerView.bounds.size.height)];
-    titleLabel.text = _viewTitle;
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20];
-    titleLabel.numberOfLines = 0;
-    [titleLabel sizeToFit];
-    CGRect titleFrame = titleLabel.frame;
+    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, _bounds.origin.y, _bounds.size.width - 32.0, self.headerView.bounds.size.height)];
+    _titleLabel.text = _viewTitle;
+    _titleLabel.textColor = [UIColor whiteColor];
+    _titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20];
+    _titleLabel.numberOfLines = 0;
+    [_titleLabel sizeToFit];
+    CGRect titleFrame = _titleLabel.frame;
     titleFrame.size.height += 20.0;
     titleFrame.origin.y = self.headerView.bounds.size.height - titleFrame.size.height;
-    titleLabel.frame = titleFrame;
-    [self.scrollView addSubview:titleLabel];
+    _titleLabel.frame = titleFrame;
+    [self.view addSubview:_titleLabel];
 }
 
 
@@ -170,8 +170,11 @@
     // Parallax
     float y = scrollView.contentOffset.y;
     CGRect imageFrame = _headerImageView.frame;
+    CGRect titleFrame = _titleLabel.frame;
     imageFrame.origin.y = -y/6;
     _headerView.frame = imageFrame;
+    titleFrame.origin.y = self.headerView.bounds.size.height - titleFrame.size.height - y/1.4;
+    _titleLabel.frame = titleFrame;
     
     // Gradient and blur opacity
     _gradientView.alpha = y*1.5/_bounds.size.height;

@@ -17,12 +17,12 @@
 
 + (UIColor*)secondaryColor
 {
-    return [UIColor colorWithRed:0.886 green:0.271 blue:0.298 alpha:1.0];
+    return [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0];
 }
 
 + (UIColor*)actionColor
 {
-    return [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0];
+    return [UIColor colorWithRed:0.886 green:0.271 blue:0.298 alpha:1.0];
 }
 
 + (UIColor*)mutedColor

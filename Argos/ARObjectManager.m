@@ -18,7 +18,8 @@ static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
-    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Set up the object manager.
     ARObjectManager *objectManager = [ARObjectManager managerWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString]];
