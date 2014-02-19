@@ -17,6 +17,12 @@
 @property (strong, nonatomic) UIView *headerView;
 @property (strong, nonatomic) NSString *viewTitle;
 
+// Progress
+@property (strong, nonatomic) UIProgressView *progressView;
+@property (assign, nonatomic) int loadedItems;
+@property (assign, nonatomic) int totalItems;
+
+
 - (void)viewEntity:(NSString*)entityId;
 
 @end

@@ -39,6 +39,8 @@
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
+    self.totalItems = _story.events.count + _story.entities.count;
+    
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
     self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_story.summary updatedAt:_story.updatedAt];
@@ -69,6 +71,9 @@
         [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_entity_count++;
             
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
             if (fetched_entity_count == [_story.entities count]) {
                 [self.summaryView setText:_story.summary withEntities:_story.entities];
             }
@@ -81,10 +86,18 @@
 - (void)fetchEvents
 {
     for (Event* event in _story.events) {
+        __block NSUInteger fetched_event_count = 0;
         [[RKObjectManager sharedManager] getObject:event path:event.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            [_eventList reloadData];
-            [_eventList sizeToFit];
-            [self.scrollView sizeToFit];
+            fetched_event_count++;
+            
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
+            if (fetched_event_count == [_story.events count]) {
+                [_eventList reloadData];
+                [_eventList sizeToFit];
+                [self.scrollView sizeToFit];
+            }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];

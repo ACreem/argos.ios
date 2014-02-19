@@ -49,6 +49,8 @@
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
+    self.totalItems = _entity.stories.count;
+    
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
     //NSString *summaryText = _entity.summary;
@@ -74,12 +76,19 @@
 
 - (void)fetchMentions
 {
-    NSLog(@"fetching mentions");
+    __block NSUInteger fetched_mention_count = 0;
     for (Story* story in _entity.stories) {
         [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            [_mentionList reloadData];
-            [_mentionList sizeToFit];
-            [self.scrollView sizeToFit];
+            fetched_mention_count++;
+            
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
+            if (fetched_mention_count == [_entity.stories count]) {
+                [_mentionList reloadData];
+                [_mentionList sizeToFit];
+                [self.scrollView sizeToFit];
+            }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];

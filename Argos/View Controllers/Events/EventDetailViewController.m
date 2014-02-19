@@ -21,6 +21,7 @@
     CGRect _bounds;
     AREmbeddedTableView *_articleList;
     AREmbeddedTableView *_storyList;
+
 }
 
 @end
@@ -42,6 +43,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.totalItems = _event.stories.count + _event.articles.count + _event.entities.count;
     
     _bounds = [[UIScreen mainScreen] bounds];
     
@@ -100,6 +103,9 @@
         [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_story_count++;
             
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
             if (fetched_story_count == [_event.stories count] && _storyList) {
                 [_storyList reloadData];
                 [_storyList sizeToFit];
@@ -142,6 +148,9 @@
         [[RKObjectManager sharedManager] getObject:article path:article.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_article_count++;
             
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
             if (fetched_article_count == [_event.articles count]) {
                 [_articleList reloadData];
                 [_articleList sizeToFit];
@@ -160,6 +169,9 @@
     for (Entity* entity in _event.entities) {
         [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_entity_count++;
+            
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
             if (fetched_entity_count == [_event.entities count]) {
                 [self.summaryView setText:_event.summary withEntities:_event.entities];

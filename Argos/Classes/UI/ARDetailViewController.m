@@ -93,6 +93,14 @@
     [_headerView addSubview:_gradientView];
     
     [self.view addSubview:_headerView];
+    
+    _loadedItems = 0;
+    _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+    _progressView.frame = CGRectMake(0, 0, _bounds.size.width, 20);
+    _progressView.tintColor = [UIColor actionColor];
+    _progressView.trackTintColor = [UIColor mutedColor];
+    [_scrollView addSubview:_progressView];
+    
     [self setupTitle];
     [self.view addSubview:_scrollView];
 }
