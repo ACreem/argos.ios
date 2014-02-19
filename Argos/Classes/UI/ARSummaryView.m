@@ -81,6 +81,13 @@
         return [first compare:second];
     }];
     
+    
+    // Hide the UIWebView if there are no entities.
+    // (for fade in later)
+    if (!entities) {
+        _summaryWebView.alpha = 0.0;
+    }
+    
     for (Entity* entity in sortedEntities) {
         summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
     }
@@ -180,6 +187,11 @@
     CGSize fittingSize = [aWebView sizeThatFits:CGSizeZero];
     frame.size = fittingSize;
     aWebView.frame = frame;
+    
+    // Fade in the UIWebView.
+    [UIView beginAnimations:@"fade" context:nil];
+    aWebView.alpha = 1.0;
+    [UIView commitAnimations];
     
     // Disable long touch in the web view.
     [aWebView stringByEvaluatingJavaScriptFromString:@"document.body.style.webkitTouchCallout='none'; document.body.style.KhtmlUserSelect='none'"];
