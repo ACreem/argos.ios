@@ -89,13 +89,11 @@
         NSMutableArray *leftUtilityButtons = [NSMutableArray new];
         NSMutableArray *rightUtilityButtons = [NSMutableArray new];
         
-        [rightUtilityButtons sw_addUtilityButtonWithColor:
-            [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
-            icon:[UIImage imageNamed:@"favorite"]];
+        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor primaryColor]
+                                                     icon:[UIImage imageNamed:@"favorite"]];
         
-        [rightUtilityButtons sw_addUtilityButtonWithColor:
-            [UIColor colorWithRed:0.478 green:0.757 blue:0.471 alpha:1.0]
-            icon:[UIImage imageNamed:@"watch"]];
+        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor primaryColor]
+                                                     icon:[UIImage imageNamed:@"watch"]];
         
         cell = [[AREventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
                                         reuseIdentifier:CellIdentifier
