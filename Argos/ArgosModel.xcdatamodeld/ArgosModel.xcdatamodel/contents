@@ -8,6 +8,11 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="articles" inverseEntity="Event" syncable="YES"/>
     </entity>
+    <entity name="CurrentUser" representedClassName="CurrentUser" syncable="YES">
+        <attribute name="contrast" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="fontSize" optional="YES" attributeType="Float" defaultValueString="0.9" syncable="YES"/>
+        <attribute name="fontType" optional="YES" attributeType="String" defaultValueString="Georgia" syncable="YES"/>
+    </entity>
     <entity name="Entity" representedClassName="Entity" syncable="YES">
         <attribute name="entityId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -46,5 +51,6 @@
         <element name="Entity" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Story" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CurrentUser" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

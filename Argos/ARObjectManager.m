@@ -13,12 +13,21 @@
 #import "Entity.h"
 
 #ifdef DEBUG
-    static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
+    static NSString* const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
 #else
-    static NSString * const kArgosAPIBaseURLString = @"http://api.argos.com/";
+    static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com/";
 #endif
 
+@interface ARObjectManager () {
+    CurrentUser* _currentUser;
+}
+@end
+
 @implementation ARObjectManager
+
++(ARObjectManager*)sharedManager {
+    return (ARObjectManager*)[super sharedManager];
+}
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
@@ -105,6 +114,16 @@
                              mappings:entityMappings];
     
     return objectManager;
+}
+
+// Temporary for handling the current user.
+// Eventually this should be handled through RestKit, GETing and POSTing the CurrentUser to the `/user` endpoint.
+- (CurrentUser*)currentUser {
+    if (!_currentUser) {
+        NSEntityDescription* entityDesc = [NSEntityDescription entityForName:@"CurrentUser" inManagedObjectContext:self.managedObjectStore.mainQueueManagedObjectContext];
+        _currentUser = [[CurrentUser alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:self.managedObjectStore.mainQueueManagedObjectContext];
+    }
+    return _currentUser;
 }
 
 /*

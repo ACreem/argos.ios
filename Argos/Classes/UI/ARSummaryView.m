@@ -8,6 +8,18 @@
 
 #import "ARSummaryView.h"
 #import "Entity.h"
+#import "CurrentUser.h"
+
+@interface ARSummaryView () {
+    CurrentUser *_currentUser;
+    
+    // Keep track of the summary html,
+    // which includes the processed summary text but
+    // does NOT include filled in styling values.
+    // This way we can update them as necessary when font preferences change.
+    NSString *_summaryTextHtml;
+}
+@end
 
 @implementation ARSummaryView
 
@@ -19,9 +31,14 @@
     CGRect frame = CGRectMake(origin.x, origin.y, bounds.size.width, 400.0);
     self = [super initWithFrame:frame];
     if (self) {
-        self.backgroundColor = [UIColor whiteColor];
         
-        // Header view with meta and actions.
+        // Get current user and observe the necessary properties.
+        _currentUser = [[ARObjectManager sharedManager] currentUser];
+        [_currentUser addObserver:self forKeyPath:@"fontSize" options:NSKeyValueObservingOptionNew context:nil];
+        [_currentUser addObserver:self forKeyPath:@"fontType" options:NSKeyValueObservingOptionNew context:nil];
+        [_currentUser addObserver:self forKeyPath:@"contrast" options:NSKeyValueObservingOptionNew context:nil];
+        
+        // Header view with metadata.
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 30.0 + paddingY)];
         
         // Setup time ago
@@ -40,10 +57,12 @@
                                                                         _timeLabel.frame.origin.y + _timeLabel.frame.size.height + paddingY*2,
                                                                         bounds.size.width - (paddingX*2),
                                                                         200.0)];
+        _summaryWebView.backgroundColor = [UIColor clearColor];
+        _summaryWebView.opaque = NO;
         _summaryWebView.delegate = self;
-        [self setText:summaryText withEntities:nil];
         _summaryWebView.scrollView.scrollEnabled = NO;
         _summaryWebView.scrollView.bounces = NO;
+        [self setText:summaryText withEntities:nil];
         [self addSubview:_summaryWebView];
         
         [self sizeToFit];
@@ -51,6 +70,23 @@
     return self;
 }
 
+# pragma mark - KVO
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    // Re-style the summary html.
+    NSString* summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:_currentUser.fontSize fontType:_currentUser.fontType contrast:[_currentUser.contrast boolValue]];
+    [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+}
+
+- (void)dealloc
+{
+    [_currentUser removeObserver:self forKeyPath:@"fontSize"];
+    [_currentUser removeObserver:self forKeyPath:@"fontType"];
+    [_currentUser removeObserver:self forKeyPath:@"contrast"];
+}
+
+
+# pragma mark - HTML/Text setting
 - (void)setText:(NSString*)summaryText withEntities:(NSSet*)entities
 {
     // Entities are sorted by length (longest first) so when replacing them in the summary text,
@@ -66,20 +102,33 @@
     }];
     
     
-    // Hide the UIWebView if there are no entities.
-    // (for fade in later)
-    if (!entities) {
-        _summaryWebView.alpha = 0.0;
-    }
-    
     for (Entity* entity in sortedEntities) {
         summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
     }
     
     NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
     NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
-    NSString* summaryHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
+    _summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
+    
+    NSString* summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:_currentUser.fontSize fontType:_currentUser.fontType contrast:[_currentUser.contrast boolValue]];
     [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+}
+
+
+- (NSString*)styleSummaryHtml:(NSString*)html fontSize:(NSNumber*)size fontType:(NSString*)type contrast:(BOOL)light
+{
+    if (light) {
+        html = [html stringByReplacingOccurrencesOfString:@"{{color}}" withString:@"#000"];
+        self.backgroundColor = [UIColor whiteColor];
+    } else {
+        html = [html stringByReplacingOccurrencesOfString:@"{{color}}" withString:@"#fff"];
+        self.backgroundColor = [UIColor darkColor];
+    }
+    
+    html = [html stringByReplacingOccurrencesOfString:@"{{size}}" withString:[NSString stringWithFormat:@"%fem", [size floatValue]]];
+    html = [html stringByReplacingOccurrencesOfString:@"{{type}}" withString:type];
+    
+    return html;
 }
 
 # pragma mark - UIView

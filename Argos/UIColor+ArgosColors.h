@@ -15,5 +15,6 @@
 + (UIColor*)actionColor;
 + (UIColor*)mutedColor;
 + (UIColor*)mutedAltColor;
++ (UIColor*)darkColor;
 
 @end

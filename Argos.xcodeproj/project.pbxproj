@@ -39,6 +39,7 @@
 		F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148CD18B3E6A800948933 /* ArticleWebViewController.m */; };
 		F16148D118B5278700948933 /* ARShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D018B5278700948933 /* ARShareViewController.m */; };
 		F16148D418B53AF100948933 /* ARFontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D318B53AF100948933 /* ARFontViewController.m */; };
+		F16148F118B6728D00948933 /* CurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148F018B6728D00948933 /* CurrentUser.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
 		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */; };
@@ -124,6 +125,8 @@
 		F16148D018B5278700948933 /* ARShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARShareViewController.m; path = Classes/UI/ARShareViewController.m; sourceTree = "<group>"; };
 		F16148D218B53AF100948933 /* ARFontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARFontViewController.h; path = Classes/UI/ARFontViewController.h; sourceTree = "<group>"; };
 		F16148D318B53AF100948933 /* ARFontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARFontViewController.m; path = Classes/UI/ARFontViewController.m; sourceTree = "<group>"; };
+		F16148EF18B6728D00948933 /* CurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentUser.h; path = Classes/Models/CurrentUser.h; sourceTree = "<group>"; };
+		F16148F018B6728D00948933 /* CurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentUser.m; path = Classes/Models/CurrentUser.m; sourceTree = "<group>"; };
 		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
@@ -289,6 +292,8 @@
 		F1601C0618ABDC2300C89590 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F16148EF18B6728D00948933 /* CurrentUser.h */,
+				F16148F018B6728D00948933 /* CurrentUser.m */,
 				F1C6D6FA18B2F4AC00129552 /* Article.h */,
 				F1C6D6FB18B2F4AC00129552 /* Article.m */,
 				F1C6D6F718B2F4AC00129552 /* Story.h */,
@@ -536,6 +541,7 @@
 				F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */,
 				F1C6D6F918B2F4AC00129552 /* Story.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
+				F16148F118B6728D00948933 /* CurrentUser.m in Sources */,
 				F1C6D6F018B2F34300129552 /* EntityDetailViewController.m in Sources */,
 				F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,

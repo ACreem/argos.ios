@@ -15,7 +15,8 @@
     #import <Foundation/Foundation.h>
     #import <CoreData/CoreData.h>
     #import <RestKit/RestKit.h>
-    #import <NYXImagesKit/NYXImagesKit.h>"
+    #import <NYXImagesKit/NYXImagesKit.h>
+    #import "ARObjectManager.h"
     #import "UIColor+ArgosColors.h"
     #import "NSDate+DateUtils.h"
 #endif

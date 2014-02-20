@@ -7,9 +7,12 @@
 //
 
 #import "RKObjectManager.h"
+#import "CurrentUser.h"
 
 @interface ARObjectManager : RKObjectManager
 
 +(ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos;
++(ARObjectManager*)sharedManager;
+-(CurrentUser*)currentUser;
 
 @end

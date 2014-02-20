@@ -7,10 +7,16 @@
 //
 
 #import "ARFontViewController.h"
+#import "CurrentUser.h"
+
+float const kFontSizeLarge = 1.1;
+float const kFontSizeMedium = 0.9;
+float const kFontSizeSmall = 0.7;
 
 @interface ARFontViewController () {
     UITabBar *_typeSizeSelectionBar;
     UIButton *_selectedTypeButton;
+    CurrentUser *_currentUser;
 }
 @end
 
@@ -19,6 +25,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    _currentUser = [[ARObjectManager sharedManager] currentUser];
     
     float width = 200;
     float topPadding = 10;
@@ -40,8 +48,15 @@
     _typeSizeSelectionBar.tintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this is taken as the selected image tint color.
     _typeSizeSelectionBar.selectedImageTintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this value is ignored.
     [_typeSizeSelectionBar setItems:[NSArray arrayWithObjects:smallSize, mediumSize, largeSize, nil]];
-    _typeSizeSelectionBar.selectedItem = mediumSize;
     _typeSizeSelectionBar.delegate = self;
+    
+    if ([_currentUser.fontSize floatValue] == kFontSizeLarge) {
+        _typeSizeSelectionBar.selectedItem = largeSize;
+    } else if ([_currentUser.fontSize floatValue] == kFontSizeMedium) {
+        _typeSizeSelectionBar.selectedItem = mediumSize;
+    } else {
+        _typeSizeSelectionBar.selectedItem = smallSize;
+    }
     
     // Bottom border for the UITabBar.
     CALayer *bottomBorder = [CALayer layer];
@@ -63,8 +78,12 @@
     georgia.titleLabel.font = [UIFont fontWithName:@"Georgia" size:16.0];
     georgia.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     georgia.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
-    [georgia setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _selectedTypeButton = georgia;
+    if ([_currentUser.fontType isEqualToString:@"Georgia"]) {
+        [georgia setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _selectedTypeButton = georgia;
+    } else {
+        [georgia setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+    }
     [typeSelectionView addSubview:georgia];
     
     UIButton* marion = [[UIButton alloc] initWithFrame:CGRectMake(0, georgia.frame.origin.y + georgia.frame.size.height, width, 40)];
@@ -74,7 +93,12 @@
     marion.titleLabel.font = [UIFont fontWithName:@"Marion" size:16.0];
     marion.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     marion.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
-    [marion setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+    if ([_currentUser.fontType isEqualToString:@"Marion"]) {
+        [marion setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _selectedTypeButton = marion;
+    } else {
+        [marion setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+    }
     [typeSelectionView addSubview:marion];
     
     UIButton* palatino = [[UIButton alloc] initWithFrame:CGRectMake(0, marion.frame.origin.y + marion.frame.size.height, width, 40)];
@@ -84,7 +108,12 @@
     palatino.titleLabel.font = [UIFont fontWithName:@"Palatino" size:16.0];
     palatino.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
     palatino.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
-    [palatino setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+    if ([_currentUser.fontType isEqualToString:@"Palatino"]) {
+        [palatino setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _selectedTypeButton = palatino;
+    } else {
+        [palatino setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+    }
     [typeSelectionView addSubview:palatino];
     
     [self.view addSubview:typeSelectionView];
@@ -99,8 +128,12 @@
     contrastSelectionBar.tintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this is taken as the selected image tint color.
     contrastSelectionBar.selectedImageTintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this value is ignored.
     [contrastSelectionBar setItems:[NSArray arrayWithObjects:light, dark, nil]];
-    contrastSelectionBar.selectedItem = light;
     contrastSelectionBar.delegate = self;
+    if ([_currentUser.contrast boolValue]) {
+        contrastSelectionBar.selectedItem = light;
+    } else {
+        contrastSelectionBar.selectedItem = dark;
+    }
     
     // Top border for the UITabBar.
     CALayer *topBorder = [CALayer layer];
@@ -124,17 +157,17 @@
         switch (item.tag) {
             case 0:
             {
-                NSLog(@"large type size");
+                _currentUser.fontSize = [NSNumber numberWithFloat:kFontSizeLarge];
                 break;
             }
             case 1:
             {
-                NSLog(@"medium type size");
+                _currentUser.fontSize = [NSNumber numberWithFloat:kFontSizeMedium];
                 break;
             }
             case 2:
             {
-                NSLog(@"small type size");
+                _currentUser.fontSize = [NSNumber numberWithFloat:kFontSizeSmall];
                 break;
             }
         }
@@ -142,12 +175,12 @@
         switch (item.tag) {
             case 0:
             {
-                NSLog(@"light contrast selected");
+                _currentUser.contrast = [NSNumber numberWithBool:YES];
                 break;
             }
             case 1:
             {
-                NSLog(@"dark contrast selected");
+                _currentUser.contrast = [NSNumber numberWithBool:NO];
                 break;
             }
         }
@@ -160,17 +193,17 @@
     switch (button.tag) {
         case 0:
         {
-            NSLog(@"georgia selected");
+            _currentUser.fontType = @"Georgia";
             break;
         }
         case 1:
         {
-            NSLog(@"marion selected");
+            _currentUser.fontType = @"Marion";
             break;
         }
         case 2:
         {
-            NSLog(@"palatino selected");
+            _currentUser.fontType = @"Palatino";
             break;
         }
     }
