@@ -25,7 +25,6 @@
     self = [super init];
     if (self) {
         // Load requested entity
-        self.navigationItem.title = @"Entity";
         self.viewTitle = entity.name;
         _entity = entity;
     }

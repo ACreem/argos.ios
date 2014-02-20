@@ -19,7 +19,8 @@
     <entity name="Event" representedClassName="Event" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eventId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
-        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="image" optional="YES" attributeType="Transformable" storedInTruthFile="YES" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -31,6 +32,7 @@
     <entity name="Story" representedClassName="Story" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="storyId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>

@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "SWTableViewCell.h"
 
-@interface EventListViewController : UITableViewController <SWTableViewCellDelegate, NSFetchedResultsControllerDelegate>
+@interface EventListViewController : UITableViewController <SWTableViewCellDelegate, NSFetchedResultsControllerDelegate, UIScrollViewDelegate>
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;

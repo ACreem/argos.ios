@@ -25,5 +25,6 @@
 
 
 - (void)viewEntity:(NSString*)entityId;
+- (void)setHeaderImage:(UIImage*)image;
 
 @end

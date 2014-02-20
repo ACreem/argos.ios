@@ -11,7 +11,6 @@
 #import "AREmbeddedTableView.h"
 #import "ARShareViewController.h"
 #import "ARFontViewController.h"
-#import "GPUImage.h"
 #import <QuartzCore/QuartzCore.h>
 #import "Entity.h"
 #import "EntityDetailViewController.h"
@@ -60,7 +59,7 @@
     self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, favoriteButton, item, fontButton, item, watchButton, item, nil];
     
     
-    float headerImageHeight = 220.0;
+    float headerImageHeight = 200.0;
     _bounds = [[UIScreen mainScreen] bounds];
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -73,16 +72,13 @@
     _headerView = [[UIView alloc] initWithFrame:CGRectMake(_bounds.origin.x, _bounds.origin.y, _bounds.size.width, headerImageHeight)];
     
     // Header image
-    UIImage* headerImage = [UIImage imageNamed:@"sample"];
+    UIImage* headerImage = [UIImage imageNamed:@"placeholder"];
     _headerImageView = [[UIImageView alloc] initWithImage:headerImage];
     _headerImageView.frame = CGRectMake(_bounds.origin.x, _bounds.origin.y, _bounds.size.width, headerImageHeight);
     [_headerView addSubview:_headerImageView];
     
     // Header image blur
-    GPUImageGaussianBlurFilter* filter =[[GPUImageGaussianBlurFilter alloc] init];
-    filter.blurRadiusAsFractionOfImageHeight = 0.7;
-    filter.blurRadiusAsFractionOfImageWidth = 0.7;
-    UIImage* blurred = [filter imageByFilteringImage:headerImage];
+    UIImage* blurred = [headerImage gaussianBlurWithBias:0];
     _headerImageViewBlurred = [[UIImageView alloc] initWithImage:blurred];
     _headerImageViewBlurred.frame = _headerImageView.frame;
     _headerImageViewBlurred.alpha = 0.0;
@@ -137,6 +133,16 @@
     titleFrame.origin.y = self.headerView.bounds.size.height - titleFrame.size.height;
     _titleLabel.frame = titleFrame;
     [self.view addSubview:_titleLabel];
+}
+
+- (void)setHeaderImage:(UIImage*)image
+{
+    UIImage *croppedImage = [image scaleToFitSize:CGSizeMake(640, 400)];
+    croppedImage = [image cropToSize:CGSizeMake(640, 400) usingMode:NYXCropModeCenter];
+    [_headerImageView setImage:croppedImage];
+    
+    UIImage* blurred = [croppedImage gaussianBlurWithBias:0];
+    [_headerImageViewBlurred setImage:blurred];
 }
 
 

@@ -36,6 +36,7 @@ static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000
                                       @"id":             @"eventId",
                                       @"url":            @"jsonUrl",
                                       @"title":          @"title",
+                                      @"image":          @"imageUrl",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
                                       @"created_at":     @"createdAt"};
@@ -43,6 +44,7 @@ static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000
                                       @"id":             @"storyId",
                                       @"url":            @"jsonUrl",
                                       @"title":          @"title",
+                                      @"image":          @"imageUrl",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
                                       @"created_at":     @"createdAt"};

@@ -47,6 +47,24 @@
     
     _bounds = [[UIScreen mainScreen] bounds];
     
+    // Set the header image,
+    // downloading if necessary.
+    if (_event.image) {
+        [self setHeaderImage:_event.image];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            NSURL* imageUrl = [NSURL URLWithString:_event.imageUrl];
+            NSError* error = nil;
+            NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage* image = [UIImage imageWithData:imageData];
+                _event.image = image;
+                [self setHeaderImage:_event.image];
+            });
+        });
+    }
+    
     // Summary view
     CGPoint summaryOrigin = CGPointMake(0, self.headerView.bounds.size.height);
     self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_event.summary updatedAt:_event.updatedAt];

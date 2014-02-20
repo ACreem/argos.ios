@@ -26,7 +26,6 @@
     self = [super init];
     if (self) {
         // Load requested story
-        self.navigationItem.title = @"Story";
         self.viewTitle = story.title;
         _story = story;
     }
@@ -38,6 +37,24 @@
     [super viewDidLoad];
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
+    
+    // Set the header image,
+    // downloading if necessary.
+    if (_story.image) {
+        [self setHeaderImage:_story.image];
+    } else {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            NSURL* imageUrl = [NSURL URLWithString:_story.imageUrl];
+            NSError* error = nil;
+            NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                UIImage* image = [UIImage imageWithData:imageData];
+                _story.image = image;
+                [self setHeaderImage:_story.image];
+            });
+        });
+    }
     
     self.totalItems = _story.events.count + _story.entities.count;
     

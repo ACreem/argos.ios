@@ -65,6 +65,41 @@
     }];
 }
 
+- (void)downloadImageForEvent:(Event*)event forIndexPath:(NSIndexPath*)indexPath
+{
+    NSURL* imageUrl = [NSURL URLWithString:event.imageUrl];
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+        NSError* error = nil;
+        NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage* image = [UIImage imageWithData:imageData];
+            event.image = image;
+            
+            // Crop the image
+            // Need to double cell height for retina.
+            UIImage *croppedImage = [image scaleToCoverSize:CGSizeMake(120, 120)];
+            croppedImage = [image cropToSize:CGSizeMake(120, 120) usingMode:NYXCropModeCenter];
+            
+            // Update the UI
+            UITableViewCell* tableCell =[self.tableView cellForRowAtIndexPath:indexPath];
+            tableCell.imageView.image = croppedImage;
+        });
+    });
+}
+
+- (void)loadImagesForOnscreenRows
+{
+    NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
+    for (NSIndexPath *indexPath in visiblePaths) {
+        Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        if (!event.image) {
+            [self downloadImageForEvent:event forIndexPath:indexPath];
+        }
+    }
+}
+
 #pragma mark - UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -106,10 +141,28 @@
         [cell setCellHeight:[self rowHeightForIndexPath:indexPath]];
     }
     
-    // Configure the cell...
+    
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    // If there's no cached image for this event,
+    // consider loading it.
+    if (!event.image) {
+        // Only start loading images when scrolling stops.
+        if (self.tableView.dragging == NO && self.tableView.decelerating == NO) {
+            [self downloadImageForEvent:event forIndexPath:indexPath];
+            
+        // Otherwise use the placeholder image.
+        } else {
+            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+        }
+        
+    // If there is a cached image, use it.
+    } else {
+        cell.imageView.image = event.image;
+    }
+    
+    // Configure the cell...
     cell.textLabel.text = event.title;
-    cell.imageView.image = [UIImage imageNamed:@"sample"];
     cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
     
     return cell;
@@ -275,6 +328,20 @@
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = event.title;
     cell.imageView.image = [UIImage imageNamed:@"sample"];
+}
+
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate)
+    {
+        [self loadImagesForOnscreenRows];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [self loadImagesForOnscreenRows];
 }
 
 
