@@ -12,7 +12,11 @@
 #import "Story.h"
 #import "Entity.h"
 
-static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
+#ifdef DEBUG
+    static NSString * const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
+#else
+    static NSString * const kArgosAPIBaseURLString = @"http://api.argos.com/";
+#endif
 
 @implementation ARObjectManager
 
