@@ -21,6 +21,11 @@
     // Setup RestKit.
     NSManagedObjectContext* moc = [self setupRestKit];
     
+    // Load settings.
+    NSString *defaultPrefsFile = [[NSBundle mainBundle] pathForResource:@"defaultPrefs" ofType:@"plist"];
+    NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfFile:defaultPrefsFile];
+    [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     
     LoginViewController *lvc = [[LoginViewController alloc] init];

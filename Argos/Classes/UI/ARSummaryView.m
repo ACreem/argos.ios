@@ -8,11 +8,8 @@
 
 #import "ARSummaryView.h"
 #import "Entity.h"
-#import "CurrentUser.h"
 
 @interface ARSummaryView () {
-    CurrentUser *_currentUser;
-    
     // Keep track of the summary html,
     // which includes the processed summary text but
     // does NOT include filled in styling values.
@@ -31,12 +28,9 @@
     CGRect frame = CGRectMake(origin.x, origin.y, bounds.size.width, 400.0);
     self = [super initWithFrame:frame];
     if (self) {
-        
-        // Get current user and observe the necessary properties.
-        _currentUser = [[ARObjectManager sharedManager] currentUser];
-        [_currentUser addObserver:self forKeyPath:@"fontSize" options:NSKeyValueObservingOptionNew context:nil];
-        [_currentUser addObserver:self forKeyPath:@"fontType" options:NSKeyValueObservingOptionNew context:nil];
-        [_currentUser addObserver:self forKeyPath:@"contrast" options:NSKeyValueObservingOptionNew context:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(defaultsDidChange:) name:NSUserDefaultsDidChangeNotification
+                                                   object:nil];
         
         // Header view with metadata.
         UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 30.0 + paddingY)];
@@ -70,21 +64,20 @@
     return self;
 }
 
-# pragma mark - KVO
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+
+- (void)defaultsDidChange:(NSNotification *)notification
 {
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    
     // Re-style the summary html.
-    NSString* summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:_currentUser.fontSize fontType:_currentUser.fontType contrast:[_currentUser.contrast boolValue]];
+    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:[prefs floatForKey:@"fontSize"] fontType:[prefs stringForKey:@"fontType"] contrast:[prefs boolForKey:@"contrast"]];
     [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
-
-- (void)dealloc
-{
-    [_currentUser removeObserver:self forKeyPath:@"fontSize"];
-    [_currentUser removeObserver:self forKeyPath:@"fontType"];
-    [_currentUser removeObserver:self forKeyPath:@"contrast"];
-}
-
 
 # pragma mark - HTML/Text setting
 - (void)setText:(NSString*)summaryText withEntities:(NSSet*)entities
@@ -95,27 +88,28 @@
     // For instance, "UN Convention" might become "<a href='#'><a href='#'>UN</a> Convention</a>".
     // Instead, " UN Convention" as a whole is captured: "<a href='#'>UN Convention</a>",
     // and then " UN" can't be captured since it has no space on the left anymore.
-    NSArray* sortedEntities = [[entities allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+    NSArray *sortedEntities = [[entities allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
         NSNumber *first = [NSNumber numberWithInt:[[(Entity*)obj1 name] length]];
         NSNumber *second = [NSNumber numberWithInt:[[(Entity*)obj2 name] length]];
         return [first compare:second];
     }];
     
     
-    for (Entity* entity in sortedEntities) {
+    for (Entity *entity in sortedEntities) {
         summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
     }
     
     NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
-    NSString* htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    NSString *htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
     _summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
     
-    NSString* summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:_currentUser.fontSize fontType:_currentUser.fontType contrast:[_currentUser.contrast boolValue]];
+    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:[prefs floatForKey:@"fontSize"] fontType:[prefs stringForKey:@"fontType"] contrast:[prefs boolForKey:@"contrast"]];
     [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
 
 
-- (NSString*)styleSummaryHtml:(NSString*)html fontSize:(NSNumber*)size fontType:(NSString*)type contrast:(BOOL)light
+- (NSString*)styleSummaryHtml:(NSString*)html fontSize:(float)size fontType:(NSString*)type contrast:(BOOL)light
 {
     if (light) {
         html = [html stringByReplacingOccurrencesOfString:@"{{color}}" withString:@"#000"];
@@ -125,7 +119,7 @@
         self.backgroundColor = [UIColor darkColor];
     }
     
-    html = [html stringByReplacingOccurrencesOfString:@"{{size}}" withString:[NSString stringWithFormat:@"%fem", [size floatValue]]];
+    html = [html stringByReplacingOccurrencesOfString:@"{{size}}" withString:[NSString stringWithFormat:@"%fem", size]];
     html = [html stringByReplacingOccurrencesOfString:@"{{type}}" withString:type];
     
     return html;
