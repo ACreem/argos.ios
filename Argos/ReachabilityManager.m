@@ -48,7 +48,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        self.reachability = [Reachability reachabilityWithHostname:@"www.google.com"];
+        self.reachability = [Reachability reachabilityWithHostname:kArgosAPIBaseURLString];
         
         // Start monitoring
         [self.reachability startNotifier];

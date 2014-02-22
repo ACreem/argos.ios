@@ -19,4 +19,10 @@
     #import "ARObjectManager.h"
     #import "UIColor+ArgosColors.h"
     #import "NSDate+DateUtils.h"
+
+    #ifdef DEBUG
+        static NSString* const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
+    #else
+        static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com";
+    #endif
 #endif

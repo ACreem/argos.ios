@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-@interface LoginViewController : UIViewController <UITextFieldDelegate>
+@interface LoginViewController : UIViewController <UITextFieldDelegate, UIWebViewDelegate>
 
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 
