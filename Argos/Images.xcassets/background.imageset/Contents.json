@@ -3,12 +3,12 @@
     {
       "idiom" : "universal",
       "scale" : "1x",
-      "filename" : "argos_splash_iphone_r4_alt.png"
+      "filename" : "background.png"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "argos_splash_iphone_alt@2x.png"
+      "filename" : "background@2x.png"
     }
   ],
   "info" : {

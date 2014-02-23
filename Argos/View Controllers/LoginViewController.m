@@ -83,10 +83,10 @@
     
     UIView *loginView = [[UIView alloc] initWithFrame:screenRect];
     
-    // Use same background image as launch, but different background color.
-    UIImageView *background = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launch"]];
-    background.frame = screenRect;
-    [loginView addSubview:background];
+    // Use same background image as launch, but with a transparent background.
+    UIImageView *logo = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"launch"]];
+    logo.frame = screenRect;
+    [loginView addSubview:logo];
 
     
     // Create buttons
