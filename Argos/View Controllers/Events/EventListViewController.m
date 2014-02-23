@@ -8,7 +8,7 @@
 
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
-#import "AREventTableViewCell.h"
+#import "ARTableViewCell.h"
 #import "Event.h"
 
 @interface EventListViewController () {
@@ -118,28 +118,28 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    AREventTableViewCell *cell = (AREventTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    ARTableViewCell *cell = (ARTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    if (cell == nil) {
-        NSMutableArray *leftUtilityButtons = [NSMutableArray new];
-        NSMutableArray *rightUtilityButtons = [NSMutableArray new];
+    if (!cell) {
+        cell = [[ARTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         
-        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor primaryColor]
-                                                     icon:[UIImage imageNamed:@"favorite"]];
+        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
         
-        [rightUtilityButtons sw_addUtilityButtonWithColor:[UIColor primaryColor]
-                                                     icon:[UIImage imageNamed:@"watch"]];
-        
-        cell = [[AREventTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault
-                                        reuseIdentifier:CellIdentifier
-                                        containingTableView:tableView
-                                        leftUtilityButtons:leftUtilityButtons
-                                        rightUtilityButtons:rightUtilityButtons];
-        cell.delegate = self;
-        
-        // Adjust cell height
-        [cell setCellHeight:[self rowHeightForIndexPath:indexPath]];
+        // Setting the background color of the cell.
+        cell.contentView.backgroundColor = [UIColor whiteColor];
     }
+    
+    [cell setDefaultColor:[UIColor secondaryColor]];
+    
+    UIImageView *favoriteView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorite"]];
+    [cell setSwipeGestureWithView:favoriteView color:[UIColor secondaryColor] mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+        NSLog(@"favorited");
+    }];
+    
+    UIImageView *watchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"watch"]];
+    [cell setSwipeGestureWithView:watchView color:[UIColor secondaryColor] mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState3 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+        NSLog(@"watched");
+    }];
     
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
@@ -170,10 +170,6 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return [self rowHeightForIndexPath:indexPath];
-}
-
-- (CGFloat)rowHeightForIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
 
@@ -181,46 +177,6 @@
 {
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
-}
-
-#pragma mark - SWTableViewDelegate
-- (void)swipeableTableViewCell:(SWTableViewCell *)cell didTriggerRightUtilityButtonWithIndex:(NSInteger)index {
-    switch (index) {
-        case 0:
-        {
-            UIButton* button = [[cell rightUtilityButtons] objectAtIndex:index];
-            if (button.tag != 1) {
-                [button setImage:[UIImage imageNamed:@"favorited"] forState:UIControlStateNormal];
-                [button setTag:1];
-            } else {
-                [button setImage:[UIImage imageNamed:@"favorite"] forState:UIControlStateNormal];
-                [button setTag:0];
-            }
-            
-            //[cell hideUtilityButtonsAnimated:YES];
-            break;
-        }
-        case 1:
-        {
-            UIButton* button = [[cell rightUtilityButtons] objectAtIndex:index];
-            if (button.tag != 1) {
-                [button setImage:[UIImage imageNamed:@"watched"] forState:UIControlStateNormal];
-                [button setTag:1];
-            } else {
-                [button setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
-                [button setTag:0];
-            }
-            
-            //[cell hideUtilityButtonsAnimated:YES];
-            break;
-        }
-        case 2:
-        {
-            NSLog(@"share");
-        }
-        default:
-            break;
-    }
 }
 
 

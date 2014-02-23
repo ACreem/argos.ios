@@ -9,6 +9,7 @@
 #import "StoryDetailViewController.h"
 #import "EventDetailViewController.h"
 #import "AREmbeddedTableView.h"
+#import "ARTableViewCell.h"
 #import "Event.h"
 #import "Entity.h"
 
@@ -133,16 +134,13 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ARTableViewCell *cell = (ARTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
     
     cell.textLabel.text = event.title;
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.imageView.image = [UIImage imageNamed:@"sample"];
+    cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
     
     return cell;
 }

@@ -7,6 +7,7 @@
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="articles" inverseEntity="Event" syncable="YES"/>
+        <relationship name="source" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Source" inverseName="articles" inverseEntity="Source" syncable="YES"/>
     </entity>
     <entity name="CurrentUser" representedClassName="CurrentUser" syncable="YES"/>
     <entity name="Entity" representedClassName="Entity" syncable="YES">
@@ -30,6 +31,13 @@
         <relationship name="entities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Entity" inverseName="events" inverseEntity="Entity" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="events" inverseEntity="Story" syncable="YES"/>
     </entity>
+    <entity name="Source" representedClassName="Source" syncable="YES">
+        <attribute name="extUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sourceId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="source" inverseEntity="Article" syncable="YES"/>
+    </entity>
     <entity name="Story" representedClassName="Story" syncable="YES">
         <attribute name="createdAt" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -48,5 +56,6 @@
         <element name="Entity" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Story" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Source" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

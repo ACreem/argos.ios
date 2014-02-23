@@ -1,5 +1,5 @@
 pod 'Reachability'
-pod 'SWTableViewCell'
+pod 'MCSwipeTableViewCell'
 pod 'ViewDeck', '~> 2.2.11'
 pod 'RestKit'
 pod 'WYPopoverController'

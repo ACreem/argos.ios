@@ -9,19 +9,19 @@
 #import "EventDetailViewController.h"
 #import "StoryDetailViewController.h"
 #import "ArticleWebViewController.h"
-#import "ARSectionHeaderView.h"
 #import "AREmbeddedTableView.h"
+#import "ARTableViewCell.h"
 #import "ARTextButton.h"
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
+#import "Source.h"
 
 @interface EventDetailViewController () {
     Event *_event;
     CGRect _bounds;
     AREmbeddedTableView *_articleList;
     AREmbeddedTableView *_storyList;
-
 }
 
 @end
@@ -227,23 +227,26 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ARTableViewCell *cell = (ARTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     NSString* title;
+    NSDate* date;
+    NSString* meta = @"";
     if (tableView == _articleList) {
         Article *article = [[_event.articles allObjects] objectAtIndex:indexPath.row];
         title = article.title;
+        date = article.createdAt;
+        meta = article.source.name;
     } else {
         Story *story = [[_event.stories allObjects] objectAtIndex:indexPath.row];
         title = story.title;
+        date = story.updatedAt;
     }
     
     cell.textLabel.text = title;
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.imageView.image = [UIImage imageNamed:@"sample"];
+    cell.timeLabel.text = [NSDate dateDiff:date];
+    cell.metaLabel.text = meta;
     
     return cell;
 }
@@ -255,6 +258,15 @@
     } else {
         return _event.stories.count;
     }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [self rowHeightForIndexPath:indexPath];
+}
+
+- (CGFloat)rowHeightForIndexPath:(NSIndexPath *)indexPath {
+    return 60;
 }
 
 @end

@@ -2,14 +2,14 @@
 //  Article.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/19/14.
+//  Created by Francis Tseng on 2/22/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Event;
+@class Event, Source;
 
 @interface Article : NSManagedObject
 
@@ -19,5 +19,6 @@
 @property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) Event *event;
+@property (nonatomic, retain) Source *source;
 
 @end

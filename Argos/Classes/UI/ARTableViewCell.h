@@ -1,15 +1,15 @@
 //
-//  AREventTableViewCell.h
+//  ARTableViewCell.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
+#import "MCSwipeTableViewCell.h"
 
-#import "SWTableViewCell.h"
-
-@interface AREventTableViewCell : SWTableViewCell
+@interface ARTableViewCell : MCSwipeTableViewCell
 
 @property (strong, nonatomic) UILabel *timeLabel;
+@property (strong, nonatomic) UILabel *metaLabel;
 
 @end

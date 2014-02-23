@@ -11,7 +11,7 @@
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
-
+#import "Source.h"
 
 
 @interface ARObjectManager () {
@@ -27,8 +27,8 @@
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
-    //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Set up the object manager.
     ARObjectManager *objectManager = [ARObjectManager managerWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString]];
@@ -62,6 +62,11 @@
                                       @"url":            @"jsonUrl",
                                       @"name":           @"name",
                                       @"updated_at":     @"updatedAt"};
+    NSDictionary *sourceMappings  = @{
+                                      @"id":             @"sourceId",
+                                      @"url":            @"jsonUrl",
+                                      @"name":           @"name",
+                                      @"ext_url":        @"extUrl"};
     
     [objectManager setupEntityForName:@"Event"
                           pathPattern:@"/events"
@@ -83,8 +88,18 @@
                           pathPattern:@"/articles"
                                 class:[Article class]
                            identifier:@"articleId"
-                        relationships:nil
+                        relationships:@{
+                                        @"source": @{
+                                                     @"entity":   @"Source",
+                                                     @"mappings": sourceMappings}}
                              mappings:articleMappings];
+    
+    [objectManager setupEntityForName:@"Source"
+                          pathPattern:@"/sources"
+                                class:[Source class]
+                           identifier:@"sourceId"
+                        relationships:nil
+                             mappings:sourceMappings];
     
     [objectManager setupEntityForName:@"Story"
                           pathPattern:@"/stories"

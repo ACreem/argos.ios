@@ -9,6 +9,7 @@
 #import "EntityDetailViewController.h"
 #import "StoryDetailViewController.h"
 #import "AREmbeddedTableView.h"
+#import "ARTableViewCell.h"
 #import "Story.h"
 
 @interface EntityDetailViewController () {
@@ -106,16 +107,13 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
+    ARTableViewCell *cell = (ARTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
     
     // Configure the cell...
     Story *story = [[_entity.stories allObjects] objectAtIndex:indexPath.row];
     
     cell.textLabel.text = story.title;
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:14.0];
-    cell.textLabel.numberOfLines = 0;
-    cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    cell.imageView.image = [UIImage imageNamed:@"sample"];
+    cell.timeLabel.text = [NSDate dateDiff:story.updatedAt];
     
     return cell;
 }

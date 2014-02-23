@@ -7,6 +7,7 @@
 //
 
 #import "AREmbeddedTableView.h"
+#import "ARTableViewCell.h"
 
 @implementation AREmbeddedTableView
 
@@ -18,7 +19,7 @@
         _title = title;
         
         self.scrollEnabled = NO;
-        [self registerClass: [UITableViewCell class] forCellReuseIdentifier: @"Cell"];
+        [self registerClass: [ARTableViewCell class] forCellReuseIdentifier: @"Cell"];
         
         // Set cell separator to full width, if necessary.
         if ([self respondsToSelector:@selector(setSeparatorInset:)]) {
