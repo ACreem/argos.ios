@@ -40,7 +40,7 @@
         float textLabelHeight = 120;
         self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, screenRect.size.height - textLabelHeight - yPadding, screenRect.size.width - 2*xPadding, textLabelHeight)];
         self.textLabel.numberOfLines = 10;
-        self.textLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
+        self.textLabel.font = [UIFont fontWithName:@"Graphik-Regular" size:14.0];
         self.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.textLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.textLabel];

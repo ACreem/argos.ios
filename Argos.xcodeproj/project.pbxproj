@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
+		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
+		F1203A1818BD379400DCEB3A /* Graphik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */; };
+		F1203A1918BD379400DCEB3A /* Graphik-BoldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0718BD379400DCEB3A /* Graphik-BoldItalic.otf */; };
+		F1203A1A18BD379400DCEB3A /* Graphik-Extralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0818BD379400DCEB3A /* Graphik-Extralight.otf */; };
+		F1203A1B18BD379400DCEB3A /* Graphik-ExtralightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0918BD379400DCEB3A /* Graphik-ExtralightItalic.otf */; };
+		F1203A1C18BD379400DCEB3A /* Graphik-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0A18BD379400DCEB3A /* Graphik-Light.otf */; };
+		F1203A1D18BD379400DCEB3A /* Graphik-LightItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0B18BD379400DCEB3A /* Graphik-LightItalic.otf */; };
+		F1203A1E18BD379400DCEB3A /* Graphik-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0C18BD379400DCEB3A /* Graphik-Medium.otf */; };
+		F1203A1F18BD379400DCEB3A /* Graphik-MediumItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0D18BD379400DCEB3A /* Graphik-MediumItalic.otf */; };
+		F1203A2018BD379400DCEB3A /* Graphik-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0E18BD379400DCEB3A /* Graphik-Regular.otf */; };
+		F1203A2118BD379400DCEB3A /* Graphik-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0F18BD379400DCEB3A /* Graphik-RegularItalic.otf */; };
+		F1203A2218BD379400DCEB3A /* Graphik-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1018BD379400DCEB3A /* Graphik-Semibold.otf */; };
+		F1203A2318BD379400DCEB3A /* Graphik-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1118BD379400DCEB3A /* Graphik-SemiboldItalic.otf */; };
+		F1203A2418BD379400DCEB3A /* Graphik-Super.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1218BD379400DCEB3A /* Graphik-Super.otf */; };
+		F1203A2518BD379400DCEB3A /* Graphik-SuperItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */; };
+		F1203A2618BD379400DCEB3A /* Graphik-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */; };
+		F1203A2718BD379400DCEB3A /* Graphik-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */; };
 		F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
@@ -78,6 +96,24 @@
 /* Begin PBXFileReference section */
 		4C8E5860754E44B8B98A352E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F1203A0418BD379400DCEB3A /* Graphik-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Black.otf"; sourceTree = "<group>"; };
+		F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BlackItalic.otf"; sourceTree = "<group>"; };
+		F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Bold.otf"; sourceTree = "<group>"; };
+		F1203A0718BD379400DCEB3A /* Graphik-BoldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BoldItalic.otf"; sourceTree = "<group>"; };
+		F1203A0818BD379400DCEB3A /* Graphik-Extralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Extralight.otf"; sourceTree = "<group>"; };
+		F1203A0918BD379400DCEB3A /* Graphik-ExtralightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ExtralightItalic.otf"; sourceTree = "<group>"; };
+		F1203A0A18BD379400DCEB3A /* Graphik-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Light.otf"; sourceTree = "<group>"; };
+		F1203A0B18BD379400DCEB3A /* Graphik-LightItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-LightItalic.otf"; sourceTree = "<group>"; };
+		F1203A0C18BD379400DCEB3A /* Graphik-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Medium.otf"; sourceTree = "<group>"; };
+		F1203A0D18BD379400DCEB3A /* Graphik-MediumItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-MediumItalic.otf"; sourceTree = "<group>"; };
+		F1203A0E18BD379400DCEB3A /* Graphik-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Regular.otf"; sourceTree = "<group>"; };
+		F1203A0F18BD379400DCEB3A /* Graphik-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-RegularItalic.otf"; sourceTree = "<group>"; };
+		F1203A1018BD379400DCEB3A /* Graphik-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Semibold.otf"; sourceTree = "<group>"; };
+		F1203A1118BD379400DCEB3A /* Graphik-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SemiboldItalic.otf"; sourceTree = "<group>"; };
+		F1203A1218BD379400DCEB3A /* Graphik-Super.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Super.otf"; sourceTree = "<group>"; };
+		F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SuperItalic.otf"; sourceTree = "<group>"; };
+		F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Thin.otf"; sourceTree = "<group>"; };
+		F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ThinItalic.otf"; sourceTree = "<group>"; };
 		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -195,6 +231,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F1203A0318BD379400DCEB3A /* graphik */ = {
+			isa = PBXGroup;
+			children = (
+				F1203A0418BD379400DCEB3A /* Graphik-Black.otf */,
+				F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */,
+				F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */,
+				F1203A0718BD379400DCEB3A /* Graphik-BoldItalic.otf */,
+				F1203A0818BD379400DCEB3A /* Graphik-Extralight.otf */,
+				F1203A0918BD379400DCEB3A /* Graphik-ExtralightItalic.otf */,
+				F1203A0A18BD379400DCEB3A /* Graphik-Light.otf */,
+				F1203A0B18BD379400DCEB3A /* Graphik-LightItalic.otf */,
+				F1203A0C18BD379400DCEB3A /* Graphik-Medium.otf */,
+				F1203A0D18BD379400DCEB3A /* Graphik-MediumItalic.otf */,
+				F1203A0E18BD379400DCEB3A /* Graphik-Regular.otf */,
+				F1203A0F18BD379400DCEB3A /* Graphik-RegularItalic.otf */,
+				F1203A1018BD379400DCEB3A /* Graphik-Semibold.otf */,
+				F1203A1118BD379400DCEB3A /* Graphik-SemiboldItalic.otf */,
+				F1203A1218BD379400DCEB3A /* Graphik-Super.otf */,
+				F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */,
+				F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */,
+				F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */,
+			);
+			path = graphik;
+			sourceTree = "<group>";
+		};
 		F1405C1718973C4C00A4819D = {
 			isa = PBXGroup;
 			children = (
@@ -413,6 +474,7 @@
 		F1C6D6D918B2E29500129552 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				F1203A0318BD379400DCEB3A /* graphik */,
 				F1C6D6DA18B2E29500129552 /* klinic */,
 			);
 			path = Fonts;
@@ -533,18 +595,36 @@
 			buildActionMask = 2147483647;
 			files = (
 				F1405C2E18973C4C00A4819D /* InfoPlist.strings in Resources */,
+				F1203A2118BD379400DCEB3A /* Graphik-RegularItalic.otf in Resources */,
 				F143295C18B30A7B00A76D97 /* SummaryTemplate.html in Resources */,
+				F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */,
 				F1C6D6EB18B2E29500129552 /* KlinicSlabMediumIt.otf in Resources */,
+				F1203A1918BD379400DCEB3A /* Graphik-BoldItalic.otf in Resources */,
 				F1C6D6E518B2E29500129552 /* KlinicSlabBoldIt.otf in Resources */,
 				F1C6D6EA18B2E29500129552 /* KlinicSlabMedium.otf in Resources */,
+				F1203A2018BD379400DCEB3A /* Graphik-Regular.otf in Resources */,
 				F1C6D6EC18B2E29500129552 /* Personal Use License.txt in Resources */,
 				F1C6D6E618B2E29500129552 /* KlinicSlabBook.otf in Resources */,
+				F1203A1E18BD379400DCEB3A /* Graphik-Medium.otf in Resources */,
 				F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */,
+				F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */,
 				F1405C3618973C4C00A4819D /* Images.xcassets in Resources */,
+				F1203A1818BD379400DCEB3A /* Graphik-Bold.otf in Resources */,
+				F1203A1F18BD379400DCEB3A /* Graphik-MediumItalic.otf in Resources */,
+				F1203A2618BD379400DCEB3A /* Graphik-Thin.otf in Resources */,
 				F1C6D6E918B2E29500129552 /* KlinicSlabLightIt.otf in Resources */,
+				F1203A2418BD379400DCEB3A /* Graphik-Super.otf in Resources */,
+				F1203A1A18BD379400DCEB3A /* Graphik-Extralight.otf in Resources */,
+				F1203A1D18BD379400DCEB3A /* Graphik-LightItalic.otf in Resources */,
 				F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */,
+				F1203A2718BD379400DCEB3A /* Graphik-ThinItalic.otf in Resources */,
+				F1203A2318BD379400DCEB3A /* Graphik-SemiboldItalic.otf in Resources */,
+				F1203A2218BD379400DCEB3A /* Graphik-Semibold.otf in Resources */,
+				F1203A1B18BD379400DCEB3A /* Graphik-ExtralightItalic.otf in Resources */,
 				F1C6D6E818B2E29500129552 /* KlinicSlabLight.otf in Resources */,
+				F1203A2518BD379400DCEB3A /* Graphik-SuperItalic.otf in Resources */,
 				F1C6D6E718B2E29500129552 /* KlinicSlabBookIt.otf in Resources */,
+				F1203A1C18BD379400DCEB3A /* Graphik-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

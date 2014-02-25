@@ -15,7 +15,7 @@ float const kFontSizeSmall = 0.75;
 NSString* const kFontSizeKey = @"fontSize";
 NSString* const kFontTypeKey = @"fontType";
 NSString* const kContrastKey = @"contrast";
-NSString* const kGeorgiaType = @"Georgia";
+NSString* const kGraphikType = @"Graphik-Regular";
 NSString* const kMarionType = @"Marion";
 NSString* const kPalatinoType = @"Palatino";
 
@@ -79,22 +79,22 @@ NSString* const kPalatinoType = @"Palatino";
     
     NSString* fontType = [prefs stringForKey:kFontTypeKey];
     
-    UIButton* georgia = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, 40)];
-    georgia.tag = 0;
-    [georgia addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
-    [georgia setTitle:kGeorgiaType forState:UIControlStateNormal];
-    georgia.titleLabel.font = [UIFont fontWithName:kGeorgiaType size:16.0];
-    georgia.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    georgia.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
-    if ([fontType isEqualToString:kGeorgiaType]) {
-        [georgia setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _selectedTypeButton = georgia;
+    UIButton* graphik = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, width, 40)];
+    graphik.tag = 0;
+    [graphik addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
+    [graphik setTitle:kGraphikType forState:UIControlStateNormal];
+    graphik.titleLabel.font = [UIFont fontWithName:kGraphikType size:16.0];
+    graphik.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    graphik.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
+    if ([fontType isEqualToString:kGraphikType]) {
+        [graphik setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        _selectedTypeButton = graphik;
     } else {
-        [georgia setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+        [graphik setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
     }
-    [typeSelectionView addSubview:georgia];
+    [typeSelectionView addSubview:graphik];
     
-    UIButton* marion = [[UIButton alloc] initWithFrame:CGRectMake(0, georgia.frame.origin.y + georgia.frame.size.height, width, 40)];
+    UIButton* marion = [[UIButton alloc] initWithFrame:CGRectMake(0, graphik.frame.origin.y + graphik.frame.size.height, width, 40)];
     marion.tag = 1;
     [marion addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
     [marion setTitle:kMarionType forState:UIControlStateNormal];
@@ -203,7 +203,7 @@ NSString* const kPalatinoType = @"Palatino";
     switch (button.tag) {
         case 0:
         {
-            [prefs setObject:kGeorgiaType forKey:kFontTypeKey];
+            [prefs setObject:kGraphikType forKey:kFontTypeKey];
             break;
         }
         case 1:
