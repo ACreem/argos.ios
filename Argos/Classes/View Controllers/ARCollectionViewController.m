@@ -187,19 +187,18 @@
         NSError* error = nil;
         NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
         
+        ARCollectionViewCell* cell = (ARCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+        
+        UIImage* image = [UIImage imageWithData:imageData];
+        entity.image = image;
+        
+        // Crop the image
+        // Need to double cell height for retina.
+        CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+        UIImage *croppedImage = [image scaleToCoverSize:dimensions];
+        croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
-            ARCollectionViewCell* cell = (ARCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-            
-            UIImage* image = [UIImage imageWithData:imageData];
-            entity.image = image;
-            
-            // Crop the image
-            // Need to double cell height for retina.
-            // This isn't working, not sure why.
-            CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
-            UIImage *croppedImage = [image scaleToCoverSize:dimensions];
-            croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-            
             // Update the UI
             cell.imageView.image = croppedImage;
         });
@@ -221,12 +220,23 @@
                 cell.imageView.image = [UIImage imageNamed:@"placeholder"];
             }
             
-            // If there is a cached image, use it.
+        // If there is a cached image, use it.
         } else {
-            CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
-            UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
-            croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-            cell.imageView.image = croppedImage;
+            // This is temporary, but something to display while the image is being cropped.
+            // Ideally, we would save a version of each cropped image and check if that exists and reuse that
+            // instead of re-cropping it each time.
+            // Currently, I believe this is the cause for image flickering; it is being called
+            // initially when the cell is created and also when the loading finishes and the collection view is reloaded.
+            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+            
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+                UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
+                croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    cell.imageView.image = croppedImage;
+                });
+            });
         }
     }
 }

@@ -298,10 +298,10 @@
 		F157FEC218BC45C400EFFC2E /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F157FEB718BC095700EFFC2E /* AREmbeddedCollectionViewController.h */,
-				F157FEB818BC095700EFFC2E /* AREmbeddedCollectionViewController.m */,
 				F157FEAE18BBF25E00EFFC2E /* ARCollectionViewController.h */,
 				F157FEAF18BBF25E00EFFC2E /* ARCollectionViewController.m */,
+				F157FEB718BC095700EFFC2E /* AREmbeddedCollectionViewController.h */,
+				F157FEB818BC095700EFFC2E /* AREmbeddedCollectionViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
