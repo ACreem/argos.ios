@@ -39,6 +39,9 @@
     self.metaLabel.textAlignment = NSTextAlignmentLeft;
     [self addSubview:self.metaLabel];
     
+    self.iconsView = [[UIView alloc] init];
+    [self addSubview:self.iconsView];
+    
     self.imageView.image = [UIImage imageNamed:@"placeholder"];
 }
 
@@ -57,6 +60,10 @@
                                       self.textLabel.frame.size.width,
                                       20);
     self.metaLabel.frame = CGRectMake(self.textLabel.frame.origin.x,
+                                      self.textLabel.frame.size.height - 4,
+                                      self.textLabel.frame.size.width,
+                                      20);
+    self.iconsView.frame = CGRectMake(self.textLabel.frame.origin.x,
                                       self.textLabel.frame.size.height - 4,
                                       self.textLabel.frame.size.width,
                                       20);

@@ -27,8 +27,8 @@
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
-    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Set up the object manager.
     ARObjectManager *objectManager = [ARObjectManager managerWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString]];

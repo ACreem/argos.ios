@@ -8,7 +8,7 @@
 
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
-#import "ARTableViewCell.h"
+#import "ARFullCollectionViewCell.h"
 #import "Event.h"
 
 @interface EventListViewController () {
@@ -21,7 +21,18 @@
 
 - (id)initWithTitle:(NSString*)title endpoint:(NSString*)endpoint
 {
-    self = [super init];
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setMinimumInteritemSpacing:0.0f];
+    [flowLayout setMinimumLineSpacing:0.0f];
+    [flowLayout setSectionInset:UIEdgeInsetsZero];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    //[flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];  // for horizontal scroll
+    
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    screenRect.size.height -= (44 + 20); // navigation bar height + status bar height
+    [flowLayout setItemSize:screenRect.size];
+    
+    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event"];
     if (self) {
         self.navigationItem.title = title;
         _endpoint = endpoint;
@@ -32,23 +43,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
-    // Hack to do back buttons w/o text.
-	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                             style:UIBarButtonItemStylePlain target:nil action:nil];
- 
-    [self.navigationController setNavigationBarHidden:NO animated:YES];
-    self.navigationItem.hidesBackButton = YES;
     
-    // Set cell separator to full width, if necessary.
-    if ([self.tableView respondsToSelector:@selector(setSeparatorInset:)]) {
-        [self.tableView setSeparatorInset:UIEdgeInsetsZero];
-    }
+    [self.collectionView registerClass:[ARFullCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    self.collectionView.backgroundColor = [UIColor primaryColor];
+    self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.pagingEnabled = YES;
+    self.collectionView.alwaysBounceVertical = YES; // necessary for pull-to-refresh
     
-    // Setup Pull-To-Refresh
-    UIRefreshControl *refreshControl = [UIRefreshControl new];
-    [refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
-    self.refreshControl = refreshControl;
+    self.refreshControl = [UIRefreshControl new];
+    [self.refreshControl addTarget:self action:@selector(loadData) forControlEvents:UIControlEventValueChanged];
+    [self.collectionView addSubview:self.refreshControl];
+    self.refreshControl.tintColor = [UIColor grayColor];
     
     [self loadData];
     [self.refreshControl beginRefreshing];
@@ -65,75 +71,35 @@
     }];
 }
 
-- (void)downloadImageForEvent:(Event*)event forIndexPath:(NSIndexPath*)indexPath
+# pragma mark - UIControllerViewDelegate
+
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSURL* imageUrl = [NSURL URLWithString:event.imageUrl];
+    ARFullCollectionViewCell *cell = (ARFullCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSError* error = nil;
-        NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIImage* image = [UIImage imageWithData:imageData];
-            event.image = image;
-            
-            // Crop the image
-            // Need to double cell height for retina.
-            UIImage *croppedImage = [image scaleToCoverSize:CGSizeMake(120, 120)];
-            croppedImage = [image cropToSize:CGSizeMake(120, 120) usingMode:NYXCropModeCenter];
-            
-            // Update the UI
-            UITableViewCell* tableCell =[self.tableView cellForRowAtIndexPath:indexPath];
-            tableCell.imageView.image = croppedImage;
-        });
-    });
+    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    
+    [self handleImageForEntity:(id)event forCell:cell atIndexPath:indexPath];
+    
+    cell.titleLabel.text = event.title;
+    cell.textLabel.text = event.summary;
+    cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
+    
+    return cell;
 }
 
-- (void)loadImagesForOnscreenRows
-{
-    NSArray *visiblePaths = [self.tableView indexPathsForVisibleRows];
-    for (NSIndexPath *indexPath in visiblePaths) {
-        Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        if (!event.image) {
-            [self downloadImageForEvent:event forIndexPath:indexPath];
-        }
-    }
-}
-
-#pragma mark - UITableViewDelegate
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return [[self.fetchedResultsController sections] count];
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    // Return the number of rows in the section.
-    id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
-    return [sectionInfo numberOfObjects];
-}
-
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
-    
-    ARTableViewCell *cell = (ARTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[ARTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        
-        [cell setSelectionStyle:UITableViewCellSelectionStyleGray];
-        
-        // Setting the background color of the cell.
-        cell.contentView.backgroundColor = [UIColor whiteColor];
-    }
-    
-    [cell setDefaultColor:[UIColor secondaryColor]];
+    ARTableViewCell *cell = (ARTableViewCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     
     UIImageView *favoriteView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorite"]];
     [cell setSwipeGestureWithView:favoriteView color:[UIColor secondaryColor] mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
         NSLog(@"favorited");
+        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorited_icon"]];
+        iconView.frame = CGRectMake(0,0,16,16);
+        ARTableViewCell* arcell = (ARTableViewCell*)cell;
+        [arcell.iconsView addSubview:iconView];
     }];
     
     UIImageView *watchView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"watch"]];
@@ -144,22 +110,7 @@
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    // If there's no cached image for this event,
-    // consider loading it.
-    if (!event.image) {
-        // Only start loading images when scrolling stops.
-        if (self.tableView.dragging == NO && self.tableView.decelerating == NO) {
-            [self downloadImageForEvent:event forIndexPath:indexPath];
-            
-        // Otherwise use the placeholder image.
-        } else {
-            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
-        }
-        
-    // If there is a cached image, use it.
-    } else {
-        cell.imageView.image = event.image;
-    }
+    [self handleImageForEntity:(id)event forCell:cell atIndexPath:indexPath];
     
     // Configure the cell...
     cell.textLabel.text = event.title;
@@ -167,139 +118,13 @@
     
     return cell;
 }
+ */
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return 60;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
 }
-
-
-#pragma mark - NSFetchedResultsControllerDelegate
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"createdAt" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-        // Replace this implementation with code to handle the error appropriately.
-        // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}
-
-/*
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
-- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView endUpdates];
-}
-*/
-
- // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed.
- 
- - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
- {
- // In the simplest, most efficient, case, reload the table view.
- [self.tableView reloadData];
- }
-
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    // Configure the cell...
-    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = event.title;
-    cell.imageView.image = [UIImage imageNamed:@"sample"];
-}
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (!decelerate)
-    {
-        [self loadImagesForOnscreenRows];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self loadImagesForOnscreenRows];
-}
-
 
 
 @end

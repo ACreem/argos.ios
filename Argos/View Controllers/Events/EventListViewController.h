@@ -6,12 +6,9 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "ARCollectionViewController.h"
 
-@interface EventListViewController : UITableViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>
-
-@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@interface EventListViewController : ARCollectionViewController
 
 - (id)initWithTitle:(NSString*)title endpoint:(NSString*)endpoint;
 

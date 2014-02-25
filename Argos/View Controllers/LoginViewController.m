@@ -144,7 +144,6 @@
         frame.origin.y -= 100;
         loginView.frame = frame;
     } completion:^(BOOL finished) {
-        NSLog(@"done");
     }];
 
     

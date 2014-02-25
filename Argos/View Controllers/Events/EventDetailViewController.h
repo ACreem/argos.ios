@@ -10,7 +10,7 @@
 #import "ARDetailViewController.h"
 #import "Event.h"
 
-@interface EventDetailViewController : ARDetailViewController
+@interface EventDetailViewController : ARDetailViewController <UIScrollViewDelegate>
 
 - (EventDetailViewController*)initWithEvent:(Event*)event;
 

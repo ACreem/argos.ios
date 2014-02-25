@@ -17,11 +17,15 @@
 #import "Entity.h"
 #import "Source.h"
 
+#import "EventListViewController.h"
+
 @interface EventDetailViewController () {
     Event *_event;
     CGRect _bounds;
     AREmbeddedTableView *_articleList;
     AREmbeddedTableView *_storyList;
+    
+    EventListViewController *testList;
 }
 
 @end
@@ -143,6 +147,17 @@
         articleListOrigin = CGPointMake(0, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
     }
     
+    /*
+    testList = [[EventListViewController alloc] initAsEmbeddedWithEntityNamed:@"Event" withTitle:@"Events"];
+    testList.tableView.frame = CGRectMake(0, articleListOrigin.y, _bounds.size.width, 200.0);
+    testList.managedObjectContext = _event.managedObjectContext;
+    [self addChildViewController:testList];
+    [self.scrollView addSubview:testList.view];
+    [testList didMoveToParentViewController:self];
+    [testList.tableView reloadData];
+    [testList.tableView sizeToFit];
+     */
+    
     _articleList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(0, articleListOrigin.y, _bounds.size.width, 200.0) title:@"Articles"];
     _articleList.delegate = self;
     _articleList.dataSource = self;
@@ -150,7 +165,6 @@
     [_articleList reloadData];
     [self.scrollView addSubview:_articleList];
     [_articleList sizeToFit];
-    
     [self fetchArticles];
 }
 
@@ -206,6 +220,21 @@
     // Called if there is one story.
     Story* story = [[_event.stories allObjects] firstObject];
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
+}
+
+# pragma mark - UIScrollViewDelegate
+#pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
+{
+    if (!decelerate)
+    {
+        [testList loadImagesForOnscreenRows];
+    }
+}
+
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    [testList loadImagesForOnscreenRows];
 }
 
 

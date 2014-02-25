@@ -11,5 +11,6 @@
 
 @property (strong, nonatomic) UILabel *timeLabel;
 @property (strong, nonatomic) UILabel *metaLabel;
+@property (strong, nonatomic) UIView  *iconsView;
 
 @end
