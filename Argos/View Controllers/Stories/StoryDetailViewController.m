@@ -8,14 +8,16 @@
 
 #import "StoryDetailViewController.h"
 #import "EventDetailViewController.h"
-#import "AREmbeddedTableView.h"
-#import "ARTableViewCell.h"
+
+#import "AREmbeddedCollectionViewController.h"
+#import "ARLargeCollectionViewCell.h"
+
 #import "Event.h"
 #import "Entity.h"
 
 @interface StoryDetailViewController () {
     Story *_story;
-    AREmbeddedTableView *_eventList;
+    AREmbeddedCollectionViewController *_eventList;
 }
 
 @end
@@ -37,27 +39,11 @@
 {
     [super viewDidLoad];
     
+    self.totalItems = _story.events.count + _story.entities.count;
+    
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    // Set the header image,
-    // downloading if necessary.
-    if (_story.image) {
-        [self setHeaderImage:_story.image];
-    } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSURL* imageUrl = [NSURL URLWithString:_story.imageUrl];
-            NSError* error = nil;
-            NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIImage* image = [UIImage imageWithData:imageData];
-                _story.image = image;
-                [self setHeaderImage:_story.image];
-            });
-        });
-    }
-    
-    self.totalItems = _story.events.count + _story.entities.count;
+    [self setHeaderImageForEntity:_story];
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
@@ -65,17 +51,19 @@
     self.summaryView.delegate = self;
     [self.scrollView addSubview:self.summaryView];
     
-    CGPoint eventListOrigin = CGPointMake(bounds.origin.x, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
-    _eventList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(bounds.origin.x, eventListOrigin.y, bounds.size.width, 200.0) title:@"Events"];
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setItemSize:CGSizeMake(bounds.size.width, 120)];
+    _eventList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", _story.events]];
+    _eventList.managedObjectContext = _story.managedObjectContext;
     _eventList.delegate = self;
-    _eventList.dataSource = self;
+    _eventList.title = @"Events";
     
-    [_eventList reloadData];
-    [self.scrollView addSubview:_eventList];
-    [_eventList sizeToFit];
+    [_eventList.collectionView registerClass:[ARLargeCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    
+    [self addChildViewController:_eventList];
+    [self.scrollView addSubview:_eventList.collectionView];
+    [_eventList didMoveToParentViewController:self];
     [self fetchEvents];
-    
-    [self.scrollView sizeToFit];
     
     [self fetchEntities];
 }
@@ -112,8 +100,8 @@
             [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
             if (fetched_event_count == [_story.events count]) {
-                [_eventList reloadData];
-                [_eventList sizeToFit];
+                [_eventList.collectionView reloadData];
+                [_eventList.collectionView sizeToFit];
                 [self.scrollView sizeToFit];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -122,32 +110,24 @@
     }
 }
 
-#pragma mark - UITableViewDelegate
-- (void)tableView:(AREmbeddedTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+# pragma mark - AREmbeddedCollectionViewControllerDelegate
+- (ARCollectionViewCell*)configureCell:(ARLargeCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
 {
-    Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
-}
-
-#pragma mark - UITableViewDataSource
-- (UITableViewCell *)tableView:(AREmbeddedTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    ARTableViewCell *cell = (ARTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
-    
-    cell.textLabel.text = event.title;
-    cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
-    
+    if (embeddedCollectionViewController == _eventList) {
+        Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
+        
+        [_eventList handleImageForEntity:(id)event forCell:cell atIndexPath:indexPath];
+        
+        cell.titleLabel.text = event.title;
+        cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
+    }
     return cell;
 }
 
-- (NSInteger)tableView:(AREmbeddedTableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return _story.events.count;
+    Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
+    [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
 }
 
 @end

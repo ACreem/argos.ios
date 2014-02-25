@@ -2,7 +2,7 @@
 //  Article.m
 //  Argos
 //
-//  Created by Francis Tseng on 2/22/14.
+//  Created by Francis Tseng on 2/25/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -18,6 +18,8 @@
 @dynamic extUrl;
 @dynamic jsonUrl;
 @dynamic title;
+@dynamic imageUrl;
+@dynamic image;
 @dynamic event;
 @dynamic source;
 

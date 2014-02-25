@@ -7,7 +7,6 @@
 //
 
 #import "ARScrollView.h"
-#import "ARSectionHeaderView.h"
 
 @interface ARScrollView () {
     float _yOffset;

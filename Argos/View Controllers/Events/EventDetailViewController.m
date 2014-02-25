@@ -9,8 +9,11 @@
 #import "EventDetailViewController.h"
 #import "StoryDetailViewController.h"
 #import "ArticleWebViewController.h"
-#import "AREmbeddedTableView.h"
-#import "ARTableViewCell.h"
+
+#import "AREmbeddedCollectionViewController.h"
+#import "ARSimpleCollectionViewCell.h"
+#import "ARLargeCollectionViewCell.h"
+
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
@@ -21,10 +24,8 @@
 @interface EventDetailViewController () {
     Event *_event;
     CGRect _bounds;
-    AREmbeddedTableView *_articleList;
-    AREmbeddedTableView *_storyList;
-    
-    EventListViewController *testList;
+    AREmbeddedCollectionViewController *_articleList;
+    AREmbeddedCollectionViewController *_storyList;
 }
 
 @end
@@ -50,23 +51,7 @@
     
     _bounds = [[UIScreen mainScreen] bounds];
     
-    // Set the header image,
-    // downloading if necessary.
-    if (_event.image) {
-        [self setHeaderImage:_event.image];
-    } else {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSURL* imageUrl = [NSURL URLWithString:_event.imageUrl];
-            NSError* error = nil;
-            NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIImage* image = [UIImage imageWithData:imageData];
-                _event.image = image;
-                [self setHeaderImage:_event.image];
-            });
-        });
-    }
+    [self setHeaderImageForEntity:_event];
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(0, self.headerView.bounds.size.height);
@@ -113,18 +98,45 @@
         
         // Otherwise show a list of stories.
     } else {
-        _storyList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(0, self.summaryView.frame.origin.y + self.summaryView.frame.size.height, _bounds.size.width, 200.0) title:@"Stories"];
+        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+        [flowLayout setItemSize:CGSizeMake(_bounds.size.width, 80)];
+        _storyList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", _event.stories]];
+        _storyList.managedObjectContext = _event.managedObjectContext;
         _storyList.delegate = self;
-        _storyList.dataSource = self;
+        _storyList.title = @"Stories";
         
-        [_storyList reloadData];
-        [self.scrollView addSubview:_storyList];
-        [_storyList sizeToFit];
+        [_storyList.collectionView registerClass:[ARLargeCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        
+        [self addChildViewController:_storyList];
+        [self.scrollView addSubview:_storyList.view];
+        [_storyList didMoveToParentViewController:self];
     }
     [self fetchStories];
     [self.summaryView sizeToFit];
 }
 
+
+
+- (void)setupArticles
+{
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setItemSize:CGSizeMake(_bounds.size.width, 80)];
+    _articleList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", _event.articles]];
+    _articleList.managedObjectContext = _event.managedObjectContext;
+    _articleList.delegate = self;
+    _articleList.title = @"In Greater Depth";
+    
+    [_articleList.collectionView registerClass:[ARSimpleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    
+    [self addChildViewController:_articleList];
+    [self.scrollView addSubview:_articleList.collectionView];
+    [_articleList didMoveToParentViewController:self];
+    
+    [self fetchArticles];
+}
+
+
+# pragma mark - Fetching Data
 - (void)fetchStories
 {
     // Fetch stories.
@@ -137,44 +149,14 @@
             [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
             if (fetched_story_count == [_event.stories count] && _storyList) {
-                [_storyList reloadData];
-                [_storyList sizeToFit];
+                [_storyList.collectionView reloadData];
+                [_storyList.collectionView sizeToFit];
                 [self.scrollView sizeToFit];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];
     }
-}
-
-- (void)setupArticles
-{
-    CGPoint articleListOrigin;
-    if (_storyList) {
-        articleListOrigin = CGPointMake(0, _storyList.frame.origin.y + _storyList.frame.size.height);
-    } else {
-        articleListOrigin = CGPointMake(0, self.summaryView.frame.origin.y + self.summaryView.frame.size.height);
-    }
-    
-    /*
-    testList = [[EventListViewController alloc] initAsEmbeddedWithEntityNamed:@"Event" withTitle:@"Events"];
-    testList.tableView.frame = CGRectMake(0, articleListOrigin.y, _bounds.size.width, 200.0);
-    testList.managedObjectContext = _event.managedObjectContext;
-    [self addChildViewController:testList];
-    [self.scrollView addSubview:testList.view];
-    [testList didMoveToParentViewController:self];
-    [testList.tableView reloadData];
-    [testList.tableView sizeToFit];
-     */
-    
-    _articleList = [[AREmbeddedTableView alloc] initWithFrame:CGRectMake(0, articleListOrigin.y, _bounds.size.width, 200.0) title:@"Articles"];
-    _articleList.delegate = self;
-    _articleList.dataSource = self;
-    
-    [_articleList reloadData];
-    [self.scrollView addSubview:_articleList];
-    [_articleList sizeToFit];
-    [self fetchArticles];
 }
 
 - (void)fetchArticles
@@ -192,8 +174,8 @@
             [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
             if (fetched_article_count == [_event.articles count]) {
-                [_articleList reloadData];
-                [_articleList sizeToFit];
+                [_articleList.collectionView reloadData];
+                [_articleList.collectionView sizeToFit];
                 [self.scrollView sizeToFit];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -223,7 +205,7 @@
 }
 
 
-#pragma mark - Actions
+# pragma mark - Actions
 - (void)viewStory:(id)sender
 {
     // Called if there is one story.
@@ -232,79 +214,36 @@
 }
 
 # pragma mark - UIScrollViewDelegate
-#pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (!decelerate)
     {
-        [testList loadImagesForOnscreenRows];
+        [_articleList loadImagesForOnscreenRows];
+        [_storyList loadImagesForOnscreenRows];
     }
 }
 
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+# pragma mark - AREmbeddedCollectionViewControllerDelegate
+- (ARCollectionViewCell*)configureCell:(ARSimpleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
 {
-    [testList loadImagesForOnscreenRows];
-}
-
-
-#pragma mark - UITableViewDelegate
-- (void)tableView:(AREmbeddedTableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Create web view for the Article.
-    if (tableView == _articleList) {
-        Article *article = [[_event.articles allObjects] objectAtIndex:indexPath.row];
-        ArticleWebViewController *webView = [[ArticleWebViewController alloc] initWithURL:article.extUrl];
-        [self.navigationController pushViewController:webView animated:YES];
-    } else {
+    if (embeddedCollectionViewController == _articleList) {
+        Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
         
+        cell.titleLabel.text = article.title;
+        cell.metaLabel.text = article.source.name;
+        cell.timeLabel.text = [NSDate dateDiff:article.createdAt];
     }
-}
-
-#pragma mark - UITableViewDataSource
-- (UITableViewCell *)tableView:(AREmbeddedTableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"Cell";
-    
-    ARTableViewCell *cell = (ARTableViewCell*)[tableView dequeueReusableCellWithIdentifier:CellIdentifier forIndexPath:indexPath];
-    
-    // Configure the cell...
-    NSString* title;
-    NSDate* date;
-    NSString* meta = @"";
-    if (tableView == _articleList) {
-        Article *article = [[_event.articles allObjects] objectAtIndex:indexPath.row];
-        title = article.title;
-        date = article.createdAt;
-        meta = article.source.name;
-    } else {
-        Story *story = [[_event.stories allObjects] objectAtIndex:indexPath.row];
-        title = story.title;
-        date = story.updatedAt;
-    }
-    
-    cell.textLabel.text = title;
-    cell.timeLabel.text = [NSDate dateDiff:date];
-    cell.metaLabel.text = meta;
-    
     return cell;
 }
 
-- (NSInteger)tableView:(AREmbeddedTableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView == _articleList) {
-        return _event.articles.count;
-    } else {
-        return _event.stories.count;
+    if (collectionView == _articleList.collectionView) {
+        Article *article = [[_event.articles allObjects] objectAtIndex:indexPath.row];
+        ArticleWebViewController *webView = [[ArticleWebViewController alloc] initWithURL:article.extUrl];
+        [self.navigationController pushViewController:webView animated:YES];
     }
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return [self rowHeightForIndexPath:indexPath];
-}
-
-- (CGFloat)rowHeightForIndexPath:(NSIndexPath *)indexPath {
-    return 60;
-}
 
 @end

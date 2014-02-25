@@ -9,7 +9,7 @@
 #import "ARDetailViewController.h"
 #import "Entity.h"
 
-@interface EntityDetailViewController : ARDetailViewController
+@interface EntityDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate>
 
 - (EntityDetailViewController*)initWithEntity:(Entity*)entity;
 

@@ -7,7 +7,18 @@
 //
 
 #import "ARCollectionViewController.h"
+#import "ARCollectionHeaderView.h"
 
 @interface AREmbeddedCollectionViewController : ARCollectionViewController
+
+@property (assign, nonatomic) id delegate;
+@property (strong, nonatomic) ARCollectionHeaderView* headerView;
+
+@end
+
+@protocol AREmbeddedCollectionViewControllerDelegate
+
+- (ARCollectionViewCell*)configureCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController*)embeddedCollectionViewController;
+- (void)collectionView:(AREmbeddedCollectionViewController *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @end

@@ -22,7 +22,6 @@
     self = [super init];
     if (self) {
         _url = url;
-        _url = @"https://www.google.com"; // temporary
     }
     return self;
 }

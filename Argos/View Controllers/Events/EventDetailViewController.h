@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import "ARDetailViewController.h"
+#import "AREmbeddedCollectionViewController.h"
 #import "Event.h"
 
-@interface EventDetailViewController : ARDetailViewController <UIScrollViewDelegate>
+@interface EventDetailViewController : ARDetailViewController <UIScrollViewDelegate, AREmbeddedCollectionViewControllerDelegate>
 
 - (EventDetailViewController*)initWithEvent:(Event*)event;
 

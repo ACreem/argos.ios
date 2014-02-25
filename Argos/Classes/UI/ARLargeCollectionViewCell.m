@@ -18,7 +18,7 @@
         
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         
-        float cellHeight = 180;
+        float cellHeight = frame.size.height;
         float xPadding = 10;
         float yPadding = 20;
         
@@ -34,21 +34,21 @@
         textGradient.frame = textGradientView.bounds;
         textGradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
         [textGradientView.layer insertSublayer:textGradient atIndex:0];
-        textGradientView.alpha = 0.7;
+        textGradientView.alpha = 0.8;
         [self addSubview:textGradientView];
         
-        float titleLabelHeight = 40;
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, cellHeight - titleLabelHeight - yPadding, screenRect.size.width - 2*xPadding, titleLabelHeight)];
-        self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20.0];
-        self.titleLabel.numberOfLines = 2;
-        self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
-        [self addSubview:self.titleLabel];
-        
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, self.titleLabel.frame.origin.y + titleLabelHeight, screenRect.size.width - 2*xPadding, 20)];
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, cellHeight - 10 - yPadding, screenRect.size.width - 2*xPadding, 20)];
         self.timeLabel.textColor = [UIColor mutedColor];
         self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
         [self addSubview:self.timeLabel];
+        
+        float titleLabelHeight = 40;
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, self.timeLabel.frame.origin.y - titleLabelHeight, screenRect.size.width - 2*xPadding, titleLabelHeight)];
+        self.titleLabel.textColor = [UIColor whiteColor];
+        self.titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:18.0];
+        self.titleLabel.numberOfLines = 2;
+        self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+        [self addSubview:self.titleLabel];
     }
     return self;
 }

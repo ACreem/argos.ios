@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ARCollectionHeaderView.h"
 
 @interface ARCollectionView : UICollectionView
+
+@property (strong, nonatomic) ARCollectionHeaderView* headerView;
 
 @end

@@ -20,6 +20,7 @@
 @interface ARCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName;
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)predicate;
 - (void)downloadImageForEntity:(id<Entity>)entity forIndexPath:(NSIndexPath*)indexPath;
 - (void)handleImageForEntity:(id<Entity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath;
 - (void)loadImagesForOnscreenRows;
@@ -29,5 +30,6 @@
 @property (strong, nonatomic) UIRefreshControl *refreshControl;
 @property (strong, nonatomic) ARCollectionView *collectionView;
 @property (strong, nonatomic) NSString *sortKey;
+@property (strong, nonatomic) NSPredicate *predicate;
 
 @end

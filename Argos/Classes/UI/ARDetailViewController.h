@@ -10,8 +10,9 @@
 #import "WYPopoverController.h"
 #import "ARSummaryView.h"
 #import "ARScrollView.h"
+#import "AREmbeddedCollectionViewController.h"
 
-@interface ARDetailViewController : UIViewController <UIScrollViewDelegate, UITableViewDelegate, UITableViewDataSource, ARSummaryViewDelegate, WYPopoverControllerDelegate>
+@interface ARDetailViewController : UIViewController <UIScrollViewDelegate, ARSummaryViewDelegate, WYPopoverControllerDelegate>
 
 @property (strong, nonatomic) ARScrollView *scrollView;
 @property (strong, nonatomic) ARSummaryView *summaryView;
@@ -26,5 +27,6 @@
 
 - (void)viewEntity:(NSString*)entityId;
 - (void)setHeaderImage:(UIImage*)image;
+- (void)setHeaderImageForEntity:(id<Entity>)entity;
 
 @end

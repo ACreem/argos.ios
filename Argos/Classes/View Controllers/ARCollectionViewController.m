@@ -16,13 +16,21 @@
 
 @implementation ARCollectionViewController
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName {
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)predicate
+{
     self = [super initWithCollectionViewLayout:collectionViewLayout];
     if (self) {
         _entityName = entityName;
         _sortKey = @"createdAt"; // default sort key
+        _predicate = predicate;
     }
     return self;
+}
+
+- (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName
+{
+    return [self initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)nil];
 }
 
 - (void)viewDidLoad
@@ -39,7 +47,7 @@
     self.collectionView = [[ARCollectionView alloc] initWithFrame:screenRect collectionViewLayout:self.collectionViewLayout];
 }
 
-# pragma mark - UICollectionViewDelegate
+# pragma mark - UICollectionViewDataSource
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Cell";
@@ -86,6 +94,10 @@
     
     [fetchRequest setSortDescriptors:sortDescriptors];
     
+    if (_predicate) {
+        [fetchRequest setPredicate:_predicate];
+    }
+    
     // Edit the section name key path and cache name if appropriate.
     // nil for section name key path means "no sections".
     NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
@@ -129,7 +141,7 @@
     NSArray *visiblePaths = [self.collectionView indexPathsForVisibleItems];
     for (NSIndexPath *indexPath in visiblePaths) {
         id<Entity> entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        if (!entity.image) {
+        if (!entity.image && entity.imageUrl) {
             [self downloadImageForEntity:entity forIndexPath:indexPath];
         }
     }
@@ -198,22 +210,24 @@
 {
     // If there's no cached image for this event,
     // consider loading it.
-    if (!entity.image) {
-        // Only start loading images when scrolling stops.
-        if (self.collectionView.dragging == NO && self.collectionView.decelerating == NO) {
-            [self downloadImageForEntity:entity forIndexPath:indexPath];
-            
+    if (entity.imageUrl) {
+        if (!entity.image) {
+            // Only start loading images when scrolling stops.
+            if (self.collectionView.dragging == NO && self.collectionView.decelerating == NO) {
+                [self downloadImageForEntity:entity forIndexPath:indexPath];
+                
             // Otherwise use the placeholder image.
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+            }
+            
+            // If there is a cached image, use it.
         } else {
-            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+            CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+            UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
+            croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+            cell.imageView.image = croppedImage;
         }
-        
-        // If there is a cached image, use it.
-    } else {
-        CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
-        UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
-        croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-        cell.imageView.image = croppedImage;
     }
 }
 

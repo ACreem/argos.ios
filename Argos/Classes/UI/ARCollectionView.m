@@ -15,11 +15,11 @@
     // if scroll is disabled,
     // assuming that this view is part of another UIScrollView
     // which handles scrolling.
-    if (!self.scrollEnabled) {
+    //if (!self.scrollEnabled) {
         CGRect viewFrame = self.frame;
         viewFrame.size.height = self.contentSize.height;
         self.frame = viewFrame;
-    }
+    //}
 }
 
 @end
