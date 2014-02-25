@@ -41,7 +41,6 @@
 		F1601C3F18ADBA9500C89590 /* ARTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3618ADBA9500C89590 /* ARTableViewCell.m */; };
 		F1601C4018ADBA9500C89590 /* ARSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */; };
 		F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3A18ADBA9500C89590 /* ARSummaryView.m */; };
-		F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3C18ADBA9500C89590 /* ARTextButton.m */; };
 		F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148CD18B3E6A800948933 /* ArticleWebViewController.m */; };
 		F16148D118B5278700948933 /* ARShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D018B5278700948933 /* ARShareViewController.m */; };
 		F16148D418B53AF100948933 /* ARFontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D318B53AF100948933 /* ARFontViewController.m */; };
@@ -139,8 +138,6 @@
 		F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSectionHeaderView.m; path = Classes/UI/ARSectionHeaderView.m; sourceTree = "<group>"; };
 		F1601C3918ADBA9500C89590 /* ARSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSummaryView.h; path = Classes/UI/ARSummaryView.h; sourceTree = "<group>"; };
 		F1601C3A18ADBA9500C89590 /* ARSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSummaryView.m; path = Classes/UI/ARSummaryView.m; sourceTree = "<group>"; };
-		F1601C3B18ADBA9500C89590 /* ARTextButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARTextButton.h; path = Classes/UI/ARTextButton.h; sourceTree = "<group>"; };
-		F1601C3C18ADBA9500C89590 /* ARTextButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARTextButton.m; path = Classes/UI/ARTextButton.m; sourceTree = "<group>"; };
 		F16148CC18B3E6A800948933 /* ArticleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleWebViewController.h; path = "View Controllers/Articles/ArticleWebViewController.h"; sourceTree = "<group>"; };
 		F16148CD18B3E6A800948933 /* ArticleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleWebViewController.m; path = "View Controllers/Articles/ArticleWebViewController.m"; sourceTree = "<group>"; };
 		F16148CF18B5278700948933 /* ARShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARShareViewController.h; path = Classes/UI/ARShareViewController.h; sourceTree = "<group>"; };
@@ -333,17 +330,13 @@
 			isa = PBXGroup;
 			children = (
 				F189B34318B9D528008D4C7F /* Tables */,
+				F157FEBA18BC0A6B00EFFC2E /* Collections */,
 				F143295D18B30FF500A76D97 /* ARScrollView.h */,
 				F143295E18B30FF500A76D97 /* ARScrollView.m */,
-				F157FEBA18BC0A6B00EFFC2E /* Collections */,
-				F1601C3318ADBA9500C89590 /* AREmbeddedTableView.h */,
-				F1601C3418ADBA9500C89590 /* AREmbeddedTableView.m */,
 				F1601C3718ADBA9500C89590 /* ARSectionHeaderView.h */,
 				F1601C3818ADBA9500C89590 /* ARSectionHeaderView.m */,
 				F1601C3918ADBA9500C89590 /* ARSummaryView.h */,
 				F1601C3A18ADBA9500C89590 /* ARSummaryView.m */,
-				F1601C3B18ADBA9500C89590 /* ARTextButton.h */,
-				F1601C3C18ADBA9500C89590 /* ARTextButton.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -392,6 +385,8 @@
 				F189B33D18B9A72F008D4C7F /* ARTableViewController.m */,
 				F189B34018B9C74C008D4C7F /* ARTableView.h */,
 				F189B34118B9C74C008D4C7F /* ARTableView.m */,
+				F1601C3318ADBA9500C89590 /* AREmbeddedTableView.h */,
+				F1601C3418ADBA9500C89590 /* AREmbeddedTableView.m */,
 				F1601C3518ADBA9500C89590 /* ARTableViewCell.h */,
 				F1601C3618ADBA9500C89590 /* ARTableViewCell.m */,
 			);
@@ -628,7 +623,6 @@
 				F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */,
 				F1601C3E18ADBA9500C89590 /* AREmbeddedTableView.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
-				F1601C4218ADBA9500C89590 /* ARTextButton.m in Sources */,
 				F1C6D6F918B2F4AC00129552 /* Story.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
 				F16148F118B6728D00948933 /* CurrentUser.m in Sources */,

@@ -11,7 +11,6 @@
 #import "ArticleWebViewController.h"
 #import "AREmbeddedTableView.h"
 #import "ARTableViewCell.h"
-#import "ARTextButton.h"
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
@@ -90,7 +89,17 @@
     if ([_event.stories count] == 1) {
         // Story button
         // Show only if this event belongs to only one story.
-        ARTextButton *storyButton = [ARTextButton buttonWithTitle:@"View the full story"];
+        UIButton* storyButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [storyButton setTitle:@"View the full story" forState:UIControlStateNormal];
+        storyButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
+        [storyButton sizeToFit];
+        storyButton.frame = CGRectMake(0, 0,
+                                       storyButton.frame.size.width + 20,
+                                       storyButton.frame.size.height);
+        storyButton.tintColor = [UIColor actionColor];
+        [[storyButton layer] setBorderWidth:1.0];
+        [[storyButton layer] setBorderColor:[UIColor actionColor].CGColor];
+        [[storyButton layer] setCornerRadius:4.0];
         CGRect buttonFrame = storyButton.frame;
         buttonFrame.origin.x = _bounds.size.width/2 - storyButton.bounds.size.width/2;
         buttonFrame.origin.y = textPaddingVertical*2;
