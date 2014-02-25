@@ -31,6 +31,10 @@
     LoginViewController *lvc = [[LoginViewController alloc] init];
     lvc.managedObjectContext = moc;
     
+    // Hide navigation bar shadow and bottom border.
+    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
+    [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
+    
     // Setup the navigation controller.
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:lvc];
     self.navigationController.view.backgroundColor = [UIColor whiteColor];

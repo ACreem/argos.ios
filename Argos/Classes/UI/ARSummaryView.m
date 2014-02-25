@@ -113,10 +113,12 @@
 {
     if (light) {
         html = [html stringByReplacingOccurrencesOfString:@"{{color}}" withString:@"#000"];
+        html = [html stringByReplacingOccurrencesOfString:@"{{link_color}}" withString:@"#e2454c"];
         self.backgroundColor = [UIColor whiteColor];
     } else {
         html = [html stringByReplacingOccurrencesOfString:@"{{color}}" withString:@"#fff"];
-        self.backgroundColor = [UIColor darkColor];
+        html = [html stringByReplacingOccurrencesOfString:@"{{link_color}}" withString:@"#83d983"];
+        self.backgroundColor = [UIColor colorWithRed:0.09 green:0.102 blue:0.129 alpha:1.0];
     }
     
     html = [html stringByReplacingOccurrencesOfString:@"{{size}}" withString:[NSString stringWithFormat:@"%fem", size]];
