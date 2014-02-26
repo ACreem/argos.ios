@@ -11,6 +11,12 @@
 
 #import "Event.h"
 
+@interface ARSearchCollectionViewController ()
+
+@property (strong, nonatomic) UISearchBar* searchBar;
+
+@end
+
 @implementation ARSearchCollectionViewController
 
 - (id)init
@@ -18,7 +24,7 @@
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
     [flowLayout setMinimumLineSpacing:0.0f];
-    [flowLayout setSectionInset:UIEdgeInsetsMake(44, 0, 0, 0)];
+    [flowLayout setSectionInset:UIEdgeInsetsZero];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
@@ -30,7 +36,7 @@
     self.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
     
     if (self) {
-        self.navigationItem.title = @"Search";
+        self.navigationItem.title = @"";
     }
     return self;
 }
@@ -47,15 +53,16 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceVertical = NO;
     
-    UISearchBar* searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.collectionView.frame.size.width, 44)];
-    searchBar.barTintColor = [UIColor primaryColor];
-    searchBar.translucent = NO;
-    searchBar.delegate = self;
-    searchBar.tintColor = [UIColor secondaryColor];
-    [self.view addSubview:searchBar];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.collectionView.frame.size.width - 60, 44)];
+    _searchBar.barTintColor = [UIColor primaryColor];
+    _searchBar.translucent = NO;
+    _searchBar.delegate = self;
+    _searchBar.tintColor = [UIColor secondaryColor];
+    _searchBar.placeholder = @"Search";
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:_searchBar];
 }
 
-# pragma mark - UIControllerViewDelegate
+# pragma mark - UICollectionViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ARLargeCollectionViewCell *cell = (ARLargeCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
@@ -78,11 +85,18 @@
      */
 }
 
+# pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [_searchBar resignFirstResponder];
+}
+
 # pragma mark - UISearchBarDelegate
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
     NSLog(@"searching...");
     [searchBar resignFirstResponder];
 }
+
+
 
 @end
