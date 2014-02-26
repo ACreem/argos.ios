@@ -7,9 +7,10 @@
 //
 
 #import "ARCollectionViewController.h"
+#import "EAIntroView.h"
 
-@interface EventListViewController : ARCollectionViewController
+@interface EventListViewController : ARCollectionViewController <EAIntroDelegate>
 
-- (id)initWithTitle:(NSString*)title endpoint:(NSString*)endpoint;
+- (id)initWithTitle:(NSString*)title stream:(NSString*)stream;
 
 @end

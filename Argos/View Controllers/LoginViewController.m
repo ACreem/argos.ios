@@ -51,7 +51,7 @@
 
 - (void)postLogin
 {
-    EventListViewController *elvc = [[EventListViewController alloc] initWithTitle:@"Latest" endpoint:@"/events"];
+    EventListViewController *elvc = [[EventListViewController alloc] initWithTitle:@"Latest" stream:@"latest"];
     elvc.managedObjectContext = self.managedObjectContext;
     
     // Add background for the status bar, so the slide-out menu transition looks better.
