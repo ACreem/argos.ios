@@ -12,7 +12,7 @@
 #import "ARSearchCollectionViewController.h"
 
 @interface MenuViewController () {
-    NSMutableArray *_feeds;
+    NSMutableArray *_streams;
     NSMutableArray *_settings;
     NSMutableArray *_search;
     UINavigationController *_navigationController;
@@ -47,7 +47,7 @@
     }
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
-    _feeds = [[NSMutableArray alloc] initWithObjects:@"Latest", @"Watching", nil];
+    _streams = [[NSMutableArray alloc] initWithObjects:@"Trending", @"Watching", @"Latest", nil];
     _settings = [[NSMutableArray alloc] initWithObjects:@"Settings", nil];
     _search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
     [self.tableView reloadData];
@@ -80,12 +80,16 @@
     UIView *viewHeader=  [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 36)];
     viewHeader.backgroundColor = [UIColor colorWithRed:0.127 green:0.139 blue:0.178 alpha:1.0];
     
+    viewHeader.backgroundColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
+    
     UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, tableView.frame.size.width - 14, 28)];
-    sectionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
+    sectionLabel.font = [UIFont fontWithName:@"Graphik-SemiBold" size:10.0];
     sectionLabel.textColor = [UIColor colorWithRed:0.522 green:0.533 blue:0.557 alpha:1.0];
+    sectionLabel.textColor = [UIColor whiteColor];
     
     switch (section) {
         case 0:
+            // The Search section has no header.
             sectionLabel.text = @"";
             break;
         case 1:
@@ -102,9 +106,10 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
+        // The Search section has no header.
         return 0;
     } else {
-        return 36;
+        return 24;
     }
 }
 
@@ -115,7 +120,7 @@
             return _search.count;
             break;
         case 1:
-            return _feeds.count;
+            return _streams.count;
             break;
         case 2:
             return _settings.count;
@@ -137,7 +142,7 @@
             title = [_search objectAtIndex:indexPath.row];
             break;
         case 1:
-            title = [_feeds objectAtIndex:indexPath.row];
+            title = [_streams objectAtIndex:indexPath.row];
             break;
         case 2:
             title = [_settings objectAtIndex:indexPath.row];
