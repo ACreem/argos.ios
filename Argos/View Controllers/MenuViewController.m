@@ -78,8 +78,6 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *viewHeader=  [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 36)];
-    viewHeader.backgroundColor = [UIColor colorWithRed:0.127 green:0.139 blue:0.178 alpha:1.0];
-    
     viewHeader.backgroundColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
     
     UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, tableView.frame.size.width - 14, 28)];
@@ -154,6 +152,15 @@
     cell.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];
     cell.textLabel.textColor = [UIColor colorWithRed:0.929 green:0.929 blue:0.929 alpha:1.0];
     cell.imageView.image = [UIImage imageNamed:[title lowercaseString]];
+    
+    if (indexPath.section == 0) {
+        cell.backgroundColor = [UIColor mutedAltColor];
+    }
+    
+    UIView *bgColorView = [[UIView alloc] init];
+    bgColorView.backgroundColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
+    bgColorView.layer.masksToBounds = YES;
+    [cell setSelectedBackgroundView:bgColorView];
     
     return cell;
 }
