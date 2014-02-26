@@ -14,7 +14,9 @@
 @protocol Entity
 -(NSString*)imageUrl;
 -(UIImage*)image;
+-(UIImage*)fullImage;
 -(void)setImage:(id)image;
+-(void)setFullImage:(id)image;
 @end
 
 @interface ARCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>

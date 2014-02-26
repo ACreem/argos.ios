@@ -207,8 +207,12 @@
 
 - (void)handleImageForEntity:(id<Entity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    screenRect.size.height -= (44 + 20); // Adjust for nav & status bar
+    
     // If there's no cached image for this event,
     // consider loading it.
+    // Only entities with an imageUrl have an image to download.
     if (entity.imageUrl) {
         if (!entity.image) {
             // Only start loading images when scrolling stops.
@@ -222,21 +226,39 @@
             
         // If there is a cached image, use it.
         } else {
-            // This is temporary, but something to display while the image is being cropped.
-            // Ideally, we would save a version of each cropped image and check if that exists and reuse that
-            // instead of re-cropping it each time.
-            // Currently, I believe this is the cause for image flickering; it is being called
-            // initially when the cell is created and also when the loading finishes and the collection view is reloaded.
-            cell.imageView.image = [UIImage imageNamed:@"placeholder"];
             
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
-                UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
-                croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    cell.imageView.image = croppedImage;
+            // If this is a full screen image...
+            if (CGSizeEqualToSize(cell.imageSize, screenRect.size)) {
+                // If there isn't yet a full image,
+                // crop and save one.
+                if (!entity.fullImage) {
+                    cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                        CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+                        UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
+                        croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+                        entity.fullImage = croppedImage;
+                        dispatch_async(dispatch_get_main_queue(), ^{
+                            cell.imageView.image = croppedImage;
+                        });
+                    });
+                } else {
+                    cell.imageView.image = entity.fullImage;
+                }
+                
+            // If this is an image of any other size...
+            } else {
+                cell.imageView.image = [UIImage imageNamed:@"placeholder"];
+                
+                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                    CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+                    UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
+                    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        cell.imageView.image = croppedImage;
+                    });
                 });
-            });
+            }
         }
     }
 }
