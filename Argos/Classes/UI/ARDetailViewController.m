@@ -244,7 +244,7 @@
             
             if ([subview isKindOfClass:[ARCollectionView class]]) {
                 ARCollectionView* colview = (ARCollectionView*)subview;
-                if (y > subview.frame.origin.y) {
+                if (y > subview.frame.origin.y && _stuckSectionHeaderView != colview.headerView) {
                     selectedHeader = colview.headerView;
                 }
             }
@@ -258,6 +258,11 @@
                 _stuckSectionHeaderView.frame = _stuckSectionHeaderViewFrame;
                 [_stuckSectionHeaderView removeFromSuperview];
                 [_stuckSectionHeaderSuperview addSubview:_stuckSectionHeaderView];
+                
+                [UIView animateWithDuration:0.2 animations:^{
+                    _stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
+                    _stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
+                }];
             }
             
             // Setup new header
@@ -279,6 +284,11 @@
             selectedHeader.frame = headerFrame;
             [self.view addSubview:selectedHeader];
             
+            [UIView animateWithDuration:0.2 animations:^{
+                selectedHeader.backgroundColor = [UIColor secondaryColor];
+                selectedHeader.titleLabel.textColor = [UIColor whiteColor];
+            }];
+            
         // Otherwise, check if it's a header that needs to be removed.
         } else {
             // Check if the stuck header view has scrolled off.
@@ -296,6 +306,13 @@
                 _stuckSectionHeaderView.frame = _stuckSectionHeaderViewFrame;
                 [_stuckSectionHeaderView removeFromSuperview];
                 [_stuckSectionHeaderSuperview addSubview:_stuckSectionHeaderView];
+                
+                [UIView animateWithDuration:0.2 animations:^{
+                    _stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
+                    _stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
+                }];
+                
+                _stuckSectionHeaderView = nil;
             }
         }
     } else {
