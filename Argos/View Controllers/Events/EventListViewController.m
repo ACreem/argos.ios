@@ -72,7 +72,6 @@
 }
 
 # pragma mark - UIControllerViewDelegate
-
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ARFullCollectionViewCell *cell = (ARFullCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];

@@ -25,6 +25,7 @@
 		F1203A2518BD379400DCEB3A /* Graphik-SuperItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */; };
 		F1203A2618BD379400DCEB3A /* Graphik-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */; };
 		F1203A2718BD379400DCEB3A /* Graphik-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */; };
+		F1203A2D18BD729900DCEB3A /* ARSearchCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1203A2C18BD729900DCEB3A /* ARSearchCollectionViewController.m */; };
 		F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
@@ -114,6 +115,8 @@
 		F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SuperItalic.otf"; sourceTree = "<group>"; };
 		F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Thin.otf"; sourceTree = "<group>"; };
 		F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ThinItalic.otf"; sourceTree = "<group>"; };
+		F1203A2B18BD729900DCEB3A /* ARSearchCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSearchCollectionViewController.h; path = "View Controllers/ARSearchCollectionViewController.h"; sourceTree = "<group>"; };
+		F1203A2C18BD729900DCEB3A /* ARSearchCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSearchCollectionViewController.m; path = "View Controllers/ARSearchCollectionViewController.m"; sourceTree = "<group>"; };
 		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -439,6 +442,8 @@
 				F1601C2318ADBA7400C89590 /* LoginViewController.m */,
 				F1601C2418ADBA7400C89590 /* MenuViewController.h */,
 				F1601C2518ADBA7400C89590 /* MenuViewController.m */,
+				F1203A2B18BD729900DCEB3A /* ARSearchCollectionViewController.h */,
+				F1203A2C18BD729900DCEB3A /* ARSearchCollectionViewController.m */,
 				F16148CF18B5278700948933 /* ARShareViewController.h */,
 				F16148D018B5278700948933 /* ARShareViewController.m */,
 				F16148D218B53AF100948933 /* ARFontViewController.h */,
@@ -677,6 +682,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */,
+				F1203A2D18BD729900DCEB3A /* ARSearchCollectionViewController.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1C6D6F918B2F4AC00129552 /* Story.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,

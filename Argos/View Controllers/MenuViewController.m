@@ -9,10 +9,12 @@
 #import "MenuViewController.h"
 #import "EventListViewController.h"
 #import "AppDelegate.h"
+#import "ARSearchCollectionViewController.h"
 
 @interface MenuViewController () {
     NSMutableArray *_feeds;
     NSMutableArray *_settings;
+    NSMutableArray *_search;
     UINavigationController *_navigationController;
 }
 
@@ -47,7 +49,9 @@
     
     _feeds = [[NSMutableArray alloc] initWithObjects:@"Latest", @"Watching", nil];
     _settings = [[NSMutableArray alloc] initWithObjects:@"Settings", nil];
+    _search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
     [self.tableView reloadData];
+ 
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -69,7 +73,7 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 2;
+    return 3;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
@@ -80,21 +84,44 @@
     sectionLabel.font = [UIFont fontWithName:@"HelveticaNeue-Bold" size:10.0];
     sectionLabel.textColor = [UIColor colorWithRed:0.522 green:0.533 blue:0.557 alpha:1.0];
     
-    if (section == 0) {
-        sectionLabel.text = @"FEEDS";
-    } else {
-        sectionLabel.text = @"SETTINGS";
+    switch (section) {
+        case 0:
+            sectionLabel.text = @"";
+            break;
+        case 1:
+            sectionLabel.text = @"FEEDS";
+            break;
+        case 2:
+            sectionLabel.text = @"SETTINGS";
+            break;
     }
     [viewHeader addSubview:sectionLabel];
     return viewHeader;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section == 0) {
-        return _feeds.count;
+        return 0;
     } else {
-        return _settings.count;
+        return 36;
+    }
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    switch (section) {
+        case 0:
+            return _search.count;
+            break;
+        case 1:
+            return _feeds.count;
+            break;
+        case 2:
+            return _settings.count;
+            break;
+        default:
+            return 0;
     }
 }
 
@@ -105,11 +132,18 @@
     
     // Configure the cell...
     NSString* title = @"";
-    if (indexPath.section == 0) {
-        title = [_feeds objectAtIndex:indexPath.row];
-    } else {
-        title = [_settings objectAtIndex:indexPath.row];
+    switch (indexPath.section) {
+        case 0:
+            title = [_search objectAtIndex:indexPath.row];
+            break;
+        case 1:
+            title = [_feeds objectAtIndex:indexPath.row];
+            break;
+        case 2:
+            title = [_settings objectAtIndex:indexPath.row];
+            break;
     }
+    
     cell.textLabel.text = title;
     cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
     cell.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];
@@ -121,14 +155,24 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        switch (indexPath.row) {
-            case 0:
-                [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Latest" endpoint:@"/events"] animated:YES];
-            case 1:
-                [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" endpoint:@"/events"] animated:YES];
+    switch (indexPath.section) {
+        case 0: {
+            ARSearchCollectionViewController *searchViewController = [[ARSearchCollectionViewController alloc] init];
+            [(UINavigationController*)self.viewDeckController.centerController pushViewController:searchViewController animated:YES];
+            [self.viewDeckController closeLeftViewAnimated:YES];
+            break;
         }
+        case 1:
+            switch (indexPath.row) {
+                case 0:
+                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Latest" endpoint:@"/events"] animated:YES];
+                    break;
+                case 1:
+                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" endpoint:@"/events"] animated:YES];
+                    break;
+            }
     }
+    
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 

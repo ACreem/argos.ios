@@ -32,13 +32,14 @@
     lvc.managedObjectContext = moc;
     
     // Hide navigation bar shadow and bottom border.
-    [[UINavigationBar appearance]setShadowImage:[[UIImage alloc] init]];
+    [[UINavigationBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UINavigationBar appearance] setBackgroundImage:[[UIImage alloc] init] forBarMetrics:UIBarMetricsDefault];
     
     // Setup the navigation controller.
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:lvc];
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor primaryColor];
+    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:
