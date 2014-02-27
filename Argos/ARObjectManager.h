@@ -7,12 +7,21 @@
 //
 
 #import "RKObjectManager.h"
+#import "AFOAuth2Client.h"
 #import "CurrentUser.h"
 
 @interface ARObjectManager : RKObjectManager
 
-+(ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos;
-+(ARObjectManager*)sharedManager;
--(CurrentUser*)currentUser;
++ (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos;
++ (ARObjectManager*)sharedManager;
+
+- (CurrentUser*)currentUser;
+- (void)logoutCurrentUser;
+- (void)loginCurrentUserWithEmail:(NSString*)email
+                         password:(NSString*)password
+                          success:(void (^)(CurrentUser *currentUser))success
+                          failure:(void (^)(NSError *error))failure;
+
+- (AFOAuth2Client*)client;
 
 @end

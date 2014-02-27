@@ -12,9 +12,14 @@
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
+static int kLoginTag = 0;
+static int kSignUpTag = 1;
+static int kFauxStatusBarTag = 99;
+
 @interface LoginViewController () {
     UITextField *_emailField;
     UITextField *_passwordField;
+    UIButton    *_primaryButton;
 }
 
 @end
@@ -25,28 +30,10 @@
 {
     [super viewDidLoad];
     
-    [self.navigationController setNavigationBarHidden:YES];
     self.view.backgroundColor = [UIColor primaryColor];
+    [self.navigationController setNavigationBarHidden:YES];
     
     [self setupUI];
-}
-
-- (void)facebookLoginButtonPressed:(id)sender
-{
-    // Implement oauth flow
-    [self postLogin];
-}
-
-- (void)twitterLoginButtonPressed:(id)sender
-{
-    // Implement oauth flow
-    [self postLogin];
-}
-
-- (void)googleLoginButtonPressed:(id)sender
-{
-    // Implement oauth flow
-    [self postLogin];
 }
 
 - (void)postLogin
@@ -54,11 +41,18 @@
     EventListViewController *elvc = [[EventListViewController alloc] initWithTitle:@"Latest" stream:@"latest"];
     elvc.managedObjectContext = self.managedObjectContext;
     
+    // Set whether or not the user is new.
+    elvc.userIsNew = (BOOL)_primaryButton.tag;
+    
     // Add background for the status bar, so the slide-out menu transition looks better.
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-    view.backgroundColor = [UIColor primaryColor];
+    // Check first to see if it already exists.
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate.window addSubview:view];
+    if (![appDelegate.window viewWithTag:kFauxStatusBarTag]) {
+        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
+        view.backgroundColor = [UIColor primaryColor];
+        view.tag = kFauxStatusBarTag;
+        [appDelegate.window addSubview:view];
+    }
     
     // Setup the slide-out menu.
     MenuViewController* menuController = [[MenuViewController alloc] init];
@@ -92,36 +86,36 @@
     // Create buttons
     UIButton *signupButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     signupButton.frame = CGRectMake(screenWidth - buttonWidth, screenHeight - buttonHeight, buttonWidth, buttonHeight);
-    [signupButton setTitle:@"Signup" forState:UIControlStateNormal];
+    [signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
     signupButton.tintColor = [UIColor mutedColor];
     signupButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
-    [signupButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [signupButton addTarget:self action:@selector(togglePrimaryButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:signupButton];
     
     UIButton *forgotButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     forgotButton.frame = CGRectMake(20, screenHeight - buttonHeight, buttonWidth, buttonHeight);
-    [forgotButton setTitle:@"Forgot Password?" forState:UIControlStateNormal];
+    [forgotButton setTitle:@"Forgot password?" forState:UIControlStateNormal];
     forgotButton.tintColor = [UIColor mutedColor];
     forgotButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
     [forgotButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:forgotButton];
     
     
-    UIButton *loginButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    loginButton.frame = CGRectMake(screenWidth/2 - mainButtonWidth/2, signupButton.frame.origin.y - signupButton.frame.size.height, mainButtonWidth, buttonHeight);
-    [loginButton setTitle:@"Login" forState:UIControlStateNormal];
-    loginButton.tintColor = [UIColor whiteColor];
-    loginButton.backgroundColor = [UIColor secondaryColor];
-    [loginButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
-    [loginView addSubview:loginButton];
+    _primaryButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    _primaryButton.tag = kLoginTag;
+    _primaryButton.frame = CGRectMake(screenWidth/2 - mainButtonWidth/2, signupButton.frame.origin.y - signupButton.frame.size.height, mainButtonWidth, buttonHeight);
+    [_primaryButton setTitle:@"Login" forState:UIControlStateNormal];
+    _primaryButton.tintColor = [UIColor whiteColor];
+    _primaryButton.backgroundColor = [UIColor secondaryColor];
+    [_primaryButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
+    [loginView addSubview:_primaryButton];
     
     // Create text fields
-    _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(screenWidth/2 - fieldWidth/2, loginButton.frame.origin.y - fieldHeight, fieldWidth, fieldHeight)];
+    _passwordField = [[UITextField alloc] initWithFrame:CGRectMake(screenWidth/2 - fieldWidth/2, _primaryButton.frame.origin.y - fieldHeight, fieldWidth, fieldHeight)];
     [_passwordField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _passwordField.delegate = self;
     _passwordField.secureTextEntry = YES;
     _passwordField.placeholder = @"password";
-    //_passwordField.backgroundColor = [UIColor whiteColor];
     _passwordField.textAlignment = NSTextAlignmentCenter;
     [loginView addSubview:_passwordField];
     
@@ -129,7 +123,6 @@
     [_emailField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _emailField.delegate = self;
     _emailField.placeholder = @"email";
-    //_emailField.backgroundColor = [UIColor whiteColor];
     _emailField.textAlignment = NSTextAlignmentCenter;
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.frame = CGRectMake(0, fieldHeight-1, screenWidth, 1);
@@ -182,9 +175,6 @@
 
 - (void)login:(id)sender
 {
-    [self postLogin];
-    
-    /*
     if (_emailField.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"What's your email?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -192,54 +182,132 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Password" message:@"Did you forget your password?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     } else {
+        
          //Workaround to authenticate the user through the app.
          // See: https://github.com/mattupstate/flask-security/issues/30
         UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,0,0)];
         webView.delegate = self;
         [self.view addSubview:webView]; // the web view must be added as a subview in order for it to "load".
         
-        [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"/login" relativeToURL:[NSURL URLWithString:kArgosAPIBaseURLString]]]];
-            
+        if (_primaryButton.tag == kLoginTag) {
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"/login" relativeToURL:[NSURL URLWithString:kArgosAPIBaseURLString]]]];
+        } else {
+            [webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"/register" relativeToURL:[NSURL URLWithString:kArgosAPIBaseURLString]]]];
+        }
+        [self primaryButtonStartLoading];
     }
-    */
+}
+
+// Toggles between "Login" and "Sign up" for the primary button.
+- (void)togglePrimaryButton:(id)sender
+{
+    UIButton* button = (UIButton*)sender;
+    if (_primaryButton.tag == kLoginTag) {
+        [button setTitle:@"Login" forState:UIControlStateNormal];
+        [_primaryButton setTitle:@"Sign up" forState:UIControlStateNormal];
+        _primaryButton.backgroundColor = [UIColor actionColor];
+        _primaryButton.tag = kSignUpTag;
+    } else {
+        [button setTitle:@"Sign up" forState:UIControlStateNormal];
+        [_primaryButton setTitle:@"Login" forState:UIControlStateNormal];
+        _primaryButton.backgroundColor = [UIColor secondaryColor];
+        _primaryButton.tag = kLoginTag;
+    }
+}
+
+- (void)primaryButtonStartLoading {
+    if (_primaryButton.tag == kLoginTag) {
+        [_primaryButton setTitle:@"Logging in..." forState:UIControlStateNormal];
+    } else {
+        [_primaryButton setTitle:@"Signing you up..." forState:UIControlStateNormal];
+    }
+    [UIView animateWithDuration:0.6 delay:0 options:(UIViewAnimationCurveLinear | UIViewAnimationOptionAutoreverse | UIViewAnimationOptionRepeat) animations:^{
+        _primaryButton.alpha = 0.7;
+    }  completion:nil];
+    _primaryButton.enabled = NO;
+}
+- (void)primaryButtonEndLoading {
+    if (_primaryButton.tag == kLoginTag) {
+        [_primaryButton setTitle:@"Login" forState:UIControlStateNormal];
+    } else {
+        [_primaryButton setTitle:@"Sign up" forState:UIControlStateNormal];
+    }
+    _primaryButton.enabled = YES;
+    [_primaryButton.layer removeAllAnimations];
+   
+    [UIView animateWithDuration:0.6 delay:0 options:(UIViewAnimationCurveLinear | UIViewAnimationOptionBeginFromCurrentState) animations:^{
+        _primaryButton.alpha = 1;
+    }  completion:nil];
 }
 
 # pragma mark - UIWebViewDelegate
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
-    NSString *js = [NSString stringWithFormat:@" \
-                    var xmlHttp = new XMLHttpRequest(), \
-                    url = document.location.href, \
-                    csrf_token = document.getElementById('csrf_token').value, \
-                    params = 'email=%@&password=%@&csrf_token='+csrf_token; \
-                    xmlHttp.open('POST', url, false); \
-                    xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded'); \
-                    xmlHttp.setRequestHeader('Content-Length', params.length); \
-                    xmlHttp.setRequestHeader('Connection', 'close'); \
-                    xmlHttp.send(params); \
-                    xmlHttp.responseText", _emailField.text, _passwordField.text]; // Note, can't use "return" or even have a ";" at the end, but this returns this value.
-    
-    /*
-     Successful response looks like:
-     {
-        "meta": {
-            "code": 200
-        },
-        "response": {
-            "user": {
-                "id": "the_user_id",
-                "authentication_token": "the_user_authentication_token"
-            }
-        }
-     }
-     */
+    NSString *js = nil;
+    if (_primaryButton.tag == kLoginTag) {
+        js = [NSString stringWithFormat:@" \
+                        var xmlHttp = new XMLHttpRequest(), \
+                        url = document.location.href, \
+                        csrf_token = document.getElementById('csrf_token').value, \
+                        params = {\"email\":\"%@\", \"password\":\"%@\", \"csrf_token\": csrf_token}; \
+                        xmlHttp.open('POST', url, false); \
+                        xmlHttp.setRequestHeader('Content-Type', 'application/json'); \
+                        xmlHttp.send(JSON.stringify(params)); \
+                        xmlHttp.responseText", _emailField.text, _passwordField.text]; // Note, can't use "return" or even have a ";" at the end, but this returns this value.
+    } else {
+        js = [NSString stringWithFormat:@" \
+                        var xmlHttp = new XMLHttpRequest(), \
+                        url = document.location.href, \
+                        csrf_token = document.getElementById('csrf_token').value, \
+                        params = {\"email\":\"%@\", \"password\":\"%@\", \"password_confirm\":\"%@\", \"csrf_token\": csrf_token}; \
+                        xmlHttp.open('POST', url, false); \
+                        xmlHttp.setRequestHeader('Content-Type', 'application/json'); \
+                        xmlHttp.send(JSON.stringify(params)); \
+                        xmlHttp.responseText", _emailField.text, _passwordField.text, _passwordField.text]; // Note, can't use "return" or even have a ";" at the end, but this returns this value.
+    }
+
     NSString *response = [webView stringByEvaluatingJavaScriptFromString:js];
-    NSLog(@"response: %@", response);
     if ([response rangeOfString:@"Specified user does not exist"].location == NSNotFound && [response rangeOfString:@"Invalid password"].location == NSNotFound) {
+        /*
+         Successful response looks like:
+         {
+            "meta": {
+                "code": 200
+            },
+            "response": {
+                "user": {
+                    "id": "the_user_id",
+                    "authentication_token": "the_user_authentication_token"
+                }
+            }
+         }
+         */
+        /* for checking the server response
         NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error;
         NSDictionary *jsonDict = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&error];
         NSLog(@"%@", jsonDict);
+        */
+        
+        // Login the user.
+        [[ARObjectManager sharedManager] loginCurrentUserWithEmail:_emailField.text
+                                                          password:_passwordField.text
+                                                           success:^(CurrentUser *currentUser) {
+                                                               [self postLogin];
+                                                               
+                                                               [self primaryButtonEndLoading];
+                                                               
+                                                               // Reset the fields.
+                                                               _emailField.text = @"";
+                                                               _passwordField.text = @"";
+                                                           } failure:^(NSError *error) {
+                                                               [self primaryButtonEndLoading];
+                                                               
+                                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials" message:@"You couldn't be logged in with the info you provided." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                                                               [alert show];
+                                                               
+                                                               NSLog(@"%@", error);
+                                                           }];
     } else {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials" message:@"You couldn't be logged in with the info you provided." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

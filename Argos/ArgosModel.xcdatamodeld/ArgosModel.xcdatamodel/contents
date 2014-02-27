@@ -11,7 +11,9 @@
         <relationship name="event" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Event" inverseName="articles" inverseEntity="Event" syncable="YES"/>
         <relationship name="source" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Source" inverseName="articles" inverseEntity="Source" syncable="YES"/>
     </entity>
-    <entity name="CurrentUser" representedClassName="CurrentUser" syncable="YES"/>
+    <entity name="CurrentUser" representedClassName="CurrentUser" syncable="YES">
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+    </entity>
     <entity name="Entity" representedClassName="Entity" syncable="YES">
         <attribute name="entityId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>

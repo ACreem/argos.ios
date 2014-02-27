@@ -304,10 +304,7 @@
 				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
-				F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */,
-				F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */,
-				F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */,
-				F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */,
+				F1D6BE4C18BEA1DA00313014 /* Utility */,
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
 				F1D8FD4818A5EE00003201BF /* Classes */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
@@ -508,6 +505,17 @@
 				F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */,
 			);
 			name = Entities;
+			sourceTree = "<group>";
+		};
+		F1D6BE4C18BEA1DA00313014 /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */,
+				F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */,
+				F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */,
+				F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */,
+			);
+			name = Utility;
 			sourceTree = "<group>";
 		};
 		F1D8FD4818A5EE00003201BF /* Classes */ = {

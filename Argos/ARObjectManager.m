@@ -7,16 +7,21 @@
 //
 
 #import "ARObjectManager.h"
+
 #import "Event.h"
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
 #import "Source.h"
+#import "CurrentUser.h"
 
+// Test values
+static NSString* const kArgosAPIClientId = @"YA9phltecnYy6tIiYvJfMiKeoYqTuTVaGpE6zYY1";
+static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8UivnbxXmLbraT9CJCAgOyarR";
 
-@interface ARObjectManager () {
-    CurrentUser* _currentUser;
-}
+@interface ARObjectManager ()
+@property (strong, nonatomic) AFOAuth2Client* client;
+@property (strong, nonatomic) CurrentUser* currentUser;
 @end
 
 @implementation ARObjectManager
@@ -30,8 +35,11 @@
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
     RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
-    // Set up the object manager.
-    ARObjectManager *objectManager = [ARObjectManager managerWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString]];
+    // Create an Argos OAuth2 client.
+    AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
+    
+    // Set up the object manager with the OAuth2 client.
+    ARObjectManager *objectManager = [[ARObjectManager alloc] initWithHTTPClient:oauthClient];
     objectManager.managedObjectStore = mos;
     
     // Define API JSON response => Core Data attributes mappings.
@@ -67,6 +75,8 @@
                                       @"url":            @"jsonUrl",
                                       @"name":           @"name",
                                       @"ext_url":        @"extUrl"};
+    NSDictionary *userMappings    = @{
+                                      @"id":             @"userId"};
     
     [objectManager setupEntityForName:@"Event"
                           pathPattern:@"/events"
@@ -124,17 +134,88 @@
                                                         @"mappings":    storyMappings}}
                              mappings:entityMappings];
     
+    [objectManager setupEntityForName:@"CurrentUser"
+                          pathPattern:@"/user"
+                                class:[CurrentUser class]
+                           identifier:@"userId"
+                        relationships:nil
+                             mappings:userMappings];
+    
     return objectManager;
 }
 
-// Temporary for handling the current user.
-// Eventually this should be handled through RestKit, GETing and POSTing the CurrentUser to the `/user` endpoint.
+// Helper to get the OAuth2 client.
+- (AFOAuth2Client*)client {
+    return (AFOAuth2Client*)self.HTTPClient;
+}
+
 - (CurrentUser*)currentUser {
-    if (!_currentUser) {
-        NSEntityDescription* entityDesc = [NSEntityDescription entityForName:@"CurrentUser" inManagedObjectContext:self.managedObjectStore.mainQueueManagedObjectContext];
-        _currentUser = [[CurrentUser alloc] initWithEntity:entityDesc insertIntoManagedObjectContext:self.managedObjectStore.mainQueueManagedObjectContext];
+    if (_currentUser) {
+        return _currentUser;
     }
+    
+    NSManagedObjectContext *moc = self.managedObjectStore.mainQueueManagedObjectContext;
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    [fetchRequest setEntity:[NSEntityDescription entityForName:@"CurrentUser"
+                                        inManagedObjectContext:moc]];
+    NSError *error = nil;
+    NSArray *userArray = [moc executeFetchRequest:fetchRequest error:&error];
+    if (!error) {
+        NSAssert([userArray count] == 1, @"Expected one current user but there were more");
+        _currentUser = [userArray objectAtIndex:0];
+    }
+    
     return _currentUser;
+}
+
+- (void)logoutCurrentUser {
+    if (_currentUser) {
+        [AFOAuthCredential deleteCredentialWithIdentifier:self.client.serviceProviderIdentifier];
+        [self.managedObjectStore.mainQueueManagedObjectContext deleteObject:_currentUser];
+        _currentUser = nil;
+    }
+}
+
+- (void)loginCurrentUserWithEmail:(NSString*)email
+                         password:(NSString*)password
+                          success:(void (^)(CurrentUser *currentUser))success
+                          failure:(void (^)(NSError *error))failure
+{
+    [self logoutCurrentUser];
+    
+    [self.client authenticateUsingOAuthWithPath:@"/oauth/token"
+                                       username:email
+                                       password:password
+                                          scope:@"userinfo"
+                                        success:^(AFOAuthCredential *credential) {
+                                            // Save the credential.
+                                            [AFOAuthCredential storeCredential:credential withIdentifier:self.client.serviceProviderIdentifier];
+                                            
+                                            // Create the current user.
+                                            _currentUser = [NSEntityDescription insertNewObjectForEntityForName:@"CurrentUser" inManagedObjectContext:self.managedObjectStore.mainQueueManagedObjectContext];
+                                            
+                                            // Get the current user's info.
+                                            if (_currentUser) {
+                                                [self getObject:_currentUser path:@"/user" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+                                                    NSLog(@"Current user successfully got, with id %@", _currentUser.userId);
+                                                    
+                                                    if (success) {
+                                                        success(_currentUser);
+                                                    }
+                                                } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                                                    NSLog(@"Error getting current user: %@", error);
+                                                    if (failure) {
+                                                        failure(error);
+                                                    }
+                                                }];
+                                            }
+                                        }
+                                        failure:^(NSError *error) {
+                                            NSLog(@"Error authenticating: %@", error);
+                                            if (failure) {
+                                                failure(error);
+                                            }
+                                        }];
 }
 
 /*

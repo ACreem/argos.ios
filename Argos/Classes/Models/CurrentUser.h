@@ -2,7 +2,7 @@
 //  CurrentUser.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/20/14.
+//  Created by Francis Tseng on 2/27/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -12,8 +12,6 @@
 
 @interface CurrentUser : NSManagedObject
 
-@property (nonatomic, retain) NSNumber * fontSize;
-@property (nonatomic, retain) NSString * fontType;
-@property (nonatomic, retain) NSNumber * contrast;
+@property (nonatomic, retain) NSNumber * userId;
 
 @end

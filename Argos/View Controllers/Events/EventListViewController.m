@@ -30,7 +30,6 @@
     [flowLayout setMinimumLineSpacing:0.0f];
     [flowLayout setSectionInset:UIEdgeInsetsZero];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    //[flowLayout setScrollDirection:UICollectionViewScrollDirectionHorizontal];  // for horizontal scroll
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     screenRect.size.height -= (44 + 20); // navigation bar height + status bar height
@@ -48,10 +47,8 @@
 {
     [super viewDidLoad];
     
-    BOOL userIsNew = YES;
-    
     // If the user is new, show the intro/onboarding.
-    if (userIsNew) {
+    if (self.userIsNew) {
         [self.navigationController setNavigationBarHidden:YES animated:NO];
         
         _titleFont = [UIFont fontWithName:@"Graphik-LightItalic" size:24];
@@ -62,7 +59,7 @@
         EAIntroPage *page3 = [self createPageWithTitle:@"Concepts" description:@"Quickly learn the concepts in a story." imageNamed:@"onboarding02"];
         EAIntroPage *page4 = [self createPageWithTitle:@"Entities" description:@"Understand the people, places, and organizations involved." imageNamed:@"onboarding03"];
         EAIntroPage *page5 = [self createPageWithTitle:@"Watch" description:@"Watch the stories that are important to you..." imageNamed:@"onboarding04"];
-        EAIntroPage *page6 = [self createPageWithTitle:@"Trending" description:@"...and hear about the stories that are important for everyone else." imageNamed:@"onboarding05"];
+        EAIntroPage *page6 = [self createPageWithTitle:@"Trending" description:@"...and hear about the stories that are important to everyone else." imageNamed:@"onboarding05"];
         
         EAIntroView *intro = [[EAIntroView alloc] initWithFrame:self.view.bounds andPages:@[page1, page2, page3, page4, page5, page6]];
         intro.delegate = self;

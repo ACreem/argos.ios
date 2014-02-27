@@ -13,7 +13,7 @@
 
 @interface MenuViewController () {
     NSMutableArray *_streams;
-    NSMutableArray *_settings;
+    NSMutableArray *_user;
     NSMutableArray *_search;
     UINavigationController *_navigationController;
 }
@@ -48,7 +48,7 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
     _streams = [[NSMutableArray alloc] initWithObjects:@"Trending", @"Watching", @"Latest", nil];
-    _settings = [[NSMutableArray alloc] initWithObjects:@"Settings", nil];
+    _user = [[NSMutableArray alloc] initWithObjects:@"Settings", @"Logout", nil];
     _search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
     [self.tableView reloadData];
  
@@ -78,11 +78,10 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView *viewHeader=  [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 36)];
-    viewHeader.backgroundColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
+    viewHeader.backgroundColor = [UIColor actionColor];
     
     UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, tableView.frame.size.width - 14, 28)];
     sectionLabel.font = [UIFont fontWithName:@"Graphik-SemiBold" size:10.0];
-    sectionLabel.textColor = [UIColor colorWithRed:0.522 green:0.533 blue:0.557 alpha:1.0];
     sectionLabel.textColor = [UIColor whiteColor];
     
     switch (section) {
@@ -94,7 +93,7 @@
             sectionLabel.text = @"FEEDS";
             break;
         case 2:
-            sectionLabel.text = @"SETTINGS";
+            sectionLabel.text = @"YOU";
             break;
     }
     [viewHeader addSubview:sectionLabel];
@@ -121,7 +120,7 @@
             return _streams.count;
             break;
         case 2:
-            return _settings.count;
+            return _user.count;
             break;
         default:
             return 0;
@@ -143,7 +142,7 @@
             title = [_streams objectAtIndex:indexPath.row];
             break;
         case 2:
-            title = [_settings objectAtIndex:indexPath.row];
+            title = [_user objectAtIndex:indexPath.row];
             break;
     }
     
@@ -157,6 +156,7 @@
         cell.backgroundColor = [UIColor mutedAltColor];
     }
     
+    // For setting the selected/tapped background color.
     UIView *bgColorView = [[UIView alloc] init];
     bgColorView.backgroundColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
     bgColorView.layer.masksToBounds = YES;
@@ -181,6 +181,23 @@
                     break;
                 case 1:
                     [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" stream:@"latest"] animated:YES];
+                    break;
+            }
+        case 2:
+            switch (indexPath.row) {
+                case 0:
+                    break;
+                case 1:
+                    // Logout.
+                    [[ARObjectManager sharedManager] logoutCurrentUser];
+                    
+                    [(UINavigationController*) self.viewDeckController.centerController setNavigationBarHidden:YES];
+                    [(UINavigationController*) self.viewDeckController.centerController popToRootViewControllerAnimated:YES];
+                    
+                    // Remove the menu!
+                    [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
+                        self.viewDeckController.leftController = nil;
+                    }];
                     break;
             }
     }
