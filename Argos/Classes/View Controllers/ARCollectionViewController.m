@@ -194,7 +194,7 @@
         
         // Crop the image
         // Need to double cell height for retina.
-        CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+        CGSize dimensions = CGSizeMake(cell.cellSize.width*2, cell.cellSize.height*2);
         UIImage *croppedImage = [image scaleToCoverSize:dimensions];
         croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
         
@@ -213,7 +213,7 @@
     // If there's no cached image for this event,
     // consider loading it.
     // Only entities with an imageUrl have an image to download.
-    if (entity.imageUrl) {
+    if (entity.imageUrl.length > 0) {
         if (!entity.image) {
             // Only start loading images when scrolling stops.
             if (self.collectionView.dragging == NO && self.collectionView.decelerating == NO) {
@@ -228,13 +228,13 @@
         } else {
             
             // If this is a full screen image...
-            if (CGSizeEqualToSize(cell.imageSize, screenRect.size)) {
+            if (CGSizeEqualToSize(cell.cellSize, screenRect.size)) {
                 // If there isn't yet a full image,
                 // crop and save one.
                 if (!entity.fullImage) {
                     cell.imageView.image = [UIImage imageNamed:@"placeholder"];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                        CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+                        CGSize dimensions = CGSizeMake(cell.cellSize.width*2, cell.cellSize.height*2);
                         UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
                         croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
                         entity.fullImage = croppedImage;
@@ -251,7 +251,7 @@
                 cell.imageView.image = [UIImage imageNamed:@"placeholder"];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    CGSize dimensions = CGSizeMake(cell.imageSize.width*2, cell.imageSize.height*2);
+                    CGSize dimensions = CGSizeMake(cell.cellSize.width*2, cell.cellSize.height*2);
                     UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
                     croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
                     dispatch_async(dispatch_get_main_queue(), ^{

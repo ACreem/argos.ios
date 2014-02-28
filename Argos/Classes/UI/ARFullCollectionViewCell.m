@@ -20,17 +20,17 @@
         CGRect screenRect = [[UIScreen mainScreen] bounds];
         screenRect.size.height -= (44 + 20);
         
-        self.imageSize = screenRect.size;
+        self.cellSize = screenRect.size;
         
         float xPadding = 10;
         float yPadding = 20;
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.imageSize.width, self.imageSize.height)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.cellSize.width, self.cellSize.height)];
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
         [self addSubview:self.imageView];
         
         // Text gradient (so the text is readable)
-        UIView *textGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.imageSize.width, self.imageSize.height)];
+        UIView *textGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.cellSize.width, self.cellSize.height)];
         CAGradientLayer *textGradient = [CAGradientLayer layer];
         textGradient.frame = textGradientView.bounds;
         textGradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];

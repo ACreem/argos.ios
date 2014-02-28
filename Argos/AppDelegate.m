@@ -59,6 +59,7 @@
                              leftViewController:nil
                              rightViewController:nil];
     self.deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
+    self.deckController.delegateMode = IIViewDeckDelegateAndSubControllers;
     
     self.window.backgroundColor = [UIColor whiteColor];
     self.window.rootViewController = self.deckController;

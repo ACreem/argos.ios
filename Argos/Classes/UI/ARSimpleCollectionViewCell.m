@@ -17,9 +17,9 @@
         float cellHeight = 80;
         float padding = 10;
         
-        self.imageSize = CGSizeMake(cellHeight - 2*padding, cellHeight - 2*padding);
+        self.cellSize = CGSizeMake(cellHeight - 2*padding, cellHeight - 2*padding);
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, self.imageSize.width, self.imageSize.height)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, self.cellSize.width, self.cellSize.height)];
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
         [self addSubview:self.imageView];
         

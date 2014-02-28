@@ -17,6 +17,7 @@
 -(UIImage*)fullImage;
 -(void)setImage:(id)image;
 -(void)setFullImage:(id)image;
+-(NSManagedObjectContext*)managedObjectContext;
 @end
 
 @interface ARCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>

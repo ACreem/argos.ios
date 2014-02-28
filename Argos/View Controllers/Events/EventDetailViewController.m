@@ -21,6 +21,11 @@
 
 #import "EventListViewController.h"
 
+#import "IIViewDeckController.h"
+#import "EntityListViewController.h"
+
+#import "AppDelegate.h"
+
 @interface EventDetailViewController () {
     Event *_event;
     CGRect _bounds;
@@ -51,8 +56,8 @@
     
     _bounds = [[UIScreen mainScreen] bounds];
     
-    [self setHeaderImageForEntity:_event];
-    
+    [self setHeaderImageForEntity:(id<Entity>)_event];
+
     // Summary view
     CGPoint summaryOrigin = CGPointMake(0, self.headerView.bounds.size.height);
     self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_event.summary updatedAt:_event.updatedAt];
@@ -66,6 +71,27 @@
     [self.scrollView sizeToFit];
 }
 
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Setup the right controller (the mention pane) for the view deck.
+    // Doesn't feel quite right for this view controller to reach that far up its hierarchy, but...
+    self.navigationController.viewDeckController.rightController = [[EntityListViewController alloc] initWithEntity:_event];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    // Remove the mention pane.
+    // For whatever reason, I can't remove it the same way I added it.
+    //self.navigationController.viewDeckController.rightController = nil;
+    
+    // It has to be removed this way, which is messy:
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.deckController.rightController = nil;
+    
+    [super viewDidDisappear:animated];
+}
 
 #pragma mark - Setup
 - (void)setupStories

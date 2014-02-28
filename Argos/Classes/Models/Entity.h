@@ -2,7 +2,7 @@
 //  Entity.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/19/14.
+//  Created by Francis Tseng on 2/28/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -17,6 +17,8 @@
 @property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSDate * updatedAt;
+@property (nonatomic, retain) NSString * imageUrl;
+@property (nonatomic, retain) id image;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *stories;
 @end

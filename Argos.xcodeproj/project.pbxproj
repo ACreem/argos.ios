@@ -65,6 +65,8 @@
 		F16148F118B6728D00948933 /* CurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148F018B6728D00948933 /* CurrentUser.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F162C0AD18B986A900B38A15 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F162C0AC18B986A900B38A15 /* Source.m */; };
+		F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A418C12C7E0014B436 /* EntityListViewController.m */; };
+		F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
 		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F1C6D6F018B2F34300129552 /* EntityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */; };
@@ -177,6 +179,10 @@
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
 		F162C0AB18B986A900B38A15 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = Classes/Models/Source.h; sourceTree = "<group>"; };
 		F162C0AC18B986A900B38A15 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Source.m; path = Classes/Models/Source.m; sourceTree = "<group>"; };
+		F1C267A318C12C7E0014B436 /* EntityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityListViewController.h; path = Classes/UI/EntityListViewController.h; sourceTree = "<group>"; };
+		F1C267A418C12C7E0014B436 /* EntityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityListViewController.m; path = Classes/UI/EntityListViewController.m; sourceTree = "<group>"; };
+		F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARClipCollectionViewCell.h; path = Classes/UI/ARClipCollectionViewCell.h; sourceTree = "<group>"; };
+		F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARClipCollectionViewCell.m; path = Classes/UI/ARClipCollectionViewCell.m; sourceTree = "<group>"; };
 		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
@@ -366,6 +372,8 @@
 				F157FEC818BC58B400EFFC2E /* ARSimpleCollectionViewCell.m */,
 				F157FEC418BC4C5200EFFC2E /* ARLargeCollectionViewCell.h */,
 				F157FEC518BC4C5200EFFC2E /* ARLargeCollectionViewCell.m */,
+				F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */,
+				F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */,
 				F157FEB418BC067B00EFFC2E /* ARFullCollectionViewCell.h */,
 				F157FEB518BC067B00EFFC2E /* ARFullCollectionViewCell.m */,
 				F157FEBF18BC3C0B00EFFC2E /* ARCollectionViewCell.h */,
@@ -480,6 +488,8 @@
 			children = (
 				F1C6D6EE18B2F34300129552 /* EntityDetailViewController.h */,
 				F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */,
+				F1C267A318C12C7E0014B436 /* EntityListViewController.h */,
+				F1C267A418C12C7E0014B436 /* EntityListViewController.m */,
 			);
 			name = Entities;
 			sourceTree = "<group>";
@@ -681,6 +691,7 @@
 				F157FEC918BC58B400EFFC2E /* ARSimpleCollectionViewCell.m in Sources */,
 				F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */,
 				F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */,
+				F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */,
 				F157FEB318BC063000EFFC2E /* ARCollectionView.m in Sources */,
 				F1601C2C18ADBA7F00C89590 /* EventDetailViewController.m in Sources */,
 				F1C6D6F618B2F4AC00129552 /* Event.m in Sources */,
@@ -693,6 +704,7 @@
 				F157FECC18BC845E00EFFC2E /* ARCollectionHeaderView.m in Sources */,
 				F1D6BE5918C010A100313014 /* ARCircleButton.m in Sources */,
 				F157FEB618BC067B00EFFC2E /* ARFullCollectionViewCell.m in Sources */,
+				F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */,
 				F1C6D6FC18B2F4AC00129552 /* Article.m in Sources */,
 				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,
 				F16148D118B5278700948933 /* ARShareViewController.m in Sources */,
