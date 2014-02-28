@@ -7,23 +7,21 @@
 //
 
 #import "ARCircleButton.h"
+#import <QuartzCore/QuartzCore.h>
 
 @implementation ARCircleButton
 
-- (void)drawRect:(CGRect)rect
-{
-    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    
-    // For fills.
-    //CGContextAddEllipseInRect(ctx, rect);
-    //CGContextSetFillColor(ctx, CGColorGetComponents([[UIColor blueColor] CGColor]));
-    //CGContextFillPath(dctx);
-    
-    // For strokes.
-    // A different rect is specified so the strokes fit in the actual rect.
-    CGContextSetLineWidth(ctx, 1);
-    CGContextSetStrokeColor(ctx, CGColorGetComponents([UIColor actionColor].CGColor));
-    CGContextStrokeEllipseInRect(ctx, CGRectMake(rect.origin.x+1, rect.origin.y+1, rect.size.width-2, rect.size.height-2));
+- (id)initWithFrame:(CGRect)frame {
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Clip the button to a circle and set its border.
+        // Assuming a square button.
+        self.layer.cornerRadius = self.frame.size.width/2;
+        self.clipsToBounds = YES;
+        self.layer.borderWidth = 1.0f;
+        self.layer.borderColor = [UIColor actionColor].CGColor;
+    }
+    return self;
 }
 
 @end

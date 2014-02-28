@@ -7,6 +7,7 @@
 //
 
 #import "ARFullCollectionViewCell.h"
+#import "ARCircleButton.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ARFullCollectionViewCell
@@ -59,6 +60,12 @@
         self.timeLabel.textColor = [UIColor mutedColor];
         self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:10.0];
         [self addSubview:self.timeLabel];
+        
+        // Watching toggle button.
+        ARCircleButton* watch = [[ARCircleButton alloc] initWithFrame:CGRectMake(screenRect.size.width - 44 - xPadding, xPadding, 44, 44)];
+        watch.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+        [watch setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
+        [self addSubview:watch];
     }
     return self;
 }
