@@ -25,4 +25,5 @@
     #else
         static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com";
     #endif
+    static int kFauxStatusBarTag = 99; // Keep track of our fake status bar background.
 #endif

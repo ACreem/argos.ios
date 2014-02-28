@@ -170,7 +170,7 @@
     switch (indexPath.section) {
         case 0: {
             ARSearchCollectionViewController *searchViewController = [[ARSearchCollectionViewController alloc] init];
-            [(UINavigationController*)self.viewDeckController.centerController pushViewController:searchViewController animated:YES];
+            [_navigationController pushViewController:searchViewController animated:YES];
             [self.viewDeckController closeLeftViewAnimated:YES];
             break;
         }
@@ -191,8 +191,8 @@
                     // Logout.
                     [[ARObjectManager sharedManager] logoutCurrentUser];
                     
-                    [(UINavigationController*) self.viewDeckController.centerController setNavigationBarHidden:YES];
-                    [(UINavigationController*) self.viewDeckController.centerController popToRootViewControllerAnimated:YES];
+                    [_navigationController setNavigationBarHidden:YES];
+                    [_navigationController popToRootViewControllerAnimated:YES];
                     
                     // Remove the menu!
                     [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {

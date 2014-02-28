@@ -17,6 +17,8 @@
 #import "ARCollectionView.h"
 #import "ARCollectionHeaderView.h"
 
+#import "TransitionDelegate.h"
+
 #import <QuartzCore/QuartzCore.h>
 
 @interface ARDetailViewController () {
@@ -35,10 +37,11 @@
     UIView *_stuckSectionHeaderSuperview;
     CGRect _stuckSectionHeaderViewFrame;
     
-    WYPopoverController *_popoverController;
     ARShareViewController *_shareViewController;
     ARFontViewController *_fontViewController;
 }
+
+@property (nonatomic, strong) TransitionDelegate *transitionController;
 
 @end
 
@@ -47,6 +50,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // Hack to get modal view controllers which can have transparent backgrounds.
+    // Thx apple.
+    self.transitionController = [[TransitionDelegate alloc] init];
     
     // Hack to do back buttons w/o text.
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
@@ -122,11 +129,6 @@
     
     [self setupTitle];
     [self.view addSubview:_scrollView];
-    
-    // Style the popovers.
-    WYPopoverBackgroundView* popoverAppearance = [WYPopoverBackgroundView appearance];
-    popoverAppearance.tintColor = [UIColor primaryColor];
-    popoverAppearance.outerCornerRadius = 0;
 }
 
 - (void)setupTitle
@@ -134,7 +136,7 @@
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, _bounds.origin.y, _bounds.size.width - 32.0, self.headerView.bounds.size.height)];
     _titleLabel.text = _viewTitle;
     _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20];
+    _titleLabel.font = [UIFont fontWithName:@"Graphik-LightItalic" size:20];
     _titleLabel.numberOfLines = 0;
     [_titleLabel sizeToFit];
     CGRect titleFrame = _titleLabel.frame;
@@ -181,18 +183,12 @@
 - (void)share:(id)sender
 {
     _shareViewController = [[ARShareViewController alloc] init];
-    _popoverController = [[WYPopoverController alloc] initWithContentViewController:_shareViewController];
-    _popoverController.delegate = self;
-    [_popoverController setPopoverContentSize:CGSizeMake(44, 220)];
-    [_popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
+    [self presentViewController:_shareViewController animated:YES completion:nil];
 }
 - (void)font:(id)sender
 {
     _fontViewController = [[ARFontViewController alloc] init];
-    _popoverController = [[WYPopoverController alloc] initWithContentViewController:_fontViewController];
-    _popoverController.delegate = self;
-    [_popoverController setPopoverContentSize:CGSizeMake(_fontViewController.view.frame.size.width, _fontViewController.view.frame.size.height)];
-    [_popoverController presentPopoverFromBarButtonItem:sender permittedArrowDirections:WYPopoverArrowDirectionAny animated:NO];
+    [self presentViewController:_fontViewController animated:YES completion:nil];
 }
 - (void)favorite:(id)sender
 {
@@ -217,6 +213,47 @@
         button.image = [UIImage imageNamed:@"nav_watch"];
         [button setTag:0];
     }
+}
+
+
+# pragma mark - UIViewController
+// Helper for consistently presenting/dismissing modal view controllers.
+- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
+{
+    // Set transparent background.
+    viewControllerToPresent.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.95];
+    
+    // Hack to get transparent backgrounds to be respected.
+    [viewControllerToPresent setTransitioningDelegate:self.transitionController];
+    viewControllerToPresent.modalPresentationStyle = UIModalPresentationCustom;
+    
+    // Have to hide our fake status bar at the top, or else it overlays everything.
+    [[[UIApplication sharedApplication] keyWindow] viewWithTag:kFauxStatusBarTag].hidden = YES;
+    
+    
+    // Add the close button.
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(
+                                                                       screenRect.size.width - 48,
+                                                                       [UIApplication sharedApplication].statusBarFrame.size.height,
+                                                                       48, 48)];
+    [closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeModal:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [viewControllerToPresent.view addSubview:closeButton];
+    
+    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
+}
+- (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
+{
+    [super dismissViewControllerAnimated:flag completion:^{
+        // Have to re-show our fake status bar at the top.
+        [[[UIApplication sharedApplication] keyWindow] viewWithTag:kFauxStatusBarTag].hidden = NO;
+    }];
+}
+- (void)closeModal:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - UIScrollViewDelegate
@@ -333,19 +370,6 @@
         _headerImageView.center = center;
     }
 }
-
-# pragma mark - WYPopoverControllerDelegate
-- (BOOL)popoverControllerShouldDismissPopover:(WYPopoverController *)controller
-{
-    return YES;
-}
-
-- (void)popoverControllerDidDismissPopover:(WYPopoverController *)controller
-{
-    controller.delegate = nil;
-    controller = nil;
-}
-
 
 
 # pragma mark - ARSummaryViewDelegate

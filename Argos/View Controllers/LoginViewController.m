@@ -14,7 +14,6 @@
 
 static int kLoginTag = 0;
 static int kSignUpTag = 1;
-static int kFauxStatusBarTag = 99;
 
 @interface LoginViewController () {
     UITextField *_emailField;
@@ -175,6 +174,7 @@ static int kFauxStatusBarTag = 99;
 
 - (void)login:(id)sender
 {
+   [self postLogin];
     if (_emailField.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"What's your email?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];

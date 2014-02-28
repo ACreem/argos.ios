@@ -26,14 +26,6 @@
 	<true/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>KlinicSlabBold.otf</string>
-		<string>KlinicSlabBoldIt.otf</string>
-		<string>KlinicSlabBook.otf</string>
-		<string>KlinicSlabBookIt.otf</string>
-		<string>KlinicSlabLight.otf</string>
-		<string>KlinicSlabLightIt.otf</string>
-		<string>KlinicSlabMedium.otf</string>
-		<string>KlinicSlabMediumIt.otf</string>
 		<string>Graphik-Regular.otf</string>
 		<string>Graphik-SemiBold.otf</string>
 		<string>Graphik-LightItalic.otf</string>

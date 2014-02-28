@@ -7,17 +7,16 @@
 //
 
 #import "ARFontViewController.h"
-#import "CurrentUser.h"
 
-float const kFontSizeLarge = 1;
-float const kFontSizeMedium = 0.9;
-float const kFontSizeSmall = 0.75;
-NSString* const kFontSizeKey = @"fontSize";
-NSString* const kFontTypeKey = @"fontType";
-NSString* const kContrastKey = @"contrast";
-NSString* const kGraphikType = @"Graphik-Regular";
-NSString* const kMarionType = @"Marion";
-NSString* const kPalatinoType = @"Palatino";
+float static const kFontSizeLarge = 1;
+float static const kFontSizeMedium = 0.9;
+float static const kFontSizeSmall = 0.75;
+static NSString* kFontSizeKey = @"fontSize";
+static NSString* kFontTypeKey = @"fontType";
+static NSString* kContrastKey = @"contrast";
+static NSString* kGraphikType = @"Graphik-Regular";
+static NSString* kMarionType = @"Marion";
+static NSString* kPalatinoType = @"Palatino";
 
 @interface ARFontViewController () {
     UITabBar *_typeSizeSelectionBar;
@@ -33,25 +32,32 @@ NSString* const kPalatinoType = @"Palatino";
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
-    float width = 200;
-    float topPadding = 10;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    float width = screenRect.size.width;
+    float topPadding = 100;
     float xPadding = 12;
-    self.view.backgroundColor = [UIColor primaryColor];
+    float yPadding = 40;
+    float barHeight = 60;
     
     // Remove the UITabBar's top shadow/line.
     [[UITabBar appearance] setShadowImage:[[UIImage alloc] init]];
     [[UITabBar appearance] setBackgroundImage:[[UIImage alloc] init]];
+    
+    // For background transparency.
+    // Note: UITabBar's translucent must be set to YES for this to work.
+    // It is set to YES by default, but note that you can't set it using UITabBar appearance.
+    [[UITabBar appearance] setBarTintColor:[UIColor clearColor]];
+    
+    // For selection/item colors.
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]]; // Note: seems to be an iOS7 bug where this is taken as the selected image tint color.
+    [[UITabBar appearance] setSelectedImageTintColor:[UIColor whiteColor]]; // Note: seems to be an iOS7 bug where this value is ignored.
     
     // Setup type size selection.
     UITabBarItem *largeSize = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"type_large"] tag:0];
     UITabBarItem *mediumSize = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"type_medium"] tag:1];
     UITabBarItem *smallSize = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"type_small"] tag:2];
     
-    _typeSizeSelectionBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, topPadding, width, 44)];
-    _typeSizeSelectionBar.barTintColor = [UIColor primaryColor];
-    _typeSizeSelectionBar.translucent = NO;
-    _typeSizeSelectionBar.tintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this is taken as the selected image tint color.
-    _typeSizeSelectionBar.selectedImageTintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this value is ignored.
+    _typeSizeSelectionBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, topPadding, width, barHeight)];
     [_typeSizeSelectionBar setItems:[NSArray arrayWithObjects:smallSize, mediumSize, largeSize, nil]];
     _typeSizeSelectionBar.delegate = self;
     
@@ -66,8 +72,8 @@ NSString* const kPalatinoType = @"Palatino";
     
     // Bottom border for the UITabBar.
     CALayer *bottomBorder = [CALayer layer];
-    bottomBorder.frame = CGRectMake(xPadding, 43, width - xPadding*2, 1);
-    bottomBorder.backgroundColor = [UIColor mutedAltColor].CGColor;
+    bottomBorder.frame = CGRectMake(xPadding, barHeight - 1, width - xPadding*2, 1);
+    bottomBorder.backgroundColor = [UIColor actionColor].CGColor;
     [_typeSizeSelectionBar.layer addSublayer:bottomBorder];
     
     [self.view addSubview:_typeSizeSelectionBar];
@@ -75,7 +81,7 @@ NSString* const kPalatinoType = @"Palatino";
     
     // Setup type selection.
     // Since there are no vertical UITabBars, fake it with some vertical buttons.
-    UIView *typeSelectionView = [[UIView alloc] initWithFrame:CGRectMake(0, _typeSizeSelectionBar.frame.origin.y + _typeSizeSelectionBar.frame.size.height, width, 120)];
+    UIView *typeSelectionView = [[UIView alloc] initWithFrame:CGRectMake(0, _typeSizeSelectionBar.frame.origin.y + _typeSizeSelectionBar.frame.size.height + yPadding, width, 160)];
     
     NSString* fontType = [prefs stringForKey:kFontTypeKey];
     
@@ -94,7 +100,7 @@ NSString* const kPalatinoType = @"Palatino";
     }
     [typeSelectionView addSubview:graphik];
     
-    UIButton* marion = [[UIButton alloc] initWithFrame:CGRectMake(0, graphik.frame.origin.y + graphik.frame.size.height, width, 40)];
+    UIButton* marion = [[UIButton alloc] initWithFrame:CGRectMake(0, graphik.frame.origin.y + graphik.frame.size.height + yPadding/2, width, 40)];
     marion.tag = 1;
     [marion addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
     [marion setTitle:kMarionType forState:UIControlStateNormal];
@@ -109,7 +115,7 @@ NSString* const kPalatinoType = @"Palatino";
     }
     [typeSelectionView addSubview:marion];
     
-    UIButton* palatino = [[UIButton alloc] initWithFrame:CGRectMake(0, marion.frame.origin.y + marion.frame.size.height, width, 40)];
+    UIButton* palatino = [[UIButton alloc] initWithFrame:CGRectMake(0, marion.frame.origin.y + marion.frame.size.height + yPadding/2, width, 40)];
     palatino.tag = 2;
     [palatino addTarget:self action:@selector(selectFont:) forControlEvents:UIControlEventTouchUpInside];
     [palatino setTitle:kPalatinoType forState:UIControlStateNormal];
@@ -130,11 +136,7 @@ NSString* const kPalatinoType = @"Palatino";
     // Setup contrast selection.
     UITabBarItem *light = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"light"] tag:0];
     UITabBarItem *dark = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"dark"] tag:1];
-    UITabBar *contrastSelectionBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, typeSelectionView.frame.origin.y + typeSelectionView.frame.size.height, width, 60)];
-    contrastSelectionBar.barTintColor = [UIColor primaryColor];
-    contrastSelectionBar.translucent = NO;
-    contrastSelectionBar.tintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this is taken as the selected image tint color.
-    contrastSelectionBar.selectedImageTintColor = [UIColor whiteColor]; // Note: seems to be an iOS7 bug where this value is ignored.
+    UITabBar *contrastSelectionBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, typeSelectionView.frame.origin.y + typeSelectionView.frame.size.height + yPadding, width, barHeight + 20)];
     [contrastSelectionBar setItems:[NSArray arrayWithObjects:light, dark, nil]];
     contrastSelectionBar.delegate = self;
     if ([prefs boolForKey:kContrastKey]) {
@@ -146,7 +148,7 @@ NSString* const kPalatinoType = @"Palatino";
     // Top border for the UITabBar.
     CALayer *topBorder = [CALayer layer];
     topBorder.frame = CGRectMake(xPadding, 0, width - xPadding*2, 1);
-    topBorder.backgroundColor = [UIColor mutedAltColor].CGColor;
+    topBorder.backgroundColor = [UIColor actionColor].CGColor;
     [contrastSelectionBar.layer addSublayer:topBorder];
     
     [self.view addSubview:contrastSelectionBar];

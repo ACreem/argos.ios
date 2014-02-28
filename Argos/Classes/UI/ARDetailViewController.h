@@ -7,12 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "WYPopoverController.h"
 #import "ARSummaryView.h"
 #import "ARScrollView.h"
 #import "AREmbeddedCollectionViewController.h"
 
-@interface ARDetailViewController : UIViewController <UIScrollViewDelegate, ARSummaryViewDelegate, WYPopoverControllerDelegate>
+@interface ARDetailViewController : UIViewController <UIScrollViewDelegate, ARSummaryViewDelegate>
 
 @property (strong, nonatomic) ARScrollView *scrollView;
 @property (strong, nonatomic) ARSummaryView *summaryView;

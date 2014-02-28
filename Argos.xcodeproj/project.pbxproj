@@ -67,20 +67,14 @@
 		F162C0AD18B986A900B38A15 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F162C0AC18B986A900B38A15 /* Source.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
 		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
-		F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */; };
-		F1C6D6E518B2E29500129552 /* KlinicSlabBoldIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DC18B2E29500129552 /* KlinicSlabBoldIt.otf */; };
-		F1C6D6E618B2E29500129552 /* KlinicSlabBook.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DD18B2E29500129552 /* KlinicSlabBook.otf */; };
-		F1C6D6E718B2E29500129552 /* KlinicSlabBookIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DE18B2E29500129552 /* KlinicSlabBookIt.otf */; };
-		F1C6D6E818B2E29500129552 /* KlinicSlabLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6DF18B2E29500129552 /* KlinicSlabLight.otf */; };
-		F1C6D6E918B2E29500129552 /* KlinicSlabLightIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E018B2E29500129552 /* KlinicSlabLightIt.otf */; };
-		F1C6D6EA18B2E29500129552 /* KlinicSlabMedium.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E118B2E29500129552 /* KlinicSlabMedium.otf */; };
-		F1C6D6EB18B2E29500129552 /* KlinicSlabMediumIt.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E218B2E29500129552 /* KlinicSlabMediumIt.otf */; };
-		F1C6D6EC18B2E29500129552 /* Personal Use License.txt in Resources */ = {isa = PBXBuildFile; fileRef = F1C6D6E318B2E29500129552 /* Personal Use License.txt */; };
 		F1C6D6F018B2F34300129552 /* EntityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */; };
 		F1C6D6F318B2F4AC00129552 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6F218B2F4AC00129552 /* Entity.m */; };
 		F1C6D6F618B2F4AC00129552 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6F518B2F4AC00129552 /* Event.m */; };
 		F1C6D6F918B2F4AC00129552 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6F818B2F4AC00129552 /* Story.m */; };
 		F1C6D6FC18B2F4AC00129552 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6FB18B2F4AC00129552 /* Article.m */; };
+		F1D6BE5518C00A6700313014 /* AnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D6BE5218C00A6700313014 /* AnimatedTransitioning.m */; };
+		F1D6BE5618C00A6700313014 /* TransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D6BE5418C00A6700313014 /* TransitionDelegate.m */; };
+		F1D6BE5918C010A100313014 /* ARCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D6BE5818C010A100313014 /* ARCircleButton.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -187,15 +181,6 @@
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
 		F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateUtils.m"; sourceTree = "<group>"; };
-		F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBold.otf; sourceTree = "<group>"; };
-		F1C6D6DC18B2E29500129552 /* KlinicSlabBoldIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBoldIt.otf; sourceTree = "<group>"; };
-		F1C6D6DD18B2E29500129552 /* KlinicSlabBook.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBook.otf; sourceTree = "<group>"; };
-		F1C6D6DE18B2E29500129552 /* KlinicSlabBookIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabBookIt.otf; sourceTree = "<group>"; };
-		F1C6D6DF18B2E29500129552 /* KlinicSlabLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabLight.otf; sourceTree = "<group>"; };
-		F1C6D6E018B2E29500129552 /* KlinicSlabLightIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabLightIt.otf; sourceTree = "<group>"; };
-		F1C6D6E118B2E29500129552 /* KlinicSlabMedium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabMedium.otf; sourceTree = "<group>"; };
-		F1C6D6E218B2E29500129552 /* KlinicSlabMediumIt.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = KlinicSlabMediumIt.otf; sourceTree = "<group>"; };
-		F1C6D6E318B2E29500129552 /* Personal Use License.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Personal Use License.txt"; sourceTree = "<group>"; };
 		F1C6D6EE18B2F34300129552 /* EntityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityDetailViewController.h; path = "View Controllers/Entities/EntityDetailViewController.h"; sourceTree = "<group>"; };
 		F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityDetailViewController.m; path = "View Controllers/Entities/EntityDetailViewController.m"; sourceTree = "<group>"; };
 		F1C6D6F118B2F4AC00129552 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = Classes/Models/Entity.h; sourceTree = "<group>"; };
@@ -206,6 +191,12 @@
 		F1C6D6F818B2F4AC00129552 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Story.m; path = Classes/Models/Story.m; sourceTree = "<group>"; };
 		F1C6D6FA18B2F4AC00129552 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Article.h; path = Classes/Models/Article.h; sourceTree = "<group>"; };
 		F1C6D6FB18B2F4AC00129552 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Article.m; path = Classes/Models/Article.m; sourceTree = "<group>"; };
+		F1D6BE5118C00A6700313014 /* AnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedTransitioning.h; sourceTree = "<group>"; };
+		F1D6BE5218C00A6700313014 /* AnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTransitioning.m; sourceTree = "<group>"; };
+		F1D6BE5318C00A6700313014 /* TransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionDelegate.h; sourceTree = "<group>"; };
+		F1D6BE5418C00A6700313014 /* TransitionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionDelegate.m; sourceTree = "<group>"; };
+		F1D6BE5718C010A100313014 /* ARCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCircleButton.h; path = Classes/UI/ARCircleButton.h; sourceTree = "<group>"; };
+		F1D6BE5818C010A100313014 /* ARCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCircleButton.m; path = Classes/UI/ARCircleButton.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +295,7 @@
 				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
+				F1D6BE5018C00A4D00313014 /* Hacks */,
 				F1D6BE4C18BEA1DA00313014 /* Utility */,
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
 				F1D8FD4818A5EE00003201BF /* Classes */,
@@ -428,6 +420,8 @@
 				F1601C3A18ADBA9500C89590 /* ARSummaryView.m */,
 				F143295D18B30FF500A76D97 /* ARScrollView.h */,
 				F143295E18B30FF500A76D97 /* ARScrollView.m */,
+				F1D6BE5718C010A100313014 /* ARCircleButton.h */,
+				F1D6BE5818C010A100313014 /* ARCircleButton.m */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -477,25 +471,8 @@
 			isa = PBXGroup;
 			children = (
 				F1203A0318BD379400DCEB3A /* graphik */,
-				F1C6D6DA18B2E29500129552 /* klinic */,
 			);
 			path = Fonts;
-			sourceTree = "<group>";
-		};
-		F1C6D6DA18B2E29500129552 /* klinic */ = {
-			isa = PBXGroup;
-			children = (
-				F1C6D6DB18B2E29500129552 /* KlinicSlabBold.otf */,
-				F1C6D6DC18B2E29500129552 /* KlinicSlabBoldIt.otf */,
-				F1C6D6DD18B2E29500129552 /* KlinicSlabBook.otf */,
-				F1C6D6DE18B2E29500129552 /* KlinicSlabBookIt.otf */,
-				F1C6D6DF18B2E29500129552 /* KlinicSlabLight.otf */,
-				F1C6D6E018B2E29500129552 /* KlinicSlabLightIt.otf */,
-				F1C6D6E118B2E29500129552 /* KlinicSlabMedium.otf */,
-				F1C6D6E218B2E29500129552 /* KlinicSlabMediumIt.otf */,
-				F1C6D6E318B2E29500129552 /* Personal Use License.txt */,
-			);
-			path = klinic;
 			sourceTree = "<group>";
 		};
 		F1C6D6ED18B2F32A00129552 /* Entities */ = {
@@ -516,6 +493,17 @@
 				F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */,
 			);
 			name = Utility;
+			sourceTree = "<group>";
+		};
+		F1D6BE5018C00A4D00313014 /* Hacks */ = {
+			isa = PBXGroup;
+			children = (
+				F1D6BE5118C00A6700313014 /* AnimatedTransitioning.h */,
+				F1D6BE5218C00A6700313014 /* AnimatedTransitioning.m */,
+				F1D6BE5318C00A6700313014 /* TransitionDelegate.h */,
+				F1D6BE5418C00A6700313014 /* TransitionDelegate.m */,
+			);
+			name = Hacks;
 			sourceTree = "<group>";
 		};
 		F1D8FD4818A5EE00003201BF /* Classes */ = {
@@ -611,21 +599,14 @@
 				F1203A2118BD379400DCEB3A /* Graphik-RegularItalic.otf in Resources */,
 				F143295C18B30A7B00A76D97 /* SummaryTemplate.html in Resources */,
 				F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */,
-				F1C6D6EB18B2E29500129552 /* KlinicSlabMediumIt.otf in Resources */,
 				F1203A1918BD379400DCEB3A /* Graphik-BoldItalic.otf in Resources */,
-				F1C6D6E518B2E29500129552 /* KlinicSlabBoldIt.otf in Resources */,
-				F1C6D6EA18B2E29500129552 /* KlinicSlabMedium.otf in Resources */,
 				F1203A2018BD379400DCEB3A /* Graphik-Regular.otf in Resources */,
-				F1C6D6EC18B2E29500129552 /* Personal Use License.txt in Resources */,
-				F1C6D6E618B2E29500129552 /* KlinicSlabBook.otf in Resources */,
 				F1203A1E18BD379400DCEB3A /* Graphik-Medium.otf in Resources */,
-				F1C6D6E418B2E29500129552 /* KlinicSlabBold.otf in Resources */,
 				F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */,
 				F1405C3618973C4C00A4819D /* Images.xcassets in Resources */,
 				F1203A1818BD379400DCEB3A /* Graphik-Bold.otf in Resources */,
 				F1203A1F18BD379400DCEB3A /* Graphik-MediumItalic.otf in Resources */,
 				F1203A2618BD379400DCEB3A /* Graphik-Thin.otf in Resources */,
-				F1C6D6E918B2E29500129552 /* KlinicSlabLightIt.otf in Resources */,
 				F1203A2418BD379400DCEB3A /* Graphik-Super.otf in Resources */,
 				F1203A1A18BD379400DCEB3A /* Graphik-Extralight.otf in Resources */,
 				F1203A1D18BD379400DCEB3A /* Graphik-LightItalic.otf in Resources */,
@@ -634,9 +615,7 @@
 				F1203A2318BD379400DCEB3A /* Graphik-SemiboldItalic.otf in Resources */,
 				F1203A2218BD379400DCEB3A /* Graphik-Semibold.otf in Resources */,
 				F1203A1B18BD379400DCEB3A /* Graphik-ExtralightItalic.otf in Resources */,
-				F1C6D6E818B2E29500129552 /* KlinicSlabLight.otf in Resources */,
 				F1203A2518BD379400DCEB3A /* Graphik-SuperItalic.otf in Resources */,
-				F1C6D6E718B2E29500129552 /* KlinicSlabBookIt.otf in Resources */,
 				F1203A1C18BD379400DCEB3A /* Graphik-Light.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -706,10 +685,13 @@
 				F1601C2C18ADBA7F00C89590 /* EventDetailViewController.m in Sources */,
 				F1C6D6F618B2F4AC00129552 /* Event.m in Sources */,
 				F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */,
+				F1D6BE5618C00A6700313014 /* TransitionDelegate.m in Sources */,
+				F1D6BE5518C00A6700313014 /* AnimatedTransitioning.m in Sources */,
 				F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */,
 				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
 				F157FEB018BBF25E00EFFC2E /* ARCollectionViewController.m in Sources */,
 				F157FECC18BC845E00EFFC2E /* ARCollectionHeaderView.m in Sources */,
+				F1D6BE5918C010A100313014 /* ARCircleButton.m in Sources */,
 				F157FEB618BC067B00EFFC2E /* ARFullCollectionViewCell.m in Sources */,
 				F1C6D6FC18B2F4AC00129552 /* Article.m in Sources */,
 				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,

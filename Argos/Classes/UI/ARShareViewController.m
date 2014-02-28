@@ -7,43 +7,83 @@
 //
 
 #import "ARShareViewController.h"
+#import "ARCircleButton.h"
+
+static const CGSize kItemSize = {64, 88};
+static const CGSize kIconSize = {64, 64};
 
 @interface ARShareViewController ()
-
+@property (strong, nonatomic) NSArray *items;
 @end
 
 @implementation ARShareViewController
+
+- (id)init
+{
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setMinimumInteritemSpacing:12];
+    [flowLayout setMinimumLineSpacing:34];
+    [flowLayout setSectionInset:UIEdgeInsetsMake(100, 32, 32, 32)];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    [flowLayout setItemSize:kItemSize];
+    
+    self = [super initWithCollectionViewLayout:flowLayout];
+    return self;
+}
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor primaryColor];
+    // Set a transparent background.
+    self.collectionView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.0];
     
-    UIButton* facebook = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, 44, 44)];
-    [facebook setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
-    facebook.tintColor = [UIColor whiteColor];
-    [self.view addSubview:facebook];
+    // These values will automatically match up with icons/images with the same name.
+    _items = [[NSArray alloc] initWithObjects:@"facebook", @"twitter", @"google", @"mail", @"messaging", @"link", nil];
+
+    [self.collectionView registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+}
+
+# pragma mark - UICollectionViewDataSource
+- (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"Cell";
     
-    UIButton* twitter = [[UIButton alloc] initWithFrame:CGRectMake(0, facebook.frame.origin.y + facebook.frame.size.height, 44, 44)];
-    [twitter setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
-    twitter.tintColor = [UIColor whiteColor];
-    [self.view addSubview:twitter];
+    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    UIButton* google = [[UIButton alloc] initWithFrame:CGRectMake(0, twitter.frame.origin.y + twitter.frame.size.height, 44, 44)];
-    [google setImage:[UIImage imageNamed:@"google"] forState:UIControlStateNormal];
-    google.tintColor = [UIColor whiteColor];
-    [self.view addSubview:google];
+    ARCircleButton* button = [[ARCircleButton alloc] initWithFrame:CGRectMake(kItemSize.width/2 - kIconSize.width/2, 0, kIconSize.width, kIconSize.height)];
+    [button setImage:[UIImage imageNamed:[_items objectAtIndex:indexPath.row]] forState:UIControlStateNormal];
+    button.tintColor = [UIColor whiteColor];
+    button.userInteractionEnabled = NO; // so button touches pass through and are handled by didSelectItemAtIndexPath
+    [cell addSubview:button];
     
-    UIButton* mail = [[UIButton alloc] initWithFrame:CGRectMake(0, google.frame.origin.y + google.frame.size.height, 44, 44)];
-    [mail setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
-    mail.tintColor = [UIColor whiteColor];
-    [self.view addSubview:mail];
+    UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kIconSize.height, kItemSize.width, 22)];
+    titleLabel.text = [[_items objectAtIndex:indexPath.row] capitalizedString];
+    titleLabel.font = [UIFont fontWithName:@"Graphik-Regular" size:12.0];
+    titleLabel.textColor = [UIColor whiteColor];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    [cell addSubview:titleLabel];
     
-    UIButton* link = [[UIButton alloc] initWithFrame:CGRectMake(0, mail.frame.origin.y + mail.frame.size.height, 44, 44)];
-    [link setImage:[UIImage imageNamed:@"link"] forState:UIControlStateNormal];
-    link.tintColor = [UIColor whiteColor];
-    [self.view addSubview:link];
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 1;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [self.items count];
+}
+
+# pragma mark - UICollectionViewDelegate
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString* sharingServiceName = [_items objectAtIndex:indexPath.row];
+    NSLog(@"sharing to %@", sharingServiceName);
 }
 
 @end

@@ -49,7 +49,7 @@
         float titleLabelHeight = 40;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, self.textLabel.frame.origin.y - titleLabelHeight - yPadding, screenRect.size.width - 2*xPadding, titleLabelHeight)];
         self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:20.0];
+        self.titleLabel.font = [UIFont fontWithName:@"Graphik-LightItalic" size:20.0];
         self.titleLabel.numberOfLines = 2;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self addSubview:self.titleLabel];

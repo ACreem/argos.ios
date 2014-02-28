@@ -27,7 +27,7 @@
         float titleLabelOriginx = self.imageView.frame.origin.x + self.imageView.frame.size.width + padding;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabelOriginx, padding/2, self.frame.size.width - titleLabelOriginx - padding, titleLabelHeight)];
         self.titleLabel.textColor = [UIColor blackColor];
-        self.titleLabel.font = [UIFont fontWithName:@"KlinicSlab-Book" size:14.0];
+        self.titleLabel.font = [UIFont fontWithName:@"Graphik-LightItalic" size:14.0];
         self.titleLabel.numberOfLines = 2;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self addSubview:self.titleLabel];

@@ -36,7 +36,7 @@
     self.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
     
     if (self) {
-        self.navigationItem.title = @"";
+        self.navigationItem.title = @""; // No title since the search bar is in the navigation bar.
     }
     return self;
 }
