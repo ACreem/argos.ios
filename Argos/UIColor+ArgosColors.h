@@ -12,6 +12,7 @@
 
 + (UIColor*)primaryColor;
 + (UIColor*)secondaryColor;
++ (UIColor*)headerColor;
 + (UIColor*)actionColor;
 + (UIColor*)mutedColor;
 + (UIColor*)mutedAltColor;

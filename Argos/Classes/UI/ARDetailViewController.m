@@ -221,7 +221,7 @@
 - (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
 {
     // Set transparent background.
-    viewControllerToPresent.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.95];
+    viewControllerToPresent.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.9];
     
     // Hack to get transparent backgrounds to be respected.
     [viewControllerToPresent setTransitioningDelegate:self.transitionController];

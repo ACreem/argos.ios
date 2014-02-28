@@ -48,7 +48,7 @@ static int kSignUpTag = 1;
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     if (![appDelegate.window viewWithTag:kFauxStatusBarTag]) {
         UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 320, 20)];
-        view.backgroundColor = [UIColor primaryColor];
+        view.backgroundColor = [UIColor headerColor];
         view.tag = kFauxStatusBarTag;
         [appDelegate.window addSubview:view];
     }
