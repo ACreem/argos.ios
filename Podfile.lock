@@ -29,6 +29,7 @@ PODS:
   - RKValueTransformers (1.0.1)
   - SOCKit (1.1)
   - TransitionKit (2.0.0)
+  - VCTransitionsLibrary (1.4.0)
   - ViewDeck (2.2.11)
 
 DEPENDENCIES:
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - NYXImagesKit
   - Reachability
   - RestKit
+  - VCTransitionsLibrary
   - ViewDeck (~> 2.2.11)
 
 SPEC CHECKSUMS:
@@ -52,6 +54,7 @@ SPEC CHECKSUMS:
   RKValueTransformers: 1562d458b9c9d59ce777bfc5982f2e1aef2e9182
   SOCKit: 2f3bc4d07910de12dcc202815e07db68a3802581
   TransitionKit: 433284465abacdc07852d7db6dd0cc075010059a
+  VCTransitionsLibrary: 328859e78311d45cf393a69a879417133a68c309
   ViewDeck: b5eddc8559b0e47259ab7addbf2de6768061f139
 
 COCOAPODS: 0.29.0

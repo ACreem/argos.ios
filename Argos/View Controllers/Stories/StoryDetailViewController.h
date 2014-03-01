@@ -9,7 +9,7 @@
 #import "ARDetailViewController.h"
 #import "Story.h"
 
-@interface StoryDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate>
+@interface StoryDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate, UIViewControllerTransitioningDelegate>
 
 - (StoryDetailViewController*)initWithStory:(Story*)story;
 

@@ -9,7 +9,6 @@
 #import "ARSimpleCollectionViewCell.h"
 
 @interface ARSimpleCollectionViewCell ()
-@property CGSize imageSize;
 @end
 
 @implementation ARSimpleCollectionViewCell
@@ -21,9 +20,9 @@
         float padding = 10;
         
         // Unlike most other cell views, the ARSimpleCollectionViewCell does not have full-cell images.
-        _imageSize = CGSizeMake(self.frame.size.height - 2*padding, self.frame.size.height - 2*padding);
+        CGSize imageSize = CGSizeMake(self.frame.size.height - 2*padding, self.frame.size.height - 2*padding);
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, _imageSize.width, _imageSize.height)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, imageSize.width, imageSize.height)];
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
         [self addSubview:self.imageView];
         
@@ -54,16 +53,6 @@
         [self.layer addSublayer:bottomBorder];
     }
     return self;
-}
-
-// Since ARSimpleCollectionViewCell does not use full-cell images,
-// cropping has to be handled a bit differently.
-- (UIImage*)cropImage:(UIImage*)image
-{
-    CGSize dimensions = CGSizeMake(_imageSize.width*2, _imageSize.height*2);
-    UIImage *croppedImage = [image scaleToCoverSize:dimensions];
-    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-    return croppedImage;
 }
 
 @end

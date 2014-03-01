@@ -183,12 +183,12 @@
 - (void)share:(id)sender
 {
     _shareViewController = [[ARShareViewController alloc] init];
-    [self presentViewController:_shareViewController animated:YES completion:nil];
+    [self presentModalViewController:_shareViewController];
 }
 - (void)font:(id)sender
 {
     _fontViewController = [[ARFontViewController alloc] init];
-    [self presentViewController:_fontViewController animated:YES completion:nil];
+    [self presentModalViewController:_fontViewController];
 }
 - (void)favorite:(id)sender
 {
@@ -217,8 +217,8 @@
 
 
 # pragma mark - UIViewController
-// Helper for consistently presenting/dismissing modal view controllers.
-- (void)presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion
+// Helper for consistently presenting modal view controllers.
+- (void)presentModalViewController:(UIViewController*)viewControllerToPresent
 {
     // Set transparent background.
     viewControllerToPresent.view.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.9];
@@ -242,7 +242,7 @@
     
     [viewControllerToPresent.view addSubview:closeButton];
     
-    [super presentViewController:viewControllerToPresent animated:flag completion:completion];
+    [super presentViewController:viewControllerToPresent animated:YES completion:nil];
 }
 - (void)dismissViewControllerAnimated:(BOOL)flag completion:(void (^)(void))completion
 {

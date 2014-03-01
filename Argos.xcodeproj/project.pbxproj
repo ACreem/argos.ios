@@ -69,6 +69,8 @@
 		F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */; };
 		F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */; };
 		F1C267B418C239390014B436 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B318C239390014B436 /* StreamViewController.m */; };
+		F1C267B718C26C940014B436 /* StoryEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B618C26C940014B436 /* StoryEventsViewController.m */; };
+		F1C267BA18C26DE50014B436 /* ARCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
 		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F1C6D6F018B2F34300129552 /* EntityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */; };
@@ -189,6 +191,10 @@
 		F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ArgosFonts.m"; sourceTree = "<group>"; };
 		F1C267B218C239390014B436 /* StreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamViewController.h; path = Classes/UI/StreamViewController.h; sourceTree = "<group>"; };
 		F1C267B318C239390014B436 /* StreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamViewController.m; path = Classes/UI/StreamViewController.m; sourceTree = "<group>"; };
+		F1C267B518C26C940014B436 /* StoryEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryEventsViewController.h; path = Classes/UI/StoryEventsViewController.h; sourceTree = "<group>"; };
+		F1C267B618C26C940014B436 /* StoryEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryEventsViewController.m; path = Classes/UI/StoryEventsViewController.m; sourceTree = "<group>"; };
+		F1C267B818C26DE50014B436 /* ARCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCardCollectionViewCell.h; path = Classes/UI/ARCardCollectionViewCell.h; sourceTree = "<group>"; };
+		F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCardCollectionViewCell.m; path = Classes/UI/ARCardCollectionViewCell.m; sourceTree = "<group>"; };
 		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
@@ -378,6 +384,8 @@
 				F157FEC818BC58B400EFFC2E /* ARSimpleCollectionViewCell.m */,
 				F157FEC418BC4C5200EFFC2E /* ARLargeCollectionViewCell.h */,
 				F157FEC518BC4C5200EFFC2E /* ARLargeCollectionViewCell.m */,
+				F1C267B818C26DE50014B436 /* ARCardCollectionViewCell.h */,
+				F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */,
 				F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */,
 				F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */,
 				F157FEB418BC067B00EFFC2E /* ARFullCollectionViewCell.h */,
@@ -479,6 +487,8 @@
 			children = (
 				F1601C2E18ADBA8800C89590 /* StoryDetailViewController.h */,
 				F1601C2F18ADBA8800C89590 /* StoryDetailViewController.m */,
+				F1C267B518C26C940014B436 /* StoryEventsViewController.h */,
+				F1C267B618C26C940014B436 /* StoryEventsViewController.m */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -709,6 +719,7 @@
 				F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */,
 				F1D6BE5618C00A6700313014 /* TransitionDelegate.m in Sources */,
 				F1D6BE5518C00A6700313014 /* AnimatedTransitioning.m in Sources */,
+				F1C267B718C26C940014B436 /* StoryEventsViewController.m in Sources */,
 				F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */,
 				F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */,
 				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
@@ -718,6 +729,7 @@
 				F157FEB618BC067B00EFFC2E /* ARFullCollectionViewCell.m in Sources */,
 				F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */,
 				F1C6D6FC18B2F4AC00129552 /* Article.m in Sources */,
+				F1C267BA18C26DE50014B436 /* ARCardCollectionViewCell.m in Sources */,
 				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,
 				F16148D118B5278700948933 /* ARShareViewController.m in Sources */,
 				F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */,

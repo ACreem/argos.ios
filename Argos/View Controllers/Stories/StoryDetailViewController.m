@@ -14,6 +14,9 @@
 
 #import "Event.h"
 #import "Entity.h"
+#import "StoryEventsViewController.h"
+
+#import "CECardsAnimationController.h"
 
 @interface StoryDetailViewController () {
     Story *_story;
@@ -45,6 +48,7 @@
     
     [self setHeaderImageForEntity:_story];
     
+    
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
     self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:_story.summary updatedAt:_story.updatedAt];
@@ -66,6 +70,52 @@
     [self fetchEvents];
     
     [self fetchEntities];
+    
+    float textPaddingVertical = 8.0;
+    UIButton* storyButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    [storyButton setTitle:@"View the full timeline" forState:UIControlStateNormal];
+    storyButton.titleLabel.font = [UIFont mediumFontForSize:14];
+    [storyButton sizeToFit];
+    storyButton.frame = CGRectMake(0, 0,
+                                   storyButton.frame.size.width + 20,
+                                   storyButton.frame.size.height);
+    storyButton.tintColor = [UIColor actionColor];
+    [[storyButton layer] setBorderWidth:1.0];
+    [[storyButton layer] setBorderColor:[UIColor actionColor].CGColor];
+    [[storyButton layer] setCornerRadius:4.0];
+    CGRect buttonFrame = storyButton.frame;
+    buttonFrame.origin.x = bounds.size.width/2 - storyButton.bounds.size.width/2;
+    buttonFrame.origin.y = textPaddingVertical*2;
+    
+    UIView *actionsView = [[UIView alloc] initWithFrame:CGRectMake(0, self.summaryView.summaryWebView.frame.origin.y + self.summaryView.summaryWebView.frame.size.height, bounds.size.width, buttonFrame.size.height + textPaddingVertical*2)];
+    storyButton.frame = buttonFrame;
+    [storyButton addTarget:self action:@selector(viewTimeline:) forControlEvents:UIControlEventTouchUpInside];
+    [actionsView addSubview:storyButton];
+    
+    [self.summaryView addSubview:actionsView];
+}
+
+- (void)viewTimeline:(id)sender
+{
+    //[self.navigationController pushViewController:[[StoryEventsViewController alloc] initWithStory:_story] animated:YES];
+    StoryEventsViewController* sevc = [[StoryEventsViewController alloc] initWithStory:_story];
+    sevc.transitioningDelegate = self;
+        // Add the close button.
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(
+                                                                       screenRect.size.width - 48,
+                                                                       [UIApplication sharedApplication].statusBarFrame.size.height,
+                                                                       48, 48)];
+    [closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeTimeline:) forControlEvents:UIControlEventTouchUpInside];
+    
+    [sevc.view addSubview:closeButton];
+ 
+    [self presentViewController:sevc animated:YES completion:nil];
+}
+- (void)closeTimeline:(id)sender
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark - Setup
@@ -128,6 +178,21 @@
 {
     Event *event = [[_story.events allObjects] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
+}
+
+#pragma mark - UIViewControllerTransitioningDelegate
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForPresentedController:(UIViewController *)presented presentingController:(UIViewController *)presenting sourceController:(UIViewController *)source {
+    
+    CECardsAnimationController *transition = [[CECardsAnimationController alloc] init];
+    transition.reverse = NO;
+    return transition;
+}
+
+- (id<UIViewControllerAnimatedTransitioning>)animationControllerForDismissedController:(UIViewController *)dismissed {
+    CECardsAnimationController *transition = [[CECardsAnimationController alloc] init];
+    transition.reverse = YES;
+    return transition;
 }
 
 @end
