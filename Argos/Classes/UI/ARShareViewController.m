@@ -60,7 +60,7 @@ static const CGSize kIconSize = {64, 64};
     
     UILabel* titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, kIconSize.height, kItemSize.width, 22)];
     titleLabel.text = [[_items objectAtIndex:indexPath.row] capitalizedString];
-    titleLabel.font = [UIFont fontWithName:@"Graphik-Regular" size:12.0];
+    titleLabel.font = [UIFont mediumFontForSize:12];
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [cell addSubview:titleLabel];

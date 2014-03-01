@@ -8,18 +8,22 @@
 
 #import "ARSimpleCollectionViewCell.h"
 
+@interface ARSimpleCollectionViewCell ()
+@property CGSize imageSize;
+@end
+
 @implementation ARSimpleCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self) {
-        float cellHeight = 80;
         float padding = 10;
         
-        self.cellSize = CGSizeMake(cellHeight - 2*padding, cellHeight - 2*padding);
+        // Unlike most other cell views, the ARSimpleCollectionViewCell does not have full-cell images.
+        _imageSize = CGSizeMake(self.frame.size.height - 2*padding, self.frame.size.height - 2*padding);
         
-        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, self.cellSize.width, self.cellSize.height)];
+        self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, _imageSize.width, _imageSize.height)];
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
         [self addSubview:self.imageView];
         
@@ -27,20 +31,20 @@
         float titleLabelOriginx = self.imageView.frame.origin.x + self.imageView.frame.size.width + padding;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabelOriginx, padding/2, self.frame.size.width - titleLabelOriginx - padding, titleLabelHeight)];
         self.titleLabel.textColor = [UIColor blackColor];
-        self.titleLabel.font = [UIFont fontWithName:@"Graphik-LightItalic" size:14.0];
+        self.titleLabel.font = [UIFont titleFontForSize:14];
         self.titleLabel.numberOfLines = 2;
         self.titleLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         [self addSubview:self.titleLabel];
         
         self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, self.titleLabel.frame.size.height + padding, self.titleLabel.frame.size.width, 20)];
         self.timeLabel.textColor = [UIColor mutedColor];
-        self.timeLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:9.0];
+        self.timeLabel.font = [UIFont mediumFontForSize:9];
         self.timeLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.timeLabel];
         
         self.metaLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.titleLabel.frame.origin.x, self.timeLabel.frame.origin.y, self.titleLabel.frame.size.width, 20)];
         self.metaLabel.textColor = [UIColor mutedColor];
-        self.metaLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:9.0];
+        self.metaLabel.font = [UIFont mediumFontForSize:9];
         self.metaLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:self.metaLabel];
         
@@ -50,6 +54,16 @@
         [self.layer addSublayer:bottomBorder];
     }
     return self;
+}
+
+// Since ARSimpleCollectionViewCell does not use full-cell images,
+// cropping has to be handled a bit differently.
+- (UIImage*)cropImage:(UIImage*)image
+{
+    CGSize dimensions = CGSizeMake(_imageSize.width*2, _imageSize.height*2);
+    UIImage *croppedImage = [image scaleToCoverSize:dimensions];
+    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+    return croppedImage;
 }
 
 @end

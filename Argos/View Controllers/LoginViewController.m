@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "EventListViewController.h"
+#import "StreamViewController.h"
 #import "MenuViewController.h"
 #import <QuartzCore/QuartzCore.h>
 
@@ -37,11 +37,11 @@ static int kSignUpTag = 1;
 
 - (void)postLogin
 {
-    EventListViewController *elvc = [[EventListViewController alloc] initWithTitle:@"Latest" stream:@"latest"];
-    elvc.managedObjectContext = self.managedObjectContext;
+    StreamViewController *svc = [[StreamViewController alloc] initWithTitle:@"Latest" stream:@"latest"];
+    svc.managedObjectContext = self.managedObjectContext;
     
     // Set whether or not the user is new.
-    elvc.userIsNew = (BOOL)_primaryButton.tag;
+    svc.userIsNew = (BOOL)_primaryButton.tag;
     
     // Add background for the status bar, so the slide-out menu transition looks better.
     // Check first to see if it already exists.
@@ -57,7 +57,7 @@ static int kSignUpTag = 1;
     MenuViewController* menuController = [[MenuViewController alloc] init];
     appDelegate.deckController.leftController = menuController;
     
-    [self.navigationController pushViewController:elvc animated:YES];
+    [self.navigationController pushViewController:svc animated:YES];
 }
 
 - (void)setupUI
@@ -87,7 +87,7 @@ static int kSignUpTag = 1;
     signupButton.frame = CGRectMake(screenWidth - buttonWidth, screenHeight - buttonHeight, buttonWidth, buttonHeight);
     [signupButton setTitle:@"Sign up" forState:UIControlStateNormal];
     signupButton.tintColor = [UIColor mutedColor];
-    signupButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
+    signupButton.titleLabel.font = [UIFont mediumFontForSize:12.0];
     [signupButton addTarget:self action:@selector(togglePrimaryButton:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:signupButton];
     
@@ -95,7 +95,7 @@ static int kSignUpTag = 1;
     forgotButton.frame = CGRectMake(20, screenHeight - buttonHeight, buttonWidth, buttonHeight);
     [forgotButton setTitle:@"Forgot password?" forState:UIControlStateNormal];
     forgotButton.tintColor = [UIColor mutedColor];
-    forgotButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:12.0];
+    forgotButton.titleLabel.font = [UIFont mediumFontForSize:12.0];
     [forgotButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:forgotButton];
     
@@ -104,6 +104,7 @@ static int kSignUpTag = 1;
     _primaryButton.tag = kLoginTag;
     _primaryButton.frame = CGRectMake(screenWidth/2 - mainButtonWidth/2, signupButton.frame.origin.y - signupButton.frame.size.height, mainButtonWidth, buttonHeight);
     [_primaryButton setTitle:@"Login" forState:UIControlStateNormal];
+    _primaryButton.titleLabel.font = [UIFont lightFontForSize:18.0];
     _primaryButton.tintColor = [UIColor whiteColor];
     _primaryButton.backgroundColor = [UIColor secondaryColor];
     [_primaryButton addTarget:self action:@selector(login:) forControlEvents:UIControlEventTouchUpInside];
@@ -114,6 +115,7 @@ static int kSignUpTag = 1;
     [_passwordField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _passwordField.delegate = self;
     _passwordField.secureTextEntry = YES;
+    _passwordField.font = [UIFont lightFontForSize:16.0];
     _passwordField.placeholder = @"password";
     _passwordField.textAlignment = NSTextAlignmentCenter;
     [loginView addSubview:_passwordField];
@@ -121,6 +123,7 @@ static int kSignUpTag = 1;
     _emailField = [[UITextField alloc] initWithFrame:CGRectMake(screenWidth/2 - fieldWidth/2, _passwordField.frame.origin.y - fieldHeight - 1, fieldWidth, fieldHeight)];
     [_emailField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
     _emailField.delegate = self;
+    _emailField.font = [UIFont lightFontForSize:16.0];
     _emailField.placeholder = @"email";
     _emailField.textAlignment = NSTextAlignmentCenter;
     CALayer *bottomBorder = [CALayer layer];

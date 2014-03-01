@@ -39,13 +39,12 @@
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:lvc];
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
     self.navigationController.navigationBar.barTintColor = [UIColor headerColor];
-    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:
         [NSDictionary dictionaryWithObjectsAndKeys:
             [UIColor whiteColor], NSForegroundColorAttributeName,
-            [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0], NSFontAttributeName,
+            [UIFont lightFontForSize:16], NSFontAttributeName,
             nil]];
     
     // Custom back button image.

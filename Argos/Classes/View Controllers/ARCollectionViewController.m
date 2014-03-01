@@ -193,10 +193,7 @@
         entity.image = image;
         
         // Crop the image
-        // Need to double cell height for retina.
-        CGSize dimensions = CGSizeMake(cell.cellSize.width*2, cell.cellSize.height*2);
-        UIImage *croppedImage = [image scaleToCoverSize:dimensions];
-        croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+        UIImage* croppedImage = [cell cropImage:image];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             // Update the UI
@@ -208,7 +205,7 @@
 - (void)handleImageForEntity:(id<Entity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    screenRect.size.height -= (44 + 20); // Adjust for nav & status bar
+    screenRect.size.height -= ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height);
     
     // If there's no cached image for this event,
     // consider loading it.
@@ -228,15 +225,13 @@
         } else {
             
             // If this is a full screen image...
-            if (CGSizeEqualToSize(cell.cellSize, screenRect.size)) {
+            if (CGSizeEqualToSize(cell.frame.size, screenRect.size)) {
                 // If there isn't yet a full image,
                 // crop and save one.
                 if (!entity.fullImage) {
                     cell.imageView.image = [UIImage imageNamed:@"placeholder"];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                        CGSize dimensions = CGSizeMake(cell.cellSize.width*2, cell.cellSize.height*2);
-                        UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
-                        croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+                        UIImage *croppedImage = [cell cropImage:entity.image];
                         entity.fullImage = croppedImage;
                         dispatch_async(dispatch_get_main_queue(), ^{
                             cell.imageView.image = croppedImage;
@@ -251,9 +246,7 @@
                 cell.imageView.image = [UIImage imageNamed:@"placeholder"];
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    CGSize dimensions = CGSizeMake(cell.cellSize.width*2, cell.cellSize.height*2);
-                    UIImage *croppedImage = [entity.image scaleToCoverSize:dimensions];
-                    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+                    UIImage *croppedImage = [cell cropImage:entity.image];
                     dispatch_async(dispatch_get_main_queue(), ^{
                         cell.imageView.image = croppedImage;
                     });

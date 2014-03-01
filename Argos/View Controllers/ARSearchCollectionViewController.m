@@ -53,7 +53,7 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceVertical = NO;
     
-    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.collectionView.frame.size.width - 60, 44)];
+    _searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0, 0, self.collectionView.frame.size.width - 60, self.navigationController.navigationBar.frame.size.height)];
     _searchBar.barTintColor = [UIColor primaryColor];
     _searchBar.translucent = NO;
     _searchBar.delegate = self;

@@ -102,7 +102,7 @@
         // Show only if this event belongs to only one story.
         UIButton* storyButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [storyButton setTitle:@"View the full story" forState:UIControlStateNormal];
-        storyButton.titleLabel.font = [UIFont fontWithName:@"HelveticaNeue" size:14.0];
+        storyButton.titleLabel.font = [UIFont mediumFontForSize:14];
         [storyButton sizeToFit];
         storyButton.frame = CGRectMake(0, 0,
                                        storyButton.frame.size.width + 20,

@@ -67,7 +67,7 @@
     headerView.backgroundColor = [UIColor actionColor];
     UILabel *headerLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 0, itemWidth, 44)];
     headerLabel.text = @"Mentions";
-    headerLabel.font = [UIFont fontWithName:@"Graphik-Light" size:16.0];
+    headerLabel.font = [UIFont lightFontForSize:16];
     headerLabel.textColor = [UIColor whiteColor];
     [headerView addSubview:headerLabel];
     [self.view addSubview:headerView];

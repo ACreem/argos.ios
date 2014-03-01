@@ -81,7 +81,7 @@
     viewHeader.backgroundColor = [UIColor actionColor];
     
     UILabel *sectionLabel = [[UILabel alloc] initWithFrame:CGRectMake(14, -2, tableView.frame.size.width - 14, 28)];
-    sectionLabel.font = [UIFont fontWithName:@"Graphik-SemiBold" size:10.0];
+    sectionLabel.font = [UIFont boldFontForSize:10];
     sectionLabel.textColor = [UIColor whiteColor];
     
     switch (section) {
@@ -147,7 +147,7 @@
     }
     
     cell.textLabel.text = title;
-    cell.textLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
+    cell.textLabel.font = [UIFont lightFontForSize:16];
     cell.backgroundColor = [UIColor colorWithRed:0.157 green:0.169 blue:0.208 alpha:1.0];
     cell.textLabel.textColor = [UIColor colorWithRed:0.929 green:0.929 blue:0.929 alpha:1.0];
     cell.imageView.image = [UIImage imageNamed:[title lowercaseString]];

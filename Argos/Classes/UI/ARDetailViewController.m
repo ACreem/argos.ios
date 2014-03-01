@@ -136,7 +136,7 @@
     _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, _bounds.origin.y, _bounds.size.width - 32.0, self.headerView.bounds.size.height)];
     _titleLabel.text = _viewTitle;
     _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.font = [UIFont fontWithName:@"Graphik-LightItalic" size:20];
+    _titleLabel.font = [UIFont titleFontForSize:20];
     _titleLabel.numberOfLines = 0;
     [_titleLabel sizeToFit];
     CGRect titleFrame = _titleLabel.frame;

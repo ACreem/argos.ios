@@ -25,7 +25,7 @@
     float paddingX = 16.0;
     float paddingY = 8.0;
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGRect frame = CGRectMake(origin.x, origin.y, bounds.size.width, 400.0);
+    CGRect frame = CGRectMake(origin.x, origin.y, bounds.size.width, 400.0); // Arbirtary height, it is set programatically later.
     self = [super initWithFrame:frame];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self
@@ -41,7 +41,7 @@
                                                                bounds.size.width - (paddingX*2),
                                                                20.0)];
         _timeLabel.text = [NSDate dateDiff:updatedAt];
-        _timeLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:10.0];
+        _timeLabel.font = [UIFont lightFontForSize:10];
         _timeLabel.textColor = [UIColor mutedColor];
         [headerView addSubview:_timeLabel];
         [self addSubview:headerView];

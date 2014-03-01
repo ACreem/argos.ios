@@ -20,9 +20,9 @@
         float yPadding = 20;
         
         float textLabelHeight = 50;
-        self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, self.cellSize.height - textLabelHeight - yPadding, self.cellSize.width - 2*xPadding, textLabelHeight)];
+        self.textLabel = [[UILabel alloc] initWithFrame:CGRectMake(xPadding, self.frame.size.height - textLabelHeight - yPadding, self.frame.size.width - 2*xPadding, textLabelHeight)];
         self.textLabel.numberOfLines = 4;
-        self.textLabel.font = [UIFont fontWithName:@"Graphik-Regular" size:12.0];
+        self.textLabel.font = [UIFont mediumFontForSize:12];
         self.textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
         self.textLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.textLabel];

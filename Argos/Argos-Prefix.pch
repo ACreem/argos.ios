@@ -18,6 +18,7 @@
     #import <NYXImagesKit/NYXImagesKit.h>
     #import "ARObjectManager.h"
     #import "UIColor+ArgosColors.h"
+    #import "UIFont+ArgosFonts.h"
     #import "NSDate+DateUtils.h"
 
     #ifdef DEBUG

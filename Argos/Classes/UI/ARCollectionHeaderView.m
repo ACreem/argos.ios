@@ -19,7 +19,7 @@
         float padding = 10;
         
         _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, self.frame.size.width - 2*padding, self.frame.size.height)];
-        _titleLabel.font = [UIFont fontWithName:@"HelveticaNeue-Light" size:16.0];
+        _titleLabel.font = [UIFont lightFontForSize:16];
         _titleLabel.textColor = [UIColor lightGrayColor];
         
         [self addSubview:_titleLabel];

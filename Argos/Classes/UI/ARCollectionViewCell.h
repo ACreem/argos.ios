@@ -14,6 +14,7 @@
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) UILabel *textLabel;
 @property (strong, nonatomic) UILabel *timeLabel;
-@property (assign, nonatomic) CGSize cellSize;
+
+- (UIImage*)cropImage:(UIImage*)image;
 
 @end
