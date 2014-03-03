@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		227356C5D8D74AD5B091E0E3 /* libPods-ArgosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */; };
+		8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
 		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
 		F1203A1818BD379400DCEB3A /* Graphik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */; };
@@ -38,7 +40,6 @@
 		F1405C3E18973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
 		F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1405C4518973C4C00A4819D /* InfoPlist.strings */; };
-		F1405C4918973C4C00A4819D /* ArgosTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F1405C4818973C4C00A4819D /* ArgosTests.m */; };
 		F143295C18B30A7B00A76D97 /* SummaryTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = F143295B18B30A7B00A76D97 /* SummaryTemplate.html */; };
 		F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F143295E18B30FF500A76D97 /* ARScrollView.m */; };
 		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
@@ -71,6 +72,8 @@
 		F1C267B418C239390014B436 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B318C239390014B436 /* StreamViewController.m */; };
 		F1C267B718C26C940014B436 /* StoryEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B618C26C940014B436 /* StoryEventsViewController.m */; };
 		F1C267BA18C26DE50014B436 /* ARCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */; };
+		F1C267C618C393F60014B436 /* ARScrollViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267C518C393F60014B436 /* ARScrollViewSpec.m */; };
+		F1C267C818C3A0D40014B436 /* ARSummaryViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267C718C3A0D40014B436 /* ARSummaryViewSpec.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
 		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F1C6D6F018B2F34300129552 /* EntityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */; };
@@ -95,7 +98,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		07BF9B82202C44829912E509 /* Pods-ArgosTests.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ArgosTests.xcconfig"; path = "Pods/Pods-ArgosTests.xcconfig"; sourceTree = "<group>"; };
 		4C8E5860754E44B8B98A352E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		F1203A0418BD379400DCEB3A /* Graphik-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Black.otf"; sourceTree = "<group>"; };
 		F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BlackItalic.otf"; sourceTree = "<group>"; };
@@ -133,7 +138,6 @@
 		F1405C3C18973C4C00A4819D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		F1405C4418973C4C00A4819D /* ArgosTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "ArgosTests-Info.plist"; sourceTree = "<group>"; };
 		F1405C4618973C4C00A4819D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		F1405C4818973C4C00A4819D /* ArgosTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ArgosTests.m; sourceTree = "<group>"; };
 		F143295B18B30A7B00A76D97 /* SummaryTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = SummaryTemplate.html; sourceTree = "<group>"; };
 		F143295D18B30FF500A76D97 /* ARScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARScrollView.h; path = Classes/UI/ARScrollView.h; sourceTree = "<group>"; };
 		F143295E18B30FF500A76D97 /* ARScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARScrollView.m; path = Classes/UI/ARScrollView.m; sourceTree = "<group>"; };
@@ -195,6 +199,8 @@
 		F1C267B618C26C940014B436 /* StoryEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryEventsViewController.m; path = Classes/UI/StoryEventsViewController.m; sourceTree = "<group>"; };
 		F1C267B818C26DE50014B436 /* ARCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCardCollectionViewCell.h; path = Classes/UI/ARCardCollectionViewCell.h; sourceTree = "<group>"; };
 		F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCardCollectionViewCell.m; path = Classes/UI/ARCardCollectionViewCell.m; sourceTree = "<group>"; };
+		F1C267C518C393F60014B436 /* ARScrollViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARScrollViewSpec.m; sourceTree = "<group>"; };
+		F1C267C718C3A0D40014B436 /* ARSummaryViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSummaryViewSpec.m; sourceTree = "<group>"; };
 		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
@@ -237,6 +243,8 @@
 				F1405C3D18973C4C00A4819D /* XCTest.framework in Frameworks */,
 				F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */,
 				F1405C3E18973C4C00A4819D /* Foundation.framework in Frameworks */,
+				8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */,
+				227356C5D8D74AD5B091E0E3 /* libPods-ArgosTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +284,7 @@
 				F1405C2218973C4C00A4819D /* Frameworks */,
 				F1405C2118973C4C00A4819D /* Products */,
 				E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */,
+				07BF9B82202C44829912E509 /* Pods-ArgosTests.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -297,6 +306,7 @@
 				F1405C2718973C4C00A4819D /* UIKit.framework */,
 				F1405C3C18973C4C00A4819D /* XCTest.framework */,
 				4C8E5860754E44B8B98A352E /* libPods.a */,
+				C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -338,7 +348,8 @@
 		F1405C4218973C4C00A4819D /* ArgosTests */ = {
 			isa = PBXGroup;
 			children = (
-				F1405C4818973C4C00A4819D /* ArgosTests.m */,
+				F1C267C518C393F60014B436 /* ARScrollViewSpec.m */,
+				F1C267C718C3A0D40014B436 /* ARSummaryViewSpec.m */,
 				F1405C4318973C4C00A4819D /* Supporting Files */,
 			);
 			path = ArgosTests;
@@ -571,9 +582,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F1405C4F18973C4C00A4819D /* Build configuration list for PBXNativeTarget "ArgosTests" */;
 			buildPhases = (
+				A30B092A64CB44F88078CD07 /* Check Pods Manifest.lock */,
 				F1405C3718973C4C00A4819D /* Sources */,
 				F1405C3818973C4C00A4819D /* Frameworks */,
 				F1405C3918973C4C00A4819D /* Resources */,
+				01C76E312B834D64937428B8 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -661,6 +674,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		01C76E312B834D64937428B8 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-ArgosTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		0CD919ACA0434EDAB0E302B0 /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -674,6 +702,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A30B092A64CB44F88078CD07 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		EB1D7606B2DF41109219A945 /* Check Pods Manifest.lock */ = {
@@ -748,7 +791,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F1405C4918973C4C00A4819D /* ArgosTests.m in Sources */,
+				F1C267C618C393F60014B436 /* ARScrollViewSpec.m in Sources */,
+				F1C267C818C3A0D40014B436 /* ARSummaryViewSpec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -892,6 +936,7 @@
 		};
 		F1405C5018973C4C00A4819D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07BF9B82202C44829912E509 /* Pods-ArgosTests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Argos.app/Argos";
@@ -907,6 +952,11 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "ArgosTests/ArgosTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -915,6 +965,7 @@
 		};
 		F1405C5118973C4C00A4819D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 07BF9B82202C44829912E509 /* Pods-ArgosTests.xcconfig */;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/Argos.app/Argos";
@@ -926,6 +977,11 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Argos/Argos-Prefix.pch";
 				INFOPLIST_FILE = "ArgosTests/ArgosTests-Info.plist";
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-framework",
+					XCTest,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;

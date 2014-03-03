@@ -177,10 +177,13 @@
         case 1:
             switch (indexPath.row) {
                 case 0:
-                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Latest" stream:@"latest"] animated:YES];
+                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Trending" stream:@"latest"] animated:YES];
                     break;
                 case 1:
                     [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" stream:@"latest"] animated:YES];
+                    break;
+                case 2:
+                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Latest" stream:@"latest"] animated:YES];
                     break;
             }
         case 2:

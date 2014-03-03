@@ -40,7 +40,6 @@
     // and its preceding view, increase it's height by 16pt rather than positioning
     // its origin 16pt further down. You may need to wrap padded views in subviews (though
     // often this works to the benefit of view organization/encapsulation).
-    // NOTE: this does not call `sizeToFit`, if you need it, call it manually.
     float yOffset = _yOffset;
     for (UIView *v in [self subviews]) {
         CGRect frame = v.frame;

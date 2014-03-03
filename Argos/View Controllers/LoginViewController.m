@@ -37,12 +37,6 @@ static int kSignUpTag = 1;
 
 - (void)postLogin
 {
-    StreamViewController *svc = [[StreamViewController alloc] initWithTitle:@"Latest" stream:@"latest"];
-    svc.managedObjectContext = self.managedObjectContext;
-    
-    // Set whether or not the user is new.
-    svc.userIsNew = (BOOL)_primaryButton.tag;
-    
     // Add background for the status bar, so the slide-out menu transition looks better.
     // Check first to see if it already exists.
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -56,6 +50,12 @@ static int kSignUpTag = 1;
     // Setup the slide-out menu.
     MenuViewController* menuController = [[MenuViewController alloc] init];
     appDelegate.deckController.leftController = menuController;
+    
+    StreamViewController *svc = [[StreamViewController alloc] initWithTitle:@"Latest" stream:@"latest"];
+    svc.managedObjectContext = self.managedObjectContext;
+    
+    // Set whether or not the user is new.
+    svc.userIsNew = (BOOL)_primaryButton.tag;
     
     [self.navigationController pushViewController:svc animated:YES];
 }
@@ -186,7 +186,7 @@ static int kSignUpTag = 1;
         [alert show];
     } else {
         
-         //Workaround to authenticate the user through the app.
+         // Workaround to authenticate the user through the app.
          // See: https://github.com/mattupstate/flask-security/issues/30
         UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,0,0)];
         webView.delegate = self;
@@ -271,20 +271,6 @@ static int kSignUpTag = 1;
 
     NSString *response = [webView stringByEvaluatingJavaScriptFromString:js];
     if ([response rangeOfString:@"Specified user does not exist"].location == NSNotFound && [response rangeOfString:@"Invalid password"].location == NSNotFound) {
-        /*
-         Successful response looks like:
-         {
-            "meta": {
-                "code": 200
-            },
-            "response": {
-                "user": {
-                    "id": "the_user_id",
-                    "authentication_token": "the_user_authentication_token"
-                }
-            }
-         }
-         */
         /* for checking the server response
         NSData *jsonData = [response dataUsingEncoding:NSUTF8StringEncoding];
         NSError *error;
