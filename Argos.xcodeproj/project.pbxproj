@@ -67,6 +67,8 @@
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F162C0AD18B986A900B38A15 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F162C0AC18B986A900B38A15 /* Source.m */; };
 		F1AB914518C40522007EF481 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914418C40522007EF481 /* ImageDownloader.m */; };
+		F1AB914818C40E8E007EF481 /* ARGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */; };
+		F1AB914B18C4108A007EF481 /* ARImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914A18C4108A007EF481 /* ARImageViewCell.m */; };
 		F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A418C12C7E0014B436 /* EntityListViewController.m */; };
 		F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */; };
 		F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */; };
@@ -190,6 +192,10 @@
 		F162C0AC18B986A900B38A15 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Source.m; path = Classes/Models/Source.m; sourceTree = "<group>"; };
 		F1AB914318C40522007EF481 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
 		F1AB914418C40522007EF481 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
+		F1AB914618C40E8E007EF481 /* ARGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARGalleryViewController.h; path = Classes/UI/ARGalleryViewController.h; sourceTree = "<group>"; };
+		F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARGalleryViewController.m; path = Classes/UI/ARGalleryViewController.m; sourceTree = "<group>"; };
+		F1AB914918C4108A007EF481 /* ARImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARImageViewCell.h; path = Classes/UI/ARImageViewCell.h; sourceTree = "<group>"; };
+		F1AB914A18C4108A007EF481 /* ARImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARImageViewCell.m; path = Classes/UI/ARImageViewCell.m; sourceTree = "<group>"; };
 		F1C267A318C12C7E0014B436 /* EntityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityListViewController.h; path = Classes/UI/EntityListViewController.h; sourceTree = "<group>"; };
 		F1C267A418C12C7E0014B436 /* EntityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityListViewController.m; path = Classes/UI/EntityListViewController.m; sourceTree = "<group>"; };
 		F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARClipCollectionViewCell.h; path = Classes/UI/ARClipCollectionViewCell.h; sourceTree = "<group>"; };
@@ -376,6 +382,8 @@
 				F157FEB218BC063000EFFC2E /* ARCollectionView.m */,
 				F157FECA18BC845E00EFFC2E /* ARCollectionHeaderView.h */,
 				F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */,
+				F1AB914618C40E8E007EF481 /* ARGalleryViewController.h */,
+				F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */,
 			);
 			name = Collections;
 			sourceTree = "<group>";
@@ -406,6 +414,8 @@
 				F157FEB518BC067B00EFFC2E /* ARFullCollectionViewCell.m */,
 				F157FEBF18BC3C0B00EFFC2E /* ARCollectionViewCell.h */,
 				F157FEC018BC3C0B00EFFC2E /* ARCollectionViewCell.m */,
+				F1AB914918C4108A007EF481 /* ARImageViewCell.h */,
+				F1AB914A18C4108A007EF481 /* ARImageViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -766,6 +776,7 @@
 				F1C6D6F618B2F4AC00129552 /* Event.m in Sources */,
 				F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */,
 				F1D6BE5618C00A6700313014 /* TransitionDelegate.m in Sources */,
+				F1AB914818C40E8E007EF481 /* ARGalleryViewController.m in Sources */,
 				F1D6BE5518C00A6700313014 /* AnimatedTransitioning.m in Sources */,
 				F1C267B718C26C940014B436 /* StoryEventsViewController.m in Sources */,
 				F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */,
@@ -784,6 +795,7 @@
 				F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */,
 				F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */,
 				F1C6D6F318B2F4AC00129552 /* Entity.m in Sources */,
+				F1AB914B18C4108A007EF481 /* ARImageViewCell.m in Sources */,
 				F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */,
 				F157FEC618BC4C5200EFFC2E /* ARLargeCollectionViewCell.m in Sources */,
 				F157FEB918BC095700EFFC2E /* AREmbeddedCollectionViewController.m in Sources */,

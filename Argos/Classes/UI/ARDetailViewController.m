@@ -130,6 +130,7 @@
     [_scrollView addSubview:_progressView];
     
     [self setupTitle];
+    
     [self.view addSubview:_scrollView];
 }
 

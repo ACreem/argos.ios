@@ -13,6 +13,7 @@
 #import "AREmbeddedCollectionViewController.h"
 #import "ARSimpleCollectionViewCell.h"
 #import "ARLargeCollectionViewCell.h"
+#import "ARGalleryViewController.h"
 
 #import "Article.h"
 #import "Story.h"
@@ -64,6 +65,17 @@
     self.summaryView.delegate = self;
     [self setupStories];
     [self.scrollView addSubview:self.summaryView];
+    
+    
+    // Setup the image gallery.
+    ARGalleryViewController *galleryViewController = [[ARGalleryViewController alloc] init];
+    CGSize gallerySize = CGSizeMake(_bounds.size.width, 220);
+    [self addChildViewController:galleryViewController];
+    [self.scrollView addSubview:galleryViewController.collectionView];
+    [galleryViewController didMoveToParentViewController:self];
+    galleryViewController.collectionView.frame = CGRectMake(0, 0, gallerySize.width, gallerySize.height);
+    [(UICollectionViewFlowLayout*)galleryViewController.collectionViewLayout setItemSize:gallerySize];
+    
     
     [self fetchEntities];
     [self setupArticles];
