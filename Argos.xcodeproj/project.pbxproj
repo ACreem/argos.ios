@@ -66,6 +66,7 @@
 		F16148F118B6728D00948933 /* CurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148F018B6728D00948933 /* CurrentUser.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F162C0AD18B986A900B38A15 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F162C0AC18B986A900B38A15 /* Source.m */; };
+		F1AB914518C40522007EF481 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914418C40522007EF481 /* ImageDownloader.m */; };
 		F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A418C12C7E0014B436 /* EntityListViewController.m */; };
 		F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */; };
 		F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */; };
@@ -187,6 +188,8 @@
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
 		F162C0AB18B986A900B38A15 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = Classes/Models/Source.h; sourceTree = "<group>"; };
 		F162C0AC18B986A900B38A15 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Source.m; path = Classes/Models/Source.m; sourceTree = "<group>"; };
+		F1AB914318C40522007EF481 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
+		F1AB914418C40522007EF481 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		F1C267A318C12C7E0014B436 /* EntityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityListViewController.h; path = Classes/UI/EntityListViewController.h; sourceTree = "<group>"; };
 		F1C267A418C12C7E0014B436 /* EntityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityListViewController.m; path = Classes/UI/EntityListViewController.m; sourceTree = "<group>"; };
 		F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARClipCollectionViewCell.h; path = Classes/UI/ARClipCollectionViewCell.h; sourceTree = "<group>"; };
@@ -532,6 +535,8 @@
 				F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */,
 				F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */,
 				F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */,
+				F1AB914318C40522007EF481 /* ImageDownloader.h */,
+				F1AB914418C40522007EF481 /* ImageDownloader.m */,
 			);
 			name = Utility;
 			sourceTree = "<group>";
@@ -775,6 +780,7 @@
 				F1C267BA18C26DE50014B436 /* ARCardCollectionViewCell.m in Sources */,
 				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,
 				F16148D118B5278700948933 /* ARShareViewController.m in Sources */,
+				F1AB914518C40522007EF481 /* ImageDownloader.m in Sources */,
 				F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */,
 				F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */,
 				F1C6D6F318B2F4AC00129552 /* Entity.m in Sources */,

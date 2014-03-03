@@ -7,11 +7,13 @@
 //
 
 #import "ARCollectionViewController.h"
+#import "ImageDownloader.h"
 
 @interface ARCollectionViewController () {
     NSString *_title;
     NSString *_entityName;
 }
+@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @end
 
 @implementation ARCollectionViewController
@@ -45,6 +47,17 @@
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     self.collectionView = [[ARCollectionView alloc] initWithFrame:screenRect collectionViewLayout:self.collectionViewLayout];
+}
+
+- (void)didReceiveMemoryWarning
+{
+    [super didReceiveMemoryWarning];
+    
+    // terminate all pending download connections
+    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
+    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
+    
+    [self.imageDownloadsInProgress removeAllObjects];
 }
 
 # pragma mark - UICollectionViewDataSource
@@ -183,23 +196,27 @@
 {
     NSURL* imageUrl = [NSURL URLWithString:entity.imageUrl];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-        NSError* error = nil;
-        NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
-        
-        ARCollectionViewCell* cell = (ARCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-        
-        UIImage* image = [UIImage imageWithData:imageData];
-        entity.image = image;
-        
-        // Crop the image
-        UIImage* croppedImage = [cell cropImage:image];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            // Update the UI
-            cell.imageView.image = croppedImage;
-        });
-    });
+    ImageDownloader *imageDownloader = [self.imageDownloadsInProgress objectForKey:indexPath];
+    if (imageDownloader == nil) {
+        imageDownloader = [[ImageDownloader alloc] initWithURL:imageUrl];
+        [imageDownloader setCompletionHandler:^(UIImage *image) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+                ARCollectionViewCell* cell = (ARCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+            
+                entity.image = image;
+                
+                // Crop the image
+                UIImage* croppedImage = [cell cropImage:image];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Update the UI
+                    cell.imageView.image = croppedImage;
+                });
+            });
+        }];
+        [self.imageDownloadsInProgress setObject:imageDownloader forKey:indexPath];
+        [imageDownloader startDownload];
+    }
 }
 
 - (void)handleImageForEntity:(id<Entity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath

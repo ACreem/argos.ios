@@ -17,6 +17,8 @@
 #import "ARCollectionView.h"
 #import "ARCollectionHeaderView.h"
 
+#import "ImageDownloader.h"
+
 #import "TransitionDelegate.h"
 
 #import <QuartzCore/QuartzCore.h>
@@ -163,17 +165,11 @@
     if (entity.image) {
         [self setHeaderImage:entity.image];
     } else if (entity.imageUrl) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            NSURL* imageUrl = [NSURL URLWithString:entity.imageUrl];
-            NSError* error = nil;
-            NSData *imageData = [NSData dataWithContentsOfURL:imageUrl options:NSDataReadingUncached error:&error];
-            
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIImage* image = [UIImage imageWithData:imageData];
-                entity.image = image;
-                [self setHeaderImage:entity.image];
-            });
-        });
+        ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:entity.imageUrl]];
+        [imageDownloader setCompletionHandler:^(UIImage *image) {
+            entity.image = image;
+            [self setHeaderImage:entity.image];
+        }];
     }
 }
 
