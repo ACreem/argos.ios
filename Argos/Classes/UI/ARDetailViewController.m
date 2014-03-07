@@ -70,8 +70,8 @@
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
     UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
     UIBarButtonItem *watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
-    UIBarButtonItem *favoriteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_favorite"] style:UIBarButtonItemStylePlain target:self action:@selector(favorite:)];
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, favoriteButton, item, fontButton, item, watchButton, item, nil];
+    UIBarButtonItem *bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmark"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
+    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, bookmarkButton, item, fontButton, item, watchButton, item, nil];
     
     
     float headerImageHeight = 200.0;
@@ -187,15 +187,15 @@
     _fontViewController = [[ARFontViewController alloc] init];
     [self presentModalViewController:_fontViewController];
 }
-- (void)favorite:(id)sender
+- (void)bookmark:(id)sender
 {
-    NSLog(@"favorited");
+    NSLog(@"bookmarkd");
     UIBarButtonItem *button = (UIBarButtonItem*)sender;
     if (button.tag != 1) {
-        button.image = [UIImage imageNamed:@"nav_favorited"];
+        button.image = [UIImage imageNamed:@"nav_bookmarkd"];
         [button setTag:1];
     } else {
-        button.image = [UIImage imageNamed:@"nav_favorite"];
+        button.image = [UIImage imageNamed:@"nav_bookmark"];
         [button setTag:0];
     }
 }

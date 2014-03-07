@@ -95,10 +95,10 @@
 {
     ARTableViewCell *cell = (ARTableViewCell*)[super tableView:tableView cellForRowAtIndexPath:indexPath];
     
-    UIImageView *favoriteView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorite"]];
-    [cell setSwipeGestureWithView:favoriteView color:[UIColor secondaryColor] mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
-        NSLog(@"favorited");
-        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"favorited_icon"]];
+    UIImageView *bookmarkView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bookmark"]];
+    [cell setSwipeGestureWithView:bookmarkView color:[UIColor secondaryColor] mode:MCSwipeTableViewCellModeSwitch state:MCSwipeTableViewCellState1 completionBlock:^(MCSwipeTableViewCell *cell, MCSwipeTableViewCellState state, MCSwipeTableViewCellMode mode) {
+        NSLog(@"bookmarked");
+        UIImageView *iconView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bookmarked_icon"]];
         iconView.frame = CGRectMake(0,0,16,16);
         ARTableViewCell* arcell = (ARTableViewCell*)cell;
         [arcell.iconsView addSubview:iconView];

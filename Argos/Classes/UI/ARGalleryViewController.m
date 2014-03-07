@@ -8,6 +8,11 @@
 
 #import "ARGalleryViewController.h"
 #import "ARImageViewCell.h"
+#import "ImageDownloader.h"
+
+@interface ARGalleryViewController ()
+@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
+@end
 
 @implementation ARGalleryViewController
 
@@ -24,6 +29,7 @@
     [self.collectionView registerClass:[ARImageViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.pagingEnabled = YES;
     self.collectionView.showsHorizontalScrollIndicator = NO;
+    self.collectionView.backgroundColor = [UIColor secondaryColor];
     
     // Testing
     self.images = [NSMutableArray arrayWithObjects:@"a", @"b", @"c", nil];
@@ -31,10 +37,15 @@
     return self;
 }
 
-- (void)viewDidLoad
+- (void)didReceiveMemoryWarning
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    [super didReceiveMemoryWarning];
+    
+    // terminate all pending download connections
+    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
+    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
+    
+    [self.imageDownloadsInProgress removeAllObjects];
 }
 
 # pragma mark - UICollectionViewDataSource
