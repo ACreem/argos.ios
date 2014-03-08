@@ -10,4 +10,6 @@
 
 @interface ARFullCollectionViewCell : ARCollectionViewCell
 
+@property (assign, nonatomic) BOOL isWatching;
+
 @end

@@ -177,7 +177,6 @@ static int kSignUpTag = 1;
 
 - (void)login:(id)sender
 {
-   [self postLogin];
     if (_emailField.text.length == 0) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Email" message:@"What's your email?" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -298,6 +297,7 @@ static int kSignUpTag = 1;
                                                                NSLog(@"%@", error);
                                                            }];
     } else {
+        [self primaryButtonEndLoading];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials" message:@"You couldn't be logged in with the info you provided." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
     }

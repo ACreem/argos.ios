@@ -56,11 +56,13 @@
         [self addSubview:self.timeLabel];
         
         // Watching toggle button.
-        float buttonSide = 44;
-        ARCircleButton* watch = [[ARCircleButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonSide - xPadding, xPadding, buttonSide, buttonSide)];
-        watch.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-        [watch setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
-        [self addSubview:watch];
+        if (self.isWatching) {
+            float buttonSide = 44;
+            ARCircleButton* watch = [[ARCircleButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonSide - xPadding, xPadding, buttonSide, buttonSide)];
+            watch.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
+            [watch setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
+            [self addSubview:watch];
+        }
     }
     return self;
 }

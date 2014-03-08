@@ -17,8 +17,8 @@
 #import "CurrentUser.h"
 
 // Test values
-static NSString* const kArgosAPIClientId = @"YA9phltecnYy6tIiYvJfMiKeoYqTuTVaGpE6zYY1";
-static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8UivnbxXmLbraT9CJCAgOyarR";
+static NSString* const kArgosAPIClientId = @"test";
+static NSString* const kArgosAPIClientSecret = @"test";
 
 @interface ARObjectManager ()
 @property (strong, nonatomic) AFOAuth2Client* client;
