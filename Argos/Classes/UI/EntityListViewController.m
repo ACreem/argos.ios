@@ -83,7 +83,11 @@
     [self handleImageForEntity:(id)entity forCell:cell atIndexPath:indexPath];
     
     cell.titleLabel.text = entity.name;
-    //cell.textLabel.text = entity.summary;
+    NSString *summaryText = @"We have no summary for this entity yet. Please help by submitting one!";
+    if (entity.summary) {
+        summaryText = entity.summary;
+    }
+    cell.textLabel.text = summaryText;
     
     return cell;
 }
