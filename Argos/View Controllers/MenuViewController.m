@@ -48,7 +48,7 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
     _streams = [[NSMutableArray alloc] initWithObjects:@"Trending", @"Watching", @"Latest", nil];
-    _user = [[NSMutableArray alloc] initWithObjects:@"Settings", @"Logout", nil];
+    _user = [[NSMutableArray alloc] initWithObjects:@"Bookmarked", @"Settings", @"Logout", nil];
     _search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
     [self.tableView reloadData];
  
@@ -188,9 +188,13 @@
             }
         case 2:
             switch (indexPath.row) {
-                case 0:
-                    break;
                 case 1:
+                    // Bookmarks.
+                    break;
+                case 0:
+                    // Settings.
+                    break;
+                case 2:
                     // Logout.
                     [[ARObjectManager sharedManager] logoutCurrentUser];
                     
