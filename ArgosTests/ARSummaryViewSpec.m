@@ -41,7 +41,7 @@ describe(@"ARSummaryView", ^{
         
         NSSet *entities = [NSSet setWithObject:entity];
         
-        [summaryView setText:summary withEntities:entities];
+        //[summaryView setText:summary withMention:entities];
         
     });
 });

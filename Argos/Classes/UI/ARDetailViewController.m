@@ -167,10 +167,13 @@
         [self setHeaderImage:entity.image];
     } else if (entity.imageUrl) {
         ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:entity.imageUrl]];
+        NSLog(@"%@", entity.imageUrl);
         [imageDownloader setCompletionHandler:^(UIImage *image) {
+            NSLog(@"COMPLETED COMPLETED");
             entity.image = image;
             [self setHeaderImage:entity.image];
         }];
+        [imageDownloader startDownload];
     }
 }
 
@@ -189,10 +192,10 @@
 }
 - (void)bookmark:(id)sender
 {
-    NSLog(@"bookmarkd");
+    NSLog(@"bookmarked");
     UIBarButtonItem *button = (UIBarButtonItem*)sender;
     if (button.tag != 1) {
-        button.image = [UIImage imageNamed:@"nav_bookmarkd"];
+        button.image = [UIImage imageNamed:@"nav_bookmarked"];
         [button setTag:1];
     } else {
         button.image = [UIImage imageNamed:@"nav_bookmark"];

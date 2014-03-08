@@ -66,6 +66,7 @@
 		F16148F118B6728D00948933 /* CurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148F018B6728D00948933 /* CurrentUser.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F162C0AD18B986A900B38A15 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F162C0AC18B986A900B38A15 /* Source.m */; };
+		F19DA69E18CAACE800173E2D /* Mention.m in Sources */ = {isa = PBXBuildFile; fileRef = F19DA69D18CAACE800173E2D /* Mention.m */; };
 		F1AB914518C40522007EF481 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914418C40522007EF481 /* ImageDownloader.m */; };
 		F1AB914818C40E8E007EF481 /* ARGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */; };
 		F1AB914B18C4108A007EF481 /* ARImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914A18C4108A007EF481 /* ARImageViewCell.m */; };
@@ -190,6 +191,8 @@
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
 		F162C0AB18B986A900B38A15 /* Source.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Source.h; path = Classes/Models/Source.h; sourceTree = "<group>"; };
 		F162C0AC18B986A900B38A15 /* Source.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Source.m; path = Classes/Models/Source.m; sourceTree = "<group>"; };
+		F19DA69C18CAACE800173E2D /* Mention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mention.h; path = Classes/Models/Mention.h; sourceTree = "<group>"; };
+		F19DA69D18CAACE800173E2D /* Mention.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Mention.m; path = Classes/Models/Mention.m; sourceTree = "<group>"; };
 		F1AB914318C40522007EF481 /* ImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageDownloader.h; sourceTree = "<group>"; };
 		F1AB914418C40522007EF481 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		F1AB914618C40E8E007EF481 /* ARGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARGalleryViewController.h; path = Classes/UI/ARGalleryViewController.h; sourceTree = "<group>"; };
@@ -432,6 +435,8 @@
 		F1601C0618ABDC2300C89590 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F19DA69C18CAACE800173E2D /* Mention.h */,
+				F19DA69D18CAACE800173E2D /* Mention.m */,
 				F162C0AB18B986A900B38A15 /* Source.h */,
 				F162C0AC18B986A900B38A15 /* Source.m */,
 				F16148EF18B6728D00948933 /* CurrentUser.h */,
@@ -801,6 +806,7 @@
 				F157FEB918BC095700EFFC2E /* AREmbeddedCollectionViewController.m in Sources */,
 				F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */,
 				F1601C2718ADBA7400C89590 /* MenuViewController.m in Sources */,
+				F19DA69E18CAACE800173E2D /* Mention.m in Sources */,
 				F16148D418B53AF100948933 /* ARFontViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

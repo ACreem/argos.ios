@@ -12,6 +12,7 @@
 #import "Article.h"
 #import "Story.h"
 #import "Entity.h"
+#import "Mention.h"
 #import "Source.h"
 #import "CurrentUser.h"
 
@@ -32,8 +33,8 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
-    //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Create an Argos OAuth2 client.
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
@@ -43,6 +44,49 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
     objectManager.managedObjectStore = mos;
     
     // Define API JSON response => Core Data attributes mappings.
+    /*
+     A note on nested relationships in mappings.
+     These nested relationships are only valid as being passed in as the `relationships` argument
+     for:
+     - (void)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
+     
+     Say you have a JSON representation of a "Widget", such as:
+     
+     {
+        "id": 1,
+        "name": "some name",
+        "thing_id": 1
+     }
+     
+     You have a resource which has a nested resource, a "Thing".
+     
+     Say you have two Core Data (CD) models:
+     
+     Widget:
+        widgetId:     NSInteger
+        name:         NSString
+        thing:        Thing
+     
+     Thing:
+        thingId:      NSInteger
+        widget:       Widget
+     
+     To properly map the Widget JSON to cover both the creation of
+     the Widget and the Thing, you would do:
+     
+     @{
+        @"name": @"name"                    // map the JSON "name" to the CD "name".
+        @"relationships": @{                // "relationships" is a special key indicating nested relationships.
+            @"thing": @{                    // the relationship name that's being mapped.
+                @"entity": @"Thing",        // the name of the nested/related entity that's being mapped to.
+                @"mappings": @{             // the mappings for the nested/related entity.
+                    @"thing_id": @"thingId"
+                }
+            }
+        }
+     }
+    */
+    
     NSDictionary *articleMappings = @{
                                       @"id":             @"articleId",
                                       @"url":            @"jsonUrl",
@@ -69,14 +113,27 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
                                       @"slug":           @"entityId",
                                       @"url":            @"jsonUrl",
                                       @"name":           @"name",
+                                      @"image":          @"imageUrl",
+                                      @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt"};
     NSDictionary *sourceMappings  = @{
                                       @"id":             @"sourceId",
                                       @"url":            @"jsonUrl",
                                       @"name":           @"name",
                                       @"ext_url":        @"extUrl"};
+    NSDictionary *mentionMappings = @{
+                                      @"name":           @"name"};
     NSDictionary *userMappings    = @{
                                       @"id":             @"userId"};
+    
+    NSDictionary *nestedMentionMappings = @{
+                                            @"name":           @"name",
+                                            @"relationships":  @{
+                                                @"parent": @{
+                                                    @"entity":     @"Entity",
+                                                    @"mappings":   @{
+                                                        @"entity_slug": @"entityId"}}}};
+    
     
     [objectManager setupEntityForName:@"Event"
                           pathPattern:@"/events"
@@ -89,6 +146,9 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
                                         @"stories":     @{
                                                           @"entity":      @"Story",
                                                           @"mappings":    storyMappings},
+                                        @"mentions":    @{
+                                                          @"entity":      @"Mention",
+                                                          @"mappings":    nestedMentionMappings},
                                         @"entities":    @{
                                                           @"entity":      @"Entity",
                                                           @"mappings":    entityMappings}}
@@ -119,6 +179,9 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
                                         @"events":      @{
                                                           @"entity":      @"Event",
                                                           @"mappings":    eventMappings},
+                                        @"mentions":    @{
+                                                          @"entity":      @"Mention",
+                                                          @"mappings":    nestedMentionMappings},
                                         @"entities":    @{
                                                           @"entity":      @"Entity",
                                                           @"mappings":    entityMappings}}
@@ -133,6 +196,13 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
                                                         @"entity":      @"Story",
                                                         @"mappings":    storyMappings}}
                              mappings:entityMappings];
+    
+    [objectManager setupEntityForName:@"Mention"
+                          pathPattern:@"/aliases"
+                                class:[Mention class]
+                           identifier:@"mentionId"
+                        relationships:nil
+                             mappings:mentionMappings];
     
     [objectManager setupEntityForName:@"CurrentUser"
                           pathPattern:@"/user"
@@ -254,6 +324,7 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
     "title": "some event title",
     "articles": [5, 6]
  }
+ Note that this requires that there is a transient "articles" attribute (NSArray) on the Event Core Data model.
  
  The benefit of the former approach is that it supports loading in partial representations of nested resources:
  {
@@ -293,6 +364,19 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
         NSLog(@"failure");
     }];
  }
+ 
+ 
+ "Nested-nested" relationships can also be mapped, i.e. when a nested relationship itself has a nested relationship.
+ 
+ For example:
+ 
+ {
+    "title": "some event title",
+    "mentions": [{
+        "name": "some mention name",
+        "entity_slug": "an_entity_slug"
+    }]
+ }
  */
 - (void)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
 {
@@ -304,9 +388,30 @@ static NSString* const kArgosAPIClientSecret = @"9tL4lKy5lj1rEpx4CjBhKDzBl8Uivnb
     // Setup the entity's nested relationship mappings.
     for (NSString* relationshipName in relationships) {
         RKEntityMapping *relationshipMapping = [RKEntityMapping mappingForEntityForName:relationships[relationshipName][@"entity"] inManagedObjectStore:self.managedObjectStore];
-        [relationshipMapping addAttributeMappingsFromDictionary:relationships[relationshipName][@"mappings"]];
+        
+        // Check for nested-nested relationship mappings.
+        NSMutableDictionary* relationshipMappingDict = [relationships[relationshipName][@"mappings"] mutableCopy];
+        NSDictionary* nestedRelationships = [relationshipMappingDict objectForKey:@"relationships"];
+        [relationshipMappingDict removeObjectForKey:@"relationships"];
+        
+        // Add top-level mappings.
+        [relationshipMapping addAttributeMappingsFromDictionary:relationshipMappingDict];
+        
+        // Create nested-nested relationships.
+        if (nestedRelationships) {
+            for (NSString* nestedRelationshipName in nestedRelationships) {
+                RKEntityMapping *nestedEntityMapping = [RKEntityMapping mappingForEntityForName:nestedRelationships[nestedRelationshipName][@"entity"] inManagedObjectStore:self.managedObjectStore];
+                [nestedEntityMapping addAttributeMappingsFromDictionary:nestedRelationships[nestedRelationshipName][@"mappings"]];
+                RKRelationshipMapping *nestedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:nestedRelationshipName withMapping:nestedEntityMapping];
+                [relationshipMapping addPropertyMapping:nestedRelationshipMapping];
+            }
+        }
         [entityMapping addRelationshipMappingWithSourceKeyPath:relationshipName mapping:relationshipMapping];
     }
+    
+    /*
+     if there exists a @"relationships" key in the mapping, recurse
+     */
     
     // Setup collection route.
     // e.g. /events

@@ -131,7 +131,7 @@
             [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
             if (fetched_entity_count == [_story.entities count]) {
-                [self.summaryView setText:_story.summary withEntities:_story.entities];
+                [self.summaryView setText:_story.summary withMentions:_story.mentions];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");

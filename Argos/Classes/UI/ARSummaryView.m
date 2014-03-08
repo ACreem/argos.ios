@@ -8,6 +8,7 @@
 
 #import "ARSummaryView.h"
 #import "Entity.h"
+#import "Mention.h"
 
 @interface ARSummaryView () {
     // Keep track of the summary html,
@@ -56,7 +57,7 @@
         _summaryWebView.delegate = self;
         _summaryWebView.scrollView.scrollEnabled = NO;
         _summaryWebView.scrollView.bounces = NO;
-        [self setText:summaryText withEntities:nil];
+        [self setText:summaryText withMentions:nil];
         [self addSubview:_summaryWebView];
         
         [self sizeToFit];
@@ -80,23 +81,23 @@
 }
 
 # pragma mark - HTML/Text setting
-- (void)setText:(NSString*)summaryText withEntities:(NSSet*)entities
+- (void)setText:(NSString*)summaryText withMentions:(NSSet*)mentions
 {
-    // Entities are sorted by length (longest first) so when replacing them in the summary text,
+    // Mentions are sorted by length (longest first) so when replacing them in the summary text,
     // the larger names are captured first. Then names are replaced taking into account their spaces.
     // Combined, this avoids situations with nested `a` tags.
     // For instance, "UN Convention" might become "<a href='#'><a href='#'>UN</a> Convention</a>".
     // Instead, " UN Convention" as a whole is captured: "<a href='#'>UN Convention</a>",
     // and then " UN" can't be captured since it has no space on the left anymore.
-    NSArray *sortedEntities = [[entities allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
-        NSNumber *first = [NSNumber numberWithInt:[[(Entity*)obj1 name] length]];
-        NSNumber *second = [NSNumber numberWithInt:[[(Entity*)obj2 name] length]];
+    NSArray *sortedMentions = [[mentions allObjects] sortedArrayUsingComparator:^NSComparisonResult(id obj1, id obj2) {
+        NSNumber *first = [NSNumber numberWithInt:[[(Mention*)obj1 name] length]];
+        NSNumber *second = [NSNumber numberWithInt:[[(Mention*)obj2 name] length]];
         return [first compare:second];
     }];
     
     
-    for (Entity *entity in sortedEntities) {
-        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", entity.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", entity.entityId, entity.name]];
+    for (Mention *mention in sortedMentions) {
+        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", mention.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", mention.parent.entityId, mention.name]];
     }
     
     NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];

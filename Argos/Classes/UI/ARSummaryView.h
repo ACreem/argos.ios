@@ -22,6 +22,6 @@
 @property (assign, nonatomic) id delegate;
 
 - (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt;
-- (void)setText:(NSString*)summaryText withEntities:(NSSet*)entities;
+- (void)setText:(NSString*)summaryText withMentions:(NSSet*)mentions;
 
 @end
