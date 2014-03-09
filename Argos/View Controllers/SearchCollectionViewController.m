@@ -1,23 +1,23 @@
 //
-//  ARSearchCollectionViewController.m
+//  SearchCollectionViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/25/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARSearchCollectionViewController.h"
-#import "ARLargeCollectionViewCell.h"
+#import "SearchCollectionViewController.h"
+#import "AREmbeddedCollectionViewCell.h"
 
 #import "Event.h"
 
-@interface ARSearchCollectionViewController ()
+@interface SearchCollectionViewController ()
 
 @property (strong, nonatomic) UISearchBar* searchBar;
 
 @end
 
-@implementation ARSearchCollectionViewController
+@implementation SearchCollectionViewController
 
 - (id)init
 {
@@ -47,7 +47,7 @@
     
     self.navigationItem.hidesBackButton = NO;
     
-    [self.collectionView registerClass:[ARLargeCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.backgroundColor = [UIColor primaryColor];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -65,7 +65,7 @@
 # pragma mark - UICollectionViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ARLargeCollectionViewCell *cell = (ARLargeCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    AREmbeddedCollectionViewCell *cell = (AREmbeddedCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

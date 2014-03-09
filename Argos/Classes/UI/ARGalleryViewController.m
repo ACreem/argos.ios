@@ -7,7 +7,7 @@
 //
 
 #import "ARGalleryViewController.h"
-#import "ARImageViewCell.h"
+#import "ARGalleryImageViewCell.h"
 #import "ImageDownloader.h"
 
 @interface ARGalleryViewController ()
@@ -26,7 +26,7 @@
     
     self = [super initWithCollectionViewLayout:flowLayout];
     
-    [self.collectionView registerClass:[ARImageViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[ARGalleryImageViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.pagingEnabled = YES;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.backgroundColor = [UIColor secondaryColor];
@@ -53,7 +53,7 @@
 {
     static NSString *CellIdentifier = @"Cell";
     
-    ARImageViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
+    ARGalleryImageViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
     cell.contentView.backgroundColor = [UIColor whiteColor];
     

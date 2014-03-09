@@ -9,7 +9,7 @@
 #import "MenuViewController.h"
 #import "EventListViewController.h"
 #import "AppDelegate.h"
-#import "ARSearchCollectionViewController.h"
+#import "SearchCollectionViewController.h"
 
 @interface MenuViewController () {
     NSMutableArray *_streams;
@@ -169,7 +169,7 @@
 {
     switch (indexPath.section) {
         case 0: {
-            ARSearchCollectionViewController *searchViewController = [[ARSearchCollectionViewController alloc] init];
+            SearchCollectionViewController *searchViewController = [[SearchCollectionViewController alloc] init];
             [_navigationController pushViewController:searchViewController animated:YES];
             [self.viewDeckController closeLeftViewAnimated:YES];
             break;

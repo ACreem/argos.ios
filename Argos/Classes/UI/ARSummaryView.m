@@ -10,13 +10,12 @@
 #import "Entity.h"
 #import "Mention.h"
 
-@interface ARSummaryView () {
-    // Keep track of the summary html,
-    // which includes the processed summary text but
-    // does NOT include filled in styling values.
-    // This way we can update them as necessary when font preferences change.
-    NSString *_summaryTextHtml;
-}
+@interface ARSummaryView ()
+// Keep track of the summary html,
+// which includes the processed summary text but
+// does NOT include filled in styling values.
+// This way we can update them as necessary when font preferences change.
+@property (strong, nonatomic) NSString *summaryTextHtml;
 @end
 
 @implementation ARSummaryView

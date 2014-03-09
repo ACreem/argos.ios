@@ -1,14 +1,14 @@
 //
-//  ARImageViewCell.m
+//  ARGalleryImageViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 3/2/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARImageViewCell.h"
+#import "ARGalleryImageViewCell.h"
 
-@implementation ARImageViewCell
+@implementation ARGalleryImageViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {

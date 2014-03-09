@@ -21,6 +21,8 @@
 @dynamic name;
 @dynamic summary;
 @dynamic updatedAt;
+@dynamic imageHeader;
+@dynamic imageLarge;
 @dynamic aliases;
 @dynamic events;
 @dynamic stories;

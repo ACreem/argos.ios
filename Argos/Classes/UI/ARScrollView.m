@@ -8,9 +8,8 @@
 
 #import "ARScrollView.h"
 
-@interface ARScrollView () {
-    float _yOffset;
-}
+@interface ARScrollView ()
+@property (assign, nonatomic) float yOffset;
 @end
 
 

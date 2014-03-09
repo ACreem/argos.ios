@@ -153,7 +153,7 @@
 {
     NSArray *visiblePaths = [self.collectionView indexPathsForVisibleItems];
     for (NSIndexPath *indexPath in visiblePaths) {
-        id<Entity> entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        id<AREntity> entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
         if (!entity.image && entity.imageUrl) {
             [self downloadImageForEntity:entity forIndexPath:indexPath];
         }
@@ -171,7 +171,7 @@
             int next = start + i;
             if (next < self.fetchedResultsController.fetchedObjects.count) {
                 NSIndexPath* nextIndexPath = [NSIndexPath indexPathForRow:next inSection:0];
-                id<Entity> entity = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
+                id<AREntity> entity = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
                 if (!entity.image) {
                     [self downloadImageForEntity:entity forIndexPath:nextIndexPath];
                 }
@@ -182,7 +182,7 @@
             int prev = start - i;
             if (prev >= 0) {
                 NSIndexPath* prevIndexPath = [NSIndexPath indexPathForRow:prev inSection:0];
-                id<Entity> entity = [self.fetchedResultsController objectAtIndexPath:prevIndexPath];
+                id<AREntity> entity = [self.fetchedResultsController objectAtIndexPath:prevIndexPath];
                 if (!entity.image) {
                     [self downloadImageForEntity:entity forIndexPath:prevIndexPath];
                 }
@@ -192,7 +192,7 @@
     }
 }
 
-- (void)downloadImageForEntity:(id<Entity>)entity forIndexPath:(NSIndexPath*)indexPath
+- (void)downloadImageForEntity:(id<AREntity>)entity forIndexPath:(NSIndexPath*)indexPath
 {
     NSURL* imageUrl = [NSURL URLWithString:entity.imageUrl];
     
@@ -219,7 +219,7 @@
     }
 }
 
-- (void)handleImageForEntity:(id<Entity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
+- (void)handleImageForEntity:(id<AREntity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     screenRect.size.height -= ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height);
@@ -245,17 +245,18 @@
             if (CGSizeEqualToSize(cell.frame.size, screenRect.size)) {
                 // If there isn't yet a full image,
                 // crop and save one.
-                if (!entity.fullImage) {
+                id <AREntityWithFullImage> entityWithFullImage = (id<AREntityWithFullImage>)entity;
+                if (!entityWithFullImage.imageFull) {
                     cell.imageView.image = [UIImage imageNamed:@"placeholder"];
                     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                         UIImage *croppedImage = [cell cropImage:entity.image];
-                        entity.fullImage = croppedImage;
+                        entityWithFullImage.imageFull = croppedImage;
                         dispatch_async(dispatch_get_main_queue(), ^{
                             cell.imageView.image = croppedImage;
                         });
                     });
                 } else {
-                    cell.imageView.image = entity.fullImage;
+                    cell.imageView.image = entityWithFullImage.imageFull;
                 }
                 
             // If this is an image of any other size...

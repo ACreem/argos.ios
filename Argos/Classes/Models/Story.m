@@ -23,6 +23,7 @@
 @dynamic summary;
 @dynamic title;
 @dynamic updatedAt;
+@dynamic imageHeader;
 @dynamic entities;
 @dynamic events;
 @dynamic mentions;

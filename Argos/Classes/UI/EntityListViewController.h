@@ -10,6 +10,6 @@
 
 @interface EntityListViewController : ARCollectionViewController
 
-- (EntityListViewController*)initWithEntity:(id<Entity>)entity;
+- (EntityListViewController*)initWithEntity:(id<AREntity>)entity;
 
 @end

@@ -27,7 +27,7 @@
 		F1203A2518BD379400DCEB3A /* Graphik-SuperItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */; };
 		F1203A2618BD379400DCEB3A /* Graphik-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */; };
 		F1203A2718BD379400DCEB3A /* Graphik-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */; };
-		F1203A2D18BD729900DCEB3A /* ARSearchCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1203A2C18BD729900DCEB3A /* ARSearchCollectionViewController.m */; };
+		F1203A2D18BD729900DCEB3A /* SearchCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1203A2C18BD729900DCEB3A /* SearchCollectionViewController.m */; };
 		F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
@@ -46,11 +46,11 @@
 		F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F14603B618A4288400A85E0F /* ReachabilityManager.m */; };
 		F157FEB018BBF25E00EFFC2E /* ARCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEAF18BBF25E00EFFC2E /* ARCollectionViewController.m */; };
 		F157FEB318BC063000EFFC2E /* ARCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEB218BC063000EFFC2E /* ARCollectionView.m */; };
-		F157FEB618BC067B00EFFC2E /* ARFullCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEB518BC067B00EFFC2E /* ARFullCollectionViewCell.m */; };
+		F157FEB618BC067B00EFFC2E /* ARFullPageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEB518BC067B00EFFC2E /* ARFullPageCollectionViewCell.m */; };
 		F157FEB918BC095700EFFC2E /* AREmbeddedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEB818BC095700EFFC2E /* AREmbeddedCollectionViewController.m */; };
 		F157FEC118BC3C0B00EFFC2E /* ARCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEC018BC3C0B00EFFC2E /* ARCollectionViewCell.m */; };
-		F157FEC618BC4C5200EFFC2E /* ARLargeCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEC518BC4C5200EFFC2E /* ARLargeCollectionViewCell.m */; };
-		F157FEC918BC58B400EFFC2E /* ARSimpleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEC818BC58B400EFFC2E /* ARSimpleCollectionViewCell.m */; };
+		F157FEC618BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEC518BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.m */; };
+		F157FEC918BC58B400EFFC2E /* ARArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FEC818BC58B400EFFC2E /* ARArticleCollectionViewCell.m */; };
 		F157FECC18BC845E00EFFC2E /* ARCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */; };
 		F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ARObjectManager.m */; };
 		F1601C2618ADBA7400C89590 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C2318ADBA7400C89590 /* LoginViewController.m */; };
@@ -61,20 +61,20 @@
 		F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3218ADBA9500C89590 /* ARDetailViewController.m */; };
 		F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C3A18ADBA9500C89590 /* ARSummaryView.m */; };
 		F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148CD18B3E6A800948933 /* ArticleWebViewController.m */; };
-		F16148D118B5278700948933 /* ARShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D018B5278700948933 /* ARShareViewController.m */; };
-		F16148D418B53AF100948933 /* ARFontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D318B53AF100948933 /* ARFontViewController.m */; };
+		F16148D118B5278700948933 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D018B5278700948933 /* ShareViewController.m */; };
+		F16148D418B53AF100948933 /* FontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148D318B53AF100948933 /* FontViewController.m */; };
 		F16148F118B6728D00948933 /* CurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F16148F018B6728D00948933 /* CurrentUser.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F162C0AD18B986A900B38A15 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F162C0AC18B986A900B38A15 /* Source.m */; };
 		F19DA69E18CAACE800173E2D /* Mention.m in Sources */ = {isa = PBXBuildFile; fileRef = F19DA69D18CAACE800173E2D /* Mention.m */; };
 		F1AB914518C40522007EF481 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914418C40522007EF481 /* ImageDownloader.m */; };
 		F1AB914818C40E8E007EF481 /* ARGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */; };
-		F1AB914B18C4108A007EF481 /* ARImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914A18C4108A007EF481 /* ARImageViewCell.m */; };
+		F1AB914B18C4108A007EF481 /* ARGalleryImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1AB914A18C4108A007EF481 /* ARGalleryImageViewCell.m */; };
 		F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A418C12C7E0014B436 /* EntityListViewController.m */; };
-		F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */; };
+		F1C267A818C139590014B436 /* ARSnippetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267A718C139590014B436 /* ARSnippetCollectionViewCell.m */; };
 		F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */; };
 		F1C267B418C239390014B436 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B318C239390014B436 /* StreamViewController.m */; };
-		F1C267B718C26C940014B436 /* StoryEventsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B618C26C940014B436 /* StoryEventsViewController.m */; };
+		F1C267B718C26C940014B436 /* StoryTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B618C26C940014B436 /* StoryTimelineViewController.m */; };
 		F1C267BA18C26DE50014B436 /* ARCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */; };
 		F1C267C618C393F60014B436 /* ARScrollViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267C518C393F60014B436 /* ARScrollViewSpec.m */; };
 		F1C267C818C3A0D40014B436 /* ARSummaryViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267C718C3A0D40014B436 /* ARSummaryViewSpec.m */; };
@@ -124,8 +124,8 @@
 		F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SuperItalic.otf"; sourceTree = "<group>"; };
 		F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Thin.otf"; sourceTree = "<group>"; };
 		F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ThinItalic.otf"; sourceTree = "<group>"; };
-		F1203A2B18BD729900DCEB3A /* ARSearchCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSearchCollectionViewController.h; path = "View Controllers/ARSearchCollectionViewController.h"; sourceTree = "<group>"; };
-		F1203A2C18BD729900DCEB3A /* ARSearchCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSearchCollectionViewController.m; path = "View Controllers/ARSearchCollectionViewController.m"; sourceTree = "<group>"; };
+		F1203A2B18BD729900DCEB3A /* SearchCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SearchCollectionViewController.h; path = "View Controllers/SearchCollectionViewController.h"; sourceTree = "<group>"; };
+		F1203A2C18BD729900DCEB3A /* SearchCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SearchCollectionViewController.m; path = "View Controllers/SearchCollectionViewController.m"; sourceTree = "<group>"; };
 		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -152,16 +152,16 @@
 		F157FEAF18BBF25E00EFFC2E /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewController.m; path = "Classes/View Controllers/ARCollectionViewController.m"; sourceTree = "<group>"; };
 		F157FEB118BC063000EFFC2E /* ARCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCollectionView.h; path = Classes/UI/ARCollectionView.h; sourceTree = "<group>"; };
 		F157FEB218BC063000EFFC2E /* ARCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionView.m; path = Classes/UI/ARCollectionView.m; sourceTree = "<group>"; };
-		F157FEB418BC067B00EFFC2E /* ARFullCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARFullCollectionViewCell.h; path = Classes/UI/ARFullCollectionViewCell.h; sourceTree = "<group>"; };
-		F157FEB518BC067B00EFFC2E /* ARFullCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARFullCollectionViewCell.m; path = Classes/UI/ARFullCollectionViewCell.m; sourceTree = "<group>"; };
+		F157FEB418BC067B00EFFC2E /* ARFullPageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARFullPageCollectionViewCell.h; path = Classes/UI/ARFullPageCollectionViewCell.h; sourceTree = "<group>"; };
+		F157FEB518BC067B00EFFC2E /* ARFullPageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARFullPageCollectionViewCell.m; path = Classes/UI/ARFullPageCollectionViewCell.m; sourceTree = "<group>"; };
 		F157FEB718BC095700EFFC2E /* AREmbeddedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AREmbeddedCollectionViewController.h; path = "Classes/View Controllers/AREmbeddedCollectionViewController.h"; sourceTree = "<group>"; };
 		F157FEB818BC095700EFFC2E /* AREmbeddedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AREmbeddedCollectionViewController.m; path = "Classes/View Controllers/AREmbeddedCollectionViewController.m"; sourceTree = "<group>"; };
 		F157FEBF18BC3C0B00EFFC2E /* ARCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCollectionViewCell.h; path = Classes/UI/ARCollectionViewCell.h; sourceTree = "<group>"; };
 		F157FEC018BC3C0B00EFFC2E /* ARCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionViewCell.m; path = Classes/UI/ARCollectionViewCell.m; sourceTree = "<group>"; };
-		F157FEC418BC4C5200EFFC2E /* ARLargeCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARLargeCollectionViewCell.h; path = Classes/UI/ARLargeCollectionViewCell.h; sourceTree = "<group>"; };
-		F157FEC518BC4C5200EFFC2E /* ARLargeCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARLargeCollectionViewCell.m; path = Classes/UI/ARLargeCollectionViewCell.m; sourceTree = "<group>"; };
-		F157FEC718BC58B400EFFC2E /* ARSimpleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSimpleCollectionViewCell.h; path = Classes/UI/ARSimpleCollectionViewCell.h; sourceTree = "<group>"; };
-		F157FEC818BC58B400EFFC2E /* ARSimpleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSimpleCollectionViewCell.m; path = Classes/UI/ARSimpleCollectionViewCell.m; sourceTree = "<group>"; };
+		F157FEC418BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AREmbeddedCollectionViewCell.h; path = Classes/UI/AREmbeddedCollectionViewCell.h; sourceTree = "<group>"; };
+		F157FEC518BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AREmbeddedCollectionViewCell.m; path = Classes/UI/AREmbeddedCollectionViewCell.m; sourceTree = "<group>"; };
+		F157FEC718BC58B400EFFC2E /* ARArticleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARArticleCollectionViewCell.h; path = Classes/UI/ARArticleCollectionViewCell.h; sourceTree = "<group>"; };
+		F157FEC818BC58B400EFFC2E /* ARArticleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARArticleCollectionViewCell.m; path = Classes/UI/ARArticleCollectionViewCell.m; sourceTree = "<group>"; };
 		F157FECA18BC845E00EFFC2E /* ARCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCollectionHeaderView.h; path = Classes/UI/ARCollectionHeaderView.h; sourceTree = "<group>"; };
 		F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCollectionHeaderView.m; path = Classes/UI/ARCollectionHeaderView.m; sourceTree = "<group>"; };
 		F1601C0718ABDC3800C89590 /* ARObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARObjectManager.h; sourceTree = "<group>"; };
@@ -182,10 +182,10 @@
 		F1601C3A18ADBA9500C89590 /* ARSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSummaryView.m; path = Classes/UI/ARSummaryView.m; sourceTree = "<group>"; };
 		F16148CC18B3E6A800948933 /* ArticleWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleWebViewController.h; path = "View Controllers/Articles/ArticleWebViewController.h"; sourceTree = "<group>"; };
 		F16148CD18B3E6A800948933 /* ArticleWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleWebViewController.m; path = "View Controllers/Articles/ArticleWebViewController.m"; sourceTree = "<group>"; };
-		F16148CF18B5278700948933 /* ARShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARShareViewController.h; path = Classes/UI/ARShareViewController.h; sourceTree = "<group>"; };
-		F16148D018B5278700948933 /* ARShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARShareViewController.m; path = Classes/UI/ARShareViewController.m; sourceTree = "<group>"; };
-		F16148D218B53AF100948933 /* ARFontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARFontViewController.h; path = Classes/UI/ARFontViewController.h; sourceTree = "<group>"; };
-		F16148D318B53AF100948933 /* ARFontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARFontViewController.m; path = Classes/UI/ARFontViewController.m; sourceTree = "<group>"; };
+		F16148CF18B5278700948933 /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ShareViewController.h; path = Classes/UI/ShareViewController.h; sourceTree = "<group>"; };
+		F16148D018B5278700948933 /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ShareViewController.m; path = Classes/UI/ShareViewController.m; sourceTree = "<group>"; };
+		F16148D218B53AF100948933 /* FontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FontViewController.h; path = Classes/UI/FontViewController.h; sourceTree = "<group>"; };
+		F16148D318B53AF100948933 /* FontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FontViewController.m; path = Classes/UI/FontViewController.m; sourceTree = "<group>"; };
 		F16148EF18B6728D00948933 /* CurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentUser.h; path = Classes/Models/CurrentUser.h; sourceTree = "<group>"; };
 		F16148F018B6728D00948933 /* CurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentUser.m; path = Classes/Models/CurrentUser.m; sourceTree = "<group>"; };
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
@@ -197,18 +197,18 @@
 		F1AB914418C40522007EF481 /* ImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageDownloader.m; sourceTree = "<group>"; };
 		F1AB914618C40E8E007EF481 /* ARGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARGalleryViewController.h; path = Classes/UI/ARGalleryViewController.h; sourceTree = "<group>"; };
 		F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARGalleryViewController.m; path = Classes/UI/ARGalleryViewController.m; sourceTree = "<group>"; };
-		F1AB914918C4108A007EF481 /* ARImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARImageViewCell.h; path = Classes/UI/ARImageViewCell.h; sourceTree = "<group>"; };
-		F1AB914A18C4108A007EF481 /* ARImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARImageViewCell.m; path = Classes/UI/ARImageViewCell.m; sourceTree = "<group>"; };
+		F1AB914918C4108A007EF481 /* ARGalleryImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARGalleryImageViewCell.h; path = Classes/UI/ARGalleryImageViewCell.h; sourceTree = "<group>"; };
+		F1AB914A18C4108A007EF481 /* ARGalleryImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARGalleryImageViewCell.m; path = Classes/UI/ARGalleryImageViewCell.m; sourceTree = "<group>"; };
 		F1C267A318C12C7E0014B436 /* EntityListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityListViewController.h; path = Classes/UI/EntityListViewController.h; sourceTree = "<group>"; };
 		F1C267A418C12C7E0014B436 /* EntityListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityListViewController.m; path = Classes/UI/EntityListViewController.m; sourceTree = "<group>"; };
-		F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARClipCollectionViewCell.h; path = Classes/UI/ARClipCollectionViewCell.h; sourceTree = "<group>"; };
-		F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARClipCollectionViewCell.m; path = Classes/UI/ARClipCollectionViewCell.m; sourceTree = "<group>"; };
+		F1C267A618C139590014B436 /* ARSnippetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARSnippetCollectionViewCell.h; path = Classes/UI/ARSnippetCollectionViewCell.h; sourceTree = "<group>"; };
+		F1C267A718C139590014B436 /* ARSnippetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARSnippetCollectionViewCell.m; path = Classes/UI/ARSnippetCollectionViewCell.m; sourceTree = "<group>"; };
 		F1C267AF18C1406E0014B436 /* UIFont+ArgosFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+ArgosFonts.h"; sourceTree = "<group>"; };
 		F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ArgosFonts.m"; sourceTree = "<group>"; };
 		F1C267B218C239390014B436 /* StreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StreamViewController.h; path = Classes/UI/StreamViewController.h; sourceTree = "<group>"; };
 		F1C267B318C239390014B436 /* StreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StreamViewController.m; path = Classes/UI/StreamViewController.m; sourceTree = "<group>"; };
-		F1C267B518C26C940014B436 /* StoryEventsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryEventsViewController.h; path = Classes/UI/StoryEventsViewController.h; sourceTree = "<group>"; };
-		F1C267B618C26C940014B436 /* StoryEventsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryEventsViewController.m; path = Classes/UI/StoryEventsViewController.m; sourceTree = "<group>"; };
+		F1C267B518C26C940014B436 /* StoryTimelineViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryTimelineViewController.h; path = Classes/UI/StoryTimelineViewController.h; sourceTree = "<group>"; };
+		F1C267B618C26C940014B436 /* StoryTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryTimelineViewController.m; path = Classes/UI/StoryTimelineViewController.m; sourceTree = "<group>"; };
 		F1C267B818C26DE50014B436 /* ARCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCardCollectionViewCell.h; path = Classes/UI/ARCardCollectionViewCell.h; sourceTree = "<group>"; };
 		F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCardCollectionViewCell.m; path = Classes/UI/ARCardCollectionViewCell.m; sourceTree = "<group>"; };
 		F1C267C518C393F60014B436 /* ARScrollViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARScrollViewSpec.m; sourceTree = "<group>"; };
@@ -233,6 +233,7 @@
 		F1D6BE5418C00A6700313014 /* TransitionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionDelegate.m; sourceTree = "<group>"; };
 		F1D6BE5718C010A100313014 /* ARCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARCircleButton.h; path = Classes/UI/ARCircleButton.h; sourceTree = "<group>"; };
 		F1D6BE5818C010A100313014 /* ARCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARCircleButton.m; path = Classes/UI/ARCircleButton.m; sourceTree = "<group>"; };
+		F1DBBC2318CCD97E00EBDFB3 /* AREntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AREntity.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -333,6 +334,7 @@
 				F143295B18B30A7B00A76D97 /* SummaryTemplate.html */,
 				F1601C0718ABDC3800C89590 /* ARObjectManager.h */,
 				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
+				F1DBBC2318CCD97E00EBDFB3 /* AREntity.h */,
 				F14603B518A4288400A85E0F /* ReachabilityManager.h */,
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
 				F1D6BE5018C00A4D00313014 /* Hacks */,
@@ -405,20 +407,20 @@
 		F157FEC318BC45D800EFFC2E /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F157FEC718BC58B400EFFC2E /* ARSimpleCollectionViewCell.h */,
-				F157FEC818BC58B400EFFC2E /* ARSimpleCollectionViewCell.m */,
-				F157FEC418BC4C5200EFFC2E /* ARLargeCollectionViewCell.h */,
-				F157FEC518BC4C5200EFFC2E /* ARLargeCollectionViewCell.m */,
+				F157FEC718BC58B400EFFC2E /* ARArticleCollectionViewCell.h */,
+				F157FEC818BC58B400EFFC2E /* ARArticleCollectionViewCell.m */,
+				F157FEC418BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.h */,
+				F157FEC518BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.m */,
 				F1C267B818C26DE50014B436 /* ARCardCollectionViewCell.h */,
 				F1C267B918C26DE50014B436 /* ARCardCollectionViewCell.m */,
-				F1C267A618C139590014B436 /* ARClipCollectionViewCell.h */,
-				F1C267A718C139590014B436 /* ARClipCollectionViewCell.m */,
-				F157FEB418BC067B00EFFC2E /* ARFullCollectionViewCell.h */,
-				F157FEB518BC067B00EFFC2E /* ARFullCollectionViewCell.m */,
+				F1C267A618C139590014B436 /* ARSnippetCollectionViewCell.h */,
+				F1C267A718C139590014B436 /* ARSnippetCollectionViewCell.m */,
+				F157FEB418BC067B00EFFC2E /* ARFullPageCollectionViewCell.h */,
+				F157FEB518BC067B00EFFC2E /* ARFullPageCollectionViewCell.m */,
 				F157FEBF18BC3C0B00EFFC2E /* ARCollectionViewCell.h */,
 				F157FEC018BC3C0B00EFFC2E /* ARCollectionViewCell.m */,
-				F1AB914918C4108A007EF481 /* ARImageViewCell.h */,
-				F1AB914A18C4108A007EF481 /* ARImageViewCell.m */,
+				F1AB914918C4108A007EF481 /* ARGalleryImageViewCell.h */,
+				F1AB914A18C4108A007EF481 /* ARGalleryImageViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -484,14 +486,10 @@
 				F1601C2318ADBA7400C89590 /* LoginViewController.m */,
 				F1601C2418ADBA7400C89590 /* MenuViewController.h */,
 				F1601C2518ADBA7400C89590 /* MenuViewController.m */,
-				F1C267B218C239390014B436 /* StreamViewController.h */,
-				F1C267B318C239390014B436 /* StreamViewController.m */,
-				F1203A2B18BD729900DCEB3A /* ARSearchCollectionViewController.h */,
-				F1203A2C18BD729900DCEB3A /* ARSearchCollectionViewController.m */,
-				F16148CF18B5278700948933 /* ARShareViewController.h */,
-				F16148D018B5278700948933 /* ARShareViewController.m */,
-				F16148D218B53AF100948933 /* ARFontViewController.h */,
-				F16148D318B53AF100948933 /* ARFontViewController.m */,
+				F1203A2B18BD729900DCEB3A /* SearchCollectionViewController.h */,
+				F1203A2C18BD729900DCEB3A /* SearchCollectionViewController.m */,
+				F1DBBC2118CCD6A000EBDFB3 /* Modals */,
+				F1DBBC2018CCD69100EBDFB3 /* Feeds */,
 				F16148CB18B3DEAE00948933 /* Articles */,
 				F1C6D6ED18B2F32A00129552 /* Entities */,
 				F1C11DF618A7639A007F2B47 /* Stories */,
@@ -516,8 +514,8 @@
 			children = (
 				F1601C2E18ADBA8800C89590 /* StoryDetailViewController.h */,
 				F1601C2F18ADBA8800C89590 /* StoryDetailViewController.m */,
-				F1C267B518C26C940014B436 /* StoryEventsViewController.h */,
-				F1C267B618C26C940014B436 /* StoryEventsViewController.m */,
+				F1C267B518C26C940014B436 /* StoryTimelineViewController.h */,
+				F1C267B618C26C940014B436 /* StoryTimelineViewController.m */,
 			);
 			name = Stories;
 			sourceTree = "<group>";
@@ -576,6 +574,26 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
+		F1DBBC2018CCD69100EBDFB3 /* Feeds */ = {
+			isa = PBXGroup;
+			children = (
+				F1C267B218C239390014B436 /* StreamViewController.h */,
+				F1C267B318C239390014B436 /* StreamViewController.m */,
+			);
+			name = Feeds;
+			sourceTree = "<group>";
+		};
+		F1DBBC2118CCD6A000EBDFB3 /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				F16148CF18B5278700948933 /* ShareViewController.h */,
+				F16148D018B5278700948933 /* ShareViewController.m */,
+				F16148D218B53AF100948933 /* FontViewController.h */,
+				F16148D318B53AF100948933 /* FontViewController.m */,
+			);
+			name = Modals;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -624,6 +642,7 @@
 		F1405C1818973C4C00A4819D /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = AR;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Argos;
 				TargetAttributes = {
@@ -762,7 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F16148CE18B3E6A800948933 /* ArticleWebViewController.m in Sources */,
-				F1203A2D18BD729900DCEB3A /* ARSearchCollectionViewController.m in Sources */,
+				F1203A2D18BD729900DCEB3A /* SearchCollectionViewController.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1C6D6F918B2F4AC00129552 /* Story.m in Sources */,
 				F14603B718A4288400A85E0F /* ReachabilityManager.m in Sources */,
@@ -772,10 +791,10 @@
 				F1C267B418C239390014B436 /* StreamViewController.m in Sources */,
 				F157FEC118BC3C0B00EFFC2E /* ARCollectionViewCell.m in Sources */,
 				F162C0AD18B986A900B38A15 /* Source.m in Sources */,
-				F157FEC918BC58B400EFFC2E /* ARSimpleCollectionViewCell.m in Sources */,
+				F157FEC918BC58B400EFFC2E /* ARArticleCollectionViewCell.m in Sources */,
 				F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */,
 				F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */,
-				F1C267A818C139590014B436 /* ARClipCollectionViewCell.m in Sources */,
+				F1C267A818C139590014B436 /* ARSnippetCollectionViewCell.m in Sources */,
 				F157FEB318BC063000EFFC2E /* ARCollectionView.m in Sources */,
 				F1601C2C18ADBA7F00C89590 /* EventDetailViewController.m in Sources */,
 				F1C6D6F618B2F4AC00129552 /* Event.m in Sources */,
@@ -783,31 +802,31 @@
 				F1D6BE5618C00A6700313014 /* TransitionDelegate.m in Sources */,
 				F1AB914818C40E8E007EF481 /* ARGalleryViewController.m in Sources */,
 				F1D6BE5518C00A6700313014 /* AnimatedTransitioning.m in Sources */,
-				F1C267B718C26C940014B436 /* StoryEventsViewController.m in Sources */,
+				F1C267B718C26C940014B436 /* StoryTimelineViewController.m in Sources */,
 				F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */,
 				F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */,
 				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
 				F157FEB018BBF25E00EFFC2E /* ARCollectionViewController.m in Sources */,
 				F157FECC18BC845E00EFFC2E /* ARCollectionHeaderView.m in Sources */,
 				F1D6BE5918C010A100313014 /* ARCircleButton.m in Sources */,
-				F157FEB618BC067B00EFFC2E /* ARFullCollectionViewCell.m in Sources */,
+				F157FEB618BC067B00EFFC2E /* ARFullPageCollectionViewCell.m in Sources */,
 				F1C267A518C12C7E0014B436 /* EntityListViewController.m in Sources */,
 				F1C6D6FC18B2F4AC00129552 /* Article.m in Sources */,
 				F1C267BA18C26DE50014B436 /* ARCardCollectionViewCell.m in Sources */,
 				F1601C2D18ADBA7F00C89590 /* EventListViewController.m in Sources */,
-				F16148D118B5278700948933 /* ARShareViewController.m in Sources */,
+				F16148D118B5278700948933 /* ShareViewController.m in Sources */,
 				F1AB914518C40522007EF481 /* ImageDownloader.m in Sources */,
 				F1601C3018ADBA8800C89590 /* StoryDetailViewController.m in Sources */,
 				F1601C3D18ADBA9500C89590 /* ARDetailViewController.m in Sources */,
 				F1C6D6F318B2F4AC00129552 /* Entity.m in Sources */,
-				F1AB914B18C4108A007EF481 /* ARImageViewCell.m in Sources */,
+				F1AB914B18C4108A007EF481 /* ARGalleryImageViewCell.m in Sources */,
 				F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */,
-				F157FEC618BC4C5200EFFC2E /* ARLargeCollectionViewCell.m in Sources */,
+				F157FEC618BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.m in Sources */,
 				F157FEB918BC095700EFFC2E /* AREmbeddedCollectionViewController.m in Sources */,
 				F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */,
 				F1601C2718ADBA7400C89590 /* MenuViewController.m in Sources */,
 				F19DA69E18CAACE800173E2D /* Mention.m in Sources */,
-				F16148D418B53AF100948933 /* ARFontViewController.m in Sources */,
+				F16148D418B53AF100948933 /* FontViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -1,5 +1,5 @@
 //
-//  ARClipCollectionViewCell.m
+//  ARSnippetCollectionViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/28/14.
@@ -8,9 +8,9 @@
 
 
 
-#import "ARClipCollectionViewCell.h"
+#import "ARSnippetCollectionViewCell.h"
 
-@implementation ARClipCollectionViewCell
+@implementation ARSnippetCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {

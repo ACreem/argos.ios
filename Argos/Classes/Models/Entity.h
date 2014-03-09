@@ -20,6 +20,8 @@
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSDate * updatedAt;
+@property (nonatomic, retain) id imageHeader;
+@property (nonatomic, retain) id imageLarge;
 @property (nonatomic, retain) NSSet *aliases;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *stories;

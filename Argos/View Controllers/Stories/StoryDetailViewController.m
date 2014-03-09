@@ -10,11 +10,11 @@
 #import "EventDetailViewController.h"
 
 #import "AREmbeddedCollectionViewController.h"
-#import "ARLargeCollectionViewCell.h"
+#import "AREmbeddedCollectionViewCell.h"
 
 #import "Event.h"
 #import "Entity.h"
-#import "StoryEventsViewController.h"
+#import "StoryTimelineViewController.h"
 
 #import "CECardsAnimationController.h"
 
@@ -63,7 +63,7 @@
     _eventList.delegate = self;
     _eventList.title = @"Events";
     
-    [_eventList.collectionView registerClass:[ARLargeCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [_eventList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:_eventList];
     [self.scrollView addSubview:_eventList.collectionView];
@@ -98,10 +98,10 @@
 
 - (void)viewTimeline:(id)sender
 {
-    //[self.navigationController pushViewController:[[StoryEventsViewController alloc] initWithStory:_story] animated:YES];
-    StoryEventsViewController* sevc = [[StoryEventsViewController alloc] initWithStory:_story];
+    StoryTimelineViewController* sevc = [[StoryTimelineViewController alloc] initWithStory:_story];
     sevc.transitioningDelegate = self;
-        // Add the close button.
+    
+    // Add the close button.
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(
                                                                        screenRect.size.width - 48,
@@ -239,7 +239,7 @@
 }
 
 # pragma mark - AREmbeddedCollectionViewControllerDelegate
-- (ARCollectionViewCell*)configureCell:(ARLargeCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
+- (ARCollectionViewCell*)configureCell:(AREmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == _eventList) {
         Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

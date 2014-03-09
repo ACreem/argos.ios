@@ -1,25 +1,25 @@
 //
-//  StoryEventsViewController.m
+//  StoryTimelineViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 3/1/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "StoryEventsViewController.h"
+#import "StoryTimelineViewController.h"
 #import "ARCardCollectionViewCell.h"
 #import "Event.h"
 
 #import "EventDetailViewController.h"
 
-@interface StoryEventsViewController ()
+@interface StoryTimelineViewController ()
 @property (strong, nonatomic) Story* story;
 @property (assign, nonatomic) float padding;
 @end
 
-@implementation StoryEventsViewController
+@implementation StoryTimelineViewController
 
-- (StoryEventsViewController*)initWithStory:(Story*)story;
+- (StoryTimelineViewController*)initWithStory:(Story*)story;
 {
     _padding = 24;
     

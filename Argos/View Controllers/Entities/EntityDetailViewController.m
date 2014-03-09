@@ -10,7 +10,7 @@
 #import "StoryDetailViewController.h"
 
 #import "AREmbeddedCollectionViewController.h"
-#import "ARLargeCollectionViewCell.h"
+#import "AREmbeddedCollectionViewCell.h"
 
 #import "Story.h"
 
@@ -53,7 +53,7 @@
     
     self.totalItems = _entity.stories.count;
     
-    [self setHeaderImageForEntity:(id<Entity>)_entity];
+    [self setHeaderImageForEntity:(id<AREntity>)_entity];
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
@@ -74,7 +74,7 @@
     _mentionList.delegate = self;
     _mentionList.title = @"Mentions";
     
-    [_mentionList.collectionView registerClass:[ARLargeCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [_mentionList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:_mentionList];
     [self.scrollView addSubview:_mentionList.collectionView];
@@ -104,7 +104,7 @@
 }
 
 # pragma mark - AREmbeddedCollectionViewControllerDelegate
-- (ARCollectionViewCell*)configureCell:(ARLargeCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
+- (ARCollectionViewCell*)configureCell:(AREmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == _mentionList) {
         Story *story = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

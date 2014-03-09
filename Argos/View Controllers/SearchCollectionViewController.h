@@ -1,5 +1,5 @@
 //
-//  ARSearchCollectionViewController.h
+//  SearchCollectionViewController.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/25/14.
@@ -8,6 +8,6 @@
 
 #import "ARCollectionViewController.h"
 
-@interface ARSearchCollectionViewController : ARCollectionViewController <UISearchBarDelegate>
+@interface SearchCollectionViewController : ARCollectionViewController <UISearchBarDelegate>
 
 @end

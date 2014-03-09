@@ -8,8 +8,8 @@
 
 #import "ARDetailViewController.h"
 
-#import "ARShareViewController.h"
-#import "ARFontViewController.h"
+#import "ShareViewController.h"
+#import "FontViewController.h"
 
 #import "Entity.h"
 #import "EntityDetailViewController.h"
@@ -39,8 +39,8 @@
     UIView *_stuckSectionHeaderSuperview;
     CGRect _stuckSectionHeaderViewFrame;
     
-    ARShareViewController *_shareViewController;
-    ARFontViewController *_fontViewController;
+    ShareViewController *_shareViewController;
+    FontViewController *_fontViewController;
 }
 
 @property (nonatomic, strong) TransitionDelegate *transitionController;
@@ -162,27 +162,33 @@
 
 - (void)setHeaderImage:(UIImage*)image
 {
-    UIImage *croppedImage = [image scaleToFitSize:CGSizeMake(640, 400)];
-    croppedImage = [image cropToSize:CGSizeMake(640, 400) usingMode:NYXCropModeCenter];
-    [_headerImageView setImage:croppedImage];
+    [_headerImageView setImage:image];
     
-    UIImage* blurred = [croppedImage gaussianBlurWithBias:0];
+    UIImage* blurred = [image gaussianBlurWithBias:0];
     [_headerImageViewBlurred setImage:blurred];
 }
 
-- (void)setHeaderImageForEntity:(id<Entity>)entity
+- (void)setHeaderImageForEntity:(id<AREntity>)entity
 {
+    CGSize headerSize = CGSizeMake(640, 400);
+    
     // Set the header image,
     // downloading if necessary.
-    if (entity.image) {
-        [self setHeaderImage:entity.image];
+    if (entity.imageHeader) {
+        [self setHeaderImage:entity.imageHeader];
+        
+    } else if (entity.image) {
+        UIImage *headerImage = [entity.image scaleToCoverSize:headerSize];
+        entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
+        [self setHeaderImage:entity.imageHeader];
+        
     } else if (entity.imageUrl) {
         ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:entity.imageUrl]];
-        NSLog(@"%@", entity.imageUrl);
         [imageDownloader setCompletionHandler:^(UIImage *image) {
-            NSLog(@"COMPLETED COMPLETED");
             entity.image = image;
-            [self setHeaderImage:entity.image];
+            UIImage *headerImage = [entity.image scaleToCoverSize:headerSize];
+            entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
+            [self setHeaderImage:entity.imageHeader];
         }];
         [imageDownloader startDownload];
     }
@@ -193,12 +199,12 @@
 # pragma mark - Actions
 - (void)share:(id)sender
 {
-    _shareViewController = [[ARShareViewController alloc] init];
+    _shareViewController = [[ShareViewController alloc] init];
     [self presentModalViewController:_shareViewController];
 }
 - (void)font:(id)sender
 {
-    _fontViewController = [[ARFontViewController alloc] init];
+    _fontViewController = [[FontViewController alloc] init];
     [self presentModalViewController:_fontViewController];
 }
 - (void)bookmark:(id)sender

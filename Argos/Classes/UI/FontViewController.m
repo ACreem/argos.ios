@@ -1,12 +1,12 @@
 //
-//  ARFontViewController.m
+//  FontViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/19/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARFontViewController.h"
+#import "FontViewController.h"
 
 float static const kFontSizeLarge = 1;
 float static const kFontSizeMedium = 0.9;
@@ -18,13 +18,13 @@ static NSString* kGraphikType = @"Graphik-Regular";
 static NSString* kMarionType = @"Marion";
 static NSString* kPalatinoType = @"Palatino";
 
-@interface ARFontViewController () {
+@interface FontViewController () {
     UITabBar *_typeSizeSelectionBar;
     UIButton *_selectedTypeButton;
 }
 @end
 
-@implementation ARFontViewController
+@implementation FontViewController
 
 - (void)viewDidLoad
 {

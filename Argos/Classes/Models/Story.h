@@ -21,6 +21,7 @@
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSDate * updatedAt;
+@property (nonatomic, retain) id imageHeader;
 @property (nonatomic, retain) NSSet *entities;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *mentions;

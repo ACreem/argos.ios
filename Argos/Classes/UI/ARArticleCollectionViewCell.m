@@ -1,17 +1,17 @@
 //
-//  ARSimpleCollectionViewCell.m
+//  ARArticleCollectionViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/24/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARSimpleCollectionViewCell.h"
+#import "ARArticleCollectionViewCell.h"
 
-@interface ARSimpleCollectionViewCell ()
+@interface ARArticleCollectionViewCell ()
 @end
 
-@implementation ARSimpleCollectionViewCell
+@implementation ARArticleCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -19,7 +19,7 @@
     if (self) {
         float padding = 10;
         
-        // Unlike most other cell views, the ARSimpleCollectionViewCell does not have full-cell images.
+        // Unlike most other cell views, the ARArticleCollectionViewCell does not have full-cell images.
         CGSize imageSize = CGSizeMake(self.frame.size.height - 2*padding, self.frame.size.height - 2*padding);
         
         self.imageView = [[UIImageView alloc] initWithFrame:CGRectMake(padding, padding, imageSize.width, imageSize.height)];

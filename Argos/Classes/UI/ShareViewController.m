@@ -1,22 +1,22 @@
 //
-//  ARShareViewController.m
+//  ShareViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/19/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARShareViewController.h"
+#import "ShareViewController.h"
 #import "ARCircleButton.h"
 
 static const CGSize kItemSize = {64, 88};
 static const CGSize kIconSize = {64, 64};
 
-@interface ARShareViewController ()
+@interface ShareViewController ()
 @property (strong, nonatomic) NSArray *items;
 @end
 
-@implementation ARShareViewController
+@implementation ShareViewController
 
 - (id)init
 {

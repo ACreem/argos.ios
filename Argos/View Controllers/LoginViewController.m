@@ -185,8 +185,8 @@ static int kSignUpTag = 1;
         [alert show];
     } else {
         
-         // Workaround to authenticate the user through the app.
-         // See: https://github.com/mattupstate/flask-security/issues/30
+        // Workaround to authenticate the user through the app.
+        // See: https://github.com/mattupstate/flask-security/issues/30
         UIWebView* webView = [[UIWebView alloc] initWithFrame:CGRectMake(0,0,0,0)];
         webView.delegate = self;
         [self.view addSubview:webView]; // the web view must be added as a subview in order for it to "load".
@@ -218,6 +218,7 @@ static int kSignUpTag = 1;
 }
 
 - (void)primaryButtonStartLoading {
+    // Call when logging in begins.
     if (_primaryButton.tag == kLoginTag) {
         [_primaryButton setTitle:@"Logging in..." forState:UIControlStateNormal];
     } else {
@@ -229,6 +230,7 @@ static int kSignUpTag = 1;
     _primaryButton.enabled = NO;
 }
 - (void)primaryButtonEndLoading {
+    // Call when logging in ends (or fails).
     if (_primaryButton.tag == kLoginTag) {
         [_primaryButton setTitle:@"Login" forState:UIControlStateNormal];
     } else {

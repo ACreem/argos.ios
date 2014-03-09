@@ -11,8 +11,8 @@
 #import "ArticleWebViewController.h"
 
 #import "AREmbeddedCollectionViewController.h"
-#import "ARSimpleCollectionViewCell.h"
-#import "ARLargeCollectionViewCell.h"
+#import "ARArticleCollectionViewCell.h"
+#import "AREmbeddedCollectionViewCell.h"
 #import "ARGalleryViewController.h"
 
 #import "Article.h"
@@ -58,7 +58,7 @@
     
     _bounds = [[UIScreen mainScreen] bounds];
     
-    [self setHeaderImageForEntity:(id<Entity>)_event];
+    [self setHeaderImageForEntity:(id<AREntity>)_event];
 
     // Summary view
     CGPoint summaryOrigin = CGPointMake(0, self.headerView.bounds.size.height);
@@ -144,7 +144,7 @@
         _storyList.delegate = self;
         _storyList.title = @"Stories";
         
-        [_storyList.collectionView registerClass:[ARLargeCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [_storyList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
         
         [self addChildViewController:_storyList];
         [self.scrollView addSubview:_storyList.view];
@@ -165,7 +165,7 @@
     _articleList.delegate = self;
     _articleList.title = @"In Greater Depth";
     
-    [_articleList.collectionView registerClass:[ARSimpleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [_articleList.collectionView registerClass:[ARArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:_articleList];
     [self.scrollView addSubview:_articleList.collectionView];
@@ -340,7 +340,7 @@
 }
 
 # pragma mark - AREmbeddedCollectionViewControllerDelegate
-- (ARCollectionViewCell*)configureCell:(ARSimpleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
+- (ARCollectionViewCell*)configureCell:(ARArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == _articleList) {
         Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

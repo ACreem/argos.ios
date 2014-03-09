@@ -1,5 +1,5 @@
 //
-//  StoryEventsViewController.h
+//  StoryTimelineViewController.h
 //  Argos
 //
 //  Created by Francis Tseng on 3/1/14.
@@ -9,8 +9,8 @@
 #import "ARCollectionViewController.h"
 #import "Story.h"
 
-@interface StoryEventsViewController : ARCollectionViewController
+@interface StoryTimelineViewController : ARCollectionViewController
 
-- (StoryEventsViewController*)initWithStory:(Story*)story;
+- (StoryTimelineViewController*)initWithStory:(Story*)story;
 
 @end

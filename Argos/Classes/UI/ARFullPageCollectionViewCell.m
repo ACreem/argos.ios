@@ -1,16 +1,16 @@
 //
-//  ARFullCollectionViewCell.m
+//  ARFullPageCollectionViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/24/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARFullCollectionViewCell.h"
+#import "ARFullPageCollectionViewCell.h"
 #import "ARCircleButton.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation ARFullCollectionViewCell
+@implementation ARFullPageCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -54,15 +54,6 @@
         self.timeLabel.textColor = [UIColor mutedColor];
         self.timeLabel.font = [UIFont mediumFontForSize:10];
         [self addSubview:self.timeLabel];
-        
-        // Watching toggle button.
-        if (self.isWatching) {
-            float buttonSide = 44;
-            ARCircleButton* watch = [[ARCircleButton alloc] initWithFrame:CGRectMake(self.frame.size.width - buttonSide - xPadding, xPadding, buttonSide, buttonSide)];
-            watch.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.5];
-            [watch setImage:[UIImage imageNamed:@"watch"] forState:UIControlStateNormal];
-            [self addSubview:watch];
-        }
     }
     return self;
 }

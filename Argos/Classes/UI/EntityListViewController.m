@@ -7,7 +7,7 @@
 //
 
 #import "EntityListViewController.h"
-#import "ARClipCollectionViewCell.h"
+#import "ARSnippetCollectionViewCell.h"
 
 #import "Entity.h"
 
@@ -20,7 +20,7 @@
 
 @implementation EntityListViewController
 
-- (EntityListViewController*)initWithEntity:(id<Entity>)entity;
+- (EntityListViewController*)initWithEntity:(id<AREntity>)entity;
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -43,7 +43,7 @@
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[ARClipCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[ARSnippetCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceVertical = NO;
@@ -76,7 +76,7 @@
 # pragma mark - UIControllerViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ARClipCollectionViewCell *cell = (ARClipCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    ARSnippetCollectionViewCell *cell = (ARSnippetCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Entity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

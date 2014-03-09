@@ -1,15 +1,15 @@
 //
-//  ARLargeCollectionViewCell.m
+//  AREmbeddedCollectionViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/24/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARLargeCollectionViewCell.h"
+#import "AREmbeddedCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
 
-@implementation ARLargeCollectionViewCell
+@implementation AREmbeddedCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
