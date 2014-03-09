@@ -12,6 +12,11 @@
 
 #import "AREmbeddedCollectionViewCell.h"
 
+@protocol AREntityWithLargeImage <AREntity>
+-(UIImage*)imageLarge;
+-(void)setImageLarge:(id)image;
+@end
+
 @interface ARSnippetCollectionViewCell : AREmbeddedCollectionViewCell
 
 @end

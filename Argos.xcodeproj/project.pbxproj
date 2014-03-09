@@ -383,12 +383,7 @@
 			children = (
 				F157FEC318BC45D800EFFC2E /* Cells */,
 				F157FEC218BC45C400EFFC2E /* Controllers */,
-				F157FEB118BC063000EFFC2E /* ARCollectionView.h */,
-				F157FEB218BC063000EFFC2E /* ARCollectionView.m */,
-				F157FECA18BC845E00EFFC2E /* ARCollectionHeaderView.h */,
-				F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */,
-				F1AB914618C40E8E007EF481 /* ARGalleryViewController.h */,
-				F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */,
+				F1DBBC2418CCE77000EBDFB3 /* Views */,
 			);
 			name = Collections;
 			sourceTree = "<group>";
@@ -400,6 +395,8 @@
 				F157FEAF18BBF25E00EFFC2E /* ARCollectionViewController.m */,
 				F157FEB718BC095700EFFC2E /* AREmbeddedCollectionViewController.h */,
 				F157FEB818BC095700EFFC2E /* AREmbeddedCollectionViewController.m */,
+				F1AB914618C40E8E007EF481 /* ARGalleryViewController.h */,
+				F1AB914718C40E8E007EF481 /* ARGalleryViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -592,6 +589,17 @@
 				F16148D318B53AF100948933 /* FontViewController.m */,
 			);
 			name = Modals;
+			sourceTree = "<group>";
+		};
+		F1DBBC2418CCE77000EBDFB3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F157FEB118BC063000EFFC2E /* ARCollectionView.h */,
+				F157FEB218BC063000EFFC2E /* ARCollectionView.m */,
+				F157FECA18BC845E00EFFC2E /* ARCollectionHeaderView.h */,
+				F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

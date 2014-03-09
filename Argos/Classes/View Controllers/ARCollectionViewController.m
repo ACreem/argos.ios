@@ -240,37 +240,10 @@
             
         // If there is a cached image, use it.
         } else {
-            
-            // If this is a full screen image...
-            if (CGSizeEqualToSize(cell.frame.size, screenRect.size)) {
-                // If there isn't yet a full image,
-                // crop and save one.
-                id <AREntityWithFullImage> entityWithFullImage = (id<AREntityWithFullImage>)entity;
-                if (!entityWithFullImage.imageFull) {
-                    cell.imageView.image = [UIImage imageNamed:@"placeholder"];
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                        UIImage *croppedImage = [cell cropImage:entity.image];
-                        entityWithFullImage.imageFull = croppedImage;
-                        dispatch_async(dispatch_get_main_queue(), ^{
-                            cell.imageView.image = croppedImage;
-                        });
-                    });
-                } else {
-                    cell.imageView.image = entityWithFullImage.imageFull;
-                }
-                
-            // If this is an image of any other size...
-            } else {
-                cell.imageView.image = [UIImage imageNamed:@"placeholder"];
-                
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                    UIImage *croppedImage = [cell cropImage:entity.image];
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        cell.imageView.image = croppedImage;
-                    });
-                });
-            }
+            [cell setImageForEntity:entity];
         }
+    } else {
+        cell.imageView.image = [UIImage imageNamed:@"noimage"];
     }
 }
 

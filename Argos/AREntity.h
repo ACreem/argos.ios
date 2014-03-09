@@ -16,8 +16,3 @@
 -(void)setImageHeader:(id)image;
 -(NSManagedObjectContext*)managedObjectContext;
 @end
-
-@protocol AREntityWithFullImage <AREntity>
--(UIImage*)imageFull;
--(void)setImageFull:(id)image;
-@end

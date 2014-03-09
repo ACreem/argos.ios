@@ -17,8 +17,9 @@
     if (self) {
         float xPadding = 10;
         float yPadding = 10;
+        float aspectRatio = 1.6;
         
-        UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, 140)];
+        UIView* headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.width/aspectRatio)];
         
         self.imageView = [[UIImageView alloc] initWithFrame:headerView.frame];
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
@@ -71,6 +72,33 @@
         self.layer.shadowOpacity = 0.3;
     }
     return self;
+}
+
+- (UIImage*)cropImage:(UIImage*)image
+{
+    // Crop to same aspect ratio as detail view header images.
+    float aspectRatio = 1.6;
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    CGSize dimensions = CGSizeMake(screenRect.size.width*2, (screenRect.size.width/aspectRatio)*2);
+    UIImage *croppedImage = [image scaleToCoverSize:dimensions];
+    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
+    return croppedImage;
+}
+
+- (void)setImageForEntity:(id<AREntity>)entity
+{
+    // Just re-use header images here.
+    if (!entity.imageHeader) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            UIImage *croppedImage = [self cropImage:entity.image];
+            entity.imageHeader = croppedImage;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.image = entity.imageHeader;
+            });
+        });
+    } else {
+        self.imageView.image = entity.imageHeader;
+    }
 }
 
 @end

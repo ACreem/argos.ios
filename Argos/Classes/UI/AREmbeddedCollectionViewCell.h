@@ -11,6 +11,11 @@
 
 #import "ARCollectionViewCell.h"
 
+@protocol AREntityWithMidImage <AREntity>
+-(UIImage*)imageMid;
+-(void)setImageMid:(id)image;
+@end
+
 @interface AREmbeddedCollectionViewCell : ARCollectionViewCell
 
 @end

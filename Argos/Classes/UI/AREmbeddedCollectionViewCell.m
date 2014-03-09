@@ -47,5 +47,20 @@
     return self;
 }
 
+- (void)setImageForEntity:(id<AREntity>)entity
+{
+    id <AREntityWithMidImage> entityWithMidImage = (id<AREntityWithMidImage>)entity;
+    if (!entityWithMidImage.imageMid) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
+            UIImage *croppedImage = [self cropImage:entity.image];
+            entityWithMidImage.imageMid = croppedImage;
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.imageView.image = entityWithMidImage.imageMid;
+            });
+        });
+    } else {
+        self.imageView.image = entityWithMidImage.imageMid;
+    }
+}
 
 @end
