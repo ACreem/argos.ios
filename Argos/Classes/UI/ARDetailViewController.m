@@ -61,35 +61,7 @@
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
                                                                              style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    
-    // Navigation buttons.
-    // (Padding)
-    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                          target:nil
-                                                                          action:nil];
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
-    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
-    
-    UIBarButtonItem *watchButton;
-    if (self.isWatching) {
-        watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watched"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
-        watchButton.tag = 1;
-    } else {
-        watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
-        watchButton.tag = 0;
-    }
-    
-    UIBarButtonItem *bookmarkButton;
-    if (self.isBookmarked) {
-        bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmarked"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
-        bookmarkButton.tag = 1;
-    } else {
-        bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmark"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
-        bookmarkButton.tag = 0;
-    }
-    
-    self.navigationItem.rightBarButtonItems = [NSArray arrayWithObjects:shareButton, item, bookmarkButton, item, fontButton, item, watchButton, item, nil];
-    
+    self.navigationItem.rightBarButtonItems = [self navigationItems];
     
     float headerImageHeight = 200.0;
     _bounds = [[UIScreen mainScreen] bounds];
@@ -164,6 +136,28 @@
     titleFrame.origin.y = self.headerView.bounds.size.height - titleFrame.size.height;
     _titleLabel.frame = titleFrame;
     [self.view addSubview:_titleLabel];
+}
+
+- (NSArray*)navigationItems
+{
+    // Navigation buttons.
+    // Override this in subclasses accordingly.
+    
+    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                          target:nil
+                                                                          action:nil];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
+    
+    UIBarButtonItem *watchButton;
+    watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+    watchButton.tag = 0;
+    
+    UIBarButtonItem *bookmarkButton;
+    bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmark"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
+    bookmarkButton.tag = 0;
+    
+    return [NSArray arrayWithObjects:shareButton, paddingItem, bookmarkButton, paddingItem, fontButton, paddingItem, watchButton, paddingItem, nil];
 }
 
 - (void)setHeaderImage:(UIImage*)image

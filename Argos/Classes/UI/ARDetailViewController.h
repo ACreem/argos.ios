@@ -23,11 +23,6 @@
 @property (assign, nonatomic) int loadedItems;
 @property (assign, nonatomic) int totalItems;
 
-// Watching/Bookmarked
-@property (assign, nonatomic) BOOL isWatching;
-@property (assign, nonatomic) BOOL isBookmarked;
-
-
 - (void)viewEntity:(NSString*)entityId;
 - (void)setHeaderImage:(UIImage*)image;
 - (void)setHeaderImageForEntity:(id<Entity>)entity;

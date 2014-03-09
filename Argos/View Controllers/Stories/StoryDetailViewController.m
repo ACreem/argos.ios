@@ -22,6 +22,7 @@
     Story *_story;
     AREmbeddedCollectionViewController *_eventList;
 }
+@property (strong, nonatomic) UIBarButtonItem *watchingButton;
 
 @end
 
@@ -157,6 +158,83 @@
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];
+    }
+}
+
+- (NSArray*)navigationItems
+{
+    // Called in superclass (ARDetailViewController) viewDidLoad
+    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                 target:nil
+                                                                                 action:nil];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
+    
+    if ([[[ARObjectManager sharedManager] currentUser].watching containsObject:_story] ) {
+        self.watchingButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watched"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+        self.watchingButton.tag = 1;
+    } else {
+        self.watchingButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+        self.watchingButton.tag = 0;
+    }
+    self.watchingButton.enabled = NO; // disable for now, checkBookmark will enable it when ready.
+    [self checkWatching];
+    
+    return [NSArray arrayWithObjects:shareButton, paddingItem, self.watchingButton, paddingItem, fontButton, paddingItem, nil];
+}
+
+#pragma mark - Watching
+- (void)checkWatching
+{
+    [[[ARObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/watching/%@", _story.storyId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.watchingButton.image = [UIImage imageNamed:@"nav_watched"];
+        self.watchingButton.tag = 1;
+        self.watchingButton.enabled = YES;
+        [[[ARObjectManager sharedManager] currentUser] addWatchingObject:_story];
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([operation.response statusCode] == 404) {
+            self.watchingButton.image = [UIImage imageNamed:@"nav_watch"];
+            self.watchingButton.tag = 0;
+            self.watchingButton.enabled = YES;
+            [[[ARObjectManager sharedManager] currentUser] removeWatchingObject:_story];
+        } else {
+            NSLog(@"some non-404 error");
+        }
+    }];
+}
+
+- (void)watchStory:(Story*)story
+{
+    [[[ARObjectManager sharedManager] client] postPath:@"/user/watching" parameters:@{@"story_id": story.storyId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success");
+        [[[ARObjectManager sharedManager] currentUser] addWatchingObject:story];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
+}
+
+- (void)unwatchStory:(Story*)story
+{
+    [[[ARObjectManager sharedManager] client] deletePath:[NSString stringWithFormat:@"/user/watching/%@", story.storyId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success");
+        [[[ARObjectManager sharedManager] currentUser] removeWatchingObject:story];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
+}
+
+- (void)watch:(id)sender
+{
+    UIBarButtonItem *button = (UIBarButtonItem*)sender;
+    if (button.tag != 1) {
+        button.image = [UIImage imageNamed:@"nav_watched"];
+        [button setTag:1];
+        [self watchStory:_story];
+    } else {
+        button.image = [UIImage imageNamed:@"nav_watch"];
+        [button setTag:0];
+        [self unwatchStory:_story];
     }
 }
 

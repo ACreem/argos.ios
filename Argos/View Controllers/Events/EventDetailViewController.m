@@ -33,6 +33,7 @@
     AREmbeddedCollectionViewController *_articleList;
     AREmbeddedCollectionViewController *_storyList;
 }
+@property (strong, nonatomic) UIBarButtonItem *bookmarkButton;
 
 @end
 
@@ -173,6 +174,28 @@
     [self fetchArticles];
 }
 
+- (NSArray*)navigationItems
+{
+    // Called in superclass (ARDetailViewController) viewDidLoad
+    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                 target:nil
+                                                                                 action:nil];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
+    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
+    
+    if ([[[ARObjectManager sharedManager] currentUser].bookmarked containsObject:_event] ) {
+        self.bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmarked"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
+        self.bookmarkButton.tag = 1;
+    } else {
+        self.bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmark"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
+        self.bookmarkButton.tag = 0;
+    }
+    self.bookmarkButton.enabled = NO; // disable for now, checkBookmark will enable it when ready.
+    [self checkBookmarked];
+
+    return [NSArray arrayWithObjects:shareButton, paddingItem, self.bookmarkButton, paddingItem, fontButton, paddingItem, nil];
+}
+
 
 # pragma mark - Fetching Data
 - (void)fetchStories
@@ -239,6 +262,61 @@
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"failure");
         }];
+    }
+}
+
+#pragma mark - Bookmarking
+- (void)checkBookmarked
+{
+    [[[ARObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/bookmarked/%@", _event.eventId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        self.bookmarkButton.image = [UIImage imageNamed:@"nav_bookmarked"];
+        self.bookmarkButton.tag = 1;
+        self.bookmarkButton.enabled = YES;
+        [[[ARObjectManager sharedManager] currentUser] addBookmarkedObject:_event];
+    
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([operation.response statusCode] == 404) {
+            self.bookmarkButton.image = [UIImage imageNamed:@"nav_bookmark"];
+            self.bookmarkButton.tag = 0;
+            self.bookmarkButton.enabled = YES;
+            [[[ARObjectManager sharedManager] currentUser] removeBookmarkedObject:_event];
+        } else {
+            NSLog(@"some non-404 error");
+        }
+    }];
+}
+
+- (void)bookmarkEvent:(Event*)event
+{
+    [[[ARObjectManager sharedManager] client] postPath:@"/user/bookmarked" parameters:@{@"event_id": event.eventId} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success");
+        [[[ARObjectManager sharedManager] currentUser] addBookmarkedObject:event];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
+}
+
+- (void)unbookmarkEvent:(Event*)event
+{
+    [[[ARObjectManager sharedManager] client] deletePath:[NSString stringWithFormat:@"/user/bookmarked/%@", _event.eventId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSLog(@"success");
+        [[[ARObjectManager sharedManager] currentUser] removeBookmarkedObject:event];
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+    }];
+}
+
+- (void)bookmark:(id)sender
+{
+    UIBarButtonItem *button = (UIBarButtonItem*)sender;
+    if (button.tag != 1) {
+        button.image = [UIImage imageNamed:@"nav_bookmarked"];
+        [button setTag:1];
+        [self bookmarkEvent:_event];
+    } else {
+        button.image = [UIImage imageNamed:@"nav_bookmark"];
+        [button setTag:0];
+        [self unbookmarkEvent:_event];
     }
 }
 

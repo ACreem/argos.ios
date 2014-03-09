@@ -2,14 +2,14 @@
 //  Event.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/7/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Article, Entity, Mention, Story;
+@class Article, CurrentUser, Entity, Mention, Story;
 
 @interface Event : NSManagedObject
 
@@ -24,8 +24,9 @@
 @property (nonatomic, retain) NSDate * updatedAt;
 @property (nonatomic, retain) NSSet *articles;
 @property (nonatomic, retain) NSSet *entities;
-@property (nonatomic, retain) NSSet *stories;
 @property (nonatomic, retain) NSSet *mentions;
+@property (nonatomic, retain) NSSet *stories;
+@property (nonatomic, retain) CurrentUser *user;
 @end
 
 @interface Event (CoreDataGeneratedAccessors)
@@ -40,14 +41,14 @@
 - (void)addEntities:(NSSet *)values;
 - (void)removeEntities:(NSSet *)values;
 
-- (void)addStoriesObject:(Story *)value;
-- (void)removeStoriesObject:(Story *)value;
-- (void)addStories:(NSSet *)values;
-- (void)removeStories:(NSSet *)values;
-
 - (void)addMentionsObject:(Mention *)value;
 - (void)removeMentionsObject:(Mention *)value;
 - (void)addMentions:(NSSet *)values;
 - (void)removeMentions:(NSSet *)values;
+
+- (void)addStoriesObject:(Story *)value;
+- (void)removeStoriesObject:(Story *)value;
+- (void)addStories:(NSSet *)values;
+- (void)removeStories:(NSSet *)values;
 
 @end

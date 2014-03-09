@@ -2,14 +2,14 @@
 //  Story.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/7/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Entity, Event;
+@class CurrentUser, Entity, Event, Mention;
 
 @interface Story : NSManagedObject
 
@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSSet *entities;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *mentions;
+@property (nonatomic, retain) CurrentUser *user;
 @end
 
 @interface Story (CoreDataGeneratedAccessors)
@@ -38,8 +39,8 @@
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
 
-- (void)addMentionsObject:(NSManagedObject *)value;
-- (void)removeMentionsObject:(NSManagedObject *)value;
+- (void)addMentionsObject:(Mention *)value;
+- (void)removeMentionsObject:(Mention *)value;
 - (void)addMentions:(NSSet *)values;
 - (void)removeMentions:(NSSet *)values;
 

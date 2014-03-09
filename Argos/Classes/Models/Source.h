@@ -2,7 +2,7 @@
 //  Source.h
 //  Argos
 //
-//  Created by Francis Tseng on 2/22/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -13,10 +13,10 @@
 
 @interface Source : NSManagedObject
 
+@property (nonatomic, retain) id extUrl;
+@property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * sourceId;
-@property (nonatomic, retain) id jsonUrl;
-@property (nonatomic, retain) id extUrl;
 @property (nonatomic, retain) NSSet *articles;
 @end
 

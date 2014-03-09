@@ -2,7 +2,7 @@
 //  Mention.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/7/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @interface Mention : NSManagedObject
 
-@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSNumber * mentionId;
+@property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) Entity *parent;
 @property (nonatomic, retain) NSSet *stories;

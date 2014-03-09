@@ -2,12 +2,13 @@
 //  Event.m
 //  Argos
 //
-//  Created by Francis Tseng on 3/7/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import "Event.h"
 #import "Article.h"
+#import "CurrentUser.h"
 #import "Entity.h"
 #import "Mention.h"
 #import "Story.h"
@@ -26,7 +27,8 @@
 @dynamic updatedAt;
 @dynamic articles;
 @dynamic entities;
-@dynamic stories;
 @dynamic mentions;
+@dynamic stories;
+@dynamic user;
 
 @end

@@ -2,7 +2,7 @@
 //  Entity.m
 //  Argos
 //
-//  Created by Francis Tseng on 3/7/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -19,10 +19,10 @@
 @dynamic imageUrl;
 @dynamic jsonUrl;
 @dynamic name;
-@dynamic updatedAt;
 @dynamic summary;
+@dynamic updatedAt;
+@dynamic aliases;
 @dynamic events;
 @dynamic stories;
-@dynamic aliases;
 
 @end

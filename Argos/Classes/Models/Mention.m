@@ -2,7 +2,7 @@
 //  Mention.m
 //  Argos
 //
-//  Created by Francis Tseng on 3/7/14.
+//  Created by Francis Tseng on 3/9/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -14,8 +14,8 @@
 
 @implementation Mention
 
-@dynamic name;
 @dynamic mentionId;
+@dynamic name;
 @dynamic events;
 @dynamic parent;
 @dynamic stories;
