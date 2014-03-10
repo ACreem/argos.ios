@@ -10,6 +10,11 @@
 #import "AFOAuth2Client.h"
 #import "CurrentUser.h"
 
+static NSString* const kArgosLatestStream = @"latest";
+static NSString* const kArgosTrendingStream = @"trending";
+static NSString* const kArgosWatchingStream = @"watching";
+static NSString* const kArgosBookmarkedStream = @"bookmarked";
+
 @interface ARObjectManager : RKObjectManager
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos;

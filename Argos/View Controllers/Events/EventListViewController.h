@@ -10,6 +10,6 @@
 
 @interface EventListViewController : ARCollectionViewController
 
-- (id)initWithTitle:(NSString*)title stream:(NSString*)stream;
+- (id)initWithTitle:(NSString*)title;
 
 @end

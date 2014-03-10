@@ -12,12 +12,11 @@
 #import "Event.h"
 
 @interface EventListViewController ()
-@property (strong, nonatomic) NSString *stream;
 @end
 
 @implementation EventListViewController
 
-- (id)initWithTitle:(NSString*)title stream:(NSString*)stream
+- (id)initWithTitle:(NSString*)title
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -29,7 +28,6 @@
     
     if (self) {
         self.navigationItem.title = title;
-        _stream = stream;
     }
     return self;
 }
@@ -79,7 +77,7 @@
 {
     ARFullPageCollectionViewCell *cell = (ARFullPageCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Event *event = [[self.fetchedResultsController fetchedObjects] objectAtIndex:indexPath.row];
     
     [self handleImageForEntity:(id)event forCell:cell atIndexPath:indexPath];
     

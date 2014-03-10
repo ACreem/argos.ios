@@ -41,6 +41,7 @@
         <attribute name="imageMid" optional="YES" transient="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="imageUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="jsonUrl" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <attribute name="searchQuery" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>

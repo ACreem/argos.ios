@@ -14,4 +14,6 @@
 // Determines whether or not the onboarding view is shown.
 @property (assign, nonatomic) BOOL userIsNew;
 
+- (id)initWithStream:(NSString*)stream;
+
 @end

@@ -24,10 +24,11 @@
 @dynamic imageMid;
 @dynamic imageUrl;
 @dynamic jsonUrl;
+@dynamic searchQuery;
 @dynamic summary;
 @dynamic title;
 @dynamic updatedAt;
-@dynamic searchQuery;
+@dynamic score;
 @dynamic articles;
 @dynamic entities;
 @dynamic mentions;

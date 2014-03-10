@@ -98,6 +98,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                       @"id":             @"eventId",
                                       @"url":            @"jsonUrl",
                                       @"title":          @"title",
+                                      @"score":          @"score",
                                       @"image":          @"imageUrl",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
@@ -136,7 +137,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                 @"parent": @{
                                                     @"entity":     @"Entity",
                                                     @"mappings":   @{
-                                                        @"entity_slug": @"entityId"}}}};
+                                                        @"slug": @"entityId"}}}};
     
     
     [objectManager setupEntityForName:@"Event"
@@ -242,6 +243,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
     RKRoute *searchRoute = [RKRoute routeWithName:@"search" pathPattern:@"/search/:query" method:RKRequestMethodGET];
     [objectManager.router.routeSet addRoute:searchRoute];
     
+    [objectManager configureStreamsWithEventMappings:eventMappings storyMappings:storyMappings];
+    
     return objectManager;
 }
 
@@ -317,6 +320,65 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                 failure(error);
                                             }
                                         }];
+}
+
+- (void)configureStreamsWithEventMappings:(NSDictionary*)eventMappings storyMappings:(NSDictionary*)storyMappings
+{
+    // Setup current user mappings.
+    // This is for Bookmarked and Watching,
+    // since we actually want to map the responses from these routes
+    // to the Current User's bookmarked and watching relationships, respectively.
+    RKEntityMapping *currentUserMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:self.managedObjectStore];
+    
+    // Bookmarked
+    // ===========================
+    NSString* bookmarkedPath = @"/user/bookmarked";
+    RKEntityMapping *eventMapping = [RKEntityMapping mappingForEntityForName:@"Event" inManagedObjectStore:self.managedObjectStore];
+    [eventMapping addAttributeMappingsFromDictionary:eventMappings];
+    
+    // Setup the relationship which maps these events to the CurrentUser's "bookmarked" relationship.
+    RKRelationshipMapping *bookmarkedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"bookmarked" withMapping:eventMapping];
+    [currentUserMapping addPropertyMapping:bookmarkedRelationshipMapping];
+    
+    RKResponseDescriptor *bookmarkedResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:bookmarkedPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:bookmarkedResponseDescriptor];
+    
+    RKRoute *bookmarkedRoute = [RKRoute routeWithName:kArgosBookmarkedStream pathPattern:bookmarkedPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:bookmarkedRoute];
+    
+    // Watching
+    // ===========================
+    NSString* watchingPath = @"/user/feed";
+    RKEntityMapping *watchingStoryMapping = [RKEntityMapping mappingForEntityForName:@"Story" inManagedObjectStore:self.managedObjectStore];
+    [watchingStoryMapping addAttributeMappingsFromDictionary:storyMappings];
+    
+    // Setup the relationship which maps these events to the CurrentUser's "watching" relationship.
+    RKRelationshipMapping *watchingRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"watching" withMapping:watchingStoryMapping];
+    [currentUserMapping addPropertyMapping:watchingRelationshipMapping];
+    
+    RKResponseDescriptor *watchingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:watchingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:watchingResponseDescriptor];
+    
+    RKRoute *watchingRoute = [RKRoute routeWithName:kArgosWatchingStream pathPattern:watchingPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:watchingRoute];
+    
+    // Latest
+    // ===========================
+    NSString* latestPath = @"/latest";
+    RKResponseDescriptor *latestResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:latestPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:latestResponseDescriptor];
+    
+    RKRoute *latestRoute = [RKRoute routeWithName:kArgosLatestStream pathPattern:latestPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:latestRoute];
+    
+    // Trending
+    // ===========================
+    NSString* trendingPath = @"/trending";
+    RKResponseDescriptor *trendingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:trendingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:trendingResponseDescriptor];
+    
+    RKRoute *trendingRoute = [RKRoute routeWithName:kArgosTrendingStream pathPattern:trendingPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:trendingRoute];
 }
 
 /*

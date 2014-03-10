@@ -491,7 +491,7 @@
 				F1292B5B18CD05F4003B4433 /* SearchResultsViewController.h */,
 				F1292B5C18CD05F4003B4433 /* SearchResultsViewController.m */,
 				F1DBBC2118CCD6A000EBDFB3 /* Modals */,
-				F1DBBC2018CCD69100EBDFB3 /* Feeds */,
+				F1DBBC2018CCD69100EBDFB3 /* Streams */,
 				F16148CB18B3DEAE00948933 /* Articles */,
 				F1C6D6ED18B2F32A00129552 /* Entities */,
 				F1C11DF618A7639A007F2B47 /* Stories */,
@@ -576,13 +576,13 @@
 			name = Classes;
 			sourceTree = "<group>";
 		};
-		F1DBBC2018CCD69100EBDFB3 /* Feeds */ = {
+		F1DBBC2018CCD69100EBDFB3 /* Streams */ = {
 			isa = PBXGroup;
 			children = (
 				F1C267B218C239390014B436 /* StreamViewController.h */,
 				F1C267B318C239390014B436 /* StreamViewController.m */,
 			);
-			name = Feeds;
+			name = Streams;
 			sourceTree = "<group>";
 		};
 		F1DBBC2118CCD6A000EBDFB3 /* Modals */ = {

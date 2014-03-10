@@ -7,7 +7,7 @@
 //
 
 #import "MenuViewController.h"
-#import "EventListViewController.h"
+#import "StreamViewController.h"
 #import "AppDelegate.h"
 #import "SearchViewController.h"
 
@@ -48,7 +48,7 @@
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
     _streams = [[NSMutableArray alloc] initWithObjects:@"Trending", @"Watching", @"Latest", nil];
-    _user = [[NSMutableArray alloc] initWithObjects:@"Bookmarked", @"Settings", @"Logout", nil];
+    _user = [[NSMutableArray alloc] initWithObjects:@"Bookmarks", @"Settings", @"Logout", nil];
     _search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
     [self.tableView reloadData];
  
@@ -174,24 +174,33 @@
             [self.viewDeckController closeLeftViewAnimated:YES];
             break;
         }
-        case 1:
+        case 1: {
+            StreamViewController *svc;
+            //[_navigationController popToRootViewControllerAnimated:NO];
             switch (indexPath.row) {
                 case 0:
-                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Trending" stream:@"latest"] animated:YES];
+                    svc = [[StreamViewController alloc] initWithStream:kArgosTrendingStream];
                     break;
                 case 1:
-                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Watching" stream:@"latest"] animated:YES];
+                    svc = [[StreamViewController alloc] initWithStream:kArgosWatchingStream];
                     break;
                 case 2:
-                    [_navigationController pushViewController:[[EventListViewController alloc] initWithTitle:@"Latest" stream:@"latest"] animated:YES];
+                    svc = [[StreamViewController alloc] initWithStream:kArgosLatestStream];
                     break;
             }
+            svc.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
+            [_navigationController pushViewController:svc animated:YES];
+        }
         case 2:
             switch (indexPath.row) {
-                case 1:
+                case 0: {
                     // Bookmarks.
+                    StreamViewController *svc = [[StreamViewController alloc] initWithStream:kArgosBookmarkedStream];
+                    svc.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
+                    [_navigationController pushViewController:svc animated:YES];
                     break;
-                case 0:
+                }
+                case 1:
                     // Settings.
                     break;
                 case 2:

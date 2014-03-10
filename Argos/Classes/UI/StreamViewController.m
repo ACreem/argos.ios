@@ -10,6 +10,8 @@
 
 @interface StreamViewController ()
 
+@property (strong, nonatomic) NSString* stream;
+
 // For the intro pages.
 @property (strong, nonatomic) UIFont *titleFont;
 @property (strong, nonatomic) UIFont *descFont;
@@ -17,6 +19,47 @@
 @end
 
 @implementation StreamViewController
+
+- (id)initWithStream:(NSString *)stream
+{
+    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [flowLayout setMinimumInteritemSpacing:0.0f];
+    [flowLayout setMinimumLineSpacing:0.0f];
+    [flowLayout setSectionInset:UIEdgeInsetsZero];
+    [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    
+    self.stream = stream;
+    
+    NSPredicate *predicate;
+    NSString* title;
+    if ([stream isEqualToString:kArgosWatchingStream]) {
+        predicate = [NSPredicate predicateWithFormat:@"ANY self.stories IN %@", [[ARObjectManager sharedManager] currentUser].watching];
+        self.sortKey = @"createdAt";
+        title = @"Watching";
+        
+    } else if ([stream isEqualToString:kArgosLatestStream]) {
+        predicate = [NSPredicate predicateWithValue:YES];
+        self.sortKey = @"createdAt";
+        title = @"Latest";
+        
+    } else if ([stream isEqualToString:kArgosTrendingStream]) {
+        predicate = [NSPredicate predicateWithValue:YES];
+        self.sortKey = @"score";
+        title = @"Trending";
+        
+    } else if ([stream isEqualToString:kArgosBookmarkedStream]) {
+        predicate = [NSPredicate predicateWithFormat:@"self in %@", [[ARObjectManager sharedManager] currentUser].bookmarked];
+        self.sortKey = @"createdAt";
+        title = @"Bookmarks";
+    }
+
+
+    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:predicate];
+    if (self) {
+        self.navigationItem.title = title;
+    }
+    return self;
+}
 
 - (void)viewDidLoad
 {
@@ -40,6 +83,20 @@
         intro.delegate = self;
         [intro showInView:self.view animateDuration:0.0];
     }
+}
+
+- (void)loadData
+{
+    [[ARObjectManager sharedManager] getObjectsAtPathForRouteNamed:self.stream object:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        NSLog(@"success");
+        [self.refreshControl endRefreshing];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"failure");
+        NSLog(@"%@", error);
+        [self.refreshControl endRefreshing];
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }];
 }
 
 # pragma mark - EAIntroDelegate
