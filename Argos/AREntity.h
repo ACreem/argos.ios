@@ -8,7 +8,7 @@
 // Expect that Core Data entities processed by this
 // view controller respond to these methods.
 
-@protocol AREntity
+@protocol AREntity <NSObject>
 -(NSString*)imageUrl;
 -(UIImage*)image;
 -(UIImage*)imageHeader;

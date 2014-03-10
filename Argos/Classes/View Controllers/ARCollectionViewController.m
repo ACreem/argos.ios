@@ -202,16 +202,8 @@
         [imageDownloader setCompletionHandler:^(UIImage *image) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
                 ARCollectionViewCell* cell = (ARCollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-            
                 entity.image = image;
-                
-                // Crop the image
-                UIImage* croppedImage = [cell cropImage:image];
-                
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    // Update the UI
-                    cell.imageView.image = croppedImage;
-                });
+                [cell setImageForEntity:entity];
             });
         }];
         [self.imageDownloadsInProgress setObject:imageDownloader forKey:indexPath];

@@ -17,13 +17,14 @@
 
 @dynamic createdAt;
 @dynamic image;
+@dynamic imageHeader;
 @dynamic imageUrl;
 @dynamic jsonUrl;
 @dynamic storyId;
 @dynamic summary;
 @dynamic title;
 @dynamic updatedAt;
-@dynamic imageHeader;
+@dynamic searchQuery;
 @dynamic entities;
 @dynamic events;
 @dynamic mentions;

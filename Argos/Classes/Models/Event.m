@@ -18,15 +18,16 @@
 
 @dynamic createdAt;
 @dynamic eventId;
-@dynamic imageFull;
 @dynamic image;
+@dynamic imageFull;
+@dynamic imageHeader;
+@dynamic imageMid;
 @dynamic imageUrl;
 @dynamic jsonUrl;
 @dynamic summary;
 @dynamic title;
 @dynamic updatedAt;
-@dynamic imageMid;
-@dynamic imageHeader;
+@dynamic searchQuery;
 @dynamic articles;
 @dynamic entities;
 @dynamic mentions;

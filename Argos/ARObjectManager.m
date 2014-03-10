@@ -33,7 +33,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
-    RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
     //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Create an Argos OAuth2 client.
@@ -100,7 +101,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                       @"image":          @"imageUrl",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
-                                      @"created_at":     @"createdAt"};
+                                      @"created_at":     @"createdAt",
+                                      @"@metadata.routing.parameters.query":     @"searchQuery"};
     NSDictionary *storyMappings   = @{
                                       @"id":             @"storyId",
                                       @"url":            @"jsonUrl",
@@ -108,14 +110,16 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                       @"image":          @"imageUrl",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
-                                      @"created_at":     @"createdAt"};
+                                      @"created_at":     @"createdAt",
+                                      @"@metadata.routing.parameters.query":     @"searchQuery"};
     NSDictionary *entityMappings  = @{
                                       @"slug":           @"entityId",
                                       @"url":            @"jsonUrl",
                                       @"name":           @"name",
                                       @"image":          @"imageUrl",
                                       @"summary":        @"summary",
-                                      @"updated_at":     @"updatedAt"};
+                                      @"updated_at":     @"updatedAt",
+                                      @"@metadata.routing.parameters.query":     @"searchQuery"};
     NSDictionary *sourceMappings  = @{
                                       @"id":             @"sourceId",
                                       @"url":            @"jsonUrl",
@@ -210,6 +214,33 @@ static NSString* const kArgosAPIClientSecret = @"test";
                            identifier:@"userId"
                         relationships:nil
                              mappings:userMappings];
+    
+    // The search endpoint requires special handling,
+    // since it returns representations of multiple different resources.
+    RKDynamicMapping *searchMapping = [RKDynamicMapping new];
+    
+    RKEntityMapping *eventMapping = [RKEntityMapping mappingForEntityForName:@"Event" inManagedObjectStore:mos];
+    [eventMapping addAttributeMappingsFromDictionary:eventMappings];
+    eventMapping.identificationAttributes = @[ @"eventId" ];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"event" objectMapping:eventMapping]];
+    
+    RKEntityMapping *storyMapping = [RKEntityMapping mappingForEntityForName:@"Story" inManagedObjectStore:mos];
+    [storyMapping addAttributeMappingsFromDictionary:storyMappings];
+    storyMapping.identificationAttributes = @[ @"storyId" ];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"story" objectMapping:storyMapping]];
+    
+    RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Entity" inManagedObjectStore:mos];
+    [entityMapping addAttributeMappingsFromDictionary:entityMappings];
+    entityMapping.identificationAttributes = @[ @"entityId" ];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:entityMapping]];
+    
+    RKResponseDescriptor *searchResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:searchMapping method:RKRequestMethodGET pathPattern:@"/search/:query" keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [objectManager addResponseDescriptor:searchResponseDescriptor];
+    
+    // Since we are extracting the search query using RestKit's `@metadata`, we *MUST* specify an RKRoute.
+    // Otherwise, `@metadata` is unavailable.
+    RKRoute *searchRoute = [RKRoute routeWithName:@"search" pathPattern:@"/search/:query" method:RKRequestMethodGET];
+    [objectManager.router.routeSet addRoute:searchRoute];
     
     return objectManager;
 }

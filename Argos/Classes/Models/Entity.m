@@ -16,13 +16,14 @@
 
 @dynamic entityId;
 @dynamic image;
+@dynamic imageHeader;
+@dynamic imageLarge;
 @dynamic imageUrl;
 @dynamic jsonUrl;
 @dynamic name;
 @dynamic summary;
 @dynamic updatedAt;
-@dynamic imageHeader;
-@dynamic imageLarge;
+@dynamic searchQuery;
 @dynamic aliases;
 @dynamic events;
 @dynamic stories;

@@ -15,13 +15,14 @@
 
 @property (nonatomic, retain) NSString * entityId;
 @property (nonatomic, retain) id image;
+@property (nonatomic, retain) id imageHeader;
+@property (nonatomic, retain) id imageLarge;
 @property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSString * summary;
 @property (nonatomic, retain) NSDate * updatedAt;
-@property (nonatomic, retain) id imageHeader;
-@property (nonatomic, retain) id imageLarge;
+@property (nonatomic, retain) NSString * searchQuery;
 @property (nonatomic, retain) NSSet *aliases;
 @property (nonatomic, retain) NSSet *events;
 @property (nonatomic, retain) NSSet *stories;
