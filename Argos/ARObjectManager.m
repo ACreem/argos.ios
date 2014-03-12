@@ -140,24 +140,24 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                         @"slug": @"entityId"}}}};
     
     
-    [objectManager setupEntityForName:@"Event"
-                          pathPattern:@"/events"
-                                class:[Event class]
-                           identifier:@"eventId"
-                        relationships:@{
-                                        @"articles":    @{
-                                                          @"entity":      @"Article",
-                                                          @"mappings":    articleMappings},
-                                        @"stories":     @{
-                                                          @"entity":      @"Story",
-                                                          @"mappings":    storyMappings},
-                                        @"mentions":    @{
-                                                          @"entity":      @"Mention",
-                                                          @"mappings":    nestedMentionMappings},
-                                        @"entities":    @{
-                                                          @"entity":      @"Entity",
-                                                          @"mappings":    entityMappings}}
-                             mappings:eventMappings];
+    RKEntityMapping* eventMapping = [objectManager setupEntityForName:@"Event"
+                                                          pathPattern:@"/events"
+                                                                class:[Event class]
+                                                           identifier:@"eventId"
+                                                        relationships:@{
+                                                                        @"articles":    @{
+                                                                                          @"entity":      @"Article",
+                                                                                          @"mappings":    articleMappings},
+                                                                        @"stories":     @{
+                                                                                          @"entity":      @"Story",
+                                                                                          @"mappings":    storyMappings},
+                                                                        @"mentions":    @{
+                                                                                          @"entity":      @"Mention",
+                                                                                          @"mappings":    nestedMentionMappings},
+                                                                        @"entities":    @{
+                                                                                          @"entity":      @"Entity",
+                                                                                          @"mappings":    entityMappings}}
+                                                             mappings:eventMappings];
     
     [objectManager setupEntityForName:@"Article"
                           pathPattern:@"/articles"
@@ -176,31 +176,31 @@ static NSString* const kArgosAPIClientSecret = @"test";
                         relationships:nil
                              mappings:sourceMappings];
     
-    [objectManager setupEntityForName:@"Story"
-                          pathPattern:@"/stories"
-                                class:[Story class]
-                           identifier:@"storyId"
-                        relationships:@{
-                                        @"events":      @{
-                                                          @"entity":      @"Event",
-                                                          @"mappings":    eventMappings},
-                                        @"mentions":    @{
-                                                          @"entity":      @"Mention",
-                                                          @"mappings":    nestedMentionMappings},
-                                        @"entities":    @{
-                                                          @"entity":      @"Entity",
-                                                          @"mappings":    entityMappings}}
-                             mappings:storyMappings];
+    RKEntityMapping *storyMapping = [objectManager setupEntityForName:@"Story"
+                                                          pathPattern:@"/stories"
+                                                                class:[Story class]
+                                                           identifier:@"storyId"
+                                                        relationships:@{
+                                                                        @"events":      @{
+                                                                                          @"entity":      @"Event",
+                                                                                          @"mappings":    eventMappings},
+                                                                        @"mentions":    @{
+                                                                                          @"entity":      @"Mention",
+                                                                                          @"mappings":    nestedMentionMappings},
+                                                                        @"entities":    @{
+                                                                                          @"entity":      @"Entity",
+                                                                                          @"mappings":    entityMappings}}
+                                                             mappings:storyMappings];
     
-    [objectManager setupEntityForName:@"Entity"
-                          pathPattern:@"/entities"
-                                class:[Entity class]
-                           identifier:@"entityId"
-                        relationships:@{
-                                        @"stories":   @{
-                                                        @"entity":      @"Story",
-                                                        @"mappings":    storyMappings}}
-                             mappings:entityMappings];
+    RKEntityMapping *entityMapping = [objectManager setupEntityForName:@"Entity"
+                                                          pathPattern:@"/entities"
+                                                                class:[Entity class]
+                                                           identifier:@"entityId"
+                                                        relationships:@{
+                                                                        @"stories":   @{
+                                                                                        @"entity":      @"Story",
+                                                                                        @"mappings":    storyMappings}}
+                                                             mappings:entityMappings];
     
     [objectManager setupEntityForName:@"Mention"
                           pathPattern:@"/aliases"
@@ -209,30 +209,20 @@ static NSString* const kArgosAPIClientSecret = @"test";
                         relationships:nil
                              mappings:mentionMappings];
     
-    [objectManager setupEntityForName:@"CurrentUser"
-                          pathPattern:@"/user"
-                                class:[CurrentUser class]
-                           identifier:@"userId"
-                        relationships:nil
-                             mappings:userMappings];
+    // Setup current user mapping.
+    RKEntityMapping *currentUserMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:mos];
+    [currentUserMapping addAttributeMappingsFromDictionary:userMappings];
+    currentUserMapping.identificationAttributes = @[ @"userId" ];
+    [objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[CurrentUser class] pathPattern:@"/user" method:RKRequestMethodGET]];
+    RKResponseDescriptor *currentUserResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:@"/user" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [objectManager addResponseDescriptor:currentUserResponseDescriptor];
     
     // The search endpoint requires special handling,
     // since it returns representations of multiple different resources.
     RKDynamicMapping *searchMapping = [RKDynamicMapping new];
     
-    RKEntityMapping *eventMapping = [RKEntityMapping mappingForEntityForName:@"Event" inManagedObjectStore:mos];
-    [eventMapping addAttributeMappingsFromDictionary:eventMappings];
-    eventMapping.identificationAttributes = @[ @"eventId" ];
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"event" objectMapping:eventMapping]];
-    
-    RKEntityMapping *storyMapping = [RKEntityMapping mappingForEntityForName:@"Story" inManagedObjectStore:mos];
-    [storyMapping addAttributeMappingsFromDictionary:storyMappings];
-    storyMapping.identificationAttributes = @[ @"storyId" ];
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"story" objectMapping:storyMapping]];
-    
-    RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:@"Entity" inManagedObjectStore:mos];
-    [entityMapping addAttributeMappingsFromDictionary:entityMappings];
-    entityMapping.identificationAttributes = @[ @"entityId" ];
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:entityMapping]];
     
     RKResponseDescriptor *searchResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:searchMapping method:RKRequestMethodGET pathPattern:@"/search/:query" keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
@@ -243,7 +233,19 @@ static NSString* const kArgosAPIClientSecret = @"test";
     RKRoute *searchRoute = [RKRoute routeWithName:@"search" pathPattern:@"/search/:query" method:RKRequestMethodGET];
     [objectManager.router.routeSet addRoute:searchRoute];
     
-    [objectManager configureStreamsWithEventMappings:eventMappings storyMappings:storyMappings];
+    
+    // Setup stream/feed mappings.
+    [objectManager configureStreamsWithEventMapping:eventMapping storyMapping:storyMapping];
+    
+    
+    // Setup pagination mapping.
+    RKObjectMapping *paginationMapping = [RKObjectMapping mappingForClass:[RKPaginator class]];
+    [paginationMapping addAttributeMappingsFromDictionary:@{
+                                                            @"pagination.per_page": @"perPage",
+                                                            @"pagination.page": @"currentPage",
+                                                            @"pagination.total_count": @"objectCount",
+                                                            }];
+    [objectManager setPaginationMapping:paginationMapping];
     
     return objectManager;
 }
@@ -322,7 +324,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                         }];
 }
 
-- (void)configureStreamsWithEventMappings:(NSDictionary*)eventMappings storyMappings:(NSDictionary*)storyMappings
+- (void)configureStreamsWithEventMapping:(RKEntityMapping*)eventMapping storyMapping:(RKEntityMapping*)storyMapping
 {
     // Setup current user mappings.
     // This is for Bookmarked and Watching,
@@ -333,9 +335,6 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Bookmarked
     // ===========================
     NSString* bookmarkedPath = @"/user/bookmarked";
-    RKEntityMapping *eventMapping = [RKEntityMapping mappingForEntityForName:@"Event" inManagedObjectStore:self.managedObjectStore];
-    [eventMapping addAttributeMappingsFromDictionary:eventMappings];
-    
     // Setup the relationship which maps these events to the CurrentUser's "bookmarked" relationship.
     RKRelationshipMapping *bookmarkedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"bookmarked" withMapping:eventMapping];
     [currentUserMapping addPropertyMapping:bookmarkedRelationshipMapping];
@@ -349,11 +348,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Watching
     // ===========================
     NSString* watchingPath = @"/user/feed";
-    RKEntityMapping *watchingStoryMapping = [RKEntityMapping mappingForEntityForName:@"Story" inManagedObjectStore:self.managedObjectStore];
-    [watchingStoryMapping addAttributeMappingsFromDictionary:storyMappings];
-    
     // Setup the relationship which maps these events to the CurrentUser's "watching" relationship.
-    RKRelationshipMapping *watchingRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"watching" withMapping:watchingStoryMapping];
+    RKRelationshipMapping *watchingRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"watching" withMapping:storyMapping];
     [currentUserMapping addPropertyMapping:watchingRelationshipMapping];
     
     RKResponseDescriptor *watchingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:watchingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
@@ -365,7 +361,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Latest
     // ===========================
     NSString* latestPath = @"/latest";
-    RKResponseDescriptor *latestResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:latestPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor *latestResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:latestPath keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self addResponseDescriptor:latestResponseDescriptor];
     
     RKRoute *latestRoute = [RKRoute routeWithName:kArgosLatestStream pathPattern:latestPath method:RKRequestMethodGET];
@@ -374,7 +370,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Trending
     // ===========================
     NSString* trendingPath = @"/trending";
-    RKResponseDescriptor *trendingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:trendingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor *trendingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:trendingPath keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self addResponseDescriptor:trendingResponseDescriptor];
     
     RKRoute *trendingRoute = [RKRoute routeWithName:kArgosTrendingStream pathPattern:trendingPath method:RKRequestMethodGET];
@@ -471,7 +467,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     }]
  }
  */
-- (void)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
+- (RKEntityMapping*)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
 {
     // Setup the entity mapping.
     RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:name inManagedObjectStore:self.managedObjectStore];
@@ -480,7 +476,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     
     // Setup the entity's nested relationship mappings.
     for (NSString* relationshipName in relationships) {
-        RKEntityMapping *relationshipMapping = [RKEntityMapping mappingForEntityForName:relationships[relationshipName][@"entity"] inManagedObjectStore:self.managedObjectStore];
+        RKEntityMapping *relatedEntityMapping = [RKEntityMapping mappingForEntityForName:relationships[relationshipName][@"entity"] inManagedObjectStore:self.managedObjectStore];
         
         // Check for nested-nested relationship mappings.
         NSMutableDictionary* relationshipMappingDict = [relationships[relationshipName][@"mappings"] mutableCopy];
@@ -488,7 +484,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
         [relationshipMappingDict removeObjectForKey:@"relationships"];
         
         // Add top-level mappings.
-        [relationshipMapping addAttributeMappingsFromDictionary:relationshipMappingDict];
+        [relatedEntityMapping addAttributeMappingsFromDictionary:relationshipMappingDict];
         
         // Create nested-nested relationships.
         if (nestedRelationships) {
@@ -496,19 +492,23 @@ static NSString* const kArgosAPIClientSecret = @"test";
                 RKEntityMapping *nestedEntityMapping = [RKEntityMapping mappingForEntityForName:nestedRelationships[nestedRelationshipName][@"entity"] inManagedObjectStore:self.managedObjectStore];
                 [nestedEntityMapping addAttributeMappingsFromDictionary:nestedRelationships[nestedRelationshipName][@"mappings"]];
                 RKRelationshipMapping *nestedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:nestedRelationshipName withMapping:nestedEntityMapping];
-                [relationshipMapping addPropertyMapping:nestedRelationshipMapping];
+                [relatedEntityMapping addPropertyMapping:nestedRelationshipMapping];
             }
         }
-        [entityMapping addRelationshipMappingWithSourceKeyPath:relationshipName mapping:relationshipMapping];
+        
+        [entityMapping addRelationshipMappingWithSourceKeyPath:relationshipName mapping:relatedEntityMapping];
     }
-    
-    /*
-     if there exists a @"relationships" key in the mapping, recurse
-     */
     
     // Setup collection route.
     // e.g. /events
-    RKResponseDescriptor *collectionResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping method:RKRequestMethodGET pathPattern:pathPattern keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    // Collection routes responses look like:
+    /*
+        {
+            "results": [ ... ],
+            "pagination": { ... }
+        } 
+     */
+    RKResponseDescriptor *collectionResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping method:RKRequestMethodGET pathPattern:pathPattern keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self addResponseDescriptor:collectionResponseDescriptor];
     
     // Setup member route.
@@ -517,6 +517,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
     [self.router.routeSet addRoute:[RKRoute routeWithClass:class pathPattern:memberPathPattern method:RKRequestMethodGET]];
     RKResponseDescriptor *memberResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping method:RKRequestMethodGET pathPattern:memberPathPattern keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self addResponseDescriptor:memberResponseDescriptor];
+    
+    return entityMapping;
 }
 
 @end

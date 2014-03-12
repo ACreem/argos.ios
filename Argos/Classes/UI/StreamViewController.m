@@ -11,6 +11,8 @@
 @interface StreamViewController ()
 
 @property (strong, nonatomic) NSString* stream;
+@property (strong, nonatomic) RKPaginator *paginator;
+@property (assign, nonatomic) BOOL isLoading;
 
 // For the intro pages.
 @property (strong, nonatomic) UIFont *titleFont;
@@ -87,16 +89,45 @@
 
 - (void)loadData
 {
-    [[ARObjectManager sharedManager] getObjectsAtPathForRouteNamed:self.stream object:nil parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"success");
-        [self.refreshControl endRefreshing];
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"failure");
-        NSLog(@"%@", error);
-        [self.refreshControl endRefreshing];
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alertView show];
-    }];
+    // Create weak reference to self to use within the paginators completion block
+    __weak typeof(self) weakSelf = self;
+    
+    // Setup paginator
+    if (!self.paginator) {
+        
+        ARObjectManager *objectManager = [ARObjectManager sharedManager];
+        NSString *requestString = [NSString stringWithFormat:@"%@?page=:currentPage", self.stream];
+        self.paginator = [objectManager paginatorWithPathPattern:requestString];
+        
+        [self.paginator setCompletionBlockWithSuccess:^(RKPaginator *paginator, NSArray *objects, NSUInteger page) {
+            
+            /*
+            if (page == 1) {
+                [NSFetchedResultsController deleteCacheWithName:@"Master"];
+            }
+             */
+            [weakSelf.collectionView reloadData];
+            [weakSelf.refreshControl endRefreshing];
+            weakSelf.isLoading = NO;
+            
+        } failure:^(RKPaginator *paginator, NSError *error) {
+            NSLog(@"Failure: %@", error);
+            [weakSelf.refreshControl endRefreshing];
+            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alertView show];
+        }];
+    }
+    
+    [self.paginator loadPage:1];
+}
+
+# pragma mark - UIScrollViewDelegate
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.contentOffset.y > (0.8 * scrollView.contentSize.height) && !self.isLoading) {
+        self.isLoading = YES;
+        [self.paginator loadNextPage];
+    }
 }
 
 # pragma mark - EAIntroDelegate
