@@ -20,7 +20,7 @@
 
 @implementation EntityListViewController
 
-- (EntityListViewController*)initWithEntity:(id<AREntity>)entity;
+- (EntityListViewController*)initWithEntity:(id<AREntity>)entity withPredicate:(NSPredicate*)predicate
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -35,7 +35,7 @@
     self.managedObjectContext = entity.managedObjectContext;
     
     // For now just get all entities.
-    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Entity"];
+    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Entity" withPredicate:predicate];
     return self;
 }
 

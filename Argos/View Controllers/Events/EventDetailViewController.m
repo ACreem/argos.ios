@@ -90,7 +90,7 @@
     
     // Setup the right controller (the mention pane) for the view deck.
     // Doesn't feel quite right for this view controller to reach that far up its hierarchy, but...
-    self.navigationController.viewDeckController.rightController = [[EntityListViewController alloc] initWithEntity:_event];
+    self.navigationController.viewDeckController.rightController = [[EntityListViewController alloc] initWithEntity:_event withPredicate:[NSPredicate predicateWithFormat:@"SELF in %@", _event.entities]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated

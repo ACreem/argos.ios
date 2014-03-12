@@ -10,6 +10,6 @@
 
 @interface EntityListViewController : ARCollectionViewController
 
-- (EntityListViewController*)initWithEntity:(id<AREntity>)entity;
+- (EntityListViewController*)initWithEntity:(id<AREntity>)entity withPredicate:(NSPredicate*)predicate;
 
 @end
