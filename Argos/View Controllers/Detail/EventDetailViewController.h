@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARDetailViewController.h"
-#import "AREmbeddedCollectionViewController.h"
+#import "DetailViewController.h"
+#import "EmbeddedCollectionViewController.h"
 #import "Event.h"
 
-@interface EventDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate>
+@interface EventDetailViewController : DetailViewController <EmbeddedCollectionViewControllerDelegate>
 
 @property (nonatomic, strong) Event *entity;
 

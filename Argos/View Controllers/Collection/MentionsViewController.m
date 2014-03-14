@@ -7,7 +7,7 @@
 //
 
 #import "MentionsViewController.h"
-#import "ARSnippetCollectionViewCell.h"
+#import "SnippetCollectionViewCell.h"
 
 #import "Concept.h"
 
@@ -42,7 +42,7 @@
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[ARSnippetCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[SnippetCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceVertical = NO;
@@ -74,7 +74,7 @@
 # pragma mark - UIControllerViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ARSnippetCollectionViewCell *cell = (ARSnippetCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    SnippetCollectionViewCell *cell = (SnippetCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Concept* concept = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

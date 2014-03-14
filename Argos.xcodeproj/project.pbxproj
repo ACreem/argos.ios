@@ -40,7 +40,7 @@
 		F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F1405C4518973C4C00A4819D /* InfoPlist.strings */; };
 		F143295C18B30A7B00A76D97 /* SummaryTemplate.html in Resources */ = {isa = PBXBuildFile; fileRef = F143295B18B30A7B00A76D97 /* SummaryTemplate.html */; };
 		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
-		F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ARObjectManager.m */; };
+		F1601C0918ABDC3800C89590 /* ArgosObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ArgosObjectManager.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */; };
 		F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915D7818D2BA60005811E6 /* BaseEntity.m */; };
@@ -61,14 +61,14 @@
 		F194A57618D2A0ED00792451 /* ImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51D18D2A0ED00792451 /* ImageDownloader.m */; };
 		F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51F18D2A0ED00792451 /* UIColor+ArgosColors.m */; };
 		F194A57818D2A0ED00792451 /* UIFont+ArgosFonts.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52118D2A0ED00792451 /* UIFont+ArgosFonts.m */; };
-		F194A57918D2A0ED00792451 /* AREmbeddedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52418D2A0ED00792451 /* AREmbeddedCollectionViewController.m */; };
-		F194A57A18D2A0ED00792451 /* ARGalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52618D2A0ED00792451 /* ARGalleryViewController.m */; };
-		F194A57C18D2A0ED00792451 /* ARCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52C18D2A0ED00792451 /* ARCollectionViewController.m */; };
+		F194A57918D2A0ED00792451 /* EmbeddedCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */; };
+		F194A57A18D2A0ED00792451 /* GalleryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52618D2A0ED00792451 /* GalleryViewController.m */; };
+		F194A57C18D2A0ED00792451 /* CollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52C18D2A0ED00792451 /* CollectionViewController.m */; };
 		F194A57D18D2A0ED00792451 /* MentionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A52E18D2A0ED00792451 /* MentionsViewController.m */; };
 		F194A57E18D2A0ED00792451 /* EventListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53018D2A0ED00792451 /* EventListViewController.m */; };
 		F194A57F18D2A0ED00792451 /* StoryTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53218D2A0ED00792451 /* StoryTimelineViewController.m */; };
 		F194A58018D2A0ED00792451 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53418D2A0ED00792451 /* StreamViewController.m */; };
-		F194A58118D2A0ED00792451 /* ARDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53718D2A0ED00792451 /* ARDetailViewController.m */; };
+		F194A58118D2A0ED00792451 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53718D2A0ED00792451 /* DetailViewController.m */; };
 		F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */; };
 		F194A58318D2A0ED00792451 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53B18D2A0ED00792451 /* EventDetailViewController.m */; };
 		F194A58418D2A0ED00792451 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53D18D2A0ED00792451 /* StoryDetailViewController.m */; };
@@ -78,19 +78,19 @@
 		F194A58818D2A0ED00792451 /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A54618D2A0ED00792451 /* ShareViewController.m */; };
 		F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A54918D2A0ED00792451 /* SearchResultsViewController.m */; };
 		F194A58A18D2A0ED00792451 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A54B18D2A0ED00792451 /* SearchViewController.m */; };
-		F194A58B18D2A0ED00792451 /* ARCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A54F18D2A0ED00792451 /* ARCircleButton.m */; };
-		F194A58C18D2A0ED00792451 /* ARCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */; };
-		F194A58D18D2A0ED00792451 /* ARCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55318D2A0ED00792451 /* ARCollectionView.m */; };
-		F194A58E18D2A0ED00792451 /* ARImageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55518D2A0ED00792451 /* ARImageHeaderView.m */; };
-		F194A58F18D2A0ED00792451 /* ARScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55718D2A0ED00792451 /* ARScrollView.m */; };
-		F194A59018D2A0ED00792451 /* ARSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55918D2A0ED00792451 /* ARSummaryView.m */; };
-		F194A59118D2A0ED00792451 /* ARArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55C18D2A0ED00792451 /* ARArticleCollectionViewCell.m */; };
-		F194A59218D2A0ED00792451 /* ARCardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55E18D2A0ED00792451 /* ARCardCollectionViewCell.m */; };
-		F194A59318D2A0ED00792451 /* ARCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56018D2A0ED00792451 /* ARCollectionViewCell.m */; };
-		F194A59418D2A0ED00792451 /* AREmbeddedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56218D2A0ED00792451 /* AREmbeddedCollectionViewCell.m */; };
-		F194A59518D2A0ED00792451 /* ARFullPageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56418D2A0ED00792451 /* ARFullPageCollectionViewCell.m */; };
-		F194A59618D2A0ED00792451 /* ARGalleryImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56618D2A0ED00792451 /* ARGalleryImageViewCell.m */; };
-		F194A59718D2A0ED00792451 /* ARSnippetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56818D2A0ED00792451 /* ARSnippetCollectionViewCell.m */; };
+		F194A58B18D2A0ED00792451 /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A54F18D2A0ED00792451 /* CircleButton.m */; };
+		F194A58C18D2A0ED00792451 /* CollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55118D2A0ED00792451 /* CollectionHeaderView.m */; };
+		F194A58D18D2A0ED00792451 /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55318D2A0ED00792451 /* CollectionView.m */; };
+		F194A58E18D2A0ED00792451 /* ImageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55518D2A0ED00792451 /* ImageHeaderView.m */; };
+		F194A58F18D2A0ED00792451 /* ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55718D2A0ED00792451 /* ScrollView.m */; };
+		F194A59018D2A0ED00792451 /* SummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55918D2A0ED00792451 /* SummaryView.m */; };
+		F194A59118D2A0ED00792451 /* ArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */; };
+		F194A59218D2A0ED00792451 /* CardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55E18D2A0ED00792451 /* CardCollectionViewCell.m */; };
+		F194A59318D2A0ED00792451 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56018D2A0ED00792451 /* CollectionViewCell.m */; };
+		F194A59418D2A0ED00792451 /* EmbeddedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56218D2A0ED00792451 /* EmbeddedCollectionViewCell.m */; };
+		F194A59518D2A0ED00792451 /* FullPageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56418D2A0ED00792451 /* FullPageCollectionViewCell.m */; };
+		F194A59618D2A0ED00792451 /* GalleryImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56618D2A0ED00792451 /* GalleryImageViewCell.m */; };
+		F194A59718D2A0ED00792451 /* SnippetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56818D2A0ED00792451 /* SnippetCollectionViewCell.m */; };
 		F194A59818D2A0ED00792451 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56A18D2A0ED00792451 /* LoginView.m */; };
 		F194A59B18D2A4D300792451 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A59A18D2A4D300792451 /* WebViewController.m */; };
 		F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */; };
@@ -147,8 +147,8 @@
 		F1405C4618973C4C00A4819D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F143295B18B30A7B00A76D97 /* SummaryTemplate.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = SummaryTemplate.html; sourceTree = "<group>"; };
 		F14603B318A41FB100A85E0F /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		F1601C0718ABDC3800C89590 /* ARObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARObjectManager.h; sourceTree = "<group>"; };
-		F1601C0818ABDC3800C89590 /* ARObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARObjectManager.m; sourceTree = "<group>"; };
+		F1601C0718ABDC3800C89590 /* ArgosObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosObjectManager.h; sourceTree = "<group>"; };
+		F1601C0818ABDC3800C89590 /* ArgosObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosObjectManager.m; sourceTree = "<group>"; };
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
 		F1915D5718D2B8F7005811E6 /* Argos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Argos.xcdatamodel; sourceTree = "<group>"; };
 		F1915D7718D2BA60005811E6 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
@@ -187,12 +187,12 @@
 		F194A51F18D2A0ED00792451 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F194A52018D2A0ED00792451 /* UIFont+ArgosFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+ArgosFonts.h"; sourceTree = "<group>"; };
 		F194A52118D2A0ED00792451 /* UIFont+ArgosFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ArgosFonts.m"; sourceTree = "<group>"; };
-		F194A52318D2A0ED00792451 /* AREmbeddedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AREmbeddedCollectionViewController.h; sourceTree = "<group>"; };
-		F194A52418D2A0ED00792451 /* AREmbeddedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AREmbeddedCollectionViewController.m; sourceTree = "<group>"; };
-		F194A52518D2A0ED00792451 /* ARGalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGalleryViewController.h; sourceTree = "<group>"; };
-		F194A52618D2A0ED00792451 /* ARGalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGalleryViewController.m; sourceTree = "<group>"; };
-		F194A52B18D2A0ED00792451 /* ARCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewController.h; sourceTree = "<group>"; };
-		F194A52C18D2A0ED00792451 /* ARCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewController.m; sourceTree = "<group>"; };
+		F194A52318D2A0ED00792451 /* EmbeddedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmbeddedCollectionViewController.h; sourceTree = "<group>"; };
+		F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmbeddedCollectionViewController.m; sourceTree = "<group>"; };
+		F194A52518D2A0ED00792451 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
+		F194A52618D2A0ED00792451 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
+		F194A52B18D2A0ED00792451 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
+		F194A52C18D2A0ED00792451 /* CollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewController.m; sourceTree = "<group>"; };
 		F194A52D18D2A0ED00792451 /* MentionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MentionsViewController.h; sourceTree = "<group>"; };
 		F194A52E18D2A0ED00792451 /* MentionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MentionsViewController.m; sourceTree = "<group>"; };
 		F194A52F18D2A0ED00792451 /* EventListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventListViewController.h; sourceTree = "<group>"; };
@@ -201,8 +201,8 @@
 		F194A53218D2A0ED00792451 /* StoryTimelineViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StoryTimelineViewController.m; sourceTree = "<group>"; };
 		F194A53318D2A0ED00792451 /* StreamViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StreamViewController.h; sourceTree = "<group>"; };
 		F194A53418D2A0ED00792451 /* StreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamViewController.m; sourceTree = "<group>"; };
-		F194A53618D2A0ED00792451 /* ARDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDetailViewController.h; sourceTree = "<group>"; };
-		F194A53718D2A0ED00792451 /* ARDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDetailViewController.m; sourceTree = "<group>"; };
+		F194A53618D2A0ED00792451 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		F194A53718D2A0ED00792451 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConceptDetailViewController.h; sourceTree = "<group>"; };
 		F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConceptDetailViewController.m; sourceTree = "<group>"; };
 		F194A53A18D2A0ED00792451 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
@@ -221,32 +221,32 @@
 		F194A54918D2A0ED00792451 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		F194A54A18D2A0ED00792451 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		F194A54B18D2A0ED00792451 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		F194A54E18D2A0ED00792451 /* ARCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCircleButton.h; sourceTree = "<group>"; };
-		F194A54F18D2A0ED00792451 /* ARCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCircleButton.m; sourceTree = "<group>"; };
-		F194A55018D2A0ED00792451 /* ARCollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionHeaderView.h; sourceTree = "<group>"; };
-		F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionHeaderView.m; sourceTree = "<group>"; };
-		F194A55218D2A0ED00792451 /* ARCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionView.h; sourceTree = "<group>"; };
-		F194A55318D2A0ED00792451 /* ARCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionView.m; sourceTree = "<group>"; };
-		F194A55418D2A0ED00792451 /* ARImageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARImageHeaderView.h; sourceTree = "<group>"; };
-		F194A55518D2A0ED00792451 /* ARImageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARImageHeaderView.m; sourceTree = "<group>"; };
-		F194A55618D2A0ED00792451 /* ARScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARScrollView.h; sourceTree = "<group>"; };
-		F194A55718D2A0ED00792451 /* ARScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARScrollView.m; sourceTree = "<group>"; };
-		F194A55818D2A0ED00792451 /* ARSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSummaryView.h; sourceTree = "<group>"; };
-		F194A55918D2A0ED00792451 /* ARSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSummaryView.m; sourceTree = "<group>"; };
-		F194A55B18D2A0ED00792451 /* ARArticleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARArticleCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A55C18D2A0ED00792451 /* ARArticleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARArticleCollectionViewCell.m; sourceTree = "<group>"; };
-		F194A55D18D2A0ED00792451 /* ARCardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCardCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A55E18D2A0ED00792451 /* ARCardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCardCollectionViewCell.m; sourceTree = "<group>"; };
-		F194A55F18D2A0ED00792451 /* ARCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56018D2A0ED00792451 /* ARCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionViewCell.m; sourceTree = "<group>"; };
-		F194A56118D2A0ED00792451 /* AREmbeddedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AREmbeddedCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56218D2A0ED00792451 /* AREmbeddedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AREmbeddedCollectionViewCell.m; sourceTree = "<group>"; };
-		F194A56318D2A0ED00792451 /* ARFullPageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARFullPageCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56418D2A0ED00792451 /* ARFullPageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARFullPageCollectionViewCell.m; sourceTree = "<group>"; };
-		F194A56518D2A0ED00792451 /* ARGalleryImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARGalleryImageViewCell.h; sourceTree = "<group>"; };
-		F194A56618D2A0ED00792451 /* ARGalleryImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARGalleryImageViewCell.m; sourceTree = "<group>"; };
-		F194A56718D2A0ED00792451 /* ARSnippetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARSnippetCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56818D2A0ED00792451 /* ARSnippetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSnippetCollectionViewCell.m; sourceTree = "<group>"; };
+		F194A54E18D2A0ED00792451 /* CircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleButton.h; sourceTree = "<group>"; };
+		F194A54F18D2A0ED00792451 /* CircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleButton.m; sourceTree = "<group>"; };
+		F194A55018D2A0ED00792451 /* CollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionHeaderView.h; sourceTree = "<group>"; };
+		F194A55118D2A0ED00792451 /* CollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionHeaderView.m; sourceTree = "<group>"; };
+		F194A55218D2A0ED00792451 /* CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionView.h; sourceTree = "<group>"; };
+		F194A55318D2A0ED00792451 /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
+		F194A55418D2A0ED00792451 /* ImageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHeaderView.h; sourceTree = "<group>"; };
+		F194A55518D2A0ED00792451 /* ImageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHeaderView.m; sourceTree = "<group>"; };
+		F194A55618D2A0ED00792451 /* ScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScrollView.h; sourceTree = "<group>"; };
+		F194A55718D2A0ED00792451 /* ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollView.m; sourceTree = "<group>"; };
+		F194A55818D2A0ED00792451 /* SummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryView.h; sourceTree = "<group>"; };
+		F194A55918D2A0ED00792451 /* SummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryView.m; sourceTree = "<group>"; };
+		F194A55B18D2A0ED00792451 /* ArticleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCollectionViewCell.h; sourceTree = "<group>"; };
+		F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewCell.m; sourceTree = "<group>"; };
+		F194A55D18D2A0ED00792451 /* CardCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CardCollectionViewCell.h; sourceTree = "<group>"; };
+		F194A55E18D2A0ED00792451 /* CardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCollectionViewCell.m; sourceTree = "<group>"; };
+		F194A55F18D2A0ED00792451 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		F194A56018D2A0ED00792451 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
+		F194A56118D2A0ED00792451 /* EmbeddedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmbeddedCollectionViewCell.h; sourceTree = "<group>"; };
+		F194A56218D2A0ED00792451 /* EmbeddedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmbeddedCollectionViewCell.m; sourceTree = "<group>"; };
+		F194A56318D2A0ED00792451 /* FullPageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullPageCollectionViewCell.h; sourceTree = "<group>"; };
+		F194A56418D2A0ED00792451 /* FullPageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullPageCollectionViewCell.m; sourceTree = "<group>"; };
+		F194A56518D2A0ED00792451 /* GalleryImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryImageViewCell.h; sourceTree = "<group>"; };
+		F194A56618D2A0ED00792451 /* GalleryImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryImageViewCell.m; sourceTree = "<group>"; };
+		F194A56718D2A0ED00792451 /* SnippetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnippetCollectionViewCell.h; sourceTree = "<group>"; };
+		F194A56818D2A0ED00792451 /* SnippetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnippetCollectionViewCell.m; sourceTree = "<group>"; };
 		F194A56918D2A0ED00792451 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		F194A56A18D2A0ED00792451 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		F194A59918D2A4D300792451 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -351,8 +351,8 @@
 				F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */,
 				F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */,
 				F143295B18B30A7B00A76D97 /* SummaryTemplate.html */,
-				F1601C0718ABDC3800C89590 /* ARObjectManager.h */,
-				F1601C0818ABDC3800C89590 /* ARObjectManager.m */,
+				F1601C0718ABDC3800C89590 /* ArgosObjectManager.h */,
+				F1601C0818ABDC3800C89590 /* ArgosObjectManager.m */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
 				F194A50218D2A0EC00792451 /* Hacks */,
 				F194A50918D2A0EC00792451 /* Models */,
@@ -396,8 +396,8 @@
 		F1915E3418D34B5E005811E6 /* Elements */ = {
 			isa = PBXGroup;
 			children = (
-				F194A54E18D2A0ED00792451 /* ARCircleButton.h */,
-				F194A54F18D2A0ED00792451 /* ARCircleButton.m */,
+				F194A54E18D2A0ED00792451 /* CircleButton.h */,
+				F194A54F18D2A0ED00792451 /* CircleButton.m */,
 			);
 			name = Elements;
 			sourceTree = "<group>";
@@ -440,14 +440,14 @@
 		F1915E7118D39201005811E6 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				F194A55418D2A0ED00792451 /* ARImageHeaderView.h */,
-				F194A55518D2A0ED00792451 /* ARImageHeaderView.m */,
-				F194A55618D2A0ED00792451 /* ARScrollView.h */,
-				F194A55718D2A0ED00792451 /* ARScrollView.m */,
-				F194A55818D2A0ED00792451 /* ARSummaryView.h */,
-				F194A55918D2A0ED00792451 /* ARSummaryView.m */,
 				F1915E3518D35275005811E6 /* DetailView.h */,
 				F1915E3618D35275005811E6 /* DetailView.m */,
+				F194A55418D2A0ED00792451 /* ImageHeaderView.h */,
+				F194A55518D2A0ED00792451 /* ImageHeaderView.m */,
+				F194A55618D2A0ED00792451 /* ScrollView.h */,
+				F194A55718D2A0ED00792451 /* ScrollView.m */,
+				F194A55818D2A0ED00792451 /* SummaryView.h */,
+				F194A55918D2A0ED00792451 /* SummaryView.m */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -505,10 +505,10 @@
 		F194A52218D2A0ED00792451 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F194A52318D2A0ED00792451 /* AREmbeddedCollectionViewController.h */,
-				F194A52418D2A0ED00792451 /* AREmbeddedCollectionViewController.m */,
-				F194A52518D2A0ED00792451 /* ARGalleryViewController.h */,
-				F194A52618D2A0ED00792451 /* ARGalleryViewController.m */,
+				F194A52318D2A0ED00792451 /* EmbeddedCollectionViewController.h */,
+				F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */,
+				F194A52518D2A0ED00792451 /* GalleryViewController.h */,
+				F194A52618D2A0ED00792451 /* GalleryViewController.m */,
 				F194A59918D2A4D300792451 /* WebViewController.h */,
 				F194A59A18D2A4D300792451 /* WebViewController.m */,
 				F194A52A18D2A0ED00792451 /* Collection */,
@@ -523,8 +523,8 @@
 		F194A52A18D2A0ED00792451 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				F194A52B18D2A0ED00792451 /* ARCollectionViewController.h */,
-				F194A52C18D2A0ED00792451 /* ARCollectionViewController.m */,
+				F194A52B18D2A0ED00792451 /* CollectionViewController.h */,
+				F194A52C18D2A0ED00792451 /* CollectionViewController.m */,
 				F194A52D18D2A0ED00792451 /* MentionsViewController.h */,
 				F194A52E18D2A0ED00792451 /* MentionsViewController.m */,
 				F194A52F18D2A0ED00792451 /* EventListViewController.h */,
@@ -540,8 +540,8 @@
 		F194A53518D2A0ED00792451 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				F194A53618D2A0ED00792451 /* ARDetailViewController.h */,
-				F194A53718D2A0ED00792451 /* ARDetailViewController.m */,
+				F194A53618D2A0ED00792451 /* DetailViewController.h */,
+				F194A53718D2A0ED00792451 /* DetailViewController.m */,
 				F194A53A18D2A0ED00792451 /* EventDetailViewController.h */,
 				F194A53B18D2A0ED00792451 /* EventDetailViewController.m */,
 				F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */,
@@ -581,10 +581,10 @@
 				F1915E3418D34B5E005811E6 /* Elements */,
 				F1915E7018D37F24005811E6 /* User */,
 				F1915E7118D39201005811E6 /* Detail */,
-				F194A55018D2A0ED00792451 /* ARCollectionHeaderView.h */,
-				F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */,
-				F194A55218D2A0ED00792451 /* ARCollectionView.h */,
-				F194A55318D2A0ED00792451 /* ARCollectionView.m */,
+				F194A55018D2A0ED00792451 /* CollectionHeaderView.h */,
+				F194A55118D2A0ED00792451 /* CollectionHeaderView.m */,
+				F194A55218D2A0ED00792451 /* CollectionView.h */,
+				F194A55318D2A0ED00792451 /* CollectionView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -592,20 +592,20 @@
 		F194A55A18D2A0ED00792451 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				F194A55B18D2A0ED00792451 /* ARArticleCollectionViewCell.h */,
-				F194A55C18D2A0ED00792451 /* ARArticleCollectionViewCell.m */,
-				F194A55D18D2A0ED00792451 /* ARCardCollectionViewCell.h */,
-				F194A55E18D2A0ED00792451 /* ARCardCollectionViewCell.m */,
-				F194A55F18D2A0ED00792451 /* ARCollectionViewCell.h */,
-				F194A56018D2A0ED00792451 /* ARCollectionViewCell.m */,
-				F194A56118D2A0ED00792451 /* AREmbeddedCollectionViewCell.h */,
-				F194A56218D2A0ED00792451 /* AREmbeddedCollectionViewCell.m */,
-				F194A56318D2A0ED00792451 /* ARFullPageCollectionViewCell.h */,
-				F194A56418D2A0ED00792451 /* ARFullPageCollectionViewCell.m */,
-				F194A56518D2A0ED00792451 /* ARGalleryImageViewCell.h */,
-				F194A56618D2A0ED00792451 /* ARGalleryImageViewCell.m */,
-				F194A56718D2A0ED00792451 /* ARSnippetCollectionViewCell.h */,
-				F194A56818D2A0ED00792451 /* ARSnippetCollectionViewCell.m */,
+				F194A55F18D2A0ED00792451 /* CollectionViewCell.h */,
+				F194A56018D2A0ED00792451 /* CollectionViewCell.m */,
+				F194A55B18D2A0ED00792451 /* ArticleCollectionViewCell.h */,
+				F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */,
+				F194A55D18D2A0ED00792451 /* CardCollectionViewCell.h */,
+				F194A55E18D2A0ED00792451 /* CardCollectionViewCell.m */,
+				F194A56118D2A0ED00792451 /* EmbeddedCollectionViewCell.h */,
+				F194A56218D2A0ED00792451 /* EmbeddedCollectionViewCell.m */,
+				F194A56318D2A0ED00792451 /* FullPageCollectionViewCell.h */,
+				F194A56418D2A0ED00792451 /* FullPageCollectionViewCell.m */,
+				F194A56518D2A0ED00792451 /* GalleryImageViewCell.h */,
+				F194A56618D2A0ED00792451 /* GalleryImageViewCell.m */,
+				F194A56718D2A0ED00792451 /* SnippetCollectionViewCell.h */,
+				F194A56818D2A0ED00792451 /* SnippetCollectionViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -814,50 +814,50 @@
 				F194A57518D2A0ED00792451 /* Story.m in Sources */,
 				F194A56E18D2A0ED00792451 /* Article.m in Sources */,
 				F194A58418D2A0ED00792451 /* StoryDetailViewController.m in Sources */,
-				F194A58D18D2A0ED00792451 /* ARCollectionView.m in Sources */,
+				F194A58D18D2A0ED00792451 /* CollectionView.m in Sources */,
 				F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */,
-				F194A57918D2A0ED00792451 /* AREmbeddedCollectionViewController.m in Sources */,
-				F194A59318D2A0ED00792451 /* ARCollectionViewCell.m in Sources */,
+				F194A57918D2A0ED00792451 /* EmbeddedCollectionViewController.m in Sources */,
+				F194A59318D2A0ED00792451 /* CollectionViewCell.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
-				F194A59518D2A0ED00792451 /* ARFullPageCollectionViewCell.m in Sources */,
+				F194A59518D2A0ED00792451 /* FullPageCollectionViewCell.m in Sources */,
 				F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */,
 				F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */,
-				F194A57C18D2A0ED00792451 /* ARCollectionViewController.m in Sources */,
-				F194A59418D2A0ED00792451 /* AREmbeddedCollectionViewCell.m in Sources */,
+				F194A57C18D2A0ED00792451 /* CollectionViewController.m in Sources */,
+				F194A59418D2A0ED00792451 /* EmbeddedCollectionViewCell.m in Sources */,
 				F1915E5218D36875005811E6 /* Event+Management.m in Sources */,
-				F194A59618D2A0ED00792451 /* ARGalleryImageViewCell.m in Sources */,
-				F194A59218D2A0ED00792451 /* ARCardCollectionViewCell.m in Sources */,
+				F194A59618D2A0ED00792451 /* GalleryImageViewCell.m in Sources */,
+				F194A59218D2A0ED00792451 /* CardCollectionViewCell.m in Sources */,
 				F194A59B18D2A4D300792451 /* WebViewController.m in Sources */,
 				F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */,
 				F194A57818D2A0ED00792451 /* UIFont+ArgosFonts.m in Sources */,
 				F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */,
-				F194A59718D2A0ED00792451 /* ARSnippetCollectionViewCell.m in Sources */,
+				F194A59718D2A0ED00792451 /* SnippetCollectionViewCell.m in Sources */,
 				F1915E5618D36EB5005811E6 /* Story+Management.m in Sources */,
 				F1915E3718D35275005811E6 /* DetailView.m in Sources */,
 				F194A57F18D2A0ED00792451 /* StoryTimelineViewController.m in Sources */,
-				F194A57A18D2A0ED00792451 /* ARGalleryViewController.m in Sources */,
+				F194A57A18D2A0ED00792451 /* GalleryViewController.m in Sources */,
 				F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */,
-				F194A58C18D2A0ED00792451 /* ARCollectionHeaderView.m in Sources */,
+				F194A58C18D2A0ED00792451 /* CollectionHeaderView.m in Sources */,
 				F194A58318D2A0ED00792451 /* EventDetailViewController.m in Sources */,
-				F194A58118D2A0ED00792451 /* ARDetailViewController.m in Sources */,
-				F194A58E18D2A0ED00792451 /* ARImageHeaderView.m in Sources */,
+				F194A58118D2A0ED00792451 /* DetailViewController.m in Sources */,
+				F194A58E18D2A0ED00792451 /* ImageHeaderView.m in Sources */,
 				F194A58A18D2A0ED00792451 /* SearchViewController.m in Sources */,
-				F194A58B18D2A0ED00792451 /* ARCircleButton.m in Sources */,
+				F194A58B18D2A0ED00792451 /* CircleButton.m in Sources */,
 				F194A56B18D2A0ED00792451 /* AnimatedTransitioning.m in Sources */,
 				F194A57318D2A0ED00792451 /* Mention.m in Sources */,
-				F194A59018D2A0ED00792451 /* ARSummaryView.m in Sources */,
+				F194A59018D2A0ED00792451 /* SummaryView.m in Sources */,
 				F194A56D18D2A0ED00792451 /* UIWindow+FauxStatusBar.m in Sources */,
 				F194A59818D2A0ED00792451 /* LoginView.m in Sources */,
 				F194A58718D2A0ED00792451 /* FontViewController.m in Sources */,
-				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
+				F1601C0918ABDC3800C89590 /* ArgosObjectManager.m in Sources */,
 				F194A56F18D2A0ED00792451 /* CurrentUser+Management.m in Sources */,
 				F194A56C18D2A0ED00792451 /* TransitionDelegate.m in Sources */,
 				F194A57618D2A0ED00792451 /* ImageDownloader.m in Sources */,
 				F194A57D18D2A0ED00792451 /* MentionsViewController.m in Sources */,
-				F194A59118D2A0ED00792451 /* ARArticleCollectionViewCell.m in Sources */,
+				F194A59118D2A0ED00792451 /* ArticleCollectionViewCell.m in Sources */,
 				F194A58818D2A0ED00792451 /* ShareViewController.m in Sources */,
-				F194A58F18D2A0ED00792451 /* ARScrollView.m in Sources */,
+				F194A58F18D2A0ED00792451 /* ScrollView.m in Sources */,
 				F194A58518D2A0ED00792451 /* LoginViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

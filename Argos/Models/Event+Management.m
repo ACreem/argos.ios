@@ -13,7 +13,7 @@
 
 - (void)bookmark
 {
-    [[[ARObjectManager sharedManager] client] postPath:@"/user/bookmarked"
+    [[[ArgosObjectManager sharedManager] client] postPath:@"/user/bookmarked"
                                             parameters:@{@"event_id": self.eventId}
                                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                    [[CurrentUser currentUser] addBookmarkedObject:self];
@@ -24,7 +24,7 @@
 
 - (void)unbookmark
 {
-    [[[ARObjectManager sharedManager] client] deletePath:[NSString stringWithFormat:@"/user/bookmarked/%@", self.eventId]
+    [[[ArgosObjectManager sharedManager] client] deletePath:[NSString stringWithFormat:@"/user/bookmarked/%@", self.eventId]
                                               parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                   [[CurrentUser currentUser] removeBookmarkedObject:self];
                                               } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -39,7 +39,7 @@
 
 - (void)checkBookmarked:(void (^)(Event *))bookmarked notBookmarked:(void (^)(Event *))notBookmarked
 {
-    [[[ARObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/bookmarked/%@", self.eventId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[[ArgosObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/bookmarked/%@", self.eventId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[CurrentUser currentUser] addBookmarkedObject:self];
         if (bookmarked) {
             bookmarked(self);

@@ -7,7 +7,7 @@
 //
 
 #import "ShareViewController.h"
-#import "ARCircleButton.h"
+#import "CircleButton.h"
 
 static const CGSize kItemSize = {64, 88};
 static const CGSize kIconSize = {64, 64};
@@ -52,7 +52,7 @@ static const CGSize kIconSize = {64, 64};
     
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier forIndexPath:indexPath];
     
-    ARCircleButton* button = [[ARCircleButton alloc] initWithFrame:CGRectMake(kItemSize.width/2 - kIconSize.width/2, 0, kIconSize.width, kIconSize.height)];
+    CircleButton* button = [[CircleButton alloc] initWithFrame:CGRectMake(kItemSize.width/2 - kIconSize.width/2, 0, kIconSize.width, kIconSize.height)];
     [button setImage:[UIImage imageNamed:[self.items objectAtIndex:indexPath.row]] forState:UIControlStateNormal];
     button.tintColor = [UIColor whiteColor];
     button.userInteractionEnabled = NO; // so button touches pass through and are handled by didSelectItemAtIndexPath

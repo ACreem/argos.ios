@@ -10,9 +10,9 @@
 #import "StoryDetailViewController.h"
 #import "WebViewController.h"
 
-#import "AREmbeddedCollectionViewController.h"
-#import "ARArticleCollectionViewCell.h"
-#import "AREmbeddedCollectionViewCell.h"
+#import "EmbeddedCollectionViewController.h"
+#import "ArticleCollectionViewCell.h"
+#import "EmbeddedCollectionViewCell.h"
 
 #import "Article.h"
 #import "Source.h"
@@ -21,8 +21,8 @@
 #import "EventListViewController.h"
 
 @interface EventDetailViewController ()
-@property (nonatomic, strong) AREmbeddedCollectionViewController *articleList;
-@property (nonatomic, strong) AREmbeddedCollectionViewController *storyList;
+@property (nonatomic, strong) EmbeddedCollectionViewController *articleList;
+@property (nonatomic, strong) EmbeddedCollectionViewController *storyList;
 @end
 
 @implementation EventDetailViewController
@@ -48,11 +48,11 @@
     } else {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
         [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
-        _storyList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
+        _storyList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
         _storyList.managedObjectContext = self.entity.managedObjectContext;
         _storyList.delegate = self;
         _storyList.title = @"Stories";
-        [_storyList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [_storyList.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
         [self addChildViewController:_storyList];
         [self.view.scrollView addSubview:_storyList.view];
         [_storyList didMoveToParentViewController:self];
@@ -63,12 +63,12 @@
     
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
-    _articleList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
+    _articleList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
     _articleList.managedObjectContext = self.entity.managedObjectContext;
     _articleList.delegate = self;
     _articleList.title = @"In Greater Depth";
     
-    [_articleList.collectionView registerClass:[ARArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [_articleList.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:_articleList];
     [self.view.scrollView addSubview:_articleList.collectionView];
@@ -129,8 +129,8 @@
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 
-# pragma mark - AREmbeddedCollectionViewControllerDelegate
-- (ARCollectionViewCell*)configureCell:(ARArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
+# pragma mark - EmbeddedCollectionViewControllerDelegate
+- (CollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == _articleList) {
         Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

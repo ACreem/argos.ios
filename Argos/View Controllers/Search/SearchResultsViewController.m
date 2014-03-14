@@ -7,7 +7,7 @@
 //
 
 #import "SearchResultsViewController.h"
-#import "AREmbeddedCollectionViewCell.h"
+#import "EmbeddedCollectionViewCell.h"
 #import "SearchViewController.h"
 #import "NSDate+TimeAgo.h"
 #import "BaseEntity.h"
@@ -31,7 +31,7 @@
     
     // Initialize the predicate so nothing is returned.
     self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:entityName withPredicate:[NSPredicate predicateWithValue:NO]];
-    self.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
+    self.managedObjectContext = [[ArgosObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
     self.sortKey = @"updatedAt";
     
     if (self) {
@@ -44,7 +44,7 @@
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.backgroundColor = [UIColor primaryColor];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -57,7 +57,7 @@
 # pragma mark - UICollectionViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    AREmbeddedCollectionViewCell *cell = (AREmbeddedCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    EmbeddedCollectionViewCell *cell = (EmbeddedCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

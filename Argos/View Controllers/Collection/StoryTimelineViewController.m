@@ -7,7 +7,7 @@
 //
 
 #import "StoryTimelineViewController.h"
-#import "ARCardCollectionViewCell.h"
+#import "CardCollectionViewCell.h"
 #import "Event.h"
 
 #import "EventDetailViewController.h"
@@ -51,12 +51,11 @@
     screenRect.size.width -= _padding*2;
     [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:screenRect.size];
     
-    [self.collectionView registerClass:[ARCardCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    self.collectionView.backgroundColor = [UIColor secondaryColor];
-    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
+    [self.collectionView registerClass:[CardCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    self.collectionView.backgroundColor = [UIColor colorWithWhite:0.85 alpha:1.0];
+    self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleBlack;
     self.collectionView.showsVerticalScrollIndicator = YES;
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    //self.collectionView.pagingEnabled = YES;
     self.collectionView.alwaysBounceVertical = NO;
     
     [self loadData];
@@ -77,7 +76,7 @@
 # pragma mark - UIControllerViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    ARCardCollectionViewCell *cell = (ARCardCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    CardCollectionViewCell *cell = (CardCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

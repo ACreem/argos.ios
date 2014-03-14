@@ -102,7 +102,7 @@
     }  completion:nil];
     
     // We must make this request with `getObjectsAtPathForRouteNamed` so that the `@metadata` is available for mapping.
-    [[ARObjectManager sharedManager] getObjectsAtPathForRouteNamed:@"search" object:@{@"query": query} parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[ArgosObjectManager sharedManager] getObjectsAtPathForRouteNamed:@"search" object:@{@"query": query} parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
         
         // Execute fetch request with the new query for each view controller.

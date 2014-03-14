@@ -12,7 +12,7 @@
 
 + (CurrentUser*)currentUser
 {
-    ARObjectManager *manager = [ARObjectManager sharedManager];
+    ArgosObjectManager *manager = [ArgosObjectManager sharedManager];
     NSManagedObjectContext *moc = manager.managedObjectStore.mainQueueManagedObjectContext;
     NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
     [fetchRequest setEntity:[NSEntityDescription entityForName:@"CurrentUser"
@@ -34,7 +34,7 @@
 
 + (void)logout
 {
-    ARObjectManager *manager = [ARObjectManager sharedManager];
+    ArgosObjectManager *manager = [ArgosObjectManager sharedManager];
     CurrentUser *currentUser = [CurrentUser currentUser];
     if (currentUser) {
         [AFOAuthCredential deleteCredentialWithIdentifier:manager.client.serviceProviderIdentifier];
@@ -46,7 +46,7 @@
 + (void)loginWithEmail:(NSString *)email password:(NSString *)password success:(void (^)(CurrentUser *))success failure:(void (^)(NSError *))failure
 {
     [CurrentUser logout];
-    ARObjectManager *manager = [ARObjectManager sharedManager];
+    ArgosObjectManager *manager = [ArgosObjectManager sharedManager];
     
     [manager.client authenticateUsingOAuthWithPath:@"/oauth/token"
                                           username:email

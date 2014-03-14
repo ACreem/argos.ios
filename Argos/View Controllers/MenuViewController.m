@@ -186,7 +186,7 @@
                     svc = [[StreamViewController alloc] initWithStream:kArgosLatestStream];
                     break;
             }
-            svc.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
+            svc.managedObjectContext = [[ArgosObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
             [self.navigationController pushViewController:svc animated:YES];
         }
         case 2:
@@ -194,7 +194,7 @@
                 case 0: {
                     // Bookmarks.
                     StreamViewController *svc = [[StreamViewController alloc] initWithStream:kArgosBookmarkedStream];
-                    svc.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
+                    svc.managedObjectContext = [[ArgosObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
                     [self.navigationController pushViewController:svc animated:YES];
                     break;
                 }

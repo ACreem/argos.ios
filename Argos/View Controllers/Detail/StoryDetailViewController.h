@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARDetailViewController.h"
+#import "DetailViewController.h"
 #import "Story.h"
 
-@interface StoryDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate, UIViewControllerTransitioningDelegate>
+@interface StoryDetailViewController : DetailViewController <EmbeddedCollectionViewControllerDelegate, UIViewControllerTransitioningDelegate>
 
 @property (nonatomic, strong) Story *entity;
 

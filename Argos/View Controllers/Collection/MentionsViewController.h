@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARCollectionViewController.h"
+#import "CollectionViewController.h"
 
-@interface MentionsViewController : ARCollectionViewController
+@interface MentionsViewController : CollectionViewController
 
 - (MentionsViewController*)initWithEntity:(BaseEntity*)entity withPredicate:(NSPredicate*)predicate;
 

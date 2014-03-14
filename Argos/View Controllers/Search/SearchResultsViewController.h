@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARCollectionViewController.h"
+#import "CollectionViewController.h"
 
-@interface SearchResultsViewController : ARCollectionViewController
+@interface SearchResultsViewController : CollectionViewController
 
 - (id)initForEntityNamed:(NSString*)entityName;
 - (void)searchForQuery:(NSString*)query;

@@ -78,12 +78,11 @@
     // Setup paginator
     if (!self.paginator) {
         
-        ARObjectManager *objectManager = [ARObjectManager sharedManager];
+        ArgosObjectManager *objectManager = [ArgosObjectManager sharedManager];
         NSString *requestString = [NSString stringWithFormat:@"%@?page=:currentPage", self.stream];
         self.paginator = [objectManager paginatorWithPathPattern:requestString];
         
         [self.paginator setCompletionBlockWithSuccess:^(RKPaginator *paginator, NSArray *objects, NSUInteger page) {
-            
             if (page == 1) {
                 [NSFetchedResultsController deleteCacheWithName:@"Master"];
             }
@@ -92,7 +91,7 @@
             weakSelf.isLoading = NO;
             
         } failure:^(RKPaginator *paginator, NSError *error) {
-            NSLog(@"Failure: %@", error);
+            NSLog(@"Failure getting page: %@", error);
             [weakSelf.refreshControl endRefreshing];
             UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
             [alertView show];
@@ -105,7 +104,7 @@
 # pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if (scrollView.contentOffset.y > (0.8 * scrollView.contentSize.height) && !self.isLoading) {
+    if (scrollView.contentOffset.y > (0.8 * scrollView.contentSize.height) && !self.isLoading && self.paginator.hasNextPage) {
         self.isLoading = YES;
         [self.paginator loadNextPage];
     }

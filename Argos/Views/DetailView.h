@@ -6,14 +6,14 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARScrollView.h"
-#import "ARSummaryView.h"
-#import "ARImageHeaderView.h"
-#import "AREmbeddedCollectionViewController.h"
+#import "ScrollView.h"
+#import "SummaryView.h"
+#import "ImageHeaderView.h"
+#import "EmbeddedCollectionViewController.h"
 
 @class BaseEntity;
 
-@protocol DetailViewProtocol <UIScrollViewDelegate, ARSummaryViewDelegate, AREmbeddedCollectionViewControllerDelegate>
+@protocol DetailViewProtocol <UIScrollViewDelegate, SummaryViewDelegate, EmbeddedCollectionViewControllerDelegate>
 @end
 
 @interface DetailView : UIView
@@ -23,8 +23,8 @@
 @property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, strong) ARImageHeaderView *headerView;
-@property (nonatomic, strong) ARScrollView *scrollView;
+@property (nonatomic, strong) ImageHeaderView *headerView;
+@property (nonatomic, strong) ScrollView *scrollView;
 @property (nonatomic, assign) float progress;
 
 - (void)setActionButtonTitle:(NSString*)title;

@@ -8,11 +8,11 @@
 
 #import "DetailView.h"
 #import "BaseEntity.h"
-#import "ARGalleryViewController.h"
-#import "ARSummaryView.h"
+#import "GalleryViewController.h"
+#import "SummaryView.h"
 
 @interface DetailView ()
-@property (nonatomic, strong) ARSummaryView *summaryView;
+@property (nonatomic, strong) SummaryView *summaryView;
 @property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, strong) UIView *actionsView;
 @end
@@ -27,10 +27,10 @@
         self.backgroundColor = [UIColor whiteColor];
         
         // Scroll view
-        self.scrollView = [[ARScrollView alloc] initWithFrame:frame verticalOffset:headerImageHeight];
+        self.scrollView = [[ScrollView alloc] initWithFrame:frame verticalOffset:headerImageHeight];
         
         // Header view
-        self.headerView = [[ARImageHeaderView alloc] initWithFrame:CGRectMake(CGRectGetMinX(frame),
+        self.headerView = [[ImageHeaderView alloc] initWithFrame:CGRectMake(CGRectGetMinX(frame),
                                                                               CGRectGetMinY(frame),
                                                                               CGRectGetWidth(frame),
                                                                               headerImageHeight)];
@@ -56,7 +56,7 @@
         
         // Summary view
         CGPoint summaryOrigin = CGPointMake(0, CGRectGetHeight(self.headerView.frame));
-        self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin];
+        self.summaryView = [[SummaryView alloc] initWithOrigin:summaryOrigin];
         [self.scrollView addSubview:self.summaryView];
         
         // Actions view

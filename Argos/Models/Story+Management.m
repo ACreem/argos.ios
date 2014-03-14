@@ -13,7 +13,7 @@
 
 - (void)watch
 {
-    [[[ARObjectManager sharedManager] client] postPath:@"/user/watching"
+    [[[ArgosObjectManager sharedManager] client] postPath:@"/user/watching"
                                             parameters:@{@"story_id": self.storyId}
                                                success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                    [[CurrentUser currentUser] addWatchingObject:self];
@@ -24,7 +24,7 @@
 
 - (void)unwatch
 {
-    [[[ARObjectManager sharedManager] client] deletePath:[NSString stringWithFormat:@"/user/watching/%@", self.storyId]
+    [[[ArgosObjectManager sharedManager] client] deletePath:[NSString stringWithFormat:@"/user/watching/%@", self.storyId]
                                               parameters:nil
                                                  success:^(AFHTTPRequestOperation *operation, id responseObject) {
                                                      [[CurrentUser currentUser] removeWatchingObject:self];
@@ -40,7 +40,7 @@
 
 - (void)checkWatched:(void (^)(Story *))watched notWatched:(void (^)(Story *))notWatched
 {
-    [[[ARObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/watching/%@", self.storyId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [[[ArgosObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/watching/%@", self.storyId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
         [[CurrentUser currentUser] addWatchingObject:self];
         if (watched) {
             watched(self);

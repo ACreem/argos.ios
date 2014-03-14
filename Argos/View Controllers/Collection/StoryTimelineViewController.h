@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARCollectionViewController.h"
+#import "CollectionViewController.h"
 #import "Story.h"
 
-@interface StoryTimelineViewController : ARCollectionViewController
+@interface StoryTimelineViewController : CollectionViewController
 
 - (StoryTimelineViewController*)initWithStory:(Story*)story;
 

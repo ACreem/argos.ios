@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ARCollectionViewController.h"
+#import "CollectionViewController.h"
 
-@interface EventListViewController : ARCollectionViewController
+@interface EventListViewController : CollectionViewController
 
 - (id)initWithTitle:(NSString*)title;
 

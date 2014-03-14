@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "ARObjectManager.h"
+#import "ArgosObjectManager.h"
 #import "LoginViewController.h"
 
 @interface AppDelegate ()
@@ -56,6 +56,8 @@
                              rightViewController:nil];
     self.deckController.centerhiddenInteractivity = IIViewDeckCenterHiddenNotUserInteractiveWithTapToClose;
     self.deckController.delegateMode = IIViewDeckDelegateAndSubControllers;
+    
+    lvc.deckController = self.deckController;
     
     self.window.backgroundColor = [UIColor darkColor];
     self.window.rootViewController = self.deckController;
@@ -117,7 +119,7 @@
     [RKManagedObjectStore setDefaultStore:managedObjectStore];
     
     // Setup the object manager.
-    ARObjectManager* objectManager = [ARObjectManager objectManagerWithManagedObjectStore:managedObjectStore];
+    ArgosObjectManager* objectManager = [ArgosObjectManager objectManagerWithManagedObjectStore:managedObjectStore];
     [RKObjectManager setSharedManager:objectManager];
     
     return managedObjectStore.mainQueueManagedObjectContext;

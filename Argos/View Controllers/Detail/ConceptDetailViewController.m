@@ -9,13 +9,13 @@
 #import "ConceptDetailViewController.h"
 #import "StoryDetailViewController.h"
 
-#import "AREmbeddedCollectionViewController.h"
-#import "AREmbeddedCollectionViewCell.h"
+#import "EmbeddedCollectionViewController.h"
+#import "EmbeddedCollectionViewCell.h"
 
 #import "Story.h"
 
 @interface ConceptDetailViewController ()
-@property (nonatomic, strong) AREmbeddedCollectionViewController *mentionList;
+@property (nonatomic, strong) EmbeddedCollectionViewController *mentionList;
 @end
 
 @implementation ConceptDetailViewController
@@ -50,12 +50,12 @@
     [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 120)];
     
     // Mentions (story) list
-    self.mentionList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.entities]];
+    self.mentionList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.entities]];
     self.mentionList.managedObjectContext = self.entity.managedObjectContext;
     self.mentionList.delegate = self;
     self.mentionList.title = @"Mentions";
     
-    [self.mentionList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.mentionList.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:self.mentionList];
     [self.view.scrollView addSubview:self.mentionList.collectionView];
@@ -63,8 +63,8 @@
     [self getEntities:self.entity.entities forCollectionView:self.mentionList];
 }
 
-# pragma mark - AREmbeddedCollectionViewControllerDelegate
-- (ARCollectionViewCell*)configureCell:(AREmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
+# pragma mark - EmbeddedCollectionViewControllerDelegate
+- (CollectionViewCell*)configureCell:(EmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.mentionList) {
         Story *story = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

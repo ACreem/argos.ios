@@ -9,8 +9,8 @@
 #import "StoryDetailViewController.h"
 #import "EventDetailViewController.h"
 
-#import "AREmbeddedCollectionViewController.h"
-#import "AREmbeddedCollectionViewCell.h"
+#import "EmbeddedCollectionViewController.h"
+#import "EmbeddedCollectionViewCell.h"
 
 #import "Event.h"
 #import "Concept.h"
@@ -20,7 +20,7 @@
 #import "CECardsAnimationController.h"
 
 @interface StoryDetailViewController ()
-@property (nonatomic, strong) AREmbeddedCollectionViewController *eventList;
+@property (nonatomic, strong) EmbeddedCollectionViewController *eventList;
 @end
 
 @implementation StoryDetailViewController
@@ -39,12 +39,12 @@
     
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 120)];
-    self.eventList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.events]];
+    self.eventList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.events]];
     self.eventList.managedObjectContext = self.entity.managedObjectContext;
     self.eventList.delegate = self;
     self.eventList.title = @"Events";
     
-    [self.eventList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.eventList.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:self.eventList];
     [self.view.scrollView addSubview:self.eventList.collectionView];
@@ -127,8 +127,8 @@
     }
 }
 
-# pragma mark - AREmbeddedCollectionViewControllerDelegate
-- (ARCollectionViewCell*)configureCell:(AREmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController *)embeddedCollectionViewController
+# pragma mark - EmbeddedCollectionViewControllerDelegate
+- (CollectionViewCell*)configureCell:(EmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.eventList) {
         Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
