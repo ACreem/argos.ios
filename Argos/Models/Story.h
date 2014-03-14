@@ -10,32 +10,20 @@
 #import <CoreData/CoreData.h>
 #import "BaseEntity.h"
 
-@class Concept, CurrentUser, Event, Mention;
+@class CurrentUser, Event;
 
 @interface Story : BaseEntity
 
 @property (nonatomic, retain) NSNumber * storyId;
-@property (nonatomic, retain) NSSet *concepts;
 @property (nonatomic, retain) NSSet *events;
-@property (nonatomic, retain) NSSet *mentions;
 @property (nonatomic, retain) CurrentUser *user;
 @end
 
 @interface Story (CoreDataGeneratedAccessors)
 
-- (void)addConceptsObject:(Concept *)value;
-- (void)removeConceptsObject:(Concept *)value;
-- (void)addConcepts:(NSSet *)values;
-- (void)removeConcepts:(NSSet *)values;
-
 - (void)addEventsObject:(Event *)value;
 - (void)removeEventsObject:(Event *)value;
 - (void)addEvents:(NSSet *)values;
 - (void)removeEvents:(NSSet *)values;
-
-- (void)addMentionsObject:(Mention *)value;
-- (void)removeMentionsObject:(Mention *)value;
-- (void)addMentions:(NSSet *)values;
-- (void)removeMentions:(NSSet *)values;
 
 @end

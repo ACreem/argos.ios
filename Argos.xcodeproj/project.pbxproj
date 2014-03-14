@@ -415,6 +415,28 @@
 			name = Categories;
 			sourceTree = "<group>";
 		};
+		F1915E6F18D37F16005811E6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F194A53E18D2A0ED00792451 /* LoginViewController.h */,
+				F194A53F18D2A0ED00792451 /* LoginViewController.m */,
+				F194A54018D2A0ED00792451 /* MenuViewController.h */,
+				F194A54118D2A0ED00792451 /* MenuViewController.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
+		F1915E7018D37F24005811E6 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */,
+				F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */,
+				F194A56918D2A0ED00792451 /* LoginView.h */,
+				F194A56A18D2A0ED00792451 /* LoginView.m */,
+			);
+			name = User;
+			sourceTree = "<group>";
+		};
 		F194A50218D2A0EC00792451 /* Hacks */ = {
 			isa = PBXGroup;
 			children = (
@@ -476,10 +498,7 @@
 				F194A59A18D2A4D300792451 /* WebViewController.m */,
 				F194A52A18D2A0ED00792451 /* Collection */,
 				F194A53518D2A0ED00792451 /* Detail */,
-				F194A53E18D2A0ED00792451 /* LoginViewController.h */,
-				F194A53F18D2A0ED00792451 /* LoginViewController.m */,
-				F194A54018D2A0ED00792451 /* MenuViewController.h */,
-				F194A54118D2A0ED00792451 /* MenuViewController.m */,
+				F1915E6F18D37F16005811E6 /* User */,
 				F194A54218D2A0ED00792451 /* Modals */,
 				F194A54718D2A0ED00792451 /* Search */,
 			);
@@ -545,12 +564,11 @@
 			children = (
 				F194A55A18D2A0ED00792451 /* Cells */,
 				F1915E3418D34B5E005811E6 /* Elements */,
-				F194A55018D2A0ED00792451 /* ARCollectionHeaderView.h */,
-				F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */,
-				F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */,
-				F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */,
+				F1915E7018D37F24005811E6 /* User */,
 				F194A55218D2A0ED00792451 /* ARCollectionView.h */,
 				F194A55318D2A0ED00792451 /* ARCollectionView.m */,
+				F194A55018D2A0ED00792451 /* ARCollectionHeaderView.h */,
+				F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */,
 				F1915E3518D35275005811E6 /* DetailView.h */,
 				F1915E3618D35275005811E6 /* DetailView.m */,
 				F194A55418D2A0ED00792451 /* ARImageHeaderView.h */,
@@ -559,8 +577,6 @@
 				F194A55718D2A0ED00792451 /* ARScrollView.m */,
 				F194A55818D2A0ED00792451 /* ARSummaryView.h */,
 				F194A55918D2A0ED00792451 /* ARSummaryView.m */,
-				F194A56918D2A0ED00792451 /* LoginView.h */,
-				F194A56A18D2A0ED00792451 /* LoginView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";

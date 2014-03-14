@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+@class Concept, Mention;
 
 @interface BaseEntity : NSManagedObject
 
@@ -25,13 +26,19 @@
 @property (nonatomic, retain) id imageFull;
 @property (nonatomic, retain) id imageLarge;
 @property (nonatomic, retain) NSSet *mentions;
+@property (nonatomic, retain) NSSet *concepts;
 @end
 
 @interface BaseEntity (CoreDataGeneratedAccessors)
 
-- (void)addMentionsObject:(NSManagedObject *)value;
-- (void)removeMentionsObject:(NSManagedObject *)value;
+- (void)addMentionsObject:(Mention *)value;
+- (void)removeMentionsObject:(Mention *)value;
 - (void)addMentions:(NSSet *)values;
 - (void)removeMentions:(NSSet *)values;
+
+- (void)addConceptsObject:(Concept *)value;
+- (void)removeConceptsObject:(Concept *)value;
+- (void)addConcepts:(NSSet *)values;
+- (void)removeConcepts:(NSSet *)values;
 
 @end

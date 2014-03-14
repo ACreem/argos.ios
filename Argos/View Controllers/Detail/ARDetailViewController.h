@@ -17,10 +17,6 @@
 //  It also handles its presentation of modal view controllers.
 //  ============================================================
 
-#import "ARSummaryView.h"
-#import "ARScrollView.h"
-#import "ARImageHeaderView.h"
-#import "AREmbeddedCollectionViewController.h"
 #import "DetailView.h"
 
 @class BaseEntity;
@@ -33,7 +29,6 @@
 @property (nonatomic, strong) NSMutableArray *embeddedCollectionViewControllers;
 
 - (instancetype)initWithEntity:(BaseEntity*)entity;
-- (void)viewConcept:(NSString*)conceptId;
 - (void)getEntities:(NSSet*)entities forCollectionView:(ARCollectionViewController*)cvc;
 - (void)getConcepts:(NSSet*)concepts;
 - (NSArray*)navigationItems;

@@ -10,14 +10,13 @@
 #import <CoreData/CoreData.h>
 #import "BaseEntity.h"
 
-@class Event, Mention, Story;
+@class BaseEntity, Mention;
 
 @interface Concept : BaseEntity
 
 @property (nonatomic, retain) NSString * conceptId;
 @property (nonatomic, retain) NSSet *aliases;
-@property (nonatomic, retain) NSSet *events;
-@property (nonatomic, retain) NSSet *stories;
+@property (nonatomic, retain) NSSet *entities;
 @end
 
 @interface Concept (CoreDataGeneratedAccessors)
@@ -27,14 +26,9 @@
 - (void)addAliases:(NSSet *)values;
 - (void)removeAliases:(NSSet *)values;
 
-- (void)addEventsObject:(Event *)value;
-- (void)removeEventsObject:(Event *)value;
-- (void)addEvents:(NSSet *)values;
-- (void)removeEvents:(NSSet *)values;
-
-- (void)addStoriesObject:(Story *)value;
-- (void)removeStoriesObject:(Story *)value;
-- (void)addStories:(NSSet *)values;
-- (void)removeStories:(NSSet *)values;
+- (void)addEntitiesObject:(BaseEntity *)value;
+- (void)removeEntitiesObject:(BaseEntity *)value;
+- (void)addEntities:(NSSet *)values;
+- (void)removeEntities:(NSSet *)values;
 
 @end

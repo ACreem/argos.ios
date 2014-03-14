@@ -8,9 +8,7 @@
 
 #import "Event.h"
 #import "Article.h"
-#import "Concept.h"
 #import "CurrentUser.h"
-#import "Mention.h"
 #import "Story.h"
 
 
@@ -19,8 +17,6 @@
 @dynamic eventId;
 @dynamic score;
 @dynamic articles;
-@dynamic concepts;
-@dynamic mentions;
 @dynamic stories;
 @dynamic user;
 

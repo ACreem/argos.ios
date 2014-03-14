@@ -181,7 +181,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                                   class:[Concept class]
                                                              identifier:@"conceptId"
                                                           relationships:@{
-                                                                          @"stories":   @{
+                                                                          // TODO: adapt this to a more generic "baseEntityMappings" or something.
+                                                                          @"entities":   @{
                                                                                           @"entity":      @"Story",
                                                                                           @"mappings":    storyMappings}}
                                                              mappings:conceptMappings];

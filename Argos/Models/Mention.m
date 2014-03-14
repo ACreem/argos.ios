@@ -7,17 +7,15 @@
 //
 
 #import "Mention.h"
+#import "BaseEntity.h"
 #import "Concept.h"
-#import "Event.h"
-#import "Story.h"
 
 
 @implementation Mention
 
 @dynamic mentionId;
 @dynamic name;
-@dynamic events;
+@dynamic entities;
 @dynamic concept;
-@dynamic stories;
 
 @end

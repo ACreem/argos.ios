@@ -117,16 +117,15 @@
 }
 
 #pragma mark - Watching
-- (void)watch:(id)sender
+- (void)watch:(UIBarButtonItem*)sender
 {
-    UIBarButtonItem *button = (UIBarButtonItem*)sender;
-    if (button.tag != 1) {
-        button.image = [UIImage imageNamed:@"nav_watched"];
-        [button setTag:1];
+    if (sender.tag != 1) {
+        sender.image = [UIImage imageNamed:@"nav_watched"];
+        [sender setTag:1];
         [self.entity watch];
     } else {
-        button.image = [UIImage imageNamed:@"nav_watch"];
-        [button setTag:0];
+        sender.image = [UIImage imageNamed:@"nav_watch"];
+        [sender setTag:0];
         [self.entity unwatch];
     }
 }

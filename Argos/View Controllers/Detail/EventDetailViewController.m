@@ -16,22 +16,14 @@
 #import "ARGalleryViewController.h"
 
 #import "Article.h"
-#import "Story.h"
-#import "Concept.h"
 #import "Source.h"
 #import "Event+Management.h"
 
 #import "EventListViewController.h"
 
-#import "IIViewDeckController.h"
-#import "MentionsViewController.h"
-
-#import "AppDelegate.h"
-
 @interface EventDetailViewController ()
 @property (nonatomic, strong) AREmbeddedCollectionViewController *articleList;
 @property (nonatomic, strong) AREmbeddedCollectionViewController *storyList;
-@property (nonatomic, assign) CGRect bounds;
 @end
 
 @implementation EventDetailViewController
@@ -48,7 +40,7 @@
     
     self.totalItems = self.entity.stories.count + self.entity.articles.count + self.entity.concepts.count;
     
-    [self setupStories];
+    //[self setupStories];
     
     // Setup the image gallery.
     /*
@@ -65,28 +57,6 @@
     [self setupArticles];
 }
 
-- (void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:animated];
-    
-    // Setup the right controller (the mention pane) for the view deck.
-    // Doesn't feel quite right for this view controller to reach that far up its hierarchy, but...
-    self.navigationController.viewDeckController.rightController = [[MentionsViewController alloc] initWithEntity:self.entity withPredicate:[NSPredicate predicateWithFormat:@"SELF in %@", self.entity.concepts]];
-}
-
-- (void)viewDidDisappear:(BOOL)animated
-{
-    // Remove the mention pane.
-    // For whatever reason, I can't remove it the same way I added it.
-    //self.navigationController.viewDeckController.rightController = nil;
-    
-    // It has to be removed this way, which is messy:
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.deckController.rightController = nil;
-    
-    [super viewDidDisappear:animated];
-}
-
 #pragma mark - Setup
 - (void)setupStories
 {
@@ -98,7 +68,7 @@
     // Otherwise show a list of stories.
     } else {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        [flowLayout setItemSize:CGSizeMake(_bounds.size.width, 80)];
+        [flowLayout setItemSize:CGSizeMake(320, 80)];
         _storyList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
         _storyList.managedObjectContext = self.entity.managedObjectContext;
         _storyList.delegate = self;
@@ -118,7 +88,7 @@
 - (void)setupArticles
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(_bounds.size.width, 80)];
+    [flowLayout setItemSize:CGSizeMake(320, 80)];
     _articleList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
     _articleList.managedObjectContext = self.entity.managedObjectContext;
     _articleList.delegate = self;
@@ -164,16 +134,15 @@
 }
 
 #pragma mark - Bookmarking
-- (void)bookmark:(id)sender
+- (void)bookmark:(UIBarButtonItem*)sender
 {
-    UIBarButtonItem *button = (UIBarButtonItem*)sender;
-    if (button.tag != 1) {
-        button.image = [UIImage imageNamed:@"nav_bookmarked"];
-        [button setTag:1];
+    if (sender.tag != 1) {
+        sender.image = [UIImage imageNamed:@"nav_bookmarked"];
+        [sender setTag:1];
         [self.entity bookmark];
     } else {
-        button.image = [UIImage imageNamed:@"nav_bookmark"];
-        [button setTag:0];
+        sender.image = [UIImage imageNamed:@"nav_bookmark"];
+        [sender setTag:0];
         [self.entity unbookmark];
     }
 }

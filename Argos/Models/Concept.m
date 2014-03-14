@@ -7,16 +7,14 @@
 //
 
 #import "Concept.h"
-#import "Event.h"
+#import "BaseEntity.h"
 #import "Mention.h"
-#import "Story.h"
 
 
 @implementation Concept
 
 @dynamic conceptId;
 @dynamic aliases;
-@dynamic events;
-@dynamic stories;
+@dynamic entities;
 
 @end

@@ -10,15 +10,13 @@
 #import <CoreData/CoreData.h>
 #import "BaseEntity.h"
 
-@class Article, Concept, CurrentUser, Mention, Story;
+@class Article, CurrentUser, Story;
 
 @interface Event : BaseEntity
 
 @property (nonatomic, retain) NSNumber * eventId;
 @property (nonatomic, retain) NSNumber * score;
 @property (nonatomic, retain) NSSet *articles;
-@property (nonatomic, retain) NSSet *concepts;
-@property (nonatomic, retain) NSSet *mentions;
 @property (nonatomic, retain) NSSet *stories;
 @property (nonatomic, retain) CurrentUser *user;
 @end
@@ -29,16 +27,6 @@
 - (void)removeArticlesObject:(Article *)value;
 - (void)addArticles:(NSSet *)values;
 - (void)removeArticles:(NSSet *)values;
-
-- (void)addConceptsObject:(Concept *)value;
-- (void)removeConceptsObject:(Concept *)value;
-- (void)addConcepts:(NSSet *)values;
-- (void)removeConcepts:(NSSet *)values;
-
-- (void)addMentionsObject:(Mention *)value;
-- (void)removeMentionsObject:(Mention *)value;
-- (void)addMentions:(NSSet *)values;
-- (void)removeMentions:(NSSet *)values;
 
 - (void)addStoriesObject:(Story *)value;
 - (void)removeStoriesObject:(Story *)value;

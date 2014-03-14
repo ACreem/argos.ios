@@ -7,18 +7,14 @@
 //
 
 #import "Story.h"
-#import "Concept.h"
 #import "CurrentUser.h"
 #import "Event.h"
-#import "Mention.h"
 
 
 @implementation Story
 
 @dynamic storyId;
-@dynamic concepts;
 @dynamic events;
-@dynamic mentions;
 @dynamic user;
 
 @end

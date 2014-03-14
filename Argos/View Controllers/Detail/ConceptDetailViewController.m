@@ -43,7 +43,7 @@
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    self.totalItems = self.entity.stories.count;
+    self.totalItems = self.entity.entities.count;
     
     if (!self.entity.summary) {
         self.entity.summary = @"We have no summary for this entity yet. Please help by submitting one!";
@@ -53,7 +53,8 @@
     [flowLayout setItemSize:CGSizeMake(bounds.size.width, 120)];
     
     // Mentions (story) list header
-    self.mentionList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
+    // TODO: need to filter out only the stories instead of all entities (concepts, stories, events).
+    self.mentionList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.entities]];
     self.mentionList.managedObjectContext = self.entity.managedObjectContext;
     self.mentionList.delegate = self;
     self.mentionList.title = @"Mentions";
@@ -63,7 +64,7 @@
     [self addChildViewController:self.mentionList];
     [self.view.scrollView addSubview:self.mentionList.collectionView];
     [self.mentionList didMoveToParentViewController:self];
-    [self getEntities:self.entity.stories forCollectionView:self.mentionList];
+    [self getEntities:self.entity.entities forCollectionView:self.mentionList];
 }
 
 # pragma mark - AREmbeddedCollectionViewControllerDelegate
@@ -82,7 +83,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Story *story = [[self.entity.stories allObjects] objectAtIndex:indexPath.row];
+    Story *story = [[self.entity.entities allObjects] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 

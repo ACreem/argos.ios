@@ -7,6 +7,8 @@
 //
 
 #import "BaseEntity.h"
+#import "Concept.h"
+#import "Mention.h"
 
 
 @implementation BaseEntity
@@ -24,5 +26,6 @@
 @dynamic imageFull;
 @dynamic imageLarge;
 @dynamic mentions;
+@dynamic concepts;
 
 @end

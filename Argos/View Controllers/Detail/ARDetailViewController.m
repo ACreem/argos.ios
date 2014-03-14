@@ -7,28 +7,39 @@
 //
 
 #import "ARDetailViewController.h"
+#import "BaseEntity.h"
 
+// Sharing/font setting modals.
 #import "ShareViewController.h"
 #import "FontViewController.h"
+#import "TransitionDelegate.h"
+#import "UIWindow+FauxStatusBar.h"
 
+// For handling concept links in the summary.
 #import "Concept.h"
 #import "ConceptDetailViewController.h"
 
-#import "BaseEntity.h"
-
+// For sticky headers.
 #import "ARCollectionView.h"
 #import "ARCollectionHeaderView.h"
 
+// For the mentions pull-out.
+#import "IIViewDeckController.h"
+#import "MentionsViewController.h"
+#import "AppDelegate.h"
+
+// For downloading/processing images.
 #import "ImageDownloader.h"
-#import "TransitionDelegate.h"
-#import "UIWindow+FauxStatusBar.h"
 #import <NYXImagesKit/NYXImagesKit.h>
+
+#import "AREmbeddedCollectionViewController.h"
 
 
 @interface ARDetailViewController ()
 // For animated modal transitions with opacity.
 @property (nonatomic, strong) TransitionDelegate *transitionController;
 
+// For the progress bar.
 @property (nonatomic, assign) int loadedItems;
 
 // For keeping track of sticky headers.
@@ -116,6 +127,29 @@
         [imageDownloader startDownload];
     }
 }
+
+- (void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    
+    // Setup the right controller (the mention pane) for the view deck.
+    // Doesn't feel quite right for this view controller to reach that far up its hierarchy, but...
+    self.navigationController.viewDeckController.rightController = [[MentionsViewController alloc] initWithEntity:self.entity withPredicate:[NSPredicate predicateWithFormat:@"SELF in %@", self.entity.concepts]];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    // Remove the mention pane.
+    // For whatever reason, I can't remove it the same way I added it.
+    //self.navigationController.viewDeckController.rightController = nil;
+    
+    // It has to be removed this way, which is messy:
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.deckController.rightController = nil;
+    
+    [super viewDidDisappear:animated];
+}
+
 
 
 # pragma mark - Actions
