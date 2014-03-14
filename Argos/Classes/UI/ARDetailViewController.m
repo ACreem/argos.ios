@@ -18,33 +18,21 @@
 #import "ARCollectionHeaderView.h"
 
 #import "ImageDownloader.h"
-
 #import "TransitionDelegate.h"
+#import "UIWindow+FauxStatusBar.h"
 
-#import <QuartzCore/QuartzCore.h>
 
-@interface ARDetailViewController () {
-    CGRect _bounds;
-    
-    // For image scrolling effects.
-    UIView *_gradientView;
-    UIView *_textGradientView;
-    UIImageView *_headerImageViewBlurred;
-    UIImageView *_headerImageView;
-    UILabel *_titleLabel;
-    CGRect _cachedImageFrame;
-    
-    // For keeping track of sticky headers.
-    ARCollectionHeaderView *_stuckSectionHeaderView;
-    UIView *_stuckSectionHeaderSuperview;
-    CGRect _stuckSectionHeaderViewFrame;
-    
-    ShareViewController *_shareViewController;
-    FontViewController *_fontViewController;
-}
-
+@interface ARDetailViewController ()
+// For animated modal transitions with opacity.
 @property (nonatomic, strong) TransitionDelegate *transitionController;
 
+// For image scrolling effects.
+@property (nonatomic, strong) UILabel *titleLabel;
+
+// For keeping track of sticky headers.
+@property (nonatomic, strong) ARCollectionHeaderView *stuckSectionHeaderView;
+@property (nonatomic, strong) UIView *stuckSectionHeaderSuperview;
+@property (nonatomic, assign) CGRect stuckSectionHeaderViewFrame;
 @end
 
 @implementation ARDetailViewController
@@ -59,84 +47,53 @@
     
     // Hack to do back buttons w/o text.
 	self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@""
-                                                                             style:UIBarButtonItemStylePlain target:nil action:nil];
-    
+                                                                             style:UIBarButtonItemStylePlain
+                                                                            target:nil
+                                                                            action:nil];
     self.navigationItem.rightBarButtonItems = [self navigationItems];
     
-    float headerImageHeight = 200.0;
-    _bounds = [[UIScreen mainScreen] bounds];
+    CGFloat headerImageHeight = 200.0;
+    CGRect bounds = [[UIScreen mainScreen] bounds];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
     // Scroll view
-    _scrollView = [[ARScrollView alloc] initWithFrame:_bounds verticalOffset:headerImageHeight];
-    //_scrollView.bounces = NO;
+    _scrollView = [[ARScrollView alloc] initWithFrame:bounds verticalOffset:headerImageHeight];
     _scrollView.delegate = self;
     
-    _headerView = [[UIView alloc] initWithFrame:CGRectMake(_bounds.origin.x, _bounds.origin.y, _bounds.size.width, headerImageHeight)];
-    
-    // Header image
-    UIImage* headerImage = [UIImage imageNamed:@"placeholder"];
-    _headerImageView.contentMode = UIViewContentModeScaleAspectFill;
-    _headerImageView = [[UIImageView alloc] initWithImage:headerImage];
-    _headerImageView.frame = CGRectMake(_bounds.origin.x, _bounds.origin.y, _bounds.size.width, headerImageHeight);
-    _cachedImageFrame = _headerImageView.frame;
-    [_headerView addSubview:_headerImageView];
-    
-    // Header image blur
-    UIImage* blurred = [headerImage gaussianBlurWithBias:0];
-    _headerImageViewBlurred = [[UIImageView alloc] initWithImage:blurred];
-    _headerImageViewBlurred.frame = _headerImageView.frame;
-    _headerImageViewBlurred.alpha = 0.0;
-    [_headerView addSubview:_headerImageViewBlurred];
-    
-    // Text gradient (so the text is readable)
-    _textGradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _bounds.size.width, headerImageHeight)];
-    _textGradientView.contentMode = UIViewContentModeScaleAspectFill;
-    CAGradientLayer *textGradient = [CAGradientLayer layer];
-    textGradient.frame = _textGradientView.bounds;
-    textGradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
-    [_textGradientView.layer insertSublayer:textGradient atIndex:0];
-    _textGradientView.alpha = 0.6;
-    [_headerView addSubview:_textGradientView];
-    
-    // Gradient image overlay (for scrolling)
-    _gradientView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, _bounds.size.width, headerImageHeight)];
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = _gradientView.bounds;
-    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor clearColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], (id)[[UIColor blackColor] CGColor], nil];
-    [_gradientView.layer insertSublayer:gradient atIndex:0];
-    _gradientView.alpha = 0.0;
-    [_headerView addSubview:_gradientView];
-    
+    // Header view
+    _headerView = [[ARHeaderView alloc] initWithFrame:CGRectMake(CGRectGetMinX(bounds),
+                                                                 CGRectGetMinY(bounds),
+                                                                 CGRectGetWidth(bounds),
+                                                                 headerImageHeight)];
     [self.view addSubview:_headerView];
     
     _loadedItems = 0;
     _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-    _progressView.frame = CGRectMake(0, 0, _bounds.size.width, 20);
+    _progressView.frame = CGRectMake(0, 0, CGRectGetWidth(bounds), 20);
     _progressView.tintColor = [UIColor actionColor];
     _progressView.trackTintColor = [UIColor mutedColor];
     [_scrollView addSubview:_progressView];
     
-    [self setupTitle];
+    // Title view
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0,
+                                                                CGRectGetMinY(bounds),
+                                                                CGRectGetWidth(bounds) - 32.0,
+                                                                CGRectGetHeight(self.headerView.bounds))];
+    self.titleLabel.text = _viewTitle;
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.font = [UIFont titleFontForSize:20];
+    self.titleLabel.numberOfLines = 0;
+    [self.titleLabel sizeToFit];
+    CGRect titleFrame = self.titleLabel.frame;
+    titleFrame.size.height += 20.0;
+    titleFrame.origin.y = CGRectGetHeight(self.headerView.bounds) - CGRectGetHeight(titleFrame);
+    self.titleLabel.frame = titleFrame;
+    [self.view addSubview:self.titleLabel];
     
     [self.view addSubview:_scrollView];
 }
 
-- (void)setupTitle
-{
-    _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0, _bounds.origin.y, _bounds.size.width - 32.0, self.headerView.bounds.size.height)];
-    _titleLabel.text = _viewTitle;
-    _titleLabel.textColor = [UIColor whiteColor];
-    _titleLabel.font = [UIFont titleFontForSize:20];
-    _titleLabel.numberOfLines = 0;
-    [_titleLabel sizeToFit];
-    CGRect titleFrame = _titleLabel.frame;
-    titleFrame.size.height += 20.0;
-    titleFrame.origin.y = self.headerView.bounds.size.height - titleFrame.size.height;
-    _titleLabel.frame = titleFrame;
-    [self.view addSubview:_titleLabel];
-}
 
 - (NSArray*)navigationItems
 {
@@ -146,41 +103,44 @@
     UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                           target:nil
                                                                           action:nil];
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share:)];
-    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"] style:UIBarButtonItemStylePlain target:self action:@selector(font:)];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                 target:self
+                                                                                 action:@selector(share:)];
+    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(font:)];
     
-    UIBarButtonItem *watchButton;
-    watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+    UIBarButtonItem *watchButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"]
+                                                   style:UIBarButtonItemStylePlain target:self
+                                                  action:@selector(watch:)];
     watchButton.tag = 0;
     
-    UIBarButtonItem *bookmarkButton;
-    bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmark"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
+    UIBarButtonItem *bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmark"]
+                                                                       style:UIBarButtonItemStylePlain
+                                                                      target:self
+                                                                      action:@selector(bookmark:)];
     bookmarkButton.tag = 0;
     
-    return [NSArray arrayWithObjects:shareButton, paddingItem, bookmarkButton, paddingItem, fontButton, paddingItem, watchButton, paddingItem, nil];
-}
-
-- (void)setHeaderImage:(UIImage*)image
-{
-    [_headerImageView setImage:image];
-    
-    UIImage* blurred = [image gaussianBlurWithBias:0];
-    [_headerImageViewBlurred setImage:blurred];
+    return @[ shareButton, paddingItem,
+              bookmarkButton, paddingItem,
+              fontButton, paddingItem,
+              watchButton, paddingItem ];
 }
 
 - (void)setHeaderImageForEntity:(id<AREntity>)entity
 {
-    CGSize headerSize = CGSizeMake(640, 400);
+    CGSize headerSize = self.headerView.cachedFrame.size;
     
     // Set the header image,
     // downloading if necessary.
     if (entity.imageHeader) {
-        [self setHeaderImage:entity.imageHeader];
+        [self.headerView setImage:entity.imageHeader];
         
     } else if (entity.image) {
         UIImage *headerImage = [entity.image scaleToCoverSize:headerSize];
         entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-        [self setHeaderImage:entity.imageHeader];
+        [self.headerView setImage:entity.imageHeader];
         
     } else if (entity.imageUrl) {
         ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:entity.imageUrl]];
@@ -188,24 +148,21 @@
             entity.image = image;
             UIImage *headerImage = [entity.image scaleToCoverSize:headerSize];
             entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-            [self setHeaderImage:entity.imageHeader];
+            [self.headerView setImage:entity.imageHeader];
         }];
         [imageDownloader startDownload];
     }
 }
 
 
-
 # pragma mark - Actions
 - (void)share:(id)sender
 {
-    _shareViewController = [[ShareViewController alloc] init];
-    [self presentModalViewController:_shareViewController];
+    [self presentModalViewController:[[ShareViewController alloc] init]];
 }
 - (void)font:(id)sender
 {
-    _fontViewController = [[FontViewController alloc] init];
-    [self presentModalViewController:_fontViewController];
+    [self presentModalViewController:[[FontViewController alloc] init]];
 }
 - (void)bookmark:(id)sender
 {
@@ -245,13 +202,11 @@
     viewControllerToPresent.modalPresentationStyle = UIModalPresentationCustom;
     
     // Have to hide our fake status bar at the top, or else it overlays everything.
-    [[[UIApplication sharedApplication] keyWindow] viewWithTag:kFauxStatusBarTag].hidden = YES;
-    
+    [UIWindow hideFauxStatusBar];
     
     // Add the close button.
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(
-                                                                       screenRect.size.width - 48,
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(screenRect.size.width - 48,
                                                                        [UIApplication sharedApplication].statusBarFrame.size.height,
                                                                        48, 48)];
     [closeButton setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
@@ -265,7 +220,7 @@
 {
     [super dismissViewControllerAnimated:flag completion:^{
         // Have to re-show our fake status bar at the top.
-        [[[UIApplication sharedApplication] keyWindow] viewWithTag:kFauxStatusBarTag].hidden = NO;
+        [UIWindow showFauxStatusBar];
     }];
 }
 - (void)closeModal:(id)sender
@@ -278,18 +233,18 @@
 {
     // Parallax
     float y = scrollView.contentOffset.y;
-    CGRect imageFrame = _headerImageView.frame;
-    CGRect titleFrame = _titleLabel.frame;
+    CGRect headerFrame = self.headerView.frame;
+    CGRect titleFrame = self.titleLabel.frame;
     
     if (y >= 0) {
-        imageFrame.origin.y = -y/6;
-        _headerView.frame = imageFrame;
-        titleFrame.origin.y = self.headerView.bounds.size.height - titleFrame.size.height - y/1.4;
-        _titleLabel.frame = titleFrame;
+        headerFrame.origin.y = -y/6;
+        self.headerView.frame = headerFrame;
+        titleFrame.origin.y = CGRectGetHeight(self.headerView.bounds) - CGRectGetHeight(titleFrame) - y/1.4;
+        self.titleLabel.frame = titleFrame;
         
         // Gradient and blur opacity
-        _gradientView.alpha = y*1.5/_bounds.size.height;
-        _headerImageViewBlurred.alpha = y*4/_bounds.size.height;
+        self.headerView.gradientView.alpha = y*1.5/CGRectGetHeight(self.view.frame);
+        self.headerView.blurredImageView.alpha = y*4/CGRectGetHeight(self.view.frame);
         
         // Sticky header
         // Look for the header that needs to be stuck.
@@ -298,7 +253,7 @@
             
             if ([subview isKindOfClass:[ARCollectionView class]]) {
                 ARCollectionView* colview = (ARCollectionView*)subview;
-                if (y > subview.frame.origin.y && _stuckSectionHeaderView != colview.headerView) {
+                if (y > CGRectGetMinY(subview.frame) && _stuckSectionHeaderView != colview.headerView) {
                     selectedHeader = colview.headerView;
                 }
             }
@@ -352,9 +307,9 @@
             // superview's frame.
             float threshold;
             if (_stuckSectionHeaderSuperview == self.scrollView) {
-                threshold = _stuckSectionHeaderViewFrame.origin.y;
+                threshold = CGRectGetMinY(_stuckSectionHeaderViewFrame);
             } else {
-                threshold = _stuckSectionHeaderSuperview.frame.origin.y;
+                threshold = CGRectGetMinY(_stuckSectionHeaderSuperview.frame);
             }
             if (y < threshold) {
                 _stuckSectionHeaderView.frame = _stuckSectionHeaderViewFrame;
@@ -372,19 +327,17 @@
     } else {
         
         // Stretchy header
-        CGRect frame = CGRectMake(0, y, _cachedImageFrame.size.width-y, _cachedImageFrame.size.height-y);
-        CGRect textGradientFrame = _textGradientView.frame;
-        CGRect titleLabelFrame = _titleLabel.frame;
+        CGRect frame = CGRectMake(0, y,
+                                  CGRectGetWidth(self.headerView.cachedFrame) - y,
+                                  CGRectGetHeight(self.headerView.cachedFrame) - y);
+        CGRect titleLabelFrame = self.titleLabel.frame;
         
-        _headerImageView.frame = frame;
-        textGradientFrame.size.height = _headerImageView.frame.size.height;
-        textGradientFrame.origin.y = -y;
-        titleLabelFrame.origin.y = _headerImageView.frame.size.height - titleLabelFrame.size.height;
-        _textGradientView.frame = textGradientFrame;
-        _titleLabel.frame = titleLabelFrame;
+        self.headerView.frame = frame;
+        titleLabelFrame.origin.y = CGRectGetHeight(self.headerView.frame) - CGRectGetHeight(titleLabelFrame);
+        self.titleLabel.frame = titleLabelFrame;
         
-        CGPoint center = CGPointMake(self.view.center.x, _headerImageView.center.y - y);
-        _headerImageView.center = center;
+        CGPoint center = CGPointMake(self.view.center.x, self.headerView.center.y - y);
+        self.headerView.center = center;
     }
 }
 
@@ -395,11 +348,15 @@
     NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
     NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Entity" inManagedObjectContext:moc];
     Entity* entity = [[Entity alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-    [[RKObjectManager sharedManager] getObject:entity path:[NSString stringWithFormat:@"/entities/%@", entityId] parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        [self.navigationController pushViewController:[[EntityDetailViewController alloc] initWithEntity:entity] animated:YES];
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"failure");
-    }];
+    [[RKObjectManager sharedManager] getObject:entity
+                                          path:[NSString stringWithFormat:@"/entities/%@", entityId]
+                                    parameters:nil
+                                       success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+                                           [self.navigationController pushViewController:[[EntityDetailViewController alloc] initWithEntity:entity]
+                                                                                animated:YES];
+                                       } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                                           NSLog(@"failure");
+                                       }];
 }
 
 @end

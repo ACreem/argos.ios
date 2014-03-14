@@ -18,10 +18,9 @@ static NSString* kGraphikType = @"Graphik-Regular";
 static NSString* kMarionType = @"Marion";
 static NSString* kPalatinoType = @"Palatino";
 
-@interface FontViewController () {
-    UITabBar *_typeSizeSelectionBar;
-    UIButton *_selectedTypeButton;
-}
+@interface FontViewController ()
+@property (nonatomic, strong) UITabBar *typeSizeSelectionBar;
+@property (nonatomic, strong) UIButton *selectedTypeButton;
 @end
 
 @implementation FontViewController
@@ -57,31 +56,31 @@ static NSString* kPalatinoType = @"Palatino";
     UITabBarItem *mediumSize = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"type_medium"] tag:1];
     UITabBarItem *smallSize = [[UITabBarItem alloc] initWithTitle:@"" image:[UIImage imageNamed:@"type_small"] tag:2];
     
-    _typeSizeSelectionBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, topPadding, width, barHeight)];
-    [_typeSizeSelectionBar setItems:[NSArray arrayWithObjects:smallSize, mediumSize, largeSize, nil]];
-    _typeSizeSelectionBar.delegate = self;
+    self.typeSizeSelectionBar = [[UITabBar alloc] initWithFrame:CGRectMake(0, topPadding, width, barHeight)];
+    [self.typeSizeSelectionBar setItems:[NSArray arrayWithObjects:smallSize, mediumSize, largeSize, nil]];
+    self.typeSizeSelectionBar.delegate = self;
     
     float fontSize = [prefs floatForKey:kFontSizeKey];
     if (fontSize == kFontSizeLarge) {
-        _typeSizeSelectionBar.selectedItem = largeSize;
+        self.typeSizeSelectionBar.selectedItem = largeSize;
     } else if (fontSize == kFontSizeMedium) {
-        _typeSizeSelectionBar.selectedItem = mediumSize;
+        self.typeSizeSelectionBar.selectedItem = mediumSize;
     } else {
-        _typeSizeSelectionBar.selectedItem = smallSize;
+        self.typeSizeSelectionBar.selectedItem = smallSize;
     }
     
     // Bottom border for the UITabBar.
     CALayer *bottomBorder = [CALayer layer];
     bottomBorder.frame = CGRectMake(xPadding, barHeight - 1, width - xPadding*2, 1);
     bottomBorder.backgroundColor = [UIColor actionColor].CGColor;
-    [_typeSizeSelectionBar.layer addSublayer:bottomBorder];
+    [self.typeSizeSelectionBar.layer addSublayer:bottomBorder];
     
-    [self.view addSubview:_typeSizeSelectionBar];
+    [self.view addSubview:self.typeSizeSelectionBar];
     
     
     // Setup type selection.
     // Since there are no vertical UITabBars, fake it with some vertical buttons.
-    UIView *typeSelectionView = [[UIView alloc] initWithFrame:CGRectMake(0, _typeSizeSelectionBar.frame.origin.y + _typeSizeSelectionBar.frame.size.height + yPadding, width, 160)];
+    UIView *typeSelectionView = [[UIView alloc] initWithFrame:CGRectMake(0, self.typeSizeSelectionBar.frame.origin.y + self.typeSizeSelectionBar.frame.size.height + yPadding, width, 160)];
     
     NSString* fontType = [prefs stringForKey:kFontTypeKey];
     
@@ -94,7 +93,7 @@ static NSString* kPalatinoType = @"Palatino";
     graphik.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
     if ([fontType isEqualToString:kGraphikType]) {
         [graphik setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _selectedTypeButton = graphik;
+        self.selectedTypeButton = graphik;
     } else {
         [graphik setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
     }
@@ -109,7 +108,7 @@ static NSString* kPalatinoType = @"Palatino";
     marion.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
     if ([fontType isEqualToString:kMarionType]) {
         [marion setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _selectedTypeButton = marion;
+        self.selectedTypeButton = marion;
     } else {
         [marion setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
     }
@@ -124,7 +123,7 @@ static NSString* kPalatinoType = @"Palatino";
     palatino.contentEdgeInsets = UIEdgeInsetsMake(0, xPadding, 0, 0);
     if ([fontType isEqualToString:kPalatinoType]) {
         [palatino setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-        _selectedTypeButton = palatino;
+        self.selectedTypeButton = palatino;
     } else {
         [palatino setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
     }
@@ -154,7 +153,7 @@ static NSString* kPalatinoType = @"Palatino";
     [self.view addSubview:contrastSelectionBar];
     
     CGRect frame = self.view.frame;
-    frame.size.height = typeSelectionView.frame.size.height + contrastSelectionBar.frame.size.height + _typeSizeSelectionBar.frame.size.height + topPadding/2;
+    frame.size.height = typeSelectionView.frame.size.height + contrastSelectionBar.frame.size.height + self.typeSizeSelectionBar.frame.size.height + topPadding/2;
     frame.size.width = width;
     self.view.frame = frame;
 }
@@ -164,7 +163,7 @@ static NSString* kPalatinoType = @"Palatino";
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    if (tabBar == _typeSizeSelectionBar) {
+    if (tabBar == self.typeSizeSelectionBar) {
         switch (item.tag) {
             case 0:
             {
@@ -219,9 +218,9 @@ static NSString* kPalatinoType = @"Palatino";
             break;
         }
     }
-    [_selectedTypeButton setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
+    [self.selectedTypeButton setTitleColor:[UIColor mutedAltColor] forState:UIControlStateNormal];
     [button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    _selectedTypeButton = button;
+    self.selectedTypeButton = button;
 }
 
 @end

@@ -14,7 +14,8 @@
 // Need to double dimensions for retina.
 - (UIImage*)cropImage:(UIImage*)image
 {
-    CGSize dimensions = CGSizeMake(self.imageView.frame.size.width*2, self.imageView.frame.size.height*2);
+    CGSize dimensions = CGSizeMake(CGRectGetWidth(self.imageView.frame)*2,
+                                   CGRectGetHeight(self.imageView.frame)*2);
     UIImage *croppedImage = [image scaleToCoverSize:dimensions];
     croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
     return croppedImage;

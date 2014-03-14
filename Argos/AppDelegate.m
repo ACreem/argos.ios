@@ -11,6 +11,10 @@
 #import "LoginViewController.h"
 #import "ReachabilityManager.h"
 
+@interface AppDelegate ()
+@property (nonatomic, strong) UIView *fauxStatusBar;
+@end
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions

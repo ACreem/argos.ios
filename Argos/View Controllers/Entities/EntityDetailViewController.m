@@ -112,7 +112,7 @@
         [_mentionList handleImageForEntity:(id)story forCell:cell atIndexPath:indexPath];
         
         cell.titleLabel.text = story.title;
-        cell.timeLabel.text = [NSDate dateDiff:story.updatedAt];
+        cell.timeLabel.text = [story.updatedAt timeAgo];
     }
     return cell;
 }

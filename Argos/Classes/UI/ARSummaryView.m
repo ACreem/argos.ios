@@ -15,32 +15,36 @@
 // which includes the processed summary text but
 // does NOT include filled in styling values.
 // This way we can update them as necessary when font preferences change.
-@property (strong, nonatomic) NSString *summaryTextHtml;
+@property (nonatomic, strong) NSString *summaryTextHtml;
 @end
 
 @implementation ARSummaryView
 
-- (id)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt
+- (instancetype)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt
 {
-    float paddingX = 16.0;
-    float paddingY = 8.0;
+    CGFloat paddingX = 16.0;
+    CGFloat paddingY = 8.0;
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGRect frame = CGRectMake(origin.x, origin.y, bounds.size.width, 400.0); // Arbirtary height, it is set programatically later.
+    CGRect frame = CGRectMake(origin.x, origin.y, CGRectGetWidth(bounds), 400.0); // Arbirtary height, it is set programatically later.
     self = [super initWithFrame:frame];
     if (self) {
         [[NSNotificationCenter defaultCenter] addObserver:self
-                                                 selector:@selector(defaultsDidChange:) name:NSUserDefaultsDidChangeNotification
+                                                 selector:@selector(defaultsDidChange:)
+                                                     name:NSUserDefaultsDidChangeNotification
                                                    object:nil];
         
         // Header view with metadata.
-        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, bounds.size.width, 30.0 + paddingY)];
+        UIView *headerView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                      0,
+                                                                      CGRectGetWidth(bounds),
+                                                                      30.0 + paddingY)];
         
         // Setup time ago
         _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(paddingX,
                                                                paddingY,
-                                                               bounds.size.width - (paddingX*2),
+                                                               CGRectGetWidth(bounds) - (paddingX*2),
                                                                20.0)];
-        _timeLabel.text = [NSDate dateDiff:updatedAt];
+        _timeLabel.text = [updatedAt timeAgo];
         _timeLabel.font = [UIFont lightFontForSize:10];
         _timeLabel.textColor = [UIColor mutedColor];
         [headerView addSubview:_timeLabel];
@@ -48,9 +52,9 @@
         
         // Setup summary text
         _summaryWebView = [[UIWebView alloc] initWithFrame:CGRectMake(paddingX,
-                                                                        _timeLabel.frame.origin.y + _timeLabel.frame.size.height + paddingY*2,
-                                                                        bounds.size.width - (paddingX*2),
-                                                                        200.0)];
+                                                                      CGRectGetMinY(_timeLabel.frame) + CGRectGetHeight(_timeLabel.frame) + paddingY*2,
+                                                                      CGRectGetWidth(bounds) - (paddingX*2),
+                                                                      200.0)];
         _summaryWebView.backgroundColor = [UIColor clearColor];
         _summaryWebView.opaque = NO;
         _summaryWebView.delegate = self;
@@ -75,7 +79,10 @@
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
     
     // Re-style the summary html.
-    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:[prefs floatForKey:@"fontSize"] fontType:[prefs stringForKey:@"fontType"] contrast:[prefs boolForKey:@"contrast"]];
+    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml
+                                          fontSize:[prefs floatForKey:@"fontSize"]
+                                          fontType:[prefs stringForKey:@"fontType"]
+                                          contrast:[prefs boolForKey:@"contrast"]];
     [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
 
@@ -94,17 +101,20 @@
         return [first compare:second];
     }];
     
-    
     for (Mention *mention in sortedMentions) {
-        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", mention.name] withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", mention.parent.entityId, mention.name]];
+        summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", mention.name]
+                                                             withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", mention.parent.entityId, mention.name]];
     }
     
-    NSString *htmlFile = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
-    NSString *htmlString = [NSString stringWithContentsOfFile:htmlFile encoding:NSUTF8StringEncoding error:nil];
+    NSString *htmlTemplate = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
+    NSString *htmlString = [NSString stringWithContentsOfFile:htmlTemplate encoding:NSUTF8StringEncoding error:nil];
     _summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml fontSize:[prefs floatForKey:@"fontSize"] fontType:[prefs stringForKey:@"fontType"] contrast:[prefs boolForKey:@"contrast"]];
+    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml
+                                          fontSize:[prefs floatForKey:@"fontSize"]
+                                          fontType:[prefs stringForKey:@"fontType"]
+                                          contrast:[prefs boolForKey:@"contrast"]];
     [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
 
@@ -137,11 +147,11 @@
     
     for (UIView *v in [self subviews]) {
         //float fw = v.frame.origin.x + v.frame.size.width;
-        float fh = v.frame.origin.y + v.frame.size.height;
+        float fh = CGRectGetMinY(v.frame) + CGRectGetHeight(v.frame);
         //w = MAX(fw, w);
         h = MAX(fh, h);
     }
-    return CGSizeMake(self.frame.size.width, h + padding);
+    return CGSizeMake(CGRectGetWidth(self.frame), h + padding);
 }
 
 - (void)layoutSubviews

@@ -347,7 +347,7 @@
         
         cell.titleLabel.text = article.title;
         cell.metaLabel.text = article.source.name;
-        cell.timeLabel.text = [NSDate dateDiff:article.createdAt];
+        cell.timeLabel.text = [article.createdAt timeAgo];
     }
     return cell;
 }

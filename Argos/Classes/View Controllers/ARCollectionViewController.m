@@ -9,17 +9,16 @@
 #import "ARCollectionViewController.h"
 #import "ImageDownloader.h"
 
-@interface ARCollectionViewController () {
-    NSString *_title;
-    NSString *_entityName;
-}
+@interface ARCollectionViewController ()
+@property (nonatomic, strong) NSString *title;
+@property (nonatomic, strong) NSString *entityName;
 @property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @end
 
 @implementation ARCollectionViewController
 
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)predicate
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)predicate
 {
     self = [super initWithCollectionViewLayout:collectionViewLayout];
     if (self) {
@@ -30,7 +29,7 @@
     return self;
 }
 
-- (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName
+- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName
 {
     return [self initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)nil];
 }
@@ -53,7 +52,7 @@
 {
     [super didReceiveMemoryWarning];
     
-    // terminate all pending download connections
+    // Terminate all pending download connections
     NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
     [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
     

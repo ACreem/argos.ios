@@ -11,6 +11,7 @@ PODS:
     - Kiwi/ARC
     - Kiwi/NonARC
   - MCSwipeTableViewCell (2.1.0)
+  - NSDate+TimeAgo (1.0.2)
   - NYXImagesKit (2.3)
   - Reachability (3.1.1)
   - RestKit (0.22.0):
@@ -42,6 +43,7 @@ DEPENDENCIES:
   - EAIntroView
   - Kiwi/XCTest
   - MCSwipeTableViewCell
+  - NSDate+TimeAgo
   - NYXImagesKit
   - Reachability
   - RestKit
@@ -55,6 +57,7 @@ SPEC CHECKSUMS:
   ISO8601DateFormatterValueTransformer: d0af1f50a9df42db72d7418db31938b8473e0af8
   Kiwi: 04c51e880831d291748ec702d42c4101f7eb95c9
   MCSwipeTableViewCell: 4a26851568843d15340eeca00210c219aa9f76d5
+  NSDate+TimeAgo: fe93d3042e83093ae3630bc47ae7d57f782733f6
   NYXImagesKit: bdcd82ed61e55ad95a2e95675c2f6b84f039c423
   Reachability: be4883bb93f31e38266ae3365e5600a317aae735
   RestKit: dc107a0aa4f962575ad0385bac5b3c5e4f591f4e

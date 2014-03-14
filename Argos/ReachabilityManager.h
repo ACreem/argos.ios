@@ -14,7 +14,7 @@
 
 @interface ReachabilityManager : NSObject
 
-@property (strong, nonatomic) Reachability *reachability;
+@property (nonatomic, strong) Reachability *reachability;
 
 #pragma mark Shared Manager
 + (ReachabilityManager *)sharedManager;

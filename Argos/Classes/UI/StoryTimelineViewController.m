@@ -84,7 +84,7 @@
     
     cell.titleLabel.text = event.title;
     cell.textLabel.text = event.summary;
-    cell.timeLabel.text = [NSDate dateDiff:event.updatedAt];
+    cell.timeLabel.text = [event.updatedAt timeAgo];
     
     return cell;
 }

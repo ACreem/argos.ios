@@ -9,28 +9,20 @@
 #import "StreamViewController.h"
 
 @interface StreamViewController ()
-
 @property (strong, nonatomic) NSString* stream;
 @property (strong, nonatomic) RKPaginator *paginator;
 @property (assign, nonatomic) BOOL isLoading;
-
-// For the intro pages.
-@property (strong, nonatomic) UIFont *titleFont;
-@property (strong, nonatomic) UIFont *descFont;
-
 @end
 
 @implementation StreamViewController
 
-- (id)initWithStream:(NSString *)stream
+- (instancetype)initWithStream:(NSString *)stream
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
     [flowLayout setMinimumLineSpacing:0.0f];
     [flowLayout setSectionInset:UIEdgeInsetsZero];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
-    
-    self.stream = stream;
     
     NSPredicate *predicate;
     NSString* title;
@@ -55,9 +47,9 @@
         title = @"Bookmarks";
     }
 
-
     self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:predicate];
     if (self) {
+        _stream = stream;
         self.navigationItem.title = title;
     }
     return self;
@@ -68,11 +60,8 @@
     [super viewDidLoad];
     
     // If the user is new, show the intro/onboarding.
-    if (self.userIsNew) {
+    if (self.isNewUser) {
         [self.navigationController setNavigationBarHidden:YES animated:NO];
-        
-        _titleFont = [UIFont fontWithName:@"Graphik-LightItalic" size:24];
-        _descFont = [UIFont fontWithName:@"Graphik-Light" size:17];
         
         EAIntroPage *page1 = [self createPageWithTitle:@"Know more with less" description:@"Argos helps you stay on top of the news without overwhelming you in content." imageNamed:@"onboarding00"];
         EAIntroPage *page2 = [self createPageWithTitle:@"Events" description:@"Keep up with everything that's happened in a story." imageNamed:@"onboarding01"];
@@ -140,19 +129,21 @@
 // Helper for creating intro pages.
 - (EAIntroPage*)createPageWithTitle:(NSString*)title description:(NSString*)description imageNamed:(NSString*)imageName
 {
+    
+    UIFont *titleFont = [UIFont fontWithName:@"Graphik-LightItalic" size:24];
     float padding = 50;
     UIView *customView = [[UIView alloc] initWithFrame:self.view.bounds];
     
     // Setup the title label.
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, self.view.bounds.size.height/2 + 60, self.view.bounds.size.width - 2*padding, 60)];
-    titleLabel.font = _titleFont;
+    titleLabel.font = titleFont;
     titleLabel.text = title;
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     
     // Create a border the same width as the title.
     CALayer *bottomBorder = [CALayer layer];
-    CGFloat width = [title sizeWithAttributes:@{NSFontAttributeName: _titleFont}].width;
+    CGFloat width = [title sizeWithAttributes:@{NSFontAttributeName: titleFont}].width;
     bottomBorder.frame = CGRectMake(self.view.bounds.size.width/2 - width/2 - padding, titleLabel.frame.size.height - 20, width, 1.0f);
     bottomBorder.backgroundColor = [UIColor colorWithRed:0.227 green:0.404 blue:0.984 alpha:1.0].CGColor;
     [titleLabel.layer addSublayer:bottomBorder];
@@ -161,7 +152,7 @@
     
     // Setup the description label.
     UILabel *descLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, titleLabel.frame.origin.y + titleLabel.frame.size.height, self.view.bounds.size.width - 2*padding, 60)];
-    descLabel.font = _descFont;
+    descLabel.font = [UIFont fontWithName:@"Graphik-Light" size:17];
     descLabel.text = description;
     descLabel.textColor = [UIColor whiteColor];
     descLabel.textAlignment = NSTextAlignmentCenter;

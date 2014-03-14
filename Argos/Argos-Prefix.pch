@@ -19,12 +19,11 @@
     #import "ARObjectManager.h"
     #import "UIColor+ArgosColors.h"
     #import "UIFont+ArgosFonts.h"
-    #import "NSDate+DateUtils.h"
+    #import "NSDate+TimeAgo.h"
 
     #ifdef DEBUG
         static NSString* const kArgosAPIBaseURLString = @"http://ny-m-ftseng.local:5000";
     #else
         static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com";
     #endif
-    static int kFauxStatusBarTag = 99; // Keep track of our fake status bar background.
 #endif

@@ -16,7 +16,7 @@
 
 @implementation SearchResultsViewController
 
-- (id)initForEntityNamed:(NSString*)entityName
+- (instancetype)initForEntityNamed:(NSString*)entityName
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -66,7 +66,7 @@
     } else {
         cell.titleLabel.text = entity.name;
     }
-    cell.timeLabel.text = [NSDate dateDiff:entity.updatedAt];
+    cell.timeLabel.text = [entity.updatedAt timeAgo];
     
     return cell;
 }

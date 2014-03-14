@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-@interface LoginViewController : UIViewController <UITextFieldDelegate, UIWebViewDelegate>
+#import "LoginView.h"
 
-@property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@interface LoginViewController : UIViewController <LoginViewDelegate, UITextFieldDelegate, UIWebViewDelegate>
+
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 
 @end

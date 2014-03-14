@@ -29,6 +29,9 @@
 		F1203A2718BD379400DCEB3A /* Graphik-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */; };
 		F1292B5D18CD05F4003B4433 /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1292B5C18CD05F4003B4433 /* SearchResultsViewController.m */; };
 		F12DD86518AB2291001AE4F9 /* ArgosModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* ArgosModel.xcdatamodeld */; };
+		F13056A718D240CA00B6953A /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F13056A618D240CA00B6953A /* LoginView.m */; };
+		F13056AB18D2542300B6953A /* ARHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F13056AA18D2542300B6953A /* ARHeaderView.m */; };
+		F13056AE18D25B6C00B6953A /* UIWindow+FauxStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F13056AD18D25B6C00B6953A /* UIWindow+FauxStatusBar.m */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
 		F1405C2818973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
@@ -79,7 +82,6 @@
 		F1C267C618C393F60014B436 /* ARScrollViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267C518C393F60014B436 /* ARScrollViewSpec.m */; };
 		F1C267C818C3A0D40014B436 /* ARSummaryViewSpec.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C267C718C3A0D40014B436 /* ARSummaryViewSpec.m */; };
 		F1C6D6CB18B2C3A600129552 /* UIColor+ArgosColors.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */; };
-		F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */; };
 		F1C6D6F018B2F34300129552 /* EntityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */; };
 		F1C6D6F318B2F4AC00129552 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6F218B2F4AC00129552 /* Entity.m */; };
 		F1C6D6F618B2F4AC00129552 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6D6F518B2F4AC00129552 /* Event.m */; };
@@ -128,6 +130,12 @@
 		F1292B5B18CD05F4003B4433 /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
 		F1292B5C18CD05F4003B4433 /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
+		F13056A518D240CA00B6953A /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginView.h; path = Views/LoginView.h; sourceTree = "<group>"; };
+		F13056A618D240CA00B6953A /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginView.m; path = Views/LoginView.m; sourceTree = "<group>"; };
+		F13056A918D2542300B6953A /* ARHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARHeaderView.h; path = Views/ARHeaderView.h; sourceTree = "<group>"; };
+		F13056AA18D2542300B6953A /* ARHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARHeaderView.m; path = Views/ARHeaderView.m; sourceTree = "<group>"; };
+		F13056AC18D25B6C00B6953A /* UIWindow+FauxStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIWindow+FauxStatusBar.h"; path = "Hacks/UIWindow+FauxStatusBar.h"; sourceTree = "<group>"; };
+		F13056AD18D25B6C00B6953A /* UIWindow+FauxStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIWindow+FauxStatusBar.m"; path = "Hacks/UIWindow+FauxStatusBar.m"; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1405C2518973C4C00A4819D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -216,8 +224,6 @@
 		F1C267C718C3A0D40014B436 /* ARSummaryViewSpec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARSummaryViewSpec.m; sourceTree = "<group>"; };
 		F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ArgosColors.h"; sourceTree = "<group>"; };
 		F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
-		F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDate+DateUtils.h"; sourceTree = "<group>"; };
-		F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDate+DateUtils.m"; sourceTree = "<group>"; };
 		F1C6D6EE18B2F34300129552 /* EntityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EntityDetailViewController.h; path = "View Controllers/Entities/EntityDetailViewController.h"; sourceTree = "<group>"; };
 		F1C6D6EF18B2F34300129552 /* EntityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EntityDetailViewController.m; path = "View Controllers/Entities/EntityDetailViewController.m"; sourceTree = "<group>"; };
 		F1C6D6F118B2F4AC00129552 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entity.h; path = Classes/Models/Entity.h; sourceTree = "<group>"; };
@@ -292,6 +298,19 @@
 			path = graphik;
 			sourceTree = "<group>";
 		};
+		F13056A818D24A5B00B6953A /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F13056A518D240CA00B6953A /* LoginView.h */,
+				F13056A618D240CA00B6953A /* LoginView.m */,
+				F157FEB118BC063000EFFC2E /* ARCollectionView.h */,
+				F157FEB218BC063000EFFC2E /* ARCollectionView.m */,
+				F157FECA18BC845E00EFFC2E /* ARCollectionHeaderView.h */,
+				F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		F1405C1718973C4C00A4819D = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +361,7 @@
 				F14603B618A4288400A85E0F /* ReachabilityManager.m */,
 				F1D6BE5018C00A4D00313014 /* Hacks */,
 				F1D6BE4C18BEA1DA00313014 /* Utility */,
+				F13056A818D24A5B00B6953A /* Views */,
 				F1C11DE318A6FE56007F2B47 /* View Controllers */,
 				F1D8FD4818A5EE00003201BF /* Classes */,
 				F1405C3518973C4C00A4819D /* Images.xcassets */,
@@ -386,7 +406,6 @@
 			children = (
 				F157FEC318BC45D800EFFC2E /* Cells */,
 				F157FEC218BC45C400EFFC2E /* Controllers */,
-				F1DBBC2418CCE77000EBDFB3 /* Views */,
 			);
 			name = Collections;
 			sourceTree = "<group>";
@@ -471,6 +490,8 @@
 				F1601C3218ADBA9500C89590 /* ARDetailViewController.m */,
 				F1601C3918ADBA9500C89590 /* ARSummaryView.h */,
 				F1601C3A18ADBA9500C89590 /* ARSummaryView.m */,
+				F13056A918D2542300B6953A /* ARHeaderView.h */,
+				F13056AA18D2542300B6953A /* ARHeaderView.m */,
 				F143295D18B30FF500A76D97 /* ARScrollView.h */,
 				F143295E18B30FF500A76D97 /* ARScrollView.m */,
 				F1D6BE5718C010A100313014 /* ARCircleButton.h */,
@@ -548,8 +569,6 @@
 				F1C267B018C1406E0014B436 /* UIFont+ArgosFonts.m */,
 				F1C6D6C918B2C3A600129552 /* UIColor+ArgosColors.h */,
 				F1C6D6CA18B2C3A600129552 /* UIColor+ArgosColors.m */,
-				F1C6D6CC18B2CE7D00129552 /* NSDate+DateUtils.h */,
-				F1C6D6CD18B2CE7D00129552 /* NSDate+DateUtils.m */,
 				F1AB914318C40522007EF481 /* ImageDownloader.h */,
 				F1AB914418C40522007EF481 /* ImageDownloader.m */,
 			);
@@ -563,6 +582,8 @@
 				F1D6BE5218C00A6700313014 /* AnimatedTransitioning.m */,
 				F1D6BE5318C00A6700313014 /* TransitionDelegate.h */,
 				F1D6BE5418C00A6700313014 /* TransitionDelegate.m */,
+				F13056AC18D25B6C00B6953A /* UIWindow+FauxStatusBar.h */,
+				F13056AD18D25B6C00B6953A /* UIWindow+FauxStatusBar.m */,
 			);
 			name = Hacks;
 			sourceTree = "<group>";
@@ -594,17 +615,6 @@
 				F16148D318B53AF100948933 /* FontViewController.m */,
 			);
 			name = Modals;
-			sourceTree = "<group>";
-		};
-		F1DBBC2418CCE77000EBDFB3 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				F157FEB118BC063000EFFC2E /* ARCollectionView.h */,
-				F157FEB218BC063000EFFC2E /* ARCollectionView.m */,
-				F157FECA18BC845E00EFFC2E /* ARCollectionHeaderView.h */,
-				F157FECB18BC845E00EFFC2E /* ARCollectionHeaderView.m */,
-			);
-			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -816,10 +826,12 @@
 				F1AB914818C40E8E007EF481 /* ARGalleryViewController.m in Sources */,
 				F1D6BE5518C00A6700313014 /* AnimatedTransitioning.m in Sources */,
 				F1DBBC2A18CD00FB00EBDFB3 /* SearchViewController.m in Sources */,
+				F13056A718D240CA00B6953A /* LoginView.m in Sources */,
 				F1C267B718C26C940014B436 /* StoryTimelineViewController.m in Sources */,
 				F1C267B118C1406E0014B436 /* UIFont+ArgosFonts.m in Sources */,
 				F143295F18B30FF500A76D97 /* ARScrollView.m in Sources */,
 				F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */,
+				F13056AB18D2542300B6953A /* ARHeaderView.m in Sources */,
 				F157FEB018BBF25E00EFFC2E /* ARCollectionViewController.m in Sources */,
 				F157FECC18BC845E00EFFC2E /* ARCollectionHeaderView.m in Sources */,
 				F1D6BE5918C010A100313014 /* ARCircleButton.m in Sources */,
@@ -836,8 +848,8 @@
 				F1AB914B18C4108A007EF481 /* ARGalleryImageViewCell.m in Sources */,
 				F1601C4118ADBA9500C89590 /* ARSummaryView.m in Sources */,
 				F157FEC618BC4C5200EFFC2E /* AREmbeddedCollectionViewCell.m in Sources */,
+				F13056AE18D25B6C00B6953A /* UIWindow+FauxStatusBar.m in Sources */,
 				F157FEB918BC095700EFFC2E /* AREmbeddedCollectionViewController.m in Sources */,
-				F1C6D6CE18B2CE7D00129552 /* NSDate+DateUtils.m in Sources */,
 				F1601C2718ADBA7400C89590 /* MenuViewController.m in Sources */,
 				F19DA69E18CAACE800173E2D /* Mention.m in Sources */,
 				F16148D418B53AF100948933 /* FontViewController.m in Sources */,

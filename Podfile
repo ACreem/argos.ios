@@ -8,6 +8,7 @@ pod 'NYXImagesKit'
 pod 'EAIntroView'
 pod 'AFOAuth2Client'
 pod 'VCTransitionsLibrary'
+pod 'NSDate+TimeAgo'
 
 target :ArgosTests, :exclusive => true do
     pod 'Kiwi/XCTest'

@@ -221,11 +221,5 @@
     [self.viewDeckController closeLeftViewAnimated:YES];
 }
 
-#pragma mark - IIViewDeckControllerDelegate
-
-- (void)viewDeckController:(IIViewDeckController *)viewDeckController didChangeOffset:(CGFloat)offset orientation:(IIViewDeckOffsetOrientation)orientation panning:(BOOL)panning {
-    NSLog(@"%f", offset);
-}
-
 
 @end

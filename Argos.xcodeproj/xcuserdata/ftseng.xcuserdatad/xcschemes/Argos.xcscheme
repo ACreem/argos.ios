@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F1405C1F18973C4C00A4819D"
+               BlueprintIdentifier = "F13056B718D26A8500B6953A"
                BuildableName = "Argos.app"
                BlueprintName = "Argos"
                ReferencedContainer = "container:Argos.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F1405C3A18973C4C00A4819D"
+               BlueprintIdentifier = "F13056D718D26A8500B6953A"
                BuildableName = "ArgosTests.xctest"
                BlueprintName = "ArgosTests"
                ReferencedContainer = "container:Argos.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F1405C1F18973C4C00A4819D"
+            BlueprintIdentifier = "F13056B718D26A8500B6953A"
             BuildableName = "Argos.app"
             BlueprintName = "Argos"
             ReferencedContainer = "container:Argos.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F1405C1F18973C4C00A4819D"
+            BlueprintIdentifier = "F13056B718D26A8500B6953A"
             BuildableName = "Argos.app"
             BlueprintName = "Argos"
             ReferencedContainer = "container:Argos.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "F1405C1F18973C4C00A4819D"
+            BlueprintIdentifier = "F13056B718D26A8500B6953A"
             BuildableName = "Argos.app"
             BlueprintName = "Argos"
             ReferencedContainer = "container:Argos.xcodeproj">

@@ -16,16 +16,16 @@
     self = [super initWithFrame:frame];
     if (self) {
         self.backgroundColor = [UIColor whiteColor];
-        float padding = 10;
+        CGFloat padding = 10;
         
-        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, self.frame.size.width - 2*padding, self.frame.size.height)];
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, 0, CGRectGetWidth(self.frame) - 2*padding, CGRectGetHeight(self.frame))];
         _titleLabel.font = [UIFont lightFontForSize:16];
         _titleLabel.textColor = [UIColor lightGrayColor];
         
         [self addSubview:_titleLabel];
         
         CALayer *bottomBorder = [CALayer layer];
-        bottomBorder.frame = CGRectMake(0, self.frame.size.height, self.frame.size.width, 1.0f);
+        bottomBorder.frame = CGRectMake(0, CGRectGetHeight(self.frame), CGRectGetWidth(self.frame), 1.0f);
         bottomBorder.backgroundColor = [UIColor secondaryColor].CGColor;
         [self.layer addSublayer:bottomBorder];
     }
