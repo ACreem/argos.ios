@@ -8,6 +8,7 @@
 
 #import "ARCollectionViewController.h"
 #import "ImageDownloader.h"
+#import "BaseEntity.h"
 
 @interface ARCollectionViewController ()
 @property (nonatomic, strong) NSString *title;
@@ -150,7 +151,7 @@
 {
     NSArray *visiblePaths = [self.collectionView indexPathsForVisibleItems];
     for (NSIndexPath *indexPath in visiblePaths) {
-        id<AREntity> entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+        BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
         if (!entity.image && entity.imageUrl) {
             [self downloadImageForEntity:entity forIndexPath:indexPath];
         }
@@ -168,7 +169,7 @@
             int next = start + i;
             if (next < self.fetchedResultsController.fetchedObjects.count) {
                 NSIndexPath* nextIndexPath = [NSIndexPath indexPathForRow:next inSection:0];
-                id<AREntity> entity = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
+                BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
                 if (!entity.image) {
                     [self downloadImageForEntity:entity forIndexPath:nextIndexPath];
                 }
@@ -179,7 +180,7 @@
             int prev = start - i;
             if (prev >= 0) {
                 NSIndexPath* prevIndexPath = [NSIndexPath indexPathForRow:prev inSection:0];
-                id<AREntity> entity = [self.fetchedResultsController objectAtIndexPath:prevIndexPath];
+                BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:prevIndexPath];
                 if (!entity.image) {
                     [self downloadImageForEntity:entity forIndexPath:prevIndexPath];
                 }
@@ -189,7 +190,7 @@
     }
 }
 
-- (void)downloadImageForEntity:(id<AREntity>)entity forIndexPath:(NSIndexPath*)indexPath
+- (void)downloadImageForEntity:(BaseEntity*)entity forIndexPath:(NSIndexPath*)indexPath
 {
     NSURL* imageUrl = [NSURL URLWithString:entity.imageUrl];
     
@@ -208,7 +209,7 @@
     }
 }
 
-- (void)handleImageForEntity:(id<AREntity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
+- (void)handleImageForEntity:(BaseEntity*)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
 {
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     screenRect.size.height -= ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height);

@@ -2,8 +2,8 @@
 //  CurrentUser.m
 //  Argos
 //
-//  Created by Francis Tseng on 3/13/14.
-//  Copyright (c) 2014 Public Science. All rights reserved.
+//  Created by Francis Tseng on 3/14/14.
+//  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import "CurrentUser.h"

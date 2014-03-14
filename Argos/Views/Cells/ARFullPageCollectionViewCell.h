@@ -12,11 +12,6 @@
 
 #import "ARCollectionViewCell.h"
 
-@protocol AREntityWithFullImage <AREntity>
--(UIImage*)imageFull;
--(void)setImageFull:(id)image;
-@end
-
 @interface ARFullPageCollectionViewCell : ARCollectionViewCell
 
 @end

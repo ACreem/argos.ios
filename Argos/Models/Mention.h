@@ -2,21 +2,21 @@
 //  Mention.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/13/14.
-//  Copyright (c) 2014 Public Science. All rights reserved.
+//  Created by Francis Tseng on 3/14/14.
+//  Copyright (c) 2014 Argos. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
-@class Entity, Event, Story;
+@class Concept, Event, Story;
 
 @interface Mention : NSManagedObject
 
 @property (nonatomic, retain) NSNumber * mentionId;
 @property (nonatomic, retain) NSString * name;
 @property (nonatomic, retain) NSSet *events;
-@property (nonatomic, retain) Entity *parent;
+@property (nonatomic, retain) Concept *concept;
 @property (nonatomic, retain) NSSet *stories;
 @end
 

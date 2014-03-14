@@ -8,12 +8,6 @@
 
 #import "ARCollectionViewController.h"
 
-@protocol AREntitySearchResult <AREntity>
--(NSString*)title;
--(NSString*)name;
--(NSDate*)updatedAt;
-@end
-
 @interface SearchResultsViewController : ARCollectionViewController
 
 - (id)initForEntityNamed:(NSString*)entityName;

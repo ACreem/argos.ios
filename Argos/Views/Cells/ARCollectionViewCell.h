@@ -10,7 +10,7 @@
 //  This handles its own image cropping.
 //  ==========================================================
 
-#import "AREntity.h"
+@class BaseEntity;
 
 @interface ARCollectionViewCell : UICollectionViewCell
 
@@ -20,6 +20,6 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 
 - (UIImage*)cropImage:(UIImage*)image;
-- (void)setImageForEntity:(id<AREntity>)entity;
+- (void)setImageForEntity:(BaseEntity*)entity;
 
 @end

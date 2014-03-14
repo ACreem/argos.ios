@@ -7,6 +7,7 @@
 //
 
 #import "ARCardCollectionViewCell.h"
+#import "BaseEntity.h"
 #import <QuartzCore/QuartzCore.h>
 #import <NYXImagesKit/NYXImagesKit.h>
 
@@ -103,7 +104,7 @@
     return croppedImage;
 }
 
-- (void)setImageForEntity:(id<AREntity>)entity
+- (void)setImageForEntity:(BaseEntity*)entity
 {
     // Just re-use header images here.
     if (!entity.imageHeader) {

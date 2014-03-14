@@ -22,6 +22,8 @@
 #import "ARImageHeaderView.h"
 #import "AREmbeddedCollectionViewController.h"
 
+@class BaseEntity;
+
 @interface ARDetailViewController : UIViewController <UIScrollViewDelegate, ARSummaryViewDelegate>
 
 @property (nonatomic, strong) ARScrollView *scrollView;
@@ -35,6 +37,8 @@
 @property (nonatomic, assign) int totalItems;
 
 - (void)viewEntity:(NSString*)entityId;
-- (void)setHeaderImageForEntity:(id<AREntity>)entity;
+- (void)setHeaderImageForEntity:(BaseEntity*)entity;
+- (void)getEntities:(NSSet*)entities forCollectionView:(ARCollectionViewController*)cvc;
+- (void)getConcepts:(NSSet*)concepts forEntity:(BaseEntity*)entity;
 
 @end

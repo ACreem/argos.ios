@@ -1,26 +1,27 @@
 //
-//  Article.m
+//  BaseEntity.m
 //  Argos
 //
 //  Created by Francis Tseng on 3/14/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "Article.h"
-#import "Event.h"
-#import "Source.h"
+#import "BaseEntity.h"
 
 
-@implementation Article
+@implementation BaseEntity
 
-@dynamic articleId;
 @dynamic createdAt;
-@dynamic extUrl;
 @dynamic image;
 @dynamic imageUrl;
 @dynamic jsonUrl;
+@dynamic summary;
+@dynamic updatedAt;
+@dynamic searchQuery;
 @dynamic title;
-@dynamic event;
-@dynamic source;
+@dynamic imageHeader;
+@dynamic imageMid;
+@dynamic imageFull;
+@dynamic imageLarge;
 
 @end

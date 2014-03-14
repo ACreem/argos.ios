@@ -11,8 +11,8 @@
 #import "ShareViewController.h"
 #import "FontViewController.h"
 
-#import "Entity.h"
-#import "EntityDetailViewController.h"
+#import "Concept.h"
+#import "ConceptDetailViewController.h"
 
 #import "ARCollectionView.h"
 #import "ARCollectionHeaderView.h"
@@ -129,27 +129,27 @@
               watchButton, paddingItem ];
 }
 
-- (void)setHeaderImageForEntity:(id<AREntity>)entity
+- (void)setHeaderImageForEntity:(BaseEntity*)concept
 {
     CGSize headerSize = self.headerView.cachedFrame.size;
     
     // Set the header image,
     // downloading if necessary.
-    if (entity.imageHeader) {
-        [self.headerView setImage:entity.imageHeader];
+    if (concept.imageHeader) {
+        [self.headerView setImage:concept.imageHeader];
         
-    } else if (entity.image) {
-        UIImage *headerImage = [entity.image scaleToCoverSize:headerSize];
-        entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-        [self.headerView setImage:entity.imageHeader];
+    } else if (concept.image) {
+        UIImage *headerImage = [concept.image scaleToCoverSize:headerSize];
+        concept.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
+        [self.headerView setImage:concept.imageHeader];
         
-    } else if (entity.imageUrl) {
-        ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:entity.imageUrl]];
+    } else if (concept.imageUrl) {
+        ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:concept.imageUrl]];
         [imageDownloader setCompletionHandler:^(UIImage *image) {
-            entity.image = image;
-            UIImage *headerImage = [entity.image scaleToCoverSize:headerSize];
-            entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-            [self.headerView setImage:entity.imageHeader];
+            concept.image = image;
+            UIImage *headerImage = [concept.image scaleToCoverSize:headerSize];
+            concept.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
+            [self.headerView setImage:concept.imageHeader];
         }];
         [imageDownloader startDownload];
     }
@@ -344,20 +344,61 @@
 
 
 # pragma mark - ARSummaryViewDelegate
-- (void)viewEntity:(NSString*)entityId
+- (void)viewConcept:(NSString*)conceptId
 {
     NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Entity" inManagedObjectContext:moc];
-    Entity* entity = [[Entity alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-    [[RKObjectManager sharedManager] getObject:entity
-                                          path:[NSString stringWithFormat:@"/entities/%@", entityId]
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Concept" inManagedObjectContext:moc];
+    Concept* concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+    [[RKObjectManager sharedManager] getObject:concept
+                                          path:[NSString stringWithFormat:@"/entities/%@", conceptId]
                                     parameters:nil
                                        success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                           [self.navigationController pushViewController:[[EntityDetailViewController alloc] initWithEntity:entity]
+                                           [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
                                                                                 animated:YES];
                                        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
                                            NSLog(@"failure");
                                        }];
+}
+
+// Fetch a set of entities.
+- (void)getEntities:(NSSet*)entities forCollectionView:(ARCollectionViewController*)cvc
+{
+    __block NSUInteger fetched_concept_count = 0;
+    for (BaseEntity* concept in entities) {
+        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_concept_count++;
+            
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
+            if (fetched_concept_count == [entities count]) {
+                [cvc.collectionView reloadData];
+                [cvc.collectionView sizeToFit];
+                [self.scrollView sizeToFit];
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
+}
+
+- (void)getConcepts:(NSSet*)concepts forConcept:(BaseEntity*)concept
+{
+    __block NSUInteger fetched_concept_count = 0;
+    for (Concept* concept in concepts) {
+        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_concept_count++;
+            
+            self.loadedItems++;
+            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
+            
+            if (fetched_concept_count == [concepts count]) {
+                [self.summaryView setText:concept.summary withMentions:concepts];
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"failure");
+        }];
+    }
 }
 
 @end

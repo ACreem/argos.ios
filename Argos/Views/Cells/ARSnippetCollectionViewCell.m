@@ -9,6 +9,7 @@
 
 
 #import "ARSnippetCollectionViewCell.h"
+#import "BaseEntity.h"
 
 @implementation ARSnippetCollectionViewCell
 
@@ -38,19 +39,18 @@
     return self;
 }
 
-- (void)setImageForEntity:(id<AREntity>)entity
+- (void)setImageForEntity:(BaseEntity*)entity
 {
-    id <AREntityWithLargeImage> entityWithLargeImage = (id<AREntityWithLargeImage>)entity;
-    if (!entityWithLargeImage.imageLarge) {
+    if (!entity.imageLarge) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             UIImage *croppedImage = [self cropImage:entity.image];
-            entityWithLargeImage.imageLarge = croppedImage;
+            entity.imageLarge = croppedImage;
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = entityWithLargeImage.imageLarge;
+                self.imageView.image = entity.imageLarge;
             });
         });
     } else {
-        self.imageView.image = entityWithLargeImage.imageLarge;
+        self.imageView.image = entity.imageLarge;
     }
 }
 

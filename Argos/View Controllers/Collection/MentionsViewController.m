@@ -9,7 +9,7 @@
 #import "MentionsViewController.h"
 #import "ARSnippetCollectionViewCell.h"
 
-#import "Entity.h"
+#import "Concept.h"
 
 // For getting the ledge size.
 #import "IIViewDeckController.h"
@@ -20,7 +20,7 @@
 
 @implementation MentionsViewController
 
-- (MentionsViewController*)initWithEntity:(id<AREntity>)entity withPredicate:(NSPredicate*)predicate
+- (MentionsViewController*)initWithEntity:(BaseEntity*)concept withPredicate:(NSPredicate*)predicate
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -32,10 +32,9 @@
     [flowLayout setItemSize:CGSizeMake(screenRect.size.width, 220)];
     [flowLayout setSectionInset:UIEdgeInsetsZero];
     
-    self.managedObjectContext = entity.managedObjectContext;
+    self.managedObjectContext = concept.managedObjectContext;
     
-    // For now just get all entities.
-    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Entity" withPredicate:predicate];
+    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Concept" withPredicate:predicate];
     return self;
 }
 
@@ -77,14 +76,14 @@
 {
     ARSnippetCollectionViewCell *cell = (ARSnippetCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    Entity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    Concept* concept = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-    [self handleImageForEntity:(id)entity forCell:cell atIndexPath:indexPath];
+    [self handleImageForEntity:(id)concept forCell:cell atIndexPath:indexPath];
     
-    cell.titleLabel.text = entity.name;
-    NSString *summaryText = @"We have no summary for this entity yet. Please help by submitting one!";
-    if (entity.summary) {
-        summaryText = entity.summary;
+    cell.titleLabel.text = concept.title;
+    NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
+    if (concept.summary) {
+        summaryText = concept.summary;
     }
     cell.textLabel.text = summaryText;
     

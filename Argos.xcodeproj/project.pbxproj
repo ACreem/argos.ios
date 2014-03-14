@@ -27,7 +27,6 @@
 		F1203A2518BD379400DCEB3A /* Graphik-SuperItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */; };
 		F1203A2618BD379400DCEB3A /* Graphik-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */; };
 		F1203A2718BD379400DCEB3A /* Graphik-ThinItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */; };
-		F12DD86518AB2291001AE4F9 /* Argos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F12DD86318AB2291001AE4F9 /* Argos.xcdatamodeld */; };
 		F1405C2418973C4C00A4819D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2318973C4C00A4819D /* Foundation.framework */; };
 		F1405C2618973C4C00A4819D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2518973C4C00A4819D /* CoreGraphics.framework */; };
 		F1405C2818973C4C00A4819D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1405C2718973C4C00A4819D /* UIKit.framework */; };
@@ -43,13 +42,15 @@
 		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
 		F1601C0918ABDC3800C89590 /* ARObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ARObjectManager.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
+		F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */; };
+		F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915D7818D2BA60005811E6 /* BaseEntity.m */; };
+		F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915DF918D2C3DC005811E6 /* Concept.m */; };
 		F194A56B18D2A0ED00792451 /* AnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50418D2A0EC00792451 /* AnimatedTransitioning.m */; };
 		F194A56C18D2A0ED00792451 /* TransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50618D2A0EC00792451 /* TransitionDelegate.m */; };
 		F194A56D18D2A0ED00792451 /* UIWindow+FauxStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50818D2A0EC00792451 /* UIWindow+FauxStatusBar.m */; };
 		F194A56E18D2A0ED00792451 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50C18D2A0EC00792451 /* Article.m */; };
 		F194A56F18D2A0ED00792451 /* CurrentUser+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50E18D2A0EC00792451 /* CurrentUser+Management.m */; };
 		F194A57018D2A0ED00792451 /* CurrentUser.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51018D2A0EC00792451 /* CurrentUser.m */; };
-		F194A57118D2A0ED00792451 /* Entity.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51218D2A0EC00792451 /* Entity.m */; };
 		F194A57218D2A0ED00792451 /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51418D2A0EC00792451 /* Event.m */; };
 		F194A57318D2A0ED00792451 /* Mention.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51618D2A0EC00792451 /* Mention.m */; };
 		F194A57418D2A0ED00792451 /* Source.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A51818D2A0EC00792451 /* Source.m */; };
@@ -65,7 +66,7 @@
 		F194A57F18D2A0ED00792451 /* StoryTimelineViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53218D2A0ED00792451 /* StoryTimelineViewController.m */; };
 		F194A58018D2A0ED00792451 /* StreamViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53418D2A0ED00792451 /* StreamViewController.m */; };
 		F194A58118D2A0ED00792451 /* ARDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53718D2A0ED00792451 /* ARDetailViewController.m */; };
-		F194A58218D2A0ED00792451 /* EntityDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53918D2A0ED00792451 /* EntityDetailViewController.m */; };
+		F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */; };
 		F194A58318D2A0ED00792451 /* EventDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53B18D2A0ED00792451 /* EventDetailViewController.m */; };
 		F194A58418D2A0ED00792451 /* StoryDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53D18D2A0ED00792451 /* StoryDetailViewController.m */; };
 		F194A58518D2A0ED00792451 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A53F18D2A0ED00792451 /* LoginViewController.m */; };
@@ -127,7 +128,6 @@
 		F1203A1318BD379400DCEB3A /* Graphik-SuperItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-SuperItalic.otf"; sourceTree = "<group>"; };
 		F1203A1418BD379400DCEB3A /* Graphik-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Thin.otf"; sourceTree = "<group>"; };
 		F1203A1518BD379400DCEB3A /* Graphik-ThinItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-ThinItalic.otf"; sourceTree = "<group>"; };
-		F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ArgosModel.xcdatamodel; sourceTree = "<group>"; };
 		F1405C2018973C4C00A4819D /* Argos.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Argos.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1405C2318973C4C00A4819D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F1405C2518973C4C00A4819D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -148,21 +148,23 @@
 		F1601C0718ABDC3800C89590 /* ARObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARObjectManager.h; sourceTree = "<group>"; };
 		F1601C0818ABDC3800C89590 /* ARObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARObjectManager.m; sourceTree = "<group>"; };
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
+		F1915D5718D2B8F7005811E6 /* Argos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Argos.xcdatamodel; sourceTree = "<group>"; };
+		F1915D7718D2BA60005811E6 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
+		F1915D7818D2BA60005811E6 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
+		F1915DF818D2C3DC005811E6 /* Concept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Concept.h; sourceTree = "<group>"; };
+		F1915DF918D2C3DC005811E6 /* Concept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Concept.m; sourceTree = "<group>"; };
 		F194A50318D2A0EC00792451 /* AnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedTransitioning.h; sourceTree = "<group>"; };
 		F194A50418D2A0EC00792451 /* AnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTransitioning.m; sourceTree = "<group>"; };
 		F194A50518D2A0EC00792451 /* TransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionDelegate.h; sourceTree = "<group>"; };
 		F194A50618D2A0EC00792451 /* TransitionDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransitionDelegate.m; sourceTree = "<group>"; };
 		F194A50718D2A0EC00792451 /* UIWindow+FauxStatusBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIWindow+FauxStatusBar.h"; sourceTree = "<group>"; };
 		F194A50818D2A0EC00792451 /* UIWindow+FauxStatusBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIWindow+FauxStatusBar.m"; sourceTree = "<group>"; };
-		F194A50A18D2A0EC00792451 /* AREntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AREntity.h; sourceTree = "<group>"; };
 		F194A50B18D2A0EC00792451 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
 		F194A50C18D2A0EC00792451 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		F194A50D18D2A0EC00792451 /* CurrentUser+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CurrentUser+Management.h"; sourceTree = "<group>"; };
 		F194A50E18D2A0EC00792451 /* CurrentUser+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CurrentUser+Management.m"; sourceTree = "<group>"; };
 		F194A50F18D2A0EC00792451 /* CurrentUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentUser.h; sourceTree = "<group>"; };
 		F194A51018D2A0EC00792451 /* CurrentUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentUser.m; sourceTree = "<group>"; };
-		F194A51118D2A0EC00792451 /* Entity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Entity.h; sourceTree = "<group>"; };
-		F194A51218D2A0EC00792451 /* Entity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Entity.m; sourceTree = "<group>"; };
 		F194A51318D2A0EC00792451 /* Event.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		F194A51418D2A0EC00792451 /* Event.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		F194A51518D2A0EC00792451 /* Mention.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mention.h; sourceTree = "<group>"; };
@@ -193,8 +195,8 @@
 		F194A53418D2A0ED00792451 /* StreamViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StreamViewController.m; sourceTree = "<group>"; };
 		F194A53618D2A0ED00792451 /* ARDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARDetailViewController.h; sourceTree = "<group>"; };
 		F194A53718D2A0ED00792451 /* ARDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARDetailViewController.m; sourceTree = "<group>"; };
-		F194A53818D2A0ED00792451 /* EntityDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EntityDetailViewController.h; sourceTree = "<group>"; };
-		F194A53918D2A0ED00792451 /* EntityDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EntityDetailViewController.m; sourceTree = "<group>"; };
+		F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConceptDetailViewController.h; sourceTree = "<group>"; };
+		F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConceptDetailViewController.m; sourceTree = "<group>"; };
 		F194A53A18D2A0ED00792451 /* EventDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailViewController.h; sourceTree = "<group>"; };
 		F194A53B18D2A0ED00792451 /* EventDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailViewController.m; sourceTree = "<group>"; };
 		F194A53C18D2A0ED00792451 /* StoryDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StoryDetailViewController.h; sourceTree = "<group>"; };
@@ -338,9 +340,9 @@
 		F1405C2918973C4C00A4819D /* Argos */ = {
 			isa = PBXGroup;
 			children = (
-				F12DD86318AB2291001AE4F9 /* Argos.xcdatamodeld */,
 				F1405C3218973C4C00A4819D /* AppDelegate.h */,
 				F1405C3318973C4C00A4819D /* AppDelegate.m */,
+				F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */,
 				F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */,
 				F143295B18B30A7B00A76D97 /* SummaryTemplate.html */,
 				F1601C0718ABDC3800C89590 /* ARObjectManager.h */,
@@ -401,15 +403,16 @@
 		F194A50918D2A0EC00792451 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F194A50A18D2A0EC00792451 /* AREntity.h */,
+				F1915D7718D2BA60005811E6 /* BaseEntity.h */,
+				F1915D7818D2BA60005811E6 /* BaseEntity.m */,
 				F194A50B18D2A0EC00792451 /* Article.h */,
 				F194A50C18D2A0EC00792451 /* Article.m */,
+				F1915DF818D2C3DC005811E6 /* Concept.h */,
+				F1915DF918D2C3DC005811E6 /* Concept.m */,
 				F194A50D18D2A0EC00792451 /* CurrentUser+Management.h */,
 				F194A50E18D2A0EC00792451 /* CurrentUser+Management.m */,
 				F194A50F18D2A0EC00792451 /* CurrentUser.h */,
 				F194A51018D2A0EC00792451 /* CurrentUser.m */,
-				F194A51118D2A0EC00792451 /* Entity.h */,
-				F194A51218D2A0EC00792451 /* Entity.m */,
 				F194A51318D2A0EC00792451 /* Event.h */,
 				F194A51418D2A0EC00792451 /* Event.m */,
 				F194A51518D2A0EC00792451 /* Mention.h */,
@@ -452,7 +455,6 @@
 				F194A54118D2A0ED00792451 /* MenuViewController.m */,
 				F194A54218D2A0ED00792451 /* Modals */,
 				F194A54718D2A0ED00792451 /* Search */,
-				F194A54C18D2A0ED00792451 /* Stories */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -481,8 +483,8 @@
 			children = (
 				F194A53618D2A0ED00792451 /* ARDetailViewController.h */,
 				F194A53718D2A0ED00792451 /* ARDetailViewController.m */,
-				F194A53818D2A0ED00792451 /* EntityDetailViewController.h */,
-				F194A53918D2A0ED00792451 /* EntityDetailViewController.m */,
+				F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */,
+				F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */,
 				F194A53A18D2A0ED00792451 /* EventDetailViewController.h */,
 				F194A53B18D2A0ED00792451 /* EventDetailViewController.m */,
 				F194A53C18D2A0ED00792451 /* StoryDetailViewController.h */,
@@ -513,16 +515,10 @@
 			path = Search;
 			sourceTree = "<group>";
 		};
-		F194A54C18D2A0ED00792451 /* Stories */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Stories;
-			sourceTree = "<group>";
-		};
 		F194A54D18D2A0ED00792451 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F194A55A18D2A0ED00792451 /* Cells */,
 				F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */,
 				F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */,
 				F194A54E18D2A0ED00792451 /* ARCircleButton.h */,
@@ -537,7 +533,6 @@
 				F194A55718D2A0ED00792451 /* ARScrollView.m */,
 				F194A55818D2A0ED00792451 /* ARSummaryView.h */,
 				F194A55918D2A0ED00792451 /* ARSummaryView.m */,
-				F194A55A18D2A0ED00792451 /* Cells */,
 				F194A56918D2A0ED00792451 /* LoginView.h */,
 				F194A56A18D2A0ED00792451 /* LoginView.m */,
 			);
@@ -764,17 +759,19 @@
 				F194A58018D2A0ED00792451 /* StreamViewController.m in Sources */,
 				F194A58618D2A0ED00792451 /* MenuViewController.m in Sources */,
 				F194A57018D2A0ED00792451 /* CurrentUser.m in Sources */,
+				F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */,
 				F194A57418D2A0ED00792451 /* Source.m in Sources */,
 				F194A57518D2A0ED00792451 /* Story.m in Sources */,
 				F194A56E18D2A0ED00792451 /* Article.m in Sources */,
 				F194A58418D2A0ED00792451 /* StoryDetailViewController.m in Sources */,
 				F194A58D18D2A0ED00792451 /* ARCollectionView.m in Sources */,
+				F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */,
 				F194A57918D2A0ED00792451 /* AREmbeddedCollectionViewController.m in Sources */,
 				F194A59318D2A0ED00792451 /* ARCollectionViewCell.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
 				F194A59518D2A0ED00792451 /* ARFullPageCollectionViewCell.m in Sources */,
-				F194A58218D2A0ED00792451 /* EntityDetailViewController.m in Sources */,
+				F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */,
 				F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */,
 				F194A57C18D2A0ED00792451 /* ARCollectionViewController.m in Sources */,
 				F194A59418D2A0ED00792451 /* AREmbeddedCollectionViewCell.m in Sources */,
@@ -784,6 +781,7 @@
 				F194A59B18D2A4D300792451 /* WebViewController.m in Sources */,
 				F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */,
 				F194A57818D2A0ED00792451 /* UIFont+ArgosFonts.m in Sources */,
+				F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */,
 				F194A59718D2A0ED00792451 /* ARSnippetCollectionViewCell.m in Sources */,
 				F194A57F18D2A0ED00792451 /* StoryTimelineViewController.m in Sources */,
 				F194A57A18D2A0ED00792451 /* ARGalleryViewController.m in Sources */,
@@ -795,7 +793,6 @@
 				F194A58A18D2A0ED00792451 /* SearchViewController.m in Sources */,
 				F194A58B18D2A0ED00792451 /* ARCircleButton.m in Sources */,
 				F194A56B18D2A0ED00792451 /* AnimatedTransitioning.m in Sources */,
-				F12DD86518AB2291001AE4F9 /* Argos.xcdatamodeld in Sources */,
 				F194A57318D2A0ED00792451 /* Mention.m in Sources */,
 				F194A59018D2A0ED00792451 /* ARSummaryView.m in Sources */,
 				F194A56D18D2A0ED00792451 /* UIWindow+FauxStatusBar.m in Sources */,
@@ -805,7 +802,6 @@
 				F194A56F18D2A0ED00792451 /* CurrentUser+Management.m in Sources */,
 				F194A56C18D2A0ED00792451 /* TransitionDelegate.m in Sources */,
 				F194A57618D2A0ED00792451 /* ImageDownloader.m in Sources */,
-				F194A57118D2A0ED00792451 /* Entity.m in Sources */,
 				F194A57D18D2A0ED00792451 /* MentionsViewController.m in Sources */,
 				F194A59118D2A0ED00792451 /* ARArticleCollectionViewCell.m in Sources */,
 				F194A58818D2A0ED00792451 /* ShareViewController.m in Sources */,
@@ -1046,14 +1042,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		F12DD86318AB2291001AE4F9 /* Argos.xcdatamodeld */ = {
+		F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */,
+				F1915D5718D2B8F7005811E6 /* Argos.xcdatamodel */,
 			);
-			currentVersion = F12DD86418AB2291001AE4F9 /* ArgosModel.xcdatamodel */;
-			name = Argos.xcdatamodeld;
-			path = ArgosModel.xcdatamodeld;
+			currentVersion = F1915D5718D2B8F7005811E6 /* Argos.xcdatamodel */;
+			path = Argos.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

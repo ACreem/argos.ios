@@ -8,6 +8,7 @@
 
 #import "ARCollectionViewCell.h"
 #import <NYXImagesKit/NYXImagesKit.h>
+#import "BaseEntity.h"
 
 @implementation ARCollectionViewCell
 
@@ -22,7 +23,7 @@
     return croppedImage;
 }
 
-- (void)setImageForEntity:(id<AREntity>)entity
+- (void)setImageForEntity:(BaseEntity*)entity
 {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         UIImage *croppedImage = [self cropImage:entity.image];

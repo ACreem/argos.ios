@@ -6,7 +6,6 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
 #import "ARDetailViewController.h"
 #import "AREmbeddedCollectionViewController.h"
 #import "Event.h"

@@ -1,12 +1,12 @@
 //
-//  EntityDetailViewController.m
+//  ConceptDetailViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "EntityDetailViewController.h"
+#import "ConceptDetailViewController.h"
 #import "StoryDetailViewController.h"
 
 #import "AREmbeddedCollectionViewController.h"
@@ -14,22 +14,20 @@
 
 #import "Story.h"
 
-@interface EntityDetailViewController () {
-    Entity *_entity;
-    AREmbeddedCollectionViewController *_mentionList;
-}
-
+@interface ConceptDetailViewController ()
+@property (nonatomic, strong) Concept *concept;
+@property (nonatomic, strong) AREmbeddedCollectionViewController *mentionList;
 @end
 
-@implementation EntityDetailViewController
+@implementation ConceptDetailViewController
 
-- (EntityDetailViewController*)initWithEntity:(Entity*)entity;
+- (ConceptDetailViewController*)initWithConcept:(Concept*)concept;
 {
     self = [super init];
     if (self) {
         // Load requested entity
-        self.viewTitle = entity.name;
-        _entity = entity;
+        self.viewTitle = concept.title;
+        _concept = concept;
     }
     return self;
 }
@@ -38,7 +36,7 @@
 {
     [super viewDidLoad];
     
-    [[RKObjectManager sharedManager] getObject:_entity path:_entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    [[RKObjectManager sharedManager] getObject:_concept path:_concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         NSLog(@"success");
         [self setupView];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -51,17 +49,17 @@
 {
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    self.totalItems = _entity.stories.count;
+    self.totalItems = _concept.stories.count;
     
-    [self setHeaderImageForEntity:(id<AREntity>)_entity];
+    [self setHeaderImageForEntity:_concept];
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
     NSString *summaryText = @"We have no summary for this entity yet. Please help by submitting one!";
-    if (_entity.summary) {
-        summaryText = _entity.summary;
+    if (_concept.summary) {
+        summaryText = _concept.summary;
     }
-    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:_entity.updatedAt];
+    self.summaryView = [[ARSummaryView alloc] initWithOrigin:summaryOrigin text:summaryText updatedAt:_concept.updatedAt];
     
     [self.scrollView addSubview:self.summaryView];
     
@@ -69,8 +67,8 @@
     [flowLayout setItemSize:CGSizeMake(bounds.size.width, 120)];
     
     // Mentions (story) list header
-    _mentionList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", _entity.stories]];
-    _mentionList.managedObjectContext = _entity.managedObjectContext;
+    _mentionList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", _concept.stories]];
+    _mentionList.managedObjectContext = _concept.managedObjectContext;
     _mentionList.delegate = self;
     _mentionList.title = @"Mentions";
     
@@ -85,14 +83,14 @@
 - (void)fetchMentions
 {
     __block NSUInteger fetched_mention_count = 0;
-    for (Story* story in _entity.stories) {
+    for (Story* story in _concept.stories) {
         [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_mention_count++;
             
             self.loadedItems++;
             [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
-            if (fetched_mention_count == [_entity.stories count]) {
+            if (fetched_mention_count == [_concept.stories count]) {
                 [_mentionList.collectionView reloadData];
                 [_mentionList.collectionView sizeToFit];
                 [self.scrollView sizeToFit];
@@ -119,7 +117,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Story *story = [[_entity.stories allObjects] objectAtIndex:indexPath.row];
+    Story *story = [[_concept.stories allObjects] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 

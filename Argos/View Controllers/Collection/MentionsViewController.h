@@ -10,6 +10,6 @@
 
 @interface MentionsViewController : ARCollectionViewController
 
-- (MentionsViewController*)initWithEntity:(id<AREntity>)entity withPredicate:(NSPredicate*)predicate;
+- (MentionsViewController*)initWithEntity:(BaseEntity*)entity withPredicate:(NSPredicate*)predicate;
 
 @end

@@ -8,6 +8,7 @@
 
 #import "AREmbeddedCollectionViewCell.h"
 #import <QuartzCore/QuartzCore.h>
+#import "BaseEntity.h"
 
 @implementation AREmbeddedCollectionViewCell
 
@@ -58,19 +59,18 @@
     return self;
 }
 
-- (void)setImageForEntity:(id<AREntity>)entity
+- (void)setImageForEntity:(BaseEntity*)entity
 {
-    id <AREntityWithMidImage> entityWithMidImage = (id<AREntityWithMidImage>)entity;
-    if (!entityWithMidImage.imageMid) {
+    if (!entity.imageMid) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             UIImage *croppedImage = [self cropImage:entity.image];
-            entityWithMidImage.imageMid = croppedImage;
+            entity.imageMid = croppedImage;
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = entityWithMidImage.imageMid;
+                self.imageView.image = entity.imageMid;
             });
         });
     } else {
-        self.imageView.image = entityWithMidImage.imageMid;
+        self.imageView.image = entity.imageMid;
     }
 }
 

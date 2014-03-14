@@ -8,6 +8,7 @@
 
 #import "ARFullPageCollectionViewCell.h"
 #import "ARCircleButton.h"
+#import "BaseEntity.h"
 #import <QuartzCore/QuartzCore.h>
 
 @implementation ARFullPageCollectionViewCell
@@ -72,19 +73,18 @@
     return self;
 }
 
-- (void)setImageForEntity:(id<AREntity>)entity
+- (void)setImageForEntity:(BaseEntity*)entity
 {
-    id <AREntityWithFullImage> entityWithFullImage = (id<AREntityWithFullImage>)entity;
-    if (!entityWithFullImage.imageFull) {
+    if (!entity.imageFull) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
             UIImage *croppedImage = [self cropImage:entity.image];
-            entityWithFullImage.imageFull = croppedImage;
+            entity.imageFull = croppedImage;
             dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = entityWithFullImage.imageFull;
+                self.imageView.image = entity.imageFull;
             });
         });
     } else {
-        self.imageView.image = entityWithFullImage.imageFull;
+        self.imageView.image = entity.imageFull;
     }
 }
 

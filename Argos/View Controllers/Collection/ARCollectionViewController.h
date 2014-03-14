@@ -12,14 +12,15 @@
 
 #import "ARCollectionView.h"
 #import "ARCollectionViewCell.h"
-#import "AREntity.h"
+
+@class BaseEntity;
 
 @interface ARCollectionViewController : UICollectionViewController <NSFetchedResultsControllerDelegate, UIScrollViewDelegate>
 
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName;
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)predicate;
-- (void)downloadImageForEntity:(id<AREntity>)entity forIndexPath:(NSIndexPath*)indexPath;
-- (void)handleImageForEntity:(id<AREntity>)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath;
+- (void)downloadImageForEntity:(BaseEntity*)entity forIndexPath:(NSIndexPath*)indexPath;
+- (void)handleImageForEntity:(BaseEntity*)entity forCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath;
 - (void)loadImagesForOnscreenRows;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;

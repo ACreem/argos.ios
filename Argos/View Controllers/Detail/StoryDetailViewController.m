@@ -13,7 +13,7 @@
 #import "AREmbeddedCollectionViewCell.h"
 
 #import "Event.h"
-#import "Entity.h"
+#import "Concept.h"
 #import "StoryTimelineViewController.h"
 
 #import "CECardsAnimationController.h"
@@ -42,11 +42,11 @@
 {
     [super viewDidLoad];
     
-    self.totalItems = self.story.events.count + self.story.entities.count;
+    self.totalItems = self.story.events.count + self.story.concepts.count;
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     
-    [self setHeaderImageForEntity:(id<AREntity>)self.story];
+    [self setHeaderImageForEntity:self.story];
     
     // Summary view
     CGPoint summaryOrigin = CGPointMake(bounds.origin.x, self.headerView.bounds.size.height);
@@ -122,14 +122,14 @@
 {
     // Fetch entities.
     __block NSUInteger fetched_entity_count = 0;
-    for (Entity* entity in self.story.entities) {
-        [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+    for (Concept* concept in self.story.concepts) {
+        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
             fetched_entity_count++;
             
             self.loadedItems++;
             [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
             
-            if (fetched_entity_count == [self.story.entities count]) {
+            if (fetched_entity_count == [self.story.concepts count]) {
                 [self.summaryView setText:self.story.summary withMentions:self.story.mentions];
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {

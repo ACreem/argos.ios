@@ -10,6 +10,7 @@
 #import "AREmbeddedCollectionViewCell.h"
 #import "SearchViewController.h"
 #import "NSDate+TimeAgo.h"
+#import "BaseEntity.h"
 
 @interface SearchResultsViewController ()
 
@@ -58,15 +59,11 @@
 {
     AREmbeddedCollectionViewCell *cell = (AREmbeddedCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    id <AREntitySearchResult> entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
+    BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
     [self handleImageForEntity:entity forCell:cell atIndexPath:indexPath];
     
-    if ([entity respondsToSelector:@selector(title)]) {
-        cell.titleLabel.text = entity.title;
-    } else {
-        cell.titleLabel.text = entity.name;
-    }
+    cell.titleLabel.text = entity.title;
     cell.timeLabel.text = [entity.updatedAt timeAgo];
     
     return cell;

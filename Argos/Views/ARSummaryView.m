@@ -7,7 +7,7 @@
 //
 
 #import "ARSummaryView.h"
-#import "Entity.h"
+#import "Concept.h"
 #import "Mention.h"
 #import "NSDate+TimeAgo.h"
 
@@ -105,7 +105,9 @@
     
     for (Mention *mention in sortedMentions) {
         summaryText = [summaryText stringByReplacingOccurrencesOfString:[NSString stringWithFormat:@" %@", mention.name]
-                                                             withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>", mention.parent.entityId, mention.name]];
+                                                             withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>",
+                                                                         mention.concept.conceptId,
+                                                                         mention.name]];
     }
     
     NSString *htmlTemplate = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];

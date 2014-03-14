@@ -17,7 +17,7 @@
 
 #import "Article.h"
 #import "Story.h"
-#import "Entity.h"
+#import "Concept.h"
 #import "Source.h"
 
 #import "EventListViewController.h"
@@ -53,11 +53,11 @@
 {
     [super viewDidLoad];
     
-    self.totalItems = _event.stories.count + _event.articles.count + _event.entities.count;
+    self.totalItems = _event.stories.count + _event.articles.count + _event.concepts.count;
     
     _bounds = [[UIScreen mainScreen] bounds];
     
-    [self setHeaderImageForEntity:(id<AREntity>)_event];
+    [self setHeaderImageForEntity:_event];
 
     // Summary view
     CGPoint summaryOrigin = CGPointMake(0, self.headerView.bounds.size.height);
@@ -76,7 +76,7 @@
     galleryViewController.collectionView.frame = CGRectMake(0, 0, gallerySize.width, gallerySize.height);
     [(UICollectionViewFlowLayout*)galleryViewController.collectionViewLayout setItemSize:gallerySize];
     
-    [self fetchEntities];
+    [self getConcepts:_event.concepts forEntity:_event];
     [self setupArticles];
     
     [self.scrollView sizeToFit];
@@ -88,7 +88,7 @@
     
     // Setup the right controller (the mention pane) for the view deck.
     // Doesn't feel quite right for this view controller to reach that far up its hierarchy, but...
-    self.navigationController.viewDeckController.rightController = [[MentionsViewController alloc] initWithEntity:(id<AREntity>)_event withPredicate:[NSPredicate predicateWithFormat:@"SELF in %@", _event.entities]];
+    self.navigationController.viewDeckController.rightController = [[MentionsViewController alloc] initWithEntity:_event withPredicate:[NSPredicate predicateWithFormat:@"SELF in %@", _event.concepts]];
 }
 
 - (void)viewDidDisappear:(BOOL)animated
@@ -148,7 +148,7 @@
         [self.scrollView addSubview:_storyList.view];
         [_storyList didMoveToParentViewController:self];
     }
-    [self fetchStories];
+    [self getEntities:_event.stories forCollectionView:_storyList];
     [self.summaryView sizeToFit];
 }
 
@@ -169,7 +169,7 @@
     [self.scrollView addSubview:_articleList.collectionView];
     [_articleList didMoveToParentViewController:self];
     
-    [self fetchArticles];
+    [self getEntities:_event.articles forCollectionView:_articleList];
 }
 
 - (NSArray*)navigationItems
@@ -192,75 +192,6 @@
     [self checkBookmarked];
 
     return [NSArray arrayWithObjects:shareButton, paddingItem, self.bookmarkButton, paddingItem, fontButton, paddingItem, nil];
-}
-
-
-# pragma mark - Fetching Data
-- (void)fetchStories
-{
-    // Fetch stories.
-    __block NSUInteger fetched_story_count = 0;
-    for (Story* story in _event.stories) {
-        [[RKObjectManager sharedManager] getObject:story path:story.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_story_count++;
-            
-            self.loadedItems++;
-            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
-            
-            if (fetched_story_count == [_event.stories count] && _storyList) {
-                [_storyList.collectionView reloadData];
-                [_storyList.collectionView sizeToFit];
-                [self.scrollView sizeToFit];
-            }
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
-}
-
-- (void)fetchArticles
-{
-    // Fetch articles.
-    // Need to keep track of how many articles have been fetched.
-    // Note this is not the best way since it is possible that the number
-    // of articles (or stories or entities) changes while these requests are made.
-    __block NSUInteger fetched_article_count = 0;
-    for (Article* article in _event.articles) {
-        [[RKObjectManager sharedManager] getObject:article path:article.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_article_count++;
-            
-            self.loadedItems++;
-            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
-            
-            if (fetched_article_count == [_event.articles count]) {
-                [_articleList.collectionView reloadData];
-                [_articleList.collectionView sizeToFit];
-                [self.scrollView sizeToFit];
-            }
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
-}
-
-- (void)fetchEntities
-{
-    // Fetch entities.
-    __block NSUInteger fetched_entity_count = 0;
-    for (Entity* entity in _event.entities) {
-        [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_entity_count++;
-            
-            self.loadedItems++;
-            [self.progressView setProgress:self.loadedItems/self.totalItems animated:YES];
-            
-            if (fetched_entity_count == [_event.entities count]) {
-                [self.summaryView setText:_event.summary withMentions:_event.mentions];
-            }
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
 }
 
 #pragma mark - Bookmarking

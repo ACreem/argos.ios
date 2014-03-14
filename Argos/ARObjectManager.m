@@ -11,7 +11,7 @@
 #import "Event.h"
 #import "Article.h"
 #import "Story.h"
-#import "Entity.h"
+#import "Concept.h"
 #import "Mention.h"
 #import "Source.h"
 #import "CurrentUser.h"
@@ -34,8 +34,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
-    //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Create an Argos OAuth2 client.
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
@@ -113,13 +113,14 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                       @"updated_at":     @"updatedAt",
                                       @"created_at":     @"createdAt",
                                       @"@metadata.routing.parameters.query":     @"searchQuery"};
-    NSDictionary *entityMappings  = @{
-                                      @"slug":           @"entityId",
+    NSDictionary *conceptMappings  = @{
+                                      @"slug":           @"conceptId",
                                       @"url":            @"jsonUrl",
-                                      @"name":           @"name",
+                                      @"name":           @"title",
                                       @"image":          @"imageUrl",
                                       @"summary":        @"summary",
                                       @"updated_at":     @"updatedAt",
+                                      @"created_at":     @"createdAt",
                                       @"@metadata.routing.parameters.query":     @"searchQuery"};
     NSDictionary *sourceMappings  = @{
                                       @"id":             @"sourceId",
@@ -134,10 +135,10 @@ static NSString* const kArgosAPIClientSecret = @"test";
     NSDictionary *nestedMentionMappings = @{
                                             @"name":           @"name",
                                             @"relationships":  @{
-                                                @"parent": @{
-                                                    @"entity":     @"Entity",
+                                                @"concept": @{
+                                                    @"entity":     @"Concept",
                                                     @"mappings":   @{
-                                                        @"slug": @"entityId"}}}};
+                                                        @"slug": @"conceptId"}}}};
     
     
     RKEntityMapping* eventMapping = [objectManager setupEntityForName:@"Event"
@@ -154,9 +155,9 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                                         @"mentions":    @{
                                                                                           @"entity":      @"Mention",
                                                                                           @"mappings":    nestedMentionMappings},
-                                                                        @"entities":    @{
-                                                                                          @"entity":      @"Entity",
-                                                                                          @"mappings":    entityMappings}}
+                                                                        @"concepts":    @{
+                                                                                          @"entity":      @"Concept",
+                                                                                          @"mappings":    conceptMappings}}
                                                              mappings:eventMappings];
     
     RKEntityMapping *storyMapping = [objectManager setupEntityForName:@"Story"
@@ -170,20 +171,20 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                                         @"mentions":    @{
                                                                                           @"entity":      @"Mention",
                                                                                           @"mappings":    nestedMentionMappings},
-                                                                        @"entities":    @{
-                                                                                          @"entity":      @"Entity",
-                                                                                          @"mappings":    entityMappings}}
+                                                                        @"concepts":    @{
+                                                                                          @"entity":      @"Concept",
+                                                                                          @"mappings":    conceptMappings}}
                                                              mappings:storyMappings];
     
-    RKEntityMapping *entityMapping = [objectManager setupEntityForName:@"Entity"
-                                                          pathPattern:@"/entities"
-                                                                class:[Entity class]
-                                                           identifier:@"entityId"
-                                                        relationships:@{
-                                                                        @"stories":   @{
-                                                                                        @"entity":      @"Story",
-                                                                                        @"mappings":    storyMappings}}
-                                                             mappings:entityMappings];
+    RKEntityMapping *conceptMapping = [objectManager setupEntityForName:@"Concept"
+                                                            pathPattern:@"/concepts"
+                                                                  class:[Concept class]
+                                                             identifier:@"conceptId"
+                                                          relationships:@{
+                                                                          @"stories":   @{
+                                                                                            @"entity":      @"Story",
+                                                                                            @"mappings":    storyMappings}}
+                                                             mappings:conceptMappings];
     
     [objectManager setupEntityForName:@"Article"
                           pathPattern:@"/articles"
@@ -218,7 +219,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"event" objectMapping:eventMapping]];
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"story" objectMapping:storyMapping]];
-    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:entityMapping]];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:conceptMapping]];
     
     RKResponseDescriptor *searchResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:searchMapping method:RKRequestMethodGET pathPattern:@"/search/:query" keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [objectManager addResponseDescriptor:searchResponseDescriptor];
