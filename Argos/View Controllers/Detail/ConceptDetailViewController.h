@@ -11,6 +11,8 @@
 
 @interface ConceptDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate>
 
-- (ConceptDetailViewController*)initWithConcept:(Concept*)concept;
+@property (nonatomic, strong) Concept *entity;
+
+- (instancetype)initWithConcept:(Concept*)concept;
 
 @end

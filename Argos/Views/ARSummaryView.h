@@ -11,18 +11,19 @@
 //  for mentions included in a summary.
 //  ==========================================================
 
-@protocol ARSummaryViewDelegate
-- (void)viewEntity:(NSString*)entityId;
+@class BaseEntity;
+
+@protocol ARSummaryViewDelegate <NSObject>
+- (void)viewConcept:(NSString*)conceptId;
 @end
 
 @interface ARSummaryView : UIView <UIWebViewDelegate>
 
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UIWebView *summaryWebView;
-@property (nonatomic, weak) id delegate;
+@property (nonatomic, strong) BaseEntity *entity;
+@property (nonatomic, weak) id <ARSummaryViewDelegate> delegate;
 
-- (instancetype)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt;
+- (instancetype)initWithOrigin:(CGPoint)origin;
 - (void)setText:(NSString*)summaryText withMentions:(NSSet*)mentions;
 
 @end

@@ -24,5 +24,14 @@
 @property (nonatomic, retain) id imageMid;
 @property (nonatomic, retain) id imageFull;
 @property (nonatomic, retain) id imageLarge;
+@property (nonatomic, retain) NSSet *mentions;
+@end
+
+@interface BaseEntity (CoreDataGeneratedAccessors)
+
+- (void)addMentionsObject:(NSManagedObject *)value;
+- (void)removeMentionsObject:(NSManagedObject *)value;
+- (void)addMentions:(NSSet *)values;
+- (void)removeMentions:(NSSet *)values;
 
 @end

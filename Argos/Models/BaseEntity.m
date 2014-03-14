@@ -23,5 +23,6 @@
 @dynamic imageMid;
 @dynamic imageFull;
 @dynamic imageLarge;
+@dynamic mentions;
 
 @end

@@ -11,9 +11,8 @@
 @interface ARImageHeaderView : UIView
 
 @property (nonatomic, strong) UIView *gradientView;
+@property (nonatomic, strong) UIImage *image;
 @property (nonatomic, strong) UIImageView *blurredImageView;
 @property (nonatomic, assign) CGRect cachedFrame;
-
-- (void)setImage:(UIImage*)image;
 
 @end

@@ -11,6 +11,8 @@
 
 @interface StoryDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate, UIViewControllerTransitioningDelegate>
 
-- (StoryDetailViewController*)initWithStory:(Story*)story;
+@property (nonatomic, strong) Story *entity;
+
+- (instancetype)initWithStory:(Story*)story;
 
 @end

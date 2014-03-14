@@ -45,6 +45,9 @@
 		F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */; };
 		F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915D7818D2BA60005811E6 /* BaseEntity.m */; };
 		F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915DF918D2C3DC005811E6 /* Concept.m */; };
+		F1915E3718D35275005811E6 /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915E3618D35275005811E6 /* DetailView.m */; };
+		F1915E5218D36875005811E6 /* Event+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915E5118D36875005811E6 /* Event+Management.m */; };
+		F1915E5618D36EB5005811E6 /* Story+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915E5518D36EB5005811E6 /* Story+Management.m */; };
 		F194A56B18D2A0ED00792451 /* AnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50418D2A0EC00792451 /* AnimatedTransitioning.m */; };
 		F194A56C18D2A0ED00792451 /* TransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50618D2A0EC00792451 /* TransitionDelegate.m */; };
 		F194A56D18D2A0ED00792451 /* UIWindow+FauxStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50818D2A0EC00792451 /* UIWindow+FauxStatusBar.m */; };
@@ -90,7 +93,6 @@
 		F194A59718D2A0ED00792451 /* ARSnippetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56818D2A0ED00792451 /* ARSnippetCollectionViewCell.m */; };
 		F194A59818D2A0ED00792451 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56A18D2A0ED00792451 /* LoginView.m */; };
 		F194A59B18D2A4D300792451 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A59A18D2A4D300792451 /* WebViewController.m */; };
-		F194A59E18D2A55200792451 /* ARCollectionDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A59D18D2A55200792451 /* ARCollectionDataSource.m */; };
 		F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
@@ -153,6 +155,12 @@
 		F1915D7818D2BA60005811E6 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
 		F1915DF818D2C3DC005811E6 /* Concept.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Concept.h; sourceTree = "<group>"; };
 		F1915DF918D2C3DC005811E6 /* Concept.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Concept.m; sourceTree = "<group>"; };
+		F1915E3518D35275005811E6 /* DetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DetailView.h; path = Argos/Views/DetailView.h; sourceTree = SOURCE_ROOT; };
+		F1915E3618D35275005811E6 /* DetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DetailView.m; path = Argos/Views/DetailView.m; sourceTree = SOURCE_ROOT; };
+		F1915E5018D36875005811E6 /* Event+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Event+Management.h"; sourceTree = "<group>"; };
+		F1915E5118D36875005811E6 /* Event+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Management.m"; sourceTree = "<group>"; };
+		F1915E5418D36EB5005811E6 /* Story+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Story+Management.h"; sourceTree = "<group>"; };
+		F1915E5518D36EB5005811E6 /* Story+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Story+Management.m"; sourceTree = "<group>"; };
 		F194A50318D2A0EC00792451 /* AnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedTransitioning.h; sourceTree = "<group>"; };
 		F194A50418D2A0EC00792451 /* AnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTransitioning.m; sourceTree = "<group>"; };
 		F194A50518D2A0EC00792451 /* TransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionDelegate.h; sourceTree = "<group>"; };
@@ -243,8 +251,6 @@
 		F194A56A18D2A0ED00792451 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		F194A59918D2A4D300792451 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		F194A59A18D2A4D300792451 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
-		F194A59C18D2A55200792451 /* ARCollectionDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ARCollectionDataSource.h; sourceTree = "<group>"; };
-		F194A59D18D2A55200792451 /* ARCollectionDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ARCollectionDataSource.m; sourceTree = "<group>"; };
 		F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EAIntroView+ARIntro.h"; sourceTree = "<group>"; };
 		F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EAIntroView+ARIntro.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -387,6 +393,28 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		F1915E3418D34B5E005811E6 /* Elements */ = {
+			isa = PBXGroup;
+			children = (
+				F194A54E18D2A0ED00792451 /* ARCircleButton.h */,
+				F194A54F18D2A0ED00792451 /* ARCircleButton.m */,
+			);
+			name = Elements;
+			sourceTree = "<group>";
+		};
+		F1915E5318D36E9D005811E6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F194A50D18D2A0EC00792451 /* CurrentUser+Management.h */,
+				F194A50E18D2A0EC00792451 /* CurrentUser+Management.m */,
+				F1915E5018D36875005811E6 /* Event+Management.h */,
+				F1915E5118D36875005811E6 /* Event+Management.m */,
+				F1915E5418D36EB5005811E6 /* Story+Management.h */,
+				F1915E5518D36EB5005811E6 /* Story+Management.m */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
 		F194A50218D2A0EC00792451 /* Hacks */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,14 +431,13 @@
 		F194A50918D2A0EC00792451 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F1915E5318D36E9D005811E6 /* Categories */,
 				F1915D7718D2BA60005811E6 /* BaseEntity.h */,
 				F1915D7818D2BA60005811E6 /* BaseEntity.m */,
 				F194A50B18D2A0EC00792451 /* Article.h */,
 				F194A50C18D2A0EC00792451 /* Article.m */,
 				F1915DF818D2C3DC005811E6 /* Concept.h */,
 				F1915DF918D2C3DC005811E6 /* Concept.m */,
-				F194A50D18D2A0EC00792451 /* CurrentUser+Management.h */,
-				F194A50E18D2A0EC00792451 /* CurrentUser+Management.m */,
 				F194A50F18D2A0EC00792451 /* CurrentUser.h */,
 				F194A51018D2A0EC00792451 /* CurrentUser.m */,
 				F194A51318D2A0EC00792451 /* Event.h */,
@@ -462,8 +489,6 @@
 		F194A52A18D2A0ED00792451 /* Collection */ = {
 			isa = PBXGroup;
 			children = (
-				F194A59C18D2A55200792451 /* ARCollectionDataSource.h */,
-				F194A59D18D2A55200792451 /* ARCollectionDataSource.m */,
 				F194A52B18D2A0ED00792451 /* ARCollectionViewController.h */,
 				F194A52C18D2A0ED00792451 /* ARCollectionViewController.m */,
 				F194A52D18D2A0ED00792451 /* MentionsViewController.h */,
@@ -483,10 +508,10 @@
 			children = (
 				F194A53618D2A0ED00792451 /* ARDetailViewController.h */,
 				F194A53718D2A0ED00792451 /* ARDetailViewController.m */,
-				F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */,
-				F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */,
 				F194A53A18D2A0ED00792451 /* EventDetailViewController.h */,
 				F194A53B18D2A0ED00792451 /* EventDetailViewController.m */,
+				F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */,
+				F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */,
 				F194A53C18D2A0ED00792451 /* StoryDetailViewController.h */,
 				F194A53D18D2A0ED00792451 /* StoryDetailViewController.m */,
 			);
@@ -519,14 +544,15 @@
 			isa = PBXGroup;
 			children = (
 				F194A55A18D2A0ED00792451 /* Cells */,
-				F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */,
-				F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */,
-				F194A54E18D2A0ED00792451 /* ARCircleButton.h */,
-				F194A54F18D2A0ED00792451 /* ARCircleButton.m */,
+				F1915E3418D34B5E005811E6 /* Elements */,
 				F194A55018D2A0ED00792451 /* ARCollectionHeaderView.h */,
 				F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */,
+				F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */,
+				F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */,
 				F194A55218D2A0ED00792451 /* ARCollectionView.h */,
 				F194A55318D2A0ED00792451 /* ARCollectionView.m */,
+				F1915E3518D35275005811E6 /* DetailView.h */,
+				F1915E3618D35275005811E6 /* DetailView.m */,
 				F194A55418D2A0ED00792451 /* ARImageHeaderView.h */,
 				F194A55518D2A0ED00792451 /* ARImageHeaderView.m */,
 				F194A55618D2A0ED00792451 /* ARScrollView.h */,
@@ -775,14 +801,16 @@
 				F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */,
 				F194A57C18D2A0ED00792451 /* ARCollectionViewController.m in Sources */,
 				F194A59418D2A0ED00792451 /* AREmbeddedCollectionViewCell.m in Sources */,
+				F1915E5218D36875005811E6 /* Event+Management.m in Sources */,
 				F194A59618D2A0ED00792451 /* ARGalleryImageViewCell.m in Sources */,
-				F194A59E18D2A55200792451 /* ARCollectionDataSource.m in Sources */,
 				F194A59218D2A0ED00792451 /* ARCardCollectionViewCell.m in Sources */,
 				F194A59B18D2A4D300792451 /* WebViewController.m in Sources */,
 				F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */,
 				F194A57818D2A0ED00792451 /* UIFont+ArgosFonts.m in Sources */,
 				F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */,
 				F194A59718D2A0ED00792451 /* ARSnippetCollectionViewCell.m in Sources */,
+				F1915E5618D36EB5005811E6 /* Story+Management.m in Sources */,
+				F1915E3718D35275005811E6 /* DetailView.m in Sources */,
 				F194A57F18D2A0ED00792451 /* StoryTimelineViewController.m in Sources */,
 				F194A57A18D2A0ED00792451 /* ARGalleryViewController.m in Sources */,
 				F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */,

@@ -40,7 +40,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Create an Argos OAuth2 client.
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
     
-    // Set up the object manager with the OAuth2 client.
+    // Setup the object manager with the OAuth2 client.
     ARObjectManager *objectManager = [[ARObjectManager alloc] initWithHTTPClient:oauthClient];
     objectManager.managedObjectStore = mos;
     
@@ -182,8 +182,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                                              identifier:@"conceptId"
                                                           relationships:@{
                                                                           @"stories":   @{
-                                                                                            @"entity":      @"Story",
-                                                                                            @"mappings":    storyMappings}}
+                                                                                          @"entity":      @"Story",
+                                                                                          @"mappings":    storyMappings}}
                                                              mappings:conceptMappings];
     
     [objectManager setupEntityForName:@"Article"

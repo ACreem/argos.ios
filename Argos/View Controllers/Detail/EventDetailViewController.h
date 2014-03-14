@@ -12,6 +12,8 @@
 
 @interface EventDetailViewController : ARDetailViewController <UIScrollViewDelegate, AREmbeddedCollectionViewControllerDelegate>
 
-- (EventDetailViewController*)initWithEvent:(Event*)event;
+@property (nonatomic, strong) Event *entity;
+
+- (instancetype)initWithEvent:(Event*)event;
 
 @end

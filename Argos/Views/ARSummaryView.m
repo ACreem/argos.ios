@@ -17,16 +17,18 @@
 // does NOT include filled in styling values.
 // This way we can update them as necessary when font preferences change.
 @property (nonatomic, strong) NSString *summaryTextHtml;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *timeLabel;
 @end
 
 @implementation ARSummaryView
 
-- (instancetype)initWithOrigin:(CGPoint)origin text:(NSString*)summaryText updatedAt:(NSDate*)updatedAt
+- (instancetype)initWithOrigin:(CGPoint)origin;
 {
     CGFloat paddingX = 16.0;
     CGFloat paddingY = 8.0;
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    CGRect frame = CGRectMake(origin.x, origin.y, CGRectGetWidth(bounds), 400.0); // Arbirtary height, it is set programatically later.
+    CGRect frame = CGRectMake(origin.x, origin.y, CGRectGetWidth(bounds), 400.0); // Arbitrary height, it is set programatically later.
     self = [super initWithFrame:frame];
     if (self) {
         // Watch the user defaults, so we know when to update the font settings.
@@ -42,32 +44,37 @@
                                                                       30.0 + paddingY)];
         
         // Setup time ago
-        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(paddingX,
+        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(paddingX,
                                                                paddingY,
                                                                CGRectGetWidth(bounds) - (paddingX*2),
                                                                20.0)];
-        _timeLabel.text = [updatedAt timeAgo];
-        _timeLabel.font = [UIFont lightFontForSize:10];
-        _timeLabel.textColor = [UIColor mutedColor];
-        [headerView addSubview:_timeLabel];
+        self.timeLabel.font = [UIFont lightFontForSize:10];
+        self.timeLabel.textColor = [UIColor mutedColor];
+        [headerView addSubview:self.timeLabel];
         [self addSubview:headerView];
         
         // Setup summary text
-        _summaryWebView = [[UIWebView alloc] initWithFrame:CGRectMake(paddingX,
-                                                                      CGRectGetMinY(_timeLabel.frame) + CGRectGetHeight(_timeLabel.frame) + paddingY*2,
+        self.summaryWebView = [[UIWebView alloc] initWithFrame:CGRectMake(paddingX,
+                                                                      CGRectGetMinY(self.timeLabel.frame) + CGRectGetHeight(self.timeLabel.frame) + paddingY*2,
                                                                       CGRectGetWidth(bounds) - (paddingX*2),
                                                                       200.0)];
-        _summaryWebView.backgroundColor = [UIColor clearColor];
-        _summaryWebView.opaque = NO;
-        _summaryWebView.delegate = self;
-        _summaryWebView.scrollView.scrollEnabled = NO;
-        _summaryWebView.scrollView.bounces = NO;
-        [self setText:summaryText withMentions:nil];
-        [self addSubview:_summaryWebView];
+        self.summaryWebView.backgroundColor = [UIColor clearColor];
+        self.summaryWebView.opaque = NO;
+        self.summaryWebView.delegate = self;
+        self.summaryWebView.scrollView.scrollEnabled = NO;
+        self.summaryWebView.scrollView.bounces = NO;
+        [self addSubview:self.summaryWebView];
         
         [self sizeToFit];
     }
     return self;
+}
+
+- (void)setEntity:(BaseEntity *)entity
+{
+    _entity = entity;
+    self.timeLabel.text = [entity.updatedAt timeAgo];
+    [self setText:entity.summary withMentions:entity.mentions];
 }
 
 
@@ -85,7 +92,7 @@
                                           fontSize:[prefs floatForKey:@"fontSize"]
                                           fontType:[prefs stringForKey:@"fontType"]
                                           contrast:[prefs boolForKey:@"contrast"]];
-    [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+    [self.summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
 
 # pragma mark - HTML/Text setting
@@ -112,14 +119,14 @@
     
     NSString *htmlTemplate = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
     NSString *htmlString = [NSString stringWithContentsOfFile:htmlTemplate encoding:NSUTF8StringEncoding error:nil];
-    _summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
+    self.summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
     
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *summaryHtml = [self styleSummaryHtml:_summaryTextHtml
+    NSString *summaryHtml = [self styleSummaryHtml:self.summaryTextHtml
                                           fontSize:[prefs floatForKey:@"fontSize"]
                                           fontType:[prefs stringForKey:@"fontType"]
                                           contrast:[prefs boolForKey:@"contrast"]];
-    [_summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+    [self.summaryWebView loadHTMLString:summaryHtml baseURL:nil];
 }
 
 
@@ -145,14 +152,11 @@
 
 - (CGSize)sizeThatFits:(CGSize)size
 {
-    //float w = 0;
     float h = 0;
     float padding = 24.0;
     
     for (UIView *v in [self subviews]) {
-        //float fw = v.frame.origin.x + v.frame.size.width;
         float fh = CGRectGetMinY(v.frame) + CGRectGetHeight(v.frame);
-        //w = MAX(fw, w);
         h = MAX(fh, h);
     }
     return CGSizeMake(CGRectGetWidth(self.frame), h + padding);
@@ -213,10 +217,10 @@
         
         // Extract the selector name from the URL
         NSArray *components = [requestString componentsSeparatedByString:@":"];
-        NSString *entityId = [components objectAtIndex:1];
+        NSString *conceptId = [components objectAtIndex:1];
         
         // Call the given selector
-        [_delegate performSelector:@selector(viewEntity:) withObject:entityId];
+        [self.delegate performSelector:@selector(viewConcept:) withObject:conceptId];
         
         // Cancel the location change
         return NO;

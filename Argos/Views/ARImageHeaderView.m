@@ -64,6 +64,7 @@
 
 - (void)setImage:(UIImage*)image
 {
+    _image = image;
     [_imageView setImage:image];
     
     UIImage* blurred = [image gaussianBlurWithBias:0];

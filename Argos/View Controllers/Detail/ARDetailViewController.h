@@ -21,24 +21,21 @@
 #import "ARScrollView.h"
 #import "ARImageHeaderView.h"
 #import "AREmbeddedCollectionViewController.h"
+#import "DetailView.h"
 
 @class BaseEntity;
 
-@interface ARDetailViewController : UIViewController <UIScrollViewDelegate, ARSummaryViewDelegate>
+@interface ARDetailViewController : UIViewController <DetailViewProtocol>
 
-@property (nonatomic, strong) ARScrollView *scrollView;
-@property (nonatomic, strong) ARSummaryView *summaryView;
-@property (nonatomic, strong) ARImageHeaderView *headerView;
-@property (nonatomic, strong) NSString *viewTitle;
-
-// Progress
-@property (nonatomic, strong) UIProgressView *progressView;
-@property (nonatomic, assign) int loadedItems;
 @property (nonatomic, assign) int totalItems;
+@property (nonatomic, strong) DetailView *view;
+@property (nonatomic, strong) BaseEntity *entity;
+@property (nonatomic, strong) NSMutableArray *embeddedCollectionViewControllers;
 
-- (void)viewEntity:(NSString*)entityId;
-- (void)setHeaderImageForEntity:(BaseEntity*)entity;
+- (instancetype)initWithEntity:(BaseEntity*)entity;
+- (void)viewConcept:(NSString*)conceptId;
 - (void)getEntities:(NSSet*)entities forCollectionView:(ARCollectionViewController*)cvc;
-- (void)getConcepts:(NSSet*)concepts forEntity:(BaseEntity*)entity;
+- (void)getConcepts:(NSSet*)concepts;
+- (NSArray*)navigationItems;
 
 @end
