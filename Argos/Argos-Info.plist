@@ -24,13 +24,6 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Graphik-Regular.otf</string>
-		<string>Graphik-SemiBold.otf</string>
-		<string>Graphik-LightItalic.otf</string>
-		<string>Graphik-Light.otf</string>
-	</array>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -50,5 +43,12 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Graphik-Regular.otf</string>
+		<string>Graphik-SemiBold.otf</string>
+		<string>Graphik-LightItalic.otf</string>
+		<string>Graphik-Light.otf</string>
+	</array>
 </dict>
 </plist>

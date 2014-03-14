@@ -8,7 +8,6 @@
 
 #import "RKObjectManager.h"
 #import "AFOAuth2Client.h"
-#import "CurrentUser.h"
 
 static NSString* const kArgosLatestStream = @"latest";
 static NSString* const kArgosTrendingStream = @"trending";
@@ -19,13 +18,6 @@ static NSString* const kArgosBookmarkedStream = @"bookmarked";
 
 + (ARObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos;
 + (ARObjectManager*)sharedManager;
-
-- (CurrentUser*)currentUser;
-- (void)logoutCurrentUser;
-- (void)loginCurrentUserWithEmail:(NSString*)email
-                         password:(NSString*)password
-                          success:(void (^)(CurrentUser *currentUser))success
-                          failure:(void (^)(NSError *error))failure;
 
 - (AFOAuth2Client*)client;
 

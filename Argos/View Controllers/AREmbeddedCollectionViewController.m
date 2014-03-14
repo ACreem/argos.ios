@@ -67,7 +67,9 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self.delegate performSelector:@selector(collectionView:didSelectItemAtIndexPath:) withObject:collectionView withObject:indexPath];
+    [self.delegate performSelector:@selector(collectionView:didSelectItemAtIndexPath:)
+                        withObject:collectionView
+                        withObject:indexPath];
 }
 
 @end

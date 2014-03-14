@@ -29,6 +29,7 @@
     CGRect frame = CGRectMake(origin.x, origin.y, CGRectGetWidth(bounds), 400.0); // Arbirtary height, it is set programatically later.
     self = [super initWithFrame:frame];
     if (self) {
+        // Watch the user defaults, so we know when to update the font settings.
         [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(defaultsDidChange:)
                                                      name:NSUserDefaultsDidChangeNotification

@@ -15,16 +15,18 @@
 #import "ARCollectionViewController.h"
 #import "ARCollectionHeaderView.h"
 
-@interface AREmbeddedCollectionViewController : ARCollectionViewController
+@class AREmbeddedCollectionViewController;
 
-@property (assign, nonatomic) id delegate;
-@property (strong, nonatomic) ARCollectionHeaderView* headerView;
-
-@end
-
-@protocol AREmbeddedCollectionViewControllerDelegate
-
+@protocol AREmbeddedCollectionViewControllerDelegate <NSObject>
 - (ARCollectionViewCell*)configureCell:(ARCollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(AREmbeddedCollectionViewController*)embeddedCollectionViewController;
 - (void)collectionView:(AREmbeddedCollectionViewController *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath;
+@end
+
+@interface AREmbeddedCollectionViewController : ARCollectionViewController
+
+@property (nonatomic, assign) id <AREmbeddedCollectionViewControllerDelegate> delegate;
+@property (nonatomic, strong) ARCollectionHeaderView* headerView;
 
 @end
+
+

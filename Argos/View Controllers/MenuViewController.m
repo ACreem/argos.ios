@@ -10,14 +10,13 @@
 #import "StreamViewController.h"
 #import "AppDelegate.h"
 #import "SearchViewController.h"
+#import "CurrentUser+Management.h"
 
-@interface MenuViewController () {
-    NSMutableArray *_streams;
-    NSMutableArray *_user;
-    NSMutableArray *_search;
-    UINavigationController *_navigationController;
-}
-
+@interface MenuViewController ()
+@property (nonatomic, strong) NSMutableArray *streams;
+@property (nonatomic, strong) NSMutableArray *user;
+@property (nonatomic, strong) NSMutableArray *search;
+@property (nonatomic, strong) UINavigationController *navigationController;
 @end
 
 @implementation MenuViewController
@@ -114,13 +113,13 @@
 {
     switch (section) {
         case 0:
-            return _search.count;
+            return self.search.count;
             break;
         case 1:
-            return _streams.count;
+            return self.streams.count;
             break;
         case 2:
-            return _user.count;
+            return self.user.count;
             break;
         default:
             return 0;
@@ -136,13 +135,13 @@
     NSString* title = @"";
     switch (indexPath.section) {
         case 0:
-            title = [_search objectAtIndex:indexPath.row];
+            title = [self.search objectAtIndex:indexPath.row];
             break;
         case 1:
-            title = [_streams objectAtIndex:indexPath.row];
+            title = [self.streams objectAtIndex:indexPath.row];
             break;
         case 2:
-            title = [_user objectAtIndex:indexPath.row];
+            title = [self.user objectAtIndex:indexPath.row];
             break;
     }
     
@@ -170,13 +169,12 @@
     switch (indexPath.section) {
         case 0: {
             SearchViewController *searchViewController = [[SearchViewController alloc] init];
-            [_navigationController pushViewController:searchViewController animated:YES];
+            [self.navigationController pushViewController:searchViewController animated:YES];
             [self.viewDeckController closeLeftViewAnimated:YES];
             break;
         }
         case 1: {
             StreamViewController *svc;
-            //[_navigationController popToRootViewControllerAnimated:NO];
             switch (indexPath.row) {
                 case 0:
                     svc = [[StreamViewController alloc] initWithStream:kArgosTrendingStream];
@@ -189,7 +187,7 @@
                     break;
             }
             svc.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
-            [_navigationController pushViewController:svc animated:YES];
+            [self.navigationController pushViewController:svc animated:YES];
         }
         case 2:
             switch (indexPath.row) {
@@ -197,7 +195,7 @@
                     // Bookmarks.
                     StreamViewController *svc = [[StreamViewController alloc] initWithStream:kArgosBookmarkedStream];
                     svc.managedObjectContext = [[ARObjectManager sharedManager] managedObjectStore].mainQueueManagedObjectContext;
-                    [_navigationController pushViewController:svc animated:YES];
+                    [self.navigationController pushViewController:svc animated:YES];
                     break;
                 }
                 case 1:
@@ -205,14 +203,15 @@
                     break;
                 case 2:
                     // Logout.
-                    [[ARObjectManager sharedManager] logoutCurrentUser];
+                    [CurrentUser logout];
                     
-                    [_navigationController setNavigationBarHidden:YES];
-                    [_navigationController popToRootViewControllerAnimated:YES];
+                    [self.navigationController setNavigationBarHidden:YES];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
                     
                     // Remove the menu!
+                    __weak typeof(self) weakSelf = self;
                     [self.viewDeckController closeLeftViewAnimated:YES completion:^(IIViewDeckController *controller, BOOL success) {
-                        self.viewDeckController.leftController = nil;
+                        weakSelf.viewDeckController.leftController = nil;
                     }];
                     break;
             }

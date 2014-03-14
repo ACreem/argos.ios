@@ -19,6 +19,7 @@ static int kFauxStatusBarTag = 99; // Keep track of our fake status bar backgrou
     if (!fauxStatusBar) {
         fauxStatusBar = [[UIView alloc] initWithFrame:CGRectMake(0, 0, CGRectGetWidth(window.frame), 20)];
         fauxStatusBar.backgroundColor = [UIColor headerColor];
+        fauxStatusBar.tag = kFauxStatusBarTag;
         [window addSubview:fauxStatusBar];
     }
     fauxStatusBar.hidden = NO;

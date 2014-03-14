@@ -8,8 +8,11 @@
 
 #import "LoginView.h"
 
+@class IIViewDeckController;
+
 @interface LoginViewController : UIViewController <LoginViewDelegate, UITextFieldDelegate, UIWebViewDelegate>
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) IIViewDeckController* deckController;
 
 @end

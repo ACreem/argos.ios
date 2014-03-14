@@ -9,7 +9,6 @@
 #import "AppDelegate.h"
 #import "ARObjectManager.h"
 #import "LoginViewController.h"
-#import "ReachabilityManager.h"
 
 @interface AppDelegate ()
 @property (nonatomic, strong) UIView *fauxStatusBar;
@@ -19,9 +18,6 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Instiatiate network reachability monitor.
-    [ReachabilityManager sharedManager];
-    
     // Setup RestKit.
     NSManagedObjectContext* moc = [self setupRestKit];
     
@@ -45,11 +41,8 @@
     self.navigationController.navigationBar.barTintColor = [UIColor headerColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes:
-        [NSDictionary dictionaryWithObjectsAndKeys:
-            [UIColor whiteColor], NSForegroundColorAttributeName,
-            [UIFont lightFontForSize:16], NSFontAttributeName,
-            nil]];
+    [self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor],
+                                                                       NSFontAttributeName: [UIFont lightFontForSize:16]}];
     
     // Custom back button image.
     [self.navigationController.navigationBar setBackIndicatorImage:[UIImage imageNamed:@"nav_back"]];
@@ -108,7 +101,7 @@
 - (NSManagedObjectContext*)setupRestKit
 {
     NSError *error = nil;
-    NSURL *modelURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"ArgosModel" ofType:@"momd"]];
+    NSURL *modelURL = [NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:@"Argos" ofType:@"momd"]];
     NSManagedObjectModel *managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     RKManagedObjectStore *managedObjectStore = [[RKManagedObjectStore alloc] initWithManagedObjectModel:managedObjectModel];
     

@@ -6,11 +6,11 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "AppDelegate.h"
 #import "LoginViewController.h"
 #import "StreamViewController.h"
 #import "MenuViewController.h"
 #import "UIWindow+FauxStatusBar.h"
+#import "CurrentUser+Management.h"
 
 static int kLoginTag = 0;
 static int kSignUpTag = 1;
@@ -49,14 +49,12 @@ static int kSignUpTag = 1;
 
 - (void)postLogin
 {
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    
     // Add background for the status bar, so the slide-out menu transition looks better.
     [UIWindow showFauxStatusBar];
     
     // Setup the slide-out menu.
     MenuViewController* menuController = [[MenuViewController alloc] init];
-    appDelegate.deckController.leftController = menuController;
+    self.deckController.leftController = menuController;
     
     StreamViewController *svc = [[StreamViewController alloc] initWithStream:@"latest"];
     svc.managedObjectContext = self.managedObjectContext;
@@ -189,28 +187,28 @@ static int kSignUpTag = 1;
         */
         
         // Login the user.
-        [[ARObjectManager sharedManager] loginCurrentUserWithEmail:self.view.emailField.text
-                                                          password:self.view.passwordField.text
-                                                           success:^(CurrentUser *currentUser) {
-                                                               [self postLogin];
-                                                               
-                                                               [self primaryButtonEndLoading];
-                                                               
-                                                               // Reset the fields.
-                                                               self.view.emailField.text = @"";
-                                                               self.view.passwordField.text = @"";
-                                                           } failure:^(NSError *error) {
-                                                               [self primaryButtonEndLoading];
-                                                               
-                                                               UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
-                                                                                                               message:@"You couldn't be logged in with the info you provided."
-                                                                                                              delegate:self
-                                                                                                     cancelButtonTitle:@"OK"
-                                                                                                     otherButtonTitles:nil];
-                                                               [alert show];
-                                                               
-                                                               NSLog(@"%@", error);
-                                                           }];
+        [CurrentUser loginWithEmail:self.view.emailField.text
+                           password:self.view.passwordField.text
+                            success:^(CurrentUser *currentUser) {
+                                [self postLogin];
+                               
+                                [self primaryButtonEndLoading];
+                               
+                                // Reset the fields.
+                                self.view.emailField.text = @"";
+                                self.view.passwordField.text = @"";
+                            } failure:^(NSError *error) {
+                                [self primaryButtonEndLoading];
+                               
+                                UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
+                                                                                message:@"You couldn't be logged in with the info you provided."
+                                                                               delegate:self
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                                [alert show];
+                               
+                                NSLog(@"%@", error);
+                           }];
     } else {
         [self primaryButtonEndLoading];
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
