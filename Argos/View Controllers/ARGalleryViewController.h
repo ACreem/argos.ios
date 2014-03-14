@@ -11,6 +11,8 @@
 
 @interface ARGalleryViewController : UICollectionViewController
 
-@property (nonatomic, strong) NSMutableArray *images;
+@property (nonatomic, strong) NSArray *images;
+
+- (instancetype)initWithImages:(NSSet*)images;
 
 @end

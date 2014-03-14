@@ -33,6 +33,7 @@
 #import <NYXImagesKit/NYXImagesKit.h>
 
 #import "AREmbeddedCollectionViewController.h"
+#import "ARGalleryViewController.h"
 
 
 @interface ARDetailViewController ()
@@ -82,49 +83,16 @@
     [self loadHeaderImage];
     
     self.loadedItems = 0;
-}
-
-
-- (NSArray*)navigationItems
-{
-    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-                                                                          target:nil
-                                                                          action:nil];
-    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
-                                                                                 target:self
-                                                                                 action:@selector(share:)];
-    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(font:)];
     
-    return @[ shareButton, paddingItem,
-              fontButton, paddingItem ];
-}
-
-- (void)loadHeaderImage
-{
-    CGSize headerSize = self.view.headerView.cachedFrame.size;
-    
-    // Set the header image,
-    // downloading if necessary.
-    if (self.entity.imageHeader) {
-        self.view.image = self.entity.imageHeader;
-        
-    } else if (self.entity.image) {
-        UIImage *headerImage = [self.entity.image scaleToCoverSize:headerSize];
-        self.entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-        self.view.image = self.entity.imageHeader;
-        
-    } else if (self.entity.imageUrl) {
-        ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:self.entity.imageUrl]];
-        [imageDownloader setCompletionHandler:^(UIImage *image) {
-            self.entity.image = image;
-            UIImage *headerImage = [self.entity.image scaleToCoverSize:headerSize];
-            self.entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-            self.view.image = self.entity.imageHeader;
-        }];
-        [imageDownloader startDownload];
+    // Setup the image gallery, if there are images.
+    if ([self.entity.images count] > 0) {
+        ARGalleryViewController *galleryViewController = [[ARGalleryViewController alloc] initWithImages:self.entity.images];
+        CGSize gallerySize = CGSizeMake(CGRectGetWidth(self.view.frame), 220);
+        [self addChildViewController:galleryViewController];
+        [self.view.scrollView addSubview:galleryViewController.collectionView];
+        [galleryViewController didMoveToParentViewController:self];
+        galleryViewController.collectionView.frame = CGRectMake(0, 0, gallerySize.width, gallerySize.height);
+        [(UICollectionViewFlowLayout*)galleryViewController.collectionViewLayout setItemSize:gallerySize];
     }
 }
 
@@ -151,6 +119,52 @@
 }
 
 
+# pragma mark - Setup
+- (NSArray*)navigationItems
+{
+    UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+                                                                                 target:nil
+                                                                                 action:nil];
+    UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
+                                                                                 target:self
+                                                                                 action:@selector(share:)];
+    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"]
+                                                                   style:UIBarButtonItemStylePlain
+                                                                  target:self
+                                                                  action:@selector(font:)];
+    
+    return @[ shareButton, paddingItem,
+              fontButton, paddingItem ];
+}
+
+- (void)loadHeaderImage
+{
+    CGSize headerSize = self.view.headerView.cachedFrame.size;
+    headerSize.height *= 2;
+    headerSize.width *= 2;
+    
+    // Set the header image,
+    // downloading if necessary.
+    if (self.entity.imageHeader) {
+        self.view.image = self.entity.imageHeader;
+        
+    } else if (self.entity.image) {
+        UIImage *headerImage = [self.entity.image scaleToCoverSize:headerSize];
+        self.entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
+        self.view.image = self.entity.imageHeader;
+        
+    } else if (self.entity.imageUrl) {
+        ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:self.entity.imageUrl]];
+        [imageDownloader setCompletionHandler:^(UIImage *image) {
+            self.entity.image = image;
+            UIImage *headerImage = [self.entity.image scaleToCoverSize:headerSize];
+            self.entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
+            self.view.image = self.entity.imageHeader;
+        }];
+        [imageDownloader startDownload];
+    }
+}
+
 
 # pragma mark - Actions
 - (void)share:(id)sender
@@ -161,31 +175,6 @@
 {
     [self presentModalViewController:[[FontViewController alloc] init]];
 }
-- (void)bookmark:(id)sender
-{
-    NSLog(@"bookmarked");
-    UIBarButtonItem *button = (UIBarButtonItem*)sender;
-    if (button.tag != 1) {
-        button.image = [UIImage imageNamed:@"nav_bookmarked"];
-        [button setTag:1];
-    } else {
-        button.image = [UIImage imageNamed:@"nav_bookmark"];
-        [button setTag:0];
-    }
-}
-- (void)watch:(id)sender
-{
-    NSLog(@"watched");
-    UIBarButtonItem *button = (UIBarButtonItem*)sender;
-    if (button.tag != 1) {
-        button.image = [UIImage imageNamed:@"nav_watched"];
-        [button setTag:1];
-    } else {
-        button.image = [UIImage imageNamed:@"nav_watch"];
-        [button setTag:0];
-    }
-}
-
 
 # pragma mark - UIViewController
 // Helper for consistently presenting modal view controllers.
@@ -225,6 +214,69 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+
+# pragma mark - ARSummaryViewDelegate
+- (void)viewConcept:(NSString*)conceptId
+{
+    NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
+    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Concept" inManagedObjectContext:moc];
+    Concept* concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+    [[RKObjectManager sharedManager] getObject:concept
+                                          path:[NSString stringWithFormat:@"/concepts/%@", conceptId]
+                                    parameters:nil
+                                       success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+                                           [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
+                                                                                animated:YES];
+                                       } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                                           NSLog(@"Failure getting concept: %@", error);
+                                       }];
+}
+
+
+# pragma mark - Data getting
+// Fetch a set of entities.
+- (void)getEntities:(NSSet*)entities forCollectionView:(ARCollectionViewController*)cvc
+{
+    __block NSUInteger fetched_concept_count = 0;
+    for (BaseEntity* concept in entities) {
+        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_concept_count++;
+            
+            self.loadedItems++;
+            self.view.progress = self.loadedItems/self.totalItems;
+            
+            if (fetched_concept_count == [entities count]) {
+                [cvc.collectionView reloadData];
+                [cvc.collectionView sizeToFit];
+                [self.view.scrollView sizeToFit];
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"Failure getting entities: %@", error);
+        }];
+    }
+}
+
+// Get concepts for this entity.
+- (void)getConcepts:(NSSet*)concepts
+{
+    __block NSUInteger fetched_concept_count = 0;
+    for (Concept* concept in concepts) {
+        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_concept_count++;
+            
+            self.loadedItems++;
+            self.view.progress = self.loadedItems/self.totalItems;
+            
+            if (fetched_concept_count == [concepts count]) {
+                self.view.entity = self.entity;
+            }
+        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+            NSLog(@"Failure getting concepts: %@", error);
+        }];
+    }
+}
+
+
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
@@ -233,6 +285,7 @@
     CGRect headerFrame = self.view.headerView.frame;
     CGRect titleFrame = self.view.titleLabel.frame;
     
+    // Scrolling down/pulling up.
     if (y >= 0) {
         headerFrame.origin.y = -y/6;
         self.view.headerView.frame = headerFrame;
@@ -295,7 +348,7 @@
                 selectedHeader.titleLabel.textColor = [UIColor whiteColor];
             }];
             
-        // Otherwise, check if it's a header that needs to be removed.
+            // Otherwise, check if it's a header that needs to be removed.
         } else {
             // Check if the stuck header view has scrolled off.
             // If it's superview is the scroll view itself, it needs
@@ -321,42 +374,27 @@
                 _stuckSectionHeaderView = nil;
             }
         }
+        
+        // Scrolling up/pulling down.
     } else {
-        
-        // Stretchy header
-        CGRect frame = CGRectMake(0, y,
-                                  CGRectGetWidth(self.view.headerView.cachedFrame) - y,
-                                  CGRectGetHeight(self.view.headerView.cachedFrame) - y);
+        // Make the title label scroll down with the scroll view.
         CGRect titleLabelFrame = self.view.titleLabel.frame;
-        
-        self.view.headerView.frame = frame;
         titleLabelFrame.origin.y = CGRectGetHeight(self.view.headerView.frame) - CGRectGetHeight(titleLabelFrame);
         self.view.titleLabel.frame = titleLabelFrame;
         
-        CGPoint center = CGPointMake(self.view.center.x, self.view.headerView.center.y - y);
+        // Stretchy header
+        // NB: since we are pulling down, y is negative.
+        CGFloat aspectRatio = CGRectGetWidth(self.view.headerView.cachedFrame)/CGRectGetHeight(self.view.headerView.cachedFrame);
+        CGRect frame = CGRectMake(0, y,
+                                  CGRectGetWidth(self.view.headerView.cachedFrame) - y*aspectRatio,
+                                  CGRectGetHeight(self.view.headerView.cachedFrame) - y);
+        self.view.headerView.frame = frame;
+        
+        CGPoint center = CGPointMake(self.view.center.x - y/aspectRatio/2, self.view.headerView.center.y - y);
         self.view.headerView.center = center;
     }
 }
 
-
-# pragma mark - ARSummaryViewDelegate
-- (void)viewConcept:(NSString*)conceptId
-{
-    NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Concept" inManagedObjectContext:moc];
-    Concept* concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-    [[RKObjectManager sharedManager] getObject:concept
-                                          path:[NSString stringWithFormat:@"/entities/%@", conceptId]
-                                    parameters:nil
-                                       success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                           [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
-                                                                                animated:YES];
-                                       } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                                           NSLog(@"failure");
-                                       }];
-}
-
-# pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
 {
     if (!decelerate)
@@ -364,48 +402,6 @@
         for (AREmbeddedCollectionViewController* ecvc in self.embeddedCollectionViewControllers) {
             [ecvc loadImagesForOnscreenRows];
         }
-    }
-}
-
-// Fetch a set of entities.
-- (void)getEntities:(NSSet*)entities forCollectionView:(ARCollectionViewController*)cvc
-{
-    __block NSUInteger fetched_concept_count = 0;
-    for (BaseEntity* concept in entities) {
-        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_concept_count++;
-            
-            self.loadedItems++;
-            self.view.progress = self.loadedItems/self.totalItems;
-            
-            if (fetched_concept_count == [entities count]) {
-                [cvc.collectionView reloadData];
-                [cvc.collectionView sizeToFit];
-                [self.view.scrollView sizeToFit];
-            }
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
-    }
-}
-
-// Get concepts for this entity.
-- (void)getConcepts:(NSSet*)concepts
-{
-    __block NSUInteger fetched_concept_count = 0;
-    for (Concept* concept in concepts) {
-        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_concept_count++;
-            
-            self.loadedItems++;
-            self.view.progress = self.loadedItems/self.totalItems;
-            
-            if (fetched_concept_count == [concepts count]) {
-                self.view.entity = self.entity;
-            }
-        } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-            NSLog(@"failure");
-        }];
     }
 }
 

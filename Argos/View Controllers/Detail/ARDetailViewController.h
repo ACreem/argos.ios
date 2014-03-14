@@ -23,9 +23,13 @@
 
 @interface ARDetailViewController : UIViewController <DetailViewProtocol>
 
-@property (nonatomic, assign) int totalItems;
 @property (nonatomic, strong) DetailView *view;
 @property (nonatomic, strong) BaseEntity *entity;
+
+// For keeping track of loading progress.
+@property (nonatomic, assign) int totalItems;
+
+// For managing embedded collection view controllers.
 @property (nonatomic, strong) NSMutableArray *embeddedCollectionViewControllers;
 
 - (instancetype)initWithEntity:(BaseEntity*)entity;

@@ -27,5 +27,6 @@
 @dynamic imageLarge;
 @dynamic mentions;
 @dynamic concepts;
+@dynamic images;
 
 @end

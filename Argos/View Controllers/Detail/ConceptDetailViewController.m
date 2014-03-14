@@ -31,18 +31,15 @@
     [super viewDidLoad];
     
     [[RKObjectManager sharedManager] getObject:self.entity path:self.entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        NSLog(@"success");
         [self setupView];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"failure");
+        NSLog(@"Failed to load concept: %@", error);
     }];
 }
 
 #pragma mark - Setup
 - (void)setupView
 {
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-    
     self.totalItems = self.entity.entities.count;
     
     if (!self.entity.summary) {
@@ -50,10 +47,9 @@
     }
     
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(bounds.size.width, 120)];
+    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 120)];
     
-    // Mentions (story) list header
-    // TODO: need to filter out only the stories instead of all entities (concepts, stories, events).
+    // Mentions (story) list
     self.mentionList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.entities]];
     self.mentionList.managedObjectContext = self.entity.managedObjectContext;
     self.mentionList.delegate = self;

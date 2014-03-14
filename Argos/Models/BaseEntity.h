@@ -27,6 +27,7 @@
 @property (nonatomic, retain) id imageLarge;
 @property (nonatomic, retain) NSSet *mentions;
 @property (nonatomic, retain) NSSet *concepts;
+@property (nonatomic, retain) NSSet *images;
 @end
 
 @interface BaseEntity (CoreDataGeneratedAccessors)
@@ -40,5 +41,10 @@
 - (void)removeConceptsObject:(Concept *)value;
 - (void)addConcepts:(NSSet *)values;
 - (void)removeConcepts:(NSSet *)values;
+
+- (void)addImagesObject:(NSManagedObject *)value;
+- (void)removeImagesObject:(NSManagedObject *)value;
+- (void)addImages:(NSSet *)values;
+- (void)removeImages:(NSSet *)values;
 
 @end

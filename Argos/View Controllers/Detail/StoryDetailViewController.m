@@ -20,7 +20,6 @@
 #import "CECardsAnimationController.h"
 
 @interface StoryDetailViewController ()
-@property (nonatomic, strong) Story *story;
 @property (nonatomic, strong) AREmbeddedCollectionViewController *eventList;
 @end
 
@@ -36,14 +35,12 @@
 {
     [super viewDidLoad];
     
-    self.totalItems = self.story.events.count + self.story.concepts.count;
+    self.totalItems = self.entity.events.count + self.entity.concepts.count;
     
-    CGRect bounds = [[UIScreen mainScreen] bounds];
-
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(bounds.size.width, 120)];
-    self.eventList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.story.events]];
-    self.eventList.managedObjectContext = self.story.managedObjectContext;
+    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 120)];
+    self.eventList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.events]];
+    self.eventList.managedObjectContext = self.entity.managedObjectContext;
     self.eventList.delegate = self;
     self.eventList.title = @"Events";
     
@@ -52,9 +49,9 @@
     [self addChildViewController:self.eventList];
     [self.view.scrollView addSubview:self.eventList.collectionView];
     [self.eventList didMoveToParentViewController:self];
-    [self getEntities:self.story.events forCollectionView:self.eventList];
+    [self getEntities:self.entity.events forCollectionView:self.eventList];
     
-    [self getConcepts:self.story.concepts];
+    [self getConcepts:self.entity.concepts];
     
     [self.view setActionButtonTitle:@"View the full timeline"];
     [self.view.actionButton addTarget:self action:@selector(viewTimeline:) forControlEvents:UIControlEventTouchUpInside];
@@ -62,7 +59,7 @@
 
 - (void)viewTimeline:(id)sender
 {
-    StoryTimelineViewController* sevc = [[StoryTimelineViewController alloc] initWithStory:self.story];
+    StoryTimelineViewController* sevc = [[StoryTimelineViewController alloc] initWithStory:self.entity];
     sevc.transitioningDelegate = self;
     
     // Add the close button.
@@ -146,7 +143,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Event *event = [[self.story.events allObjects] objectAtIndex:indexPath.row];
+    Event *event = [[self.entity.events allObjects] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:[[EventDetailViewController alloc] initWithEvent:event] animated:YES];
 }
 

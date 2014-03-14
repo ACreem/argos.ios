@@ -16,7 +16,7 @@
 
 @implementation ARGalleryViewController
 
-- (instancetype)init
+- (instancetype)initWithImages:(NSSet*)images
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -31,8 +31,7 @@
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.backgroundColor = [UIColor secondaryColor];
     
-    // Testing
-    _images = [NSMutableArray arrayWithObjects:@"a", @"b", @"c", nil];
+    _images = [images allObjects];
     
     return self;
 }

@@ -10,7 +10,7 @@
 #import "AREmbeddedCollectionViewController.h"
 #import "Event.h"
 
-@interface EventDetailViewController : ARDetailViewController <UIScrollViewDelegate, AREmbeddedCollectionViewControllerDelegate>
+@interface EventDetailViewController : ARDetailViewController <AREmbeddedCollectionViewControllerDelegate>
 
 @property (nonatomic, strong) Event *entity;
 

@@ -437,6 +437,21 @@
 			name = User;
 			sourceTree = "<group>";
 		};
+		F1915E7118D39201005811E6 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				F194A55418D2A0ED00792451 /* ARImageHeaderView.h */,
+				F194A55518D2A0ED00792451 /* ARImageHeaderView.m */,
+				F194A55618D2A0ED00792451 /* ARScrollView.h */,
+				F194A55718D2A0ED00792451 /* ARScrollView.m */,
+				F194A55818D2A0ED00792451 /* ARSummaryView.h */,
+				F194A55918D2A0ED00792451 /* ARSummaryView.m */,
+				F1915E3518D35275005811E6 /* DetailView.h */,
+				F1915E3618D35275005811E6 /* DetailView.m */,
+			);
+			name = Detail;
+			sourceTree = "<group>";
+		};
 		F194A50218D2A0EC00792451 /* Hacks */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,18 +580,11 @@
 				F194A55A18D2A0ED00792451 /* Cells */,
 				F1915E3418D34B5E005811E6 /* Elements */,
 				F1915E7018D37F24005811E6 /* User */,
-				F194A55218D2A0ED00792451 /* ARCollectionView.h */,
-				F194A55318D2A0ED00792451 /* ARCollectionView.m */,
+				F1915E7118D39201005811E6 /* Detail */,
 				F194A55018D2A0ED00792451 /* ARCollectionHeaderView.h */,
 				F194A55118D2A0ED00792451 /* ARCollectionHeaderView.m */,
-				F1915E3518D35275005811E6 /* DetailView.h */,
-				F1915E3618D35275005811E6 /* DetailView.m */,
-				F194A55418D2A0ED00792451 /* ARImageHeaderView.h */,
-				F194A55518D2A0ED00792451 /* ARImageHeaderView.m */,
-				F194A55618D2A0ED00792451 /* ARScrollView.h */,
-				F194A55718D2A0ED00792451 /* ARScrollView.m */,
-				F194A55818D2A0ED00792451 /* ARSummaryView.h */,
-				F194A55918D2A0ED00792451 /* ARSummaryView.m */,
+				F194A55218D2A0ED00792451 /* ARCollectionView.h */,
+				F194A55318D2A0ED00792451 /* ARCollectionView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";

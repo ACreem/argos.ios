@@ -44,18 +44,14 @@
         [self.scrollView addSubview:self.progressView];
         
         // Title view
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(16.0,
+        CGFloat titlePadding = 16.0;
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titlePadding,
                                                                     CGRectGetMinY(frame),
-                                                                    CGRectGetWidth(frame) - 32.0,
-                                                                    CGRectGetHeight(self.headerView.frame))];
+                                                                    CGRectGetWidth(frame) - titlePadding*2,
+                                                                    CGRectGetHeight(self.headerView.bounds))];
         self.titleLabel.textColor = [UIColor whiteColor];
         self.titleLabel.font = [UIFont titleFontForSize:20];
         self.titleLabel.numberOfLines = 0;
-        [self.titleLabel sizeToFit];
-        CGRect titleFrame = self.titleLabel.frame;
-        titleFrame.size.height += 20.0;
-        titleFrame.origin.y = CGRectGetHeight(self.headerView.frame) - CGRectGetHeight(titleFrame);
-        self.titleLabel.frame = titleFrame;
         [self addSubview:self.titleLabel];
         
         // Summary view
@@ -64,27 +60,25 @@
         [self.scrollView addSubview:self.summaryView];
         
         // Actions view
-        CGFloat textPaddingVertical = 8.0;
+        CGFloat yPadding = 8.0;
         self.actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         self.actionButton.titleLabel.font = [UIFont mediumFontForSize:14];
         [self.actionButton sizeToFit];
-        self.actionButton.frame = CGRectMake(0, 0,
-                                       CGRectGetWidth(self.actionButton.frame) + 20,
-                                       CGRectGetHeight(self.actionButton.frame));
         self.actionButton.tintColor = [UIColor actionColor];
         [[self.actionButton layer] setBorderWidth:1.0];
         [[self.actionButton layer] setBorderColor:[UIColor actionColor].CGColor];
         [[self.actionButton layer] setCornerRadius:4.0];
-        CGRect buttonFrame = self.actionButton.frame;
-        buttonFrame.origin.x = CGRectGetWidth(frame)/2 - CGRectGetWidth(self.actionButton.frame)/2;
-        buttonFrame.origin.y = textPaddingVertical*2;
-        self.actionButton.frame = buttonFrame;
+        self.actionButton.frame = CGRectMake(CGRectGetWidth(frame)/2 - CGRectGetWidth(self.actionButton.frame)/2,
+                                             yPadding*2,
+                                             CGRectGetWidth(self.actionButton.frame) + 20,
+                                             CGRectGetHeight(self.actionButton.frame));
         
         self.actionsView = [[UIView alloc] initWithFrame:CGRectMake(0,
                                                                     CGRectGetMinY(self.summaryView.summaryWebView.frame)
                                                                     + CGRectGetHeight(self.summaryView.summaryWebView.frame),
                                                                     CGRectGetWidth(frame),
-                                                                    CGRectGetHeight(self.actionButton.frame)+2*textPaddingVertical)];
+                                                                    CGRectGetHeight(self.actionButton.frame)+2*yPadding)];
+        [self.actionsView addSubview:self.actionButton];
         self.actionsView.hidden = YES;
         [self.summaryView addSubview:self.actionsView];
         
@@ -98,8 +92,19 @@
 {
     _entity = entity;
     self.titleLabel.text = entity.title;
-    self.image = entity.imageHeader;
     self.summaryView.entity = entity;
+    
+    // Reposition the title label.
+    [self.titleLabel sizeToFit];
+    CGRect titleFrame = self.titleLabel.frame;
+    titleFrame.size.height += 20.0;
+    titleFrame.origin.y = CGRectGetHeight(self.headerView.bounds) - CGRectGetHeight(titleFrame);
+    self.titleLabel.frame = titleFrame;
+    
+    // Because setting the header image is
+    // somewhat expensive (involves blurring
+    // of the image), it must be explicitly
+    // set separately (with -setImage:)
 }
 
 - (void)setImage:(UIImage *)image
@@ -126,6 +131,14 @@
     self.actionsView.hidden = NO;
     [self.actionButton setTitle:title forState:UIControlStateNormal];
     [self.actionButton sizeToFit];
+    
+    // Reposition the button.
+    CGRect frame = self.actionButton.frame;
+    CGFloat xPadding = 20;
+    frame.origin.x = CGRectGetWidth(self.actionsView.frame)/2 - (CGRectGetWidth(self.actionButton.frame) + xPadding)/2;
+    frame.size.width = CGRectGetWidth(self.actionButton.frame) + xPadding;
+    self.actionButton.frame = frame;
+    
     [self.scrollView sizeToFit];
 }
 

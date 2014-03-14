@@ -25,6 +25,7 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
         <relationship name="concepts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Concept" inverseName="entities" inverseEntity="Concept" syncable="YES"/>
+        <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="entities" inverseEntity="Image" syncable="YES"/>
         <relationship name="mentions" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Mention" inverseName="entities" inverseEntity="Mention" syncable="YES"/>
     </entity>
     <entity name="Concept" representedClassName="Concept" parentEntity="BaseEntity" syncable="YES">
@@ -43,6 +44,11 @@
         <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="event" inverseEntity="Article" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="events" inverseEntity="Story" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentUser" inverseName="bookmarked" inverseEntity="CurrentUser" syncable="YES"/>
+    </entity>
+    <entity name="Image" representedClassName="Image" syncable="YES">
+        <attribute name="image" optional="YES" attributeType="Transformable" syncable="YES"/>
+        <attribute name="imageUrl" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="entities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BaseEntity" inverseName="images" inverseEntity="BaseEntity" syncable="YES"/>
     </entity>
     <entity name="Mention" representedClassName="Mention" syncable="YES">
         <attribute name="mentionId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -71,5 +77,6 @@
         <element name="Source" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Story" positionX="0" positionY="0" width="0" height="0"/>
         <element name="BaseEntity" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

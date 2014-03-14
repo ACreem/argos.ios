@@ -13,7 +13,6 @@
 #import "AREmbeddedCollectionViewController.h"
 #import "ARArticleCollectionViewCell.h"
 #import "AREmbeddedCollectionViewCell.h"
-#import "ARGalleryViewController.h"
 
 #import "Article.h"
 #import "Source.h"
@@ -40,55 +39,30 @@
     
     self.totalItems = self.entity.stories.count + self.entity.articles.count + self.entity.concepts.count;
     
-    //[self setupStories];
-    
-    // Setup the image gallery.
-    /*
-    ARGalleryViewController *galleryViewController = [[ARGalleryViewController alloc] init];
-    CGSize gallerySize = CGSizeMake(_bounds.size.width, 220);
-    [self addChildViewController:galleryViewController];
-    [self.scrollView addSubview:galleryViewController.collectionView];
-    [galleryViewController didMoveToParentViewController:self];
-    galleryViewController.collectionView.frame = CGRectMake(0, 0, gallerySize.width, gallerySize.height);
-    [(UICollectionViewFlowLayout*)galleryViewController.collectionViewLayout setItemSize:gallerySize];
-     */
-    
-    [self getConcepts:self.entity.concepts];
-    [self setupArticles];
-}
-
-#pragma mark - Setup
-- (void)setupStories
-{
     // Show story button if this event belongs to only one story.
     if ([self.entity.stories count] == 1) {
         [self.view setActionButtonTitle:@"View the full story"];
         [self.view.actionButton addTarget:self action:@selector(viewStory:) forControlEvents:UIControlEventTouchUpInside];
         
-    // Otherwise show a list of stories.
+        // Otherwise show a list of stories.
     } else {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        [flowLayout setItemSize:CGSizeMake(320, 80)];
+        [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
         _storyList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
         _storyList.managedObjectContext = self.entity.managedObjectContext;
         _storyList.delegate = self;
         _storyList.title = @"Stories";
-        
         [_storyList.collectionView registerClass:[AREmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-        
         [self addChildViewController:_storyList];
         [self.view.scrollView addSubview:_storyList.view];
         [_storyList didMoveToParentViewController:self];
     }
     [self getEntities:self.entity.stories forCollectionView:_storyList];
-}
-
-
-
-- (void)setupArticles
-{
+    
+    [self getConcepts:self.entity.concepts];
+    
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(320, 80)];
+    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
     _articleList = [[AREmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
     _articleList.managedObjectContext = self.entity.managedObjectContext;
     _articleList.delegate = self;
