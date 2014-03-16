@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
+
+
 #import "ArgosObjectManager.h"
 
 #import "Event.h"
@@ -34,7 +36,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
 + (ArgosObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
+    //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
     //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Create an Argos OAuth2 client.
@@ -44,257 +46,19 @@ static NSString* const kArgosAPIClientSecret = @"test";
     ArgosObjectManager *objectManager = [[ArgosObjectManager alloc] initWithHTTPClient:oauthClient];
     objectManager.managedObjectStore = mos;
     
-    // Define API JSON response => Core Data attributes mappings.
-    /*
-     A note on nested relationships in mappings.
-     These nested relationships are only valid as being passed in as the `relationships` argument
-     for:
-     - (void)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
-     
-     Say you have a JSON representation of a "Widget", such as:
-     
-     {
-        "id": 1,
-        "name": "some name",
-        "thing_id": 1
-     }
-     
-     You have a resource which has a nested resource, a "Thing".
-     
-     Say you have two Core Data (CD) models:
-     
-     Widget:
-        widgetId:     NSInteger
-        name:         NSString
-        thing:        Thing
-     
-     Thing:
-        thingId:      NSInteger
-        widget:       Widget
-     
-     To properly map the Widget JSON to cover both the creation of
-     the Widget and the Thing, you would do:
-     
-     @{
-        @"name": @"name"                    // map the JSON "name" to the Core Data "name".
-        @"relationships": @{                // "relationships" is a special key indicating nested relationships.
-            @"thing": @{                    // the relationship name that's being mapped.
-                @"entity": @"Thing",        // the name of the nested/related entity that's being mapped to.
-                @"mappings": @{             // the mappings for the nested/related entity.
-                    @"thing_id": @"thingId"
-                }
-            }
-        }
-     }
-    */
+    [objectManager setEntityMapping:[objectManager eventMapping] ofClass:[Event class] forPathPattern:@"/events" withIdentifier:@"eventId"];
+    [objectManager setEntityMapping:[objectManager storyMapping] ofClass:[Story class] forPathPattern:@"/stories" withIdentifier:@"storyId"];
+    [objectManager setEntityMapping:[objectManager sourceMapping] ofClass:[Source class] forPathPattern:@"/sources" withIdentifier:@"sourceId"];
+    [objectManager setEntityMapping:[objectManager conceptMapping] ofClass:[Concept class] forPathPattern:@"/concepts" withIdentifier:@"conceptId"];
+    [objectManager setEntityMapping:[objectManager articleMapping] ofClass:[Article class] forPathPattern:@"/articles" withIdentifier:@"articleId"];
+    [objectManager setEntityMapping:[objectManager mentionMapping] ofClass:[Mention class] forPathPattern:@"/aliases" withIdentifier:@"mentionId"];
     
-    NSDictionary *articleMappings = @{
-                                      @"id":             @"articleId",
-                                      @"url":            @"jsonUrl",
-                                      @"title":          @"title",
-                                      @"ext_url":        @"extUrl",
-                                      @"created_at":     @"createdAt"};
-    NSDictionary *eventMappings   = @{
-                                      @"id":             @"eventId",
-                                      @"url":            @"jsonUrl",
-                                      @"title":          @"title",
-                                      @"score":          @"score",
-                                      @"image":          @"imageUrl",
-                                      @"summary":        @"summary",
-                                      @"updated_at":     @"updatedAt",
-                                      @"created_at":     @"createdAt",
-                                      @"@metadata.routing.parameters.query":     @"searchQuery"};
-    NSDictionary *storyMappings   = @{
-                                      @"id":             @"storyId",
-                                      @"url":            @"jsonUrl",
-                                      @"title":          @"title",
-                                      @"image":          @"imageUrl",
-                                      @"summary":        @"summary",
-                                      @"updated_at":     @"updatedAt",
-                                      @"created_at":     @"createdAt",
-                                      @"@metadata.routing.parameters.query":     @"searchQuery"};
-    NSDictionary *conceptMappings  = @{
-                                      @"slug":           @"conceptId",
-                                      @"url":            @"jsonUrl",
-                                      @"name":           @"title",
-                                      @"image":          @"imageUrl",
-                                      @"summary":        @"summary",
-                                      @"updated_at":     @"updatedAt",
-                                      @"created_at":     @"createdAt",
-                                      @"@metadata.routing.parameters.query":     @"searchQuery"};
-    NSDictionary *sourceMappings  = @{
-                                      @"id":             @"sourceId",
-                                      @"url":            @"jsonUrl",
-                                      @"name":           @"name",
-                                      @"ext_url":        @"extUrl"};
-    NSDictionary *mentionMappings = @{
-                                      @"name":           @"name"};
-    NSDictionary *userMappings    = @{
-                                      @"id":             @"userId"};
-    
-    NSDictionary *nestedMentionMappings = @{
-                                            @"name":           @"name",
-                                            @"relationships":  @{
-                                                @"concept": @{
-                                                    @"entity":     @"Concept",
-                                                    @"mappings":   @{
-                                                        @"slug": @"conceptId"}}}};
-    
-    
-    RKEntityMapping* eventMapping = [objectManager setupEntityForName:@"Event"
-                                                          pathPattern:@"/events"
-                                                                class:[Event class]
-                                                           identifier:@"eventId"
-                                                        relationships:@{
-                                                                        @"articles":    @{
-                                                                                          @"entity":      @"Article",
-                                                                                          @"mappings":    articleMappings},
-                                                                        @"stories":     @{
-                                                                                          @"entity":      @"Story",
-                                                                                          @"mappings":    storyMappings},
-                                                                        @"mentions":    @{
-                                                                                          @"entity":      @"Mention",
-                                                                                          @"mappings":    nestedMentionMappings},
-                                                                        @"concepts":    @{
-                                                                                          @"entity":      @"Concept",
-                                                                                          @"mappings":    conceptMappings}}
-                                                             mappings:eventMappings];
-    
-    RKEntityMapping *storyMapping = [objectManager setupEntityForName:@"Story"
-                                                          pathPattern:@"/stories"
-                                                                class:[Story class]
-                                                           identifier:@"storyId"
-                                                        relationships:@{
-                                                                        @"events":      @{
-                                                                                          @"entity":      @"Event",
-                                                                                          @"mappings":    eventMappings},
-                                                                        @"mentions":    @{
-                                                                                          @"entity":      @"Mention",
-                                                                                          @"mappings":    nestedMentionMappings},
-                                                                        @"concepts":    @{
-                                                                                          @"entity":      @"Concept",
-                                                                                          @"mappings":    conceptMappings}}
-                                                             mappings:storyMappings];
-    
-    RKEntityMapping *conceptMapping = [objectManager setupEntityForName:@"Concept"
-                                                            pathPattern:@"/concepts"
-                                                                  class:[Concept class]
-                                                             identifier:@"conceptId"
-                                                          relationships:@{
-                                                                          // TODO: adapt this to a more generic "baseEntityMappings" or something.
-                                                                          @"entities":   @{
-                                                                                          @"entity":      @"Story",
-                                                                                          @"mappings":    storyMappings}}
-                                                             mappings:conceptMappings];
-    
-    [objectManager setupEntityForName:@"Article"
-                          pathPattern:@"/articles"
-                                class:[Article class]
-                           identifier:@"articleId"
-                        relationships:@{
-                                        @"source": @{
-                                                     @"entity":   @"Source",
-                                                     @"mappings": sourceMappings}}
-                             mappings:articleMappings];
-    
-    [objectManager setupEntityForName:@"Source"
-                          pathPattern:@"/sources"
-                                class:[Source class]
-                           identifier:@"sourceId"
-                        relationships:nil
-                             mappings:sourceMappings];
-    
-    [objectManager setupEntityForName:@"Mention"
-                          pathPattern:@"/aliases"
-                                class:[Mention class]
-                           identifier:@"mentionId"
-                        relationships:nil
-                             mappings:mentionMappings];
-
-    
-    // Setup the search results mapping.
-    // =================================
-    // The search endpoint requires special handling,
-    // since it returns representations of multiple different resources.
-    RKDynamicMapping *searchMapping = [RKDynamicMapping new];
-    
-    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"event" objectMapping:eventMapping]];
-    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"story" objectMapping:storyMapping]];
-    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:conceptMapping]];
-    
-    RKResponseDescriptor *searchResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:searchMapping method:RKRequestMethodGET pathPattern:@"/search/:query" keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:searchResponseDescriptor];
-    
-    // Since we are extracting the search query using RestKit's `@metadata`, we *MUST* specify an RKRoute.
-    // Otherwise, `@metadata` is unavailable.
-    RKRoute *searchRoute = [RKRoute routeWithName:@"search" pathPattern:@"/search/:query" method:RKRequestMethodGET];
-    [objectManager.router.routeSet addRoute:searchRoute];
-    
-    
-    // Setup current user mapping.
-    // =================================
-    // We also setup Bookmarked and Watching with the CurrentUser mapping,
-    // since those results belong to the CurrentUser.
-    RKEntityMapping *currentUserMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:mos];
-    [currentUserMapping addAttributeMappingsFromDictionary:userMappings];
-    currentUserMapping.identificationAttributes = @[ @"userId" ];
-    
-    // The currently authenticated user route.
-    // =================================
-    [objectManager.router.routeSet addRoute:[RKRoute routeWithClass:[CurrentUser class] pathPattern:@"/user" method:RKRequestMethodGET]];
-    RKResponseDescriptor *currentUserResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:@"/user" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:currentUserResponseDescriptor];
-    
-    // Bookmarked
-    // =================================
-    NSString* bookmarkedPath = @"/user/bookmarked";
-    RKEntityMapping *currentUserBookmarkedMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:mos];
-    [currentUserBookmarkedMapping addAttributeMappingsFromDictionary:userMappings];
-    currentUserBookmarkedMapping.identificationAttributes = @[ @"userId" ];
-    // Setup the relationship which maps these events to the CurrentUser's "bookmarked" relationship.
-    RKRelationshipMapping *bookmarkedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"bookmarked" withMapping:eventMapping];
-    [currentUserBookmarkedMapping addPropertyMapping:bookmarkedRelationshipMapping];
-    
-    RKResponseDescriptor *bookmarkedResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserBookmarkedMapping method:RKRequestMethodGET pathPattern:bookmarkedPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:bookmarkedResponseDescriptor];
-    
-    RKRoute *bookmarkedRoute = [RKRoute routeWithName:kArgosBookmarkedStream pathPattern:bookmarkedPath method:RKRequestMethodGET];
-    [objectManager.router.routeSet addRoute:bookmarkedRoute];
-    
-    // Watching
-    // ===========================
-    NSString* watchingPath = @"/user/feed";
-    RKEntityMapping *currentUserWatchingMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:mos];
-    [currentUserWatchingMapping addAttributeMappingsFromDictionary:userMappings];
-    currentUserWatchingMapping.identificationAttributes = @[ @"userId" ];
-    // Setup the relationship which maps these events to the CurrentUser's "watching" relationship.
-    RKRelationshipMapping *watchingRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"watching" withMapping:storyMapping];
-    [currentUserWatchingMapping addPropertyMapping:watchingRelationshipMapping];
-    
-    RKResponseDescriptor *watchingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserWatchingMapping method:RKRequestMethodGET pathPattern:watchingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:watchingResponseDescriptor];
-    
-    RKRoute *watchingRoute = [RKRoute routeWithName:kArgosWatchingStream pathPattern:watchingPath method:RKRequestMethodGET];
-    [objectManager.router.routeSet addRoute:watchingRoute];
-    
-    // Latest
-    // ===========================
-    NSString* latestPath = @"/latest";
-    RKResponseDescriptor *latestResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:latestPath keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:latestResponseDescriptor];
-    
-    RKRoute *latestRoute = [RKRoute routeWithName:kArgosLatestStream pathPattern:latestPath method:RKRequestMethodGET];
-    [objectManager.router.routeSet addRoute:latestRoute];
-    
-    // Trending
-    // ===========================
-    NSString* trendingPath = @"/trending";
-    RKResponseDescriptor *trendingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:eventMapping method:RKRequestMethodGET pathPattern:trendingPath keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
-    [objectManager addResponseDescriptor:trendingResponseDescriptor];
-    
-    RKRoute *trendingRoute = [RKRoute routeWithName:kArgosTrendingStream pathPattern:trendingPath method:RKRequestMethodGET];
-    [objectManager.router.routeSet addRoute:trendingRoute];
-    
+    [objectManager mapCurrentUser];
+    [objectManager mapBookmarked];
+    [objectManager mapWatching];
+    [objectManager mapLatest];
+    [objectManager mapTrending];
+    [objectManager mapSearch];
     
     // Setup pagination mapping.
     // =================================
@@ -314,10 +78,300 @@ static NSString* const kArgosAPIClientSecret = @"test";
     return (AFOAuth2Client*)self.HTTPClient;
 }
 
+# pragma mark - Mapping current user/stream resources
+- (void)mapCurrentUser
+{
+    RKEntityMapping *currentUserMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:self.managedObjectStore];
+    [currentUserMapping addAttributeMappingsFromDictionary:[self userMappings]];
+    currentUserMapping.identificationAttributes = @[ @"userId" ];
+    
+    // The currently authenticated user route.
+    [self.router.routeSet addRoute:[RKRoute routeWithClass:[CurrentUser class] pathPattern:@"/user" method:RKRequestMethodGET]];
+    RKResponseDescriptor *currentUserResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:@"/user" keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:currentUserResponseDescriptor];
+}
+
+- (void)mapBookmarked
+{
+    NSString* bookmarkedPath = @"/user/bookmarked";
+    RKEntityMapping *currentUserBookmarkedMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:self.managedObjectStore];
+    [currentUserBookmarkedMapping addAttributeMappingsFromDictionary:[self userMappings]];
+    currentUserBookmarkedMapping.identificationAttributes = @[ @"userId" ];
+    // Setup the relationship which maps these events to the CurrentUser's "bookmarked" relationship.
+    RKRelationshipMapping *bookmarkedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"bookmarked" withMapping:[self eventMapping]];
+    [currentUserBookmarkedMapping addPropertyMapping:bookmarkedRelationshipMapping];
+    
+    RKResponseDescriptor *bookmarkedResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserBookmarkedMapping method:RKRequestMethodGET pathPattern:bookmarkedPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:bookmarkedResponseDescriptor];
+    
+    RKRoute *bookmarkedRoute = [RKRoute routeWithName:kArgosBookmarkedStream pathPattern:bookmarkedPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:bookmarkedRoute];
+}
+
+- (void)mapWatching
+{
+    NSString* watchingPath = @"/user/feed";
+    RKEntityMapping *currentUserWatchingMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:self.managedObjectStore];
+    [currentUserWatchingMapping addAttributeMappingsFromDictionary:[self userMappings]];
+    currentUserWatchingMapping.identificationAttributes = @[ @"userId" ];
+    // Setup the relationship which maps these events to the CurrentUser's "watching" relationship.
+    RKRelationshipMapping *watchingRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"watching" withMapping:[self storyMapping]];
+    [currentUserWatchingMapping addPropertyMapping:watchingRelationshipMapping];
+    
+    RKResponseDescriptor *watchingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserWatchingMapping method:RKRequestMethodGET pathPattern:watchingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:watchingResponseDescriptor];
+    
+    RKRoute *watchingRoute = [RKRoute routeWithName:kArgosWatchingStream pathPattern:watchingPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:watchingRoute];
+}
+
+- (void)mapLatest
+{
+    NSString* latestPath = @"/latest";
+    RKResponseDescriptor *latestResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[self eventMapping] method:RKRequestMethodGET pathPattern:latestPath keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:latestResponseDescriptor];
+    
+    RKRoute *latestRoute = [RKRoute routeWithName:kArgosLatestStream pathPattern:latestPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:latestRoute];
+}
+
+- (void)mapTrending
+{
+    NSString* trendingPath = @"/trending";
+    RKResponseDescriptor *trendingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:[self eventMapping] method:RKRequestMethodGET pathPattern:trendingPath keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:trendingResponseDescriptor];
+    
+    RKRoute *trendingRoute = [RKRoute routeWithName:kArgosTrendingStream pathPattern:trendingPath method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:trendingRoute];
+}
+
+- (void)mapSearch
+{
+    // The search endpoint requires special handling,
+    // since it returns representations of multiple different resources.
+    RKDynamicMapping *searchMapping = [RKDynamicMapping new];
+    
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"event" objectMapping:[self eventMapping]]];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"story" objectMapping:[self storyMapping]]];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:[self conceptMapping]]];
+    
+    RKResponseDescriptor *searchResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:searchMapping method:RKRequestMethodGET pathPattern:@"/search/:query" keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    [self addResponseDescriptor:searchResponseDescriptor];
+    
+    // Since we are extracting the search query using RestKit's `@metadata`, we *MUST* specify an RKRoute.
+    // Otherwise, `@metadata` is unavailable.
+    RKRoute *searchRoute = [RKRoute routeWithName:@"search" pathPattern:@"/search/:query" method:RKRequestMethodGET];
+    [self.router.routeSet addRoute:searchRoute];
+}
+
+# pragma mark - Mapping methods
+- (RKEntityMapping*)mentionMapping
+{
+    return [self setupEntityForName:@"Mention"
+                           identifier:@"mentionId"
+                        relationships:nil
+                             mappings:[self mentionMappings]];
+}
+
+- (RKEntityMapping*)eventMapping
+{
+    return [self setupEntityForName:@"Event"
+                         identifier:@"eventId"
+                      relationships:@{
+                                      @"articles":    @{
+                                              @"entity":      @"Article",
+                                              @"mappings":    [self articleMappings]},
+                                      @"stories":     @{
+                                              @"entity":      @"Story",
+                                              @"mappings":    [self storyMappings]},
+                                      @"mentions":    @{
+                                              @"entity":      @"Mention",
+                                              @"mappings":    [self nestedMentionMappings]},
+                                      @"concepts":    @{
+                                              @"entity":      @"Concept",
+                                              @"mappings":    [self conceptMappings]}}
+                           mappings:[self eventMappings]];
+}
+
+- (RKEntityMapping*)storyMapping
+{
+    
+    return [self setupEntityForName:@"Story"
+                         identifier:@"storyId"
+                      relationships:@{
+                                      @"events":      @{
+                                              @"entity":      @"Event",
+                                              @"mappings":    [self eventMappings]},
+                                      @"mentions":    @{
+                                              @"entity":      @"Mention",
+                                              @"mappings":    [self nestedMentionMappings]},
+                                      @"concepts":    @{
+                                              @"entity":      @"Concept",
+                                              @"mappings":    [self conceptMappings]}}
+                           mappings:[self storyMappings]];
+}
+
+- (RKEntityMapping*)conceptMapping
+{
+    return [self setupEntityForName:@"Concept"
+                         identifier:@"conceptId"
+                      relationships:@{
+                                      // TODO: adapt this to a more generic "baseEntityMappings" or something.
+                                      @"entities":   @{
+                                              @"entity":      @"Story",
+                                              @"mappings":    [self storyMappings]}}
+                           mappings:[self conceptMappings]];
+}
+
+- (RKEntityMapping*)articleMapping
+{
+    return [self setupEntityForName:@"Article"
+                         identifier:@"articleId"
+                      relationships:@{
+                                      @"source": @{
+                                              @"entity":   @"Source",
+                                              @"mappings": [self sourceMappings]}}
+                           mappings:[self articleMappings]];
+}
+
+- (RKEntityMapping*)sourceMapping
+{
+    return [self setupEntityForName:@"Source"
+                         identifier:@"sourceId"
+                      relationships:nil
+                           mappings:[self sourceMappings]];
+}
+
+# pragma mark - Dictionary mappings
+// Define API JSON response => Core Data attributes mappings.
+/*
+ A note on nested relationships in mappings.
+ These nested relationships are only valid as being passed in as the `relationships` argument
+ for:
+ - (void)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
+ 
+ Say you have a JSON representation of a "Widget", such as:
+ 
+ {
+    "id": 1,
+    "name": "some name",
+    "thing_id": 1
+ }
+ 
+ You have a resource which has a nested resource, a "Thing".
+ 
+ Say you have two Core Data (CD) models:
+ 
+ Widget:
+    widgetId:     NSInteger
+    name:         NSString
+    thing:        Thing
+ 
+ Thing:
+    thingId:      NSInteger
+    widget:       Widget
+ 
+ To properly map the Widget JSON to cover both the creation of
+ the Widget and the Thing, you would do:
+ 
+ @{
+    @"name": @"name"                    // map the JSON "name" to the Core Data "name".
+    @"relationships": @{                // "relationships" is a special key indicating nested relationships.
+        @"thing": @{                    // the relationship name that's being mapped.
+            @"entity": @"Thing",        // the name of the nested/related entity that's being mapped to.
+            @"mappings": @{             // the mappings for the nested/related entity.
+                @"thing_id": @"thingId"
+            }
+        }
+    }
+ }
+*/
+- (NSDictionary*)userMappings
+{
+    return @{
+             @"id": @"userId"};
+}
+
+- (NSDictionary*)eventMappings
+{
+    return @{
+             @"id":             @"eventId",
+             @"url":            @"jsonUrl",
+             @"title":          @"title",
+             @"score":          @"score",
+             @"image":          @"imageUrl",
+             @"summary":        @"summary",
+             @"updated_at":     @"updatedAt",
+             @"created_at":     @"createdAt",
+             @"@metadata.routing.parameters.query":     @"searchQuery"};
+}
+
+- (NSDictionary*)articleMappings
+{
+    return @{
+             @"id":             @"articleId",
+             @"url":            @"jsonUrl",
+             @"title":          @"title",
+             @"ext_url":        @"extUrl",
+             @"created_at":     @"createdAt"};
+}
+
+- (NSDictionary*)storyMappings
+{
+    return @{
+             @"id":             @"storyId",
+             @"url":            @"jsonUrl",
+             @"title":          @"title",
+             @"image":          @"imageUrl",
+             @"summary":        @"summary",
+             @"updated_at":     @"updatedAt",
+             @"created_at":     @"createdAt",
+             @"@metadata.routing.parameters.query":     @"searchQuery"};
+}
+
+- (NSDictionary*)conceptMappings
+{
+    return @{
+             @"slug":           @"conceptId",
+             @"url":            @"jsonUrl",
+             @"name":           @"title",
+             @"image":          @"imageUrl",
+             @"summary":        @"summary",
+             @"updated_at":     @"updatedAt",
+             @"created_at":     @"createdAt",
+             @"@metadata.routing.parameters.query":     @"searchQuery"};
+}
+
+- (NSDictionary*)sourceMappings
+{
+    return @{
+             @"id":             @"sourceId",
+             @"url":            @"jsonUrl",
+             @"name":           @"name",
+             @"ext_url":        @"extUrl"};
+}
+
+- (NSDictionary*)mentionMappings
+{
+    return @{
+             @"name":           @"name"};
+}
+
+- (NSDictionary*)nestedMentionMappings
+{
+    return @{
+             @"name":           @"name",
+             @"relationships":  @{
+                     @"concept": @{
+                             @"entity":     @"Concept",
+                             @"mappings":   @{
+                                     @"slug": @"conceptId"}}}};
+}
+
+# pragma mark - Convenience mapping method
 /*
  Convenience method for setting up resource/entity handling in RestKit.
- This will setup the API JSON => Core Data attribute mappings, nested relationship mappings,
- response descriptors, collection route, and member routes for the entity/resource.
+ This will setup the API JSON => Core Data attribute mappings and nested relationship mappings.
  
  Args:
     name            (NSString)      - the Core Data entity name                      e.g. "Event"
@@ -404,7 +458,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
     }]
  }
  */
-- (RKEntityMapping*)setupEntityForName:(NSString*)name pathPattern:(NSString*)pathPattern class:(Class)class identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
+- (RKEntityMapping*)setupEntityForName:(NSString*)name identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
 {
     // Setup the entity mapping.
     RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:name inManagedObjectStore:self.managedObjectStore];
@@ -436,6 +490,12 @@ static NSString* const kArgosAPIClientSecret = @"test";
         [entityMapping addRelationshipMappingWithSourceKeyPath:relationshipName mapping:relatedEntityMapping];
     }
     
+    return entityMapping;
+}
+
+// This sets up response descriptors, collection route, and member routes for an entity/resource mapping.
+- (void)setEntityMapping:(RKEntityMapping*)entityMapping ofClass:(Class)class forPathPattern:(NSString*)pathPattern withIdentifier:(NSString*)identifier
+{
     // Setup collection route.
     // e.g. /events
     // Collection routes responses look like:
@@ -454,8 +514,6 @@ static NSString* const kArgosAPIClientSecret = @"test";
     [self.router.routeSet addRoute:[RKRoute routeWithClass:class pathPattern:memberPathPattern method:RKRequestMethodGET]];
     RKResponseDescriptor *memberResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:entityMapping method:RKRequestMethodGET pathPattern:memberPathPattern keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self addResponseDescriptor:memberResponseDescriptor];
-    
-    return entityMapping;
 }
 
 @end

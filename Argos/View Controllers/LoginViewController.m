@@ -211,9 +211,9 @@ static int kSignUpTag = 1;
                            }];
     } else {
         [self primaryButtonEndLoading];
+        NSLog(@"%@", response);
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Invalid credentials"
-                                                        message:@"You couldn't be logged in\
-                                                                with the info you provided."
+                                                        message:@"You couldn't be logged in with the info you provided."
                                                        delegate:self
                                               cancelButtonTitle:@"OK"
                                               otherButtonTitles:nil];

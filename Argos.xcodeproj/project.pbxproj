@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2661848B0D3E47FBA1587BCF /* libPods-ArgosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */; };
 		8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
 		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
@@ -43,6 +44,8 @@
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
 		F18F5CB818D6139D000AA42E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
 		F18F5CBA18D61495000AA42E /* ScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F18F5CB918D61495000AA42E /* ScrollViewTest.m */; };
+		F18F5CBD18D64592000AA42E /* events.json in Resources */ = {isa = PBXBuildFile; fileRef = F18F5CBC18D64592000AA42E /* events.json */; };
+		F18F5CC518D65D35000AA42E /* event.json in Resources */ = {isa = PBXBuildFile; fileRef = F18F5CC418D65D35000AA42E /* event.json */; };
 		F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */; };
 		F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915D7818D2BA60005811E6 /* BaseEntity.m */; };
 		F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915DF918D2C3DC005811E6 /* Concept.m */; };
@@ -150,6 +153,8 @@
 		F1601C0818ABDC3800C89590 /* ArgosObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosObjectManager.m; sourceTree = "<group>"; };
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
 		F18F5CB918D61495000AA42E /* ScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewTest.m; sourceTree = "<group>"; };
+		F18F5CBC18D64592000AA42E /* events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = events.json; path = Fixtures/events.json; sourceTree = "<group>"; };
+		F18F5CC418D65D35000AA42E /* event.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = event.json; path = Fixtures/event.json; sourceTree = "<group>"; };
 		F1915D5718D2B8F7005811E6 /* Argos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Argos.xcdatamodel; sourceTree = "<group>"; };
 		F1915D7718D2BA60005811E6 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		F1915D7818D2BA60005811E6 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
@@ -272,6 +277,7 @@
 				F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */,
 				F1405C3E18973C4C00A4819D /* Foundation.framework in Frameworks */,
 				8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */,
+				2661848B0D3E47FBA1587BCF /* libPods-ArgosTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +381,7 @@
 			isa = PBXGroup;
 			children = (
 				F1405C4318973C4C00A4819D /* Supporting Files */,
+				F18F5CBB18D64513000AA42E /* Fixtures */,
 				F19199FC18D60E8700AB9F6D /* CollectionViewTest.m */,
 				F18F5CB918D61495000AA42E /* ScrollViewTest.m */,
 			);
@@ -388,6 +395,15 @@
 				F1405C4518973C4C00A4819D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F18F5CBB18D64513000AA42E /* Fixtures */ = {
+			isa = PBXGroup;
+			children = (
+				F18F5CBC18D64592000AA42E /* events.json */,
+				F18F5CC418D65D35000AA42E /* event.json */,
+			);
+			name = Fixtures;
 			sourceTree = "<group>";
 		};
 		F1915E3418D34B5E005811E6 /* Elements */ = {
@@ -729,6 +745,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F18F5CC518D65D35000AA42E /* event.json in Resources */,
+				F18F5CBD18D64592000AA42E /* events.json in Resources */,
 				F1405C4718973C4C00A4819D /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1024,7 +1042,7 @@
 				);
 				INFOPLIST_FILE = "ArgosTests/ArgosTests-Info.plist";
 				OTHER_LDFLAGS = (
-					"-ObjC",
+					"$(inherited)",
 					"-framework",
 					XCTest,
 				);
@@ -1049,7 +1067,7 @@
 				GCC_PREFIX_HEADER = "Argos/Argos-Prefix.pch";
 				INFOPLIST_FILE = "ArgosTests/ArgosTests-Info.plist";
 				OTHER_LDFLAGS = (
-					"-ObjC",
+					"$(inherited)",
 					"-framework",
 					XCTest,
 				);
