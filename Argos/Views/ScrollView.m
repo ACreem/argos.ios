@@ -37,7 +37,7 @@
     // its origin 16pt further down. You may need to wrap padded views in subviews (though
     // often this works to the benefit of view organization/encapsulation).
     CGFloat tmpYOffset = self.yOffset;
-    for (UIView *v in [self subviews]) {
+    for (UIView *v in self.subviews) {
         CGRect frame = v.frame;
         frame.origin.y = tmpYOffset;
         v.frame = frame;

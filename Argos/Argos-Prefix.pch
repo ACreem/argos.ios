@@ -26,4 +26,6 @@
     #else
         static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com";
     #endif
+    static CGFloat const kMidCellHeight = 120.0;
+    static CGFloat const kLargeCellHeight = 220.0;
 #endif

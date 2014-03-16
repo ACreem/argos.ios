@@ -26,7 +26,7 @@
     [super viewDidLoad];
 
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    _navigationController = appDelegate.navigationController;
+    self.navigationController = appDelegate.navigationController;
     self.viewDeckController.delegate = self;
     
     // Register the Cell class to use for table cells.
@@ -46,9 +46,9 @@
     }
     [self.tableView setSeparatorColor:[UIColor colorWithRed:0.106 green:0.122 blue:0.149 alpha:1.0]];
     
-    _streams = [[NSMutableArray alloc] initWithObjects:@"Trending", @"Watching", @"Latest", nil];
-    _user = [[NSMutableArray alloc] initWithObjects:@"Bookmarks", @"Settings", @"Logout", nil];
-    _search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
+    self.streams = [[NSMutableArray alloc] initWithObjects:@"Trending", @"Watching", @"Latest", nil];
+    self.user = [[NSMutableArray alloc] initWithObjects:@"Bookmarks", @"Settings", @"Logout", nil];
+    self.search = [[NSMutableArray alloc] initWithObjects:@"Search", nil];
     [self.tableView reloadData];
  
 }

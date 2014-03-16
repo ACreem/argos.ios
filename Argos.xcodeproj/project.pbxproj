@@ -87,10 +87,7 @@
 		F194A59118D2A0ED00792451 /* ArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */; };
 		F194A59218D2A0ED00792451 /* CardCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55E18D2A0ED00792451 /* CardCollectionViewCell.m */; };
 		F194A59318D2A0ED00792451 /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56018D2A0ED00792451 /* CollectionViewCell.m */; };
-		F194A59418D2A0ED00792451 /* EmbeddedCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56218D2A0ED00792451 /* EmbeddedCollectionViewCell.m */; };
-		F194A59518D2A0ED00792451 /* FullPageCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56418D2A0ED00792451 /* FullPageCollectionViewCell.m */; };
 		F194A59618D2A0ED00792451 /* GalleryImageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56618D2A0ED00792451 /* GalleryImageViewCell.m */; };
-		F194A59718D2A0ED00792451 /* SnippetCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56818D2A0ED00792451 /* SnippetCollectionViewCell.m */; };
 		F194A59818D2A0ED00792451 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56A18D2A0ED00792451 /* LoginView.m */; };
 		F194A59B18D2A4D300792451 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A59A18D2A4D300792451 /* WebViewController.m */; };
 		F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */; };
@@ -239,14 +236,8 @@
 		F194A55E18D2A0ED00792451 /* CardCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CardCollectionViewCell.m; sourceTree = "<group>"; };
 		F194A55F18D2A0ED00792451 /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		F194A56018D2A0ED00792451 /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
-		F194A56118D2A0ED00792451 /* EmbeddedCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmbeddedCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56218D2A0ED00792451 /* EmbeddedCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmbeddedCollectionViewCell.m; sourceTree = "<group>"; };
-		F194A56318D2A0ED00792451 /* FullPageCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FullPageCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56418D2A0ED00792451 /* FullPageCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FullPageCollectionViewCell.m; sourceTree = "<group>"; };
 		F194A56518D2A0ED00792451 /* GalleryImageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryImageViewCell.h; sourceTree = "<group>"; };
 		F194A56618D2A0ED00792451 /* GalleryImageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryImageViewCell.m; sourceTree = "<group>"; };
-		F194A56718D2A0ED00792451 /* SnippetCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SnippetCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A56818D2A0ED00792451 /* SnippetCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SnippetCollectionViewCell.m; sourceTree = "<group>"; };
 		F194A56918D2A0ED00792451 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		F194A56A18D2A0ED00792451 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		F194A59918D2A4D300792451 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
@@ -452,6 +443,17 @@
 			name = Detail;
 			sourceTree = "<group>";
 		};
+		F19199FB18D5623100AB9F6D /* Collection */ = {
+			isa = PBXGroup;
+			children = (
+				F194A55018D2A0ED00792451 /* CollectionHeaderView.h */,
+				F194A55118D2A0ED00792451 /* CollectionHeaderView.m */,
+				F194A55218D2A0ED00792451 /* CollectionView.h */,
+				F194A55318D2A0ED00792451 /* CollectionView.m */,
+			);
+			name = Collection;
+			sourceTree = "<group>";
+		};
 		F194A50218D2A0EC00792451 /* Hacks */ = {
 			isa = PBXGroup;
 			children = (
@@ -581,10 +583,7 @@
 				F1915E3418D34B5E005811E6 /* Elements */,
 				F1915E7018D37F24005811E6 /* User */,
 				F1915E7118D39201005811E6 /* Detail */,
-				F194A55018D2A0ED00792451 /* CollectionHeaderView.h */,
-				F194A55118D2A0ED00792451 /* CollectionHeaderView.m */,
-				F194A55218D2A0ED00792451 /* CollectionView.h */,
-				F194A55318D2A0ED00792451 /* CollectionView.m */,
+				F19199FB18D5623100AB9F6D /* Collection */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -598,14 +597,8 @@
 				F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */,
 				F194A55D18D2A0ED00792451 /* CardCollectionViewCell.h */,
 				F194A55E18D2A0ED00792451 /* CardCollectionViewCell.m */,
-				F194A56118D2A0ED00792451 /* EmbeddedCollectionViewCell.h */,
-				F194A56218D2A0ED00792451 /* EmbeddedCollectionViewCell.m */,
-				F194A56318D2A0ED00792451 /* FullPageCollectionViewCell.h */,
-				F194A56418D2A0ED00792451 /* FullPageCollectionViewCell.m */,
 				F194A56518D2A0ED00792451 /* GalleryImageViewCell.h */,
 				F194A56618D2A0ED00792451 /* GalleryImageViewCell.m */,
-				F194A56718D2A0ED00792451 /* SnippetCollectionViewCell.h */,
-				F194A56818D2A0ED00792451 /* SnippetCollectionViewCell.m */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -820,11 +813,9 @@
 				F194A59318D2A0ED00792451 /* CollectionViewCell.m in Sources */,
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
-				F194A59518D2A0ED00792451 /* FullPageCollectionViewCell.m in Sources */,
 				F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */,
 				F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */,
 				F194A57C18D2A0ED00792451 /* CollectionViewController.m in Sources */,
-				F194A59418D2A0ED00792451 /* EmbeddedCollectionViewCell.m in Sources */,
 				F1915E5218D36875005811E6 /* Event+Management.m in Sources */,
 				F194A59618D2A0ED00792451 /* GalleryImageViewCell.m in Sources */,
 				F194A59218D2A0ED00792451 /* CardCollectionViewCell.m in Sources */,
@@ -832,7 +823,6 @@
 				F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */,
 				F194A57818D2A0ED00792451 /* UIFont+ArgosFonts.m in Sources */,
 				F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */,
-				F194A59718D2A0ED00792451 /* SnippetCollectionViewCell.m in Sources */,
 				F1915E5618D36EB5005811E6 /* Story+Management.m in Sources */,
 				F1915E3718D35275005811E6 /* DetailView.m in Sources */,
 				F194A57F18D2A0ED00792451 /* StoryTimelineViewController.m in Sources */,

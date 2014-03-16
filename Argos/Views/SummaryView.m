@@ -44,26 +44,26 @@
                                                                       30.0 + paddingY)];
         
         // Setup time ago
-        self.timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(paddingX,
+        _timeLabel = [[UILabel alloc] initWithFrame:CGRectMake(paddingX,
                                                                paddingY,
                                                                CGRectGetWidth(bounds) - (paddingX*2),
                                                                20.0)];
-        self.timeLabel.font = [UIFont lightFontForSize:10];
-        self.timeLabel.textColor = [UIColor mutedColor];
-        [headerView addSubview:self.timeLabel];
+        _timeLabel.font = [UIFont lightFontForSize:10];
+        _timeLabel.textColor = [UIColor mutedColor];
+        [headerView addSubview:_timeLabel];
         [self addSubview:headerView];
         
         // Setup summary text
-        self.summaryWebView = [[UIWebView alloc] initWithFrame:CGRectMake(paddingX,
-                                                                      CGRectGetMinY(self.timeLabel.frame) + CGRectGetHeight(self.timeLabel.frame) + paddingY*2,
+        _summaryWebView = [[UIWebView alloc] initWithFrame:CGRectMake(paddingX,
+                                                                      CGRectGetMinY(_timeLabel.frame) + CGRectGetHeight(_timeLabel.frame) + paddingY*2,
                                                                       CGRectGetWidth(bounds) - (paddingX*2),
                                                                       200.0)];
-        self.summaryWebView.backgroundColor = [UIColor clearColor];
-        self.summaryWebView.opaque = NO;
-        self.summaryWebView.delegate = self;
-        self.summaryWebView.scrollView.scrollEnabled = NO;
-        self.summaryWebView.scrollView.bounces = NO;
-        [self addSubview:self.summaryWebView];
+        _summaryWebView.backgroundColor = [UIColor clearColor];
+        _summaryWebView.opaque = NO;
+        _summaryWebView.delegate = self;
+        _summaryWebView.scrollView.scrollEnabled = NO;
+        _summaryWebView.scrollView.bounces = NO;
+        [self addSubview:_summaryWebView];
         
         [self sizeToFit];
     }

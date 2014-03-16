@@ -10,7 +10,7 @@
 #import "StoryDetailViewController.h"
 
 #import "EmbeddedCollectionViewController.h"
-#import "EmbeddedCollectionViewCell.h"
+#import "CollectionViewCell.h"
 
 #import "Story.h"
 
@@ -47,7 +47,7 @@
     }
     
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 120)];
+    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), kMidCellHeight)];
     
     // Mentions (story) list
     self.mentionList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.entities]];
@@ -55,7 +55,7 @@
     self.mentionList.delegate = self;
     self.mentionList.title = @"Mentions";
     
-    [self.mentionList.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.mentionList.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:self.mentionList];
     [self.view.scrollView addSubview:self.mentionList.collectionView];
@@ -64,7 +64,7 @@
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate
-- (CollectionViewCell*)configureCell:(EmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
+- (CollectionViewCell*)configureCell:(CollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.mentionList) {
         Story *story = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

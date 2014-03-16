@@ -93,11 +93,13 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     // Save core data.
+    /*
     NSError *executeError = nil;
     NSManagedObjectContext *managedObjCtx = [RKManagedObjectStore defaultStore].mainQueueManagedObjectContext;
     if(![managedObjCtx saveToPersistentStore:&executeError]) {
         NSLog(@"Failed to save to data store");
     }
+     */
 }
 
 - (NSManagedObjectContext*)setupRestKit
@@ -110,7 +112,16 @@
     // Initialize the Core Data stack.
     [managedObjectStore createPersistentStoreCoordinator];
     
-    NSPersistentStore __unused *persistentStore = [managedObjectStore addInMemoryPersistentStore:&error];
+    //NSPersistentStore __unused *persistentStore = [managedObjectStore addInMemoryPersistentStore:&error];
+    NSString *path = [RKApplicationDataDirectory() stringByAppendingPathComponent:@"Argos.sqlite"];
+    NSPersistentStore *persistentStore = [managedObjectStore addSQLitePersistentStoreAtPath:path
+                                                                     fromSeedDatabaseAtPath:nil
+                                                                          withConfiguration:nil
+                                                                                    options:@{
+                                                                                              NSInferMappingModelAutomaticallyOption: @YES,
+                                                                                              NSMigratePersistentStoresAutomaticallyOption: @YES}
+                                                                                      error:&error];
+
     NSAssert(persistentStore, @"Failed to add persistent store: %@", error);
     
     [managedObjectStore createManagedObjectContexts];

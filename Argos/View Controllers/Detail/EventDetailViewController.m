@@ -12,7 +12,7 @@
 
 #import "EmbeddedCollectionViewController.h"
 #import "ArticleCollectionViewCell.h"
-#import "EmbeddedCollectionViewCell.h"
+#import "CollectionViewCell.h"
 
 #import "Article.h"
 #import "Source.h"
@@ -48,33 +48,33 @@
     } else {
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
         [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
-        _storyList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
-        _storyList.managedObjectContext = self.entity.managedObjectContext;
-        _storyList.delegate = self;
-        _storyList.title = @"Stories";
-        [_storyList.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-        [self addChildViewController:_storyList];
-        [self.view.scrollView addSubview:_storyList.view];
-        [_storyList didMoveToParentViewController:self];
+        self.storyList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
+        self.storyList.managedObjectContext = self.entity.managedObjectContext;
+        self.storyList.delegate = self;
+        self.storyList.title = @"Stories";
+        [self.storyList.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [self addChildViewController:self.storyList];
+        [self.view.scrollView addSubview:self.storyList.view];
+        [self.storyList didMoveToParentViewController:self];
     }
-    [self getEntities:self.entity.stories forCollectionView:_storyList];
+    [self getEntities:self.entity.stories forCollectionView:self.storyList];
     
     [self getConcepts:self.entity.concepts];
     
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
-    _articleList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
-    _articleList.managedObjectContext = self.entity.managedObjectContext;
-    _articleList.delegate = self;
-    _articleList.title = @"In Greater Depth";
+    self.articleList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
+    self.articleList.managedObjectContext = self.entity.managedObjectContext;
+    self.articleList.delegate = self;
+    self.articleList.title = @"In Greater Depth";
     
-    [_articleList.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.articleList.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
-    [self addChildViewController:_articleList];
-    [self.view.scrollView addSubview:_articleList.collectionView];
-    [_articleList didMoveToParentViewController:self];
+    [self addChildViewController:self.articleList];
+    [self.view.scrollView addSubview:self.articleList.collectionView];
+    [self.articleList didMoveToParentViewController:self];
     
-    [self getEntities:self.entity.articles forCollectionView:_articleList];
+    [self getEntities:self.entity.articles forCollectionView:self.articleList];
 }
 
 - (NSArray*)navigationItems
@@ -132,7 +132,7 @@
 # pragma mark - EmbeddedCollectionViewControllerDelegate
 - (CollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
-    if (embeddedCollectionViewController == _articleList) {
+    if (embeddedCollectionViewController == self.articleList) {
         Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
         
         cell.titleLabel.text = article.title;
@@ -144,7 +144,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView == _articleList.collectionView) {
+    if (collectionView == self.articleList.collectionView) {
         Article *article = [[self.entity.articles allObjects] objectAtIndex:indexPath.row];
         WebViewController *webView = [[WebViewController alloc] initWithURL:article.extUrl];
         [self.navigationController pushViewController:webView animated:YES];

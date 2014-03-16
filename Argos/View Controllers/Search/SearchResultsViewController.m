@@ -7,7 +7,7 @@
 //
 
 #import "SearchResultsViewController.h"
-#import "EmbeddedCollectionViewCell.h"
+#import "CollectionViewCell.h"
 #import "SearchViewController.h"
 #import "NSDate+TimeAgo.h"
 #import "BaseEntity.h"
@@ -44,7 +44,7 @@
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.backgroundColor = [UIColor primaryColor];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -57,7 +57,7 @@
 # pragma mark - UICollectionViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    EmbeddedCollectionViewCell *cell = (EmbeddedCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

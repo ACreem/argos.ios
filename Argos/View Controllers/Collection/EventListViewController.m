@@ -8,7 +8,7 @@
 
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
-#import "FullPageCollectionViewCell.h"
+#import "CollectionViewCell.h"
 #import "Event.h"
 
 @interface EventListViewController ()
@@ -45,7 +45,7 @@
     screenRect.size.height -= ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height);
     [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:screenRect.size];
     
-    [self.collectionView registerClass:[FullPageCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.backgroundColor = [UIColor colorWithRed:0.078 green:0.086 blue:0.114 alpha:1.0];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -75,7 +75,7 @@
 # pragma mark - UIControllerViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    FullPageCollectionViewCell *cell = (FullPageCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

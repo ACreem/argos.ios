@@ -159,7 +159,6 @@ static NSString* kPalatinoType = @"Palatino";
 }
 
 # pragma mark - UITabBarDelegate
-
 - (void)tabBar:(UITabBar *)tabBar didSelectItem:(UITabBarItem *)item
 {
     NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];

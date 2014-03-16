@@ -27,63 +27,63 @@
         self.backgroundColor = [UIColor whiteColor];
         
         // Scroll view
-        self.scrollView = [[ScrollView alloc] initWithFrame:frame verticalOffset:headerImageHeight];
+        _scrollView = [[ScrollView alloc] initWithFrame:frame verticalOffset:headerImageHeight];
         
         // Header view
-        self.headerView = [[ImageHeaderView alloc] initWithFrame:CGRectMake(CGRectGetMinX(frame),
+        _headerView = [[ImageHeaderView alloc] initWithFrame:CGRectMake(CGRectGetMinX(frame),
                                                                               CGRectGetMinY(frame),
                                                                               CGRectGetWidth(frame),
                                                                               headerImageHeight)];
-        [self addSubview:self.headerView];
+        [self addSubview:_headerView];
         
         // Progress view
-        self.progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
-        self.progressView.frame = CGRectMake(0, 0, CGRectGetWidth(frame), 20);
-        self.progressView.tintColor = [UIColor actionColor];
-        self.progressView.trackTintColor = [UIColor mutedColor];
-        [self.scrollView addSubview:self.progressView];
+        _progressView = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleBar];
+        _progressView.frame = CGRectMake(0, 0, CGRectGetWidth(frame), 20);
+        _progressView.tintColor = [UIColor actionColor];
+        _progressView.trackTintColor = [UIColor mutedColor];
+        [_scrollView addSubview:_progressView];
         
         // Title view
         CGFloat titlePadding = 16.0;
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titlePadding,
+        _titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titlePadding,
                                                                     CGRectGetMinY(frame),
                                                                     CGRectGetWidth(frame) - titlePadding*2,
-                                                                    CGRectGetHeight(self.headerView.bounds))];
-        self.titleLabel.textColor = [UIColor whiteColor];
-        self.titleLabel.font = [UIFont titleFontForSize:20];
-        self.titleLabel.numberOfLines = 0;
-        [self addSubview:self.titleLabel];
+                                                                    CGRectGetHeight(_headerView.bounds))];
+        _titleLabel.textColor = [UIColor whiteColor];
+        _titleLabel.font = [UIFont titleFontForSize:20];
+        _titleLabel.numberOfLines = 0;
+        [self addSubview:_titleLabel];
         
         // Summary view
-        CGPoint summaryOrigin = CGPointMake(0, CGRectGetHeight(self.headerView.frame));
-        self.summaryView = [[SummaryView alloc] initWithOrigin:summaryOrigin];
-        [self.scrollView addSubview:self.summaryView];
+        CGPoint summaryOrigin = CGPointMake(0, CGRectGetHeight(_headerView.frame));
+        _summaryView = [[SummaryView alloc] initWithOrigin:summaryOrigin];
+        [_scrollView addSubview:_summaryView];
         
         // Actions view
         CGFloat yPadding = 8.0;
-        self.actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-        self.actionButton.titleLabel.font = [UIFont mediumFontForSize:14];
-        [self.actionButton sizeToFit];
-        self.actionButton.tintColor = [UIColor actionColor];
-        [[self.actionButton layer] setBorderWidth:1.0];
-        [[self.actionButton layer] setBorderColor:[UIColor actionColor].CGColor];
-        [[self.actionButton layer] setCornerRadius:4.0];
-        self.actionButton.frame = CGRectMake(CGRectGetWidth(frame)/2 - CGRectGetWidth(self.actionButton.frame)/2,
+        _actionButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        _actionButton.titleLabel.font = [UIFont mediumFontForSize:14];
+        [_actionButton sizeToFit];
+        _actionButton.tintColor = [UIColor actionColor];
+        [[_actionButton layer] setBorderWidth:1.0];
+        [[_actionButton layer] setBorderColor:[UIColor actionColor].CGColor];
+        [[_actionButton layer] setCornerRadius:4.0];
+        _actionButton.frame = CGRectMake(CGRectGetWidth(frame)/2 - CGRectGetWidth(_actionButton.frame)/2,
                                              yPadding*2,
-                                             CGRectGetWidth(self.actionButton.frame) + 20,
-                                             CGRectGetHeight(self.actionButton.frame));
+                                             CGRectGetWidth(_actionButton.frame) + 20,
+                                             CGRectGetHeight(_actionButton.frame));
         
-        self.actionsView = [[UIView alloc] initWithFrame:CGRectMake(0,
-                                                                    CGRectGetMinY(self.summaryView.summaryWebView.frame)
-                                                                    + CGRectGetHeight(self.summaryView.summaryWebView.frame),
+        _actionsView = [[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                    CGRectGetMinY(_summaryView.summaryWebView.frame)
+                                                                    + CGRectGetHeight(_summaryView.summaryWebView.frame),
                                                                     CGRectGetWidth(frame),
-                                                                    CGRectGetHeight(self.actionButton.frame)+2*yPadding)];
-        [self.actionsView addSubview:self.actionButton];
-        self.actionsView.hidden = YES;
-        [self.summaryView addSubview:self.actionsView];
+                                                                    CGRectGetHeight(_actionButton.frame)+2*yPadding)];
+        [_actionsView addSubview:_actionButton];
+        _actionsView.hidden = YES;
+        [_summaryView addSubview:_actionsView];
         
-        [self addSubview:self.scrollView];
-        [self.scrollView sizeToFit];
+        [self addSubview:_scrollView];
+        [_scrollView sizeToFit];
     }
     return self;
 }

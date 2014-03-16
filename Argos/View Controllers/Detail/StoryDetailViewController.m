@@ -10,7 +10,7 @@
 #import "EventDetailViewController.h"
 
 #import "EmbeddedCollectionViewController.h"
-#import "EmbeddedCollectionViewCell.h"
+#import "CollectionViewCell.h"
 
 #import "Event.h"
 #import "Concept.h"
@@ -38,13 +38,13 @@
     self.totalItems = self.entity.events.count + self.entity.concepts.count;
     
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 120)];
+    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), kMidCellHeight)];
     self.eventList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.events]];
     self.eventList.managedObjectContext = self.entity.managedObjectContext;
     self.eventList.delegate = self;
     self.eventList.title = @"Events";
     
-    [self.eventList.collectionView registerClass:[EmbeddedCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.eventList.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     
     [self addChildViewController:self.eventList];
     [self.view.scrollView addSubview:self.eventList.collectionView];
@@ -128,7 +128,7 @@
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate
-- (CollectionViewCell*)configureCell:(EmbeddedCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
+- (CollectionViewCell*)configureCell:(CollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.eventList) {
         Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

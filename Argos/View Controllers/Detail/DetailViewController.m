@@ -303,7 +303,7 @@
             
             if ([subview isKindOfClass:[CollectionView class]]) {
                 CollectionView* colview = (CollectionView*)subview;
-                if (y > CGRectGetMinY(subview.frame) && _stuckSectionHeaderView != colview.headerView) {
+                if (y > CGRectGetMinY(subview.frame) && self.stuckSectionHeaderView != colview.headerView) {
                     selectedHeader = colview.headerView;
                 }
             }
@@ -313,14 +313,14 @@
         if (selectedHeader) {
             
             // Restore old header to position in UIScrollView
-            if (_stuckSectionHeaderView) {
-                _stuckSectionHeaderView.frame = _stuckSectionHeaderViewFrame;
-                [_stuckSectionHeaderView removeFromSuperview];
-                [_stuckSectionHeaderSuperview addSubview:_stuckSectionHeaderView];
+            if (self.stuckSectionHeaderView) {
+                self.stuckSectionHeaderView.frame = self.stuckSectionHeaderViewFrame;
+                [self.stuckSectionHeaderView removeFromSuperview];
+                [self.stuckSectionHeaderSuperview addSubview:self.stuckSectionHeaderView];
                 
                 [UIView animateWithDuration:0.2 animations:^{
-                    _stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
-                    _stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
+                    self.stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
+                    self.stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
                 }];
             }
             
@@ -330,9 +330,9 @@
             //  - the header view's superview (which could be the scroll view itself)
             //  - the original frame of the header view
             CGRect headerFrame = selectedHeader.frame;
-            _stuckSectionHeaderView = selectedHeader;
-            _stuckSectionHeaderViewFrame = headerFrame;
-            _stuckSectionHeaderSuperview = selectedHeader.superview;
+            self.stuckSectionHeaderView = selectedHeader;
+            self.stuckSectionHeaderViewFrame = headerFrame;
+            self.stuckSectionHeaderSuperview = selectedHeader.superview;
             
             // Remove the new header from its original superview.
             [selectedHeader removeFromSuperview];
@@ -356,22 +356,22 @@
             // otherwise it needs to be checked relative to its original
             // superview's frame.
             float threshold;
-            if (_stuckSectionHeaderSuperview == self.view.scrollView) {
-                threshold = CGRectGetMinY(_stuckSectionHeaderViewFrame);
+            if (self.stuckSectionHeaderSuperview == self.view.scrollView) {
+                threshold = CGRectGetMinY(self.stuckSectionHeaderViewFrame);
             } else {
-                threshold = CGRectGetMinY(_stuckSectionHeaderSuperview.frame);
+                threshold = CGRectGetMinY(self.stuckSectionHeaderSuperview.frame);
             }
             if (y < threshold) {
-                _stuckSectionHeaderView.frame = _stuckSectionHeaderViewFrame;
-                [_stuckSectionHeaderView removeFromSuperview];
-                [_stuckSectionHeaderSuperview addSubview:_stuckSectionHeaderView];
+                self.stuckSectionHeaderView.frame = self.stuckSectionHeaderViewFrame;
+                [self.stuckSectionHeaderView removeFromSuperview];
+                [self.stuckSectionHeaderSuperview addSubview:self.stuckSectionHeaderView];
                 
                 [UIView animateWithDuration:0.2 animations:^{
-                    _stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
-                    _stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
+                    self.stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
+                    self.stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
                 }];
                 
-                _stuckSectionHeaderView = nil;
+                self.stuckSectionHeaderView = nil;
             }
         }
         

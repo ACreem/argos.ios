@@ -7,7 +7,7 @@
 //
 
 #import "MentionsViewController.h"
-#import "SnippetCollectionViewCell.h"
+#import "CollectionViewCell.h"
 
 #import "Concept.h"
 
@@ -29,7 +29,7 @@
     
     // Temporary, these are overridden later according to the view deck controller's ledge size.
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    [flowLayout setItemSize:CGSizeMake(screenRect.size.width, 220)];
+    [flowLayout setItemSize:CGSizeMake(screenRect.size.width, kLargeCellHeight)];
     [flowLayout setSectionInset:UIEdgeInsetsZero];
     
     self.managedObjectContext = concept.managedObjectContext;
@@ -42,7 +42,7 @@
 {
     [super viewDidLoad];
     
-    [self.collectionView registerClass:[SnippetCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceVertical = NO;
@@ -56,7 +56,7 @@
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     float ledgeSize = self.viewDeckController.rightSize;
     float itemWidth = screenRect.size.width - ledgeSize;
-    [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:CGSizeMake(screenRect.size.width - ledgeSize, 220)];
+    [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:CGSizeMake(screenRect.size.width - ledgeSize, kLargeCellHeight)];
     [(UICollectionViewFlowLayout*)self.collectionViewLayout setSectionInset:UIEdgeInsetsMake(64, ledgeSize, 0, 0)];
     
     // Setup the header.
@@ -74,7 +74,7 @@
 # pragma mark - UIControllerViewDelegate
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    SnippetCollectionViewCell *cell = (SnippetCollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Concept* concept = [self.fetchedResultsController objectAtIndexPath:indexPath];
     

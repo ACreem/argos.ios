@@ -34,8 +34,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
 + (ArgosObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Create an Argos OAuth2 client.
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
@@ -248,11 +248,14 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Bookmarked
     // =================================
     NSString* bookmarkedPath = @"/user/bookmarked";
+    RKEntityMapping *currentUserBookmarkedMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:mos];
+    [currentUserBookmarkedMapping addAttributeMappingsFromDictionary:userMappings];
+    currentUserBookmarkedMapping.identificationAttributes = @[ @"userId" ];
     // Setup the relationship which maps these events to the CurrentUser's "bookmarked" relationship.
     RKRelationshipMapping *bookmarkedRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"bookmarked" withMapping:eventMapping];
-    [currentUserMapping addPropertyMapping:bookmarkedRelationshipMapping];
+    [currentUserBookmarkedMapping addPropertyMapping:bookmarkedRelationshipMapping];
     
-    RKResponseDescriptor *bookmarkedResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:bookmarkedPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor *bookmarkedResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserBookmarkedMapping method:RKRequestMethodGET pathPattern:bookmarkedPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [objectManager addResponseDescriptor:bookmarkedResponseDescriptor];
     
     RKRoute *bookmarkedRoute = [RKRoute routeWithName:kArgosBookmarkedStream pathPattern:bookmarkedPath method:RKRequestMethodGET];
@@ -261,11 +264,14 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // Watching
     // ===========================
     NSString* watchingPath = @"/user/feed";
+    RKEntityMapping *currentUserWatchingMapping = [RKEntityMapping mappingForEntityForName:@"CurrentUser" inManagedObjectStore:mos];
+    [currentUserWatchingMapping addAttributeMappingsFromDictionary:userMappings];
+    currentUserWatchingMapping.identificationAttributes = @[ @"userId" ];
     // Setup the relationship which maps these events to the CurrentUser's "watching" relationship.
     RKRelationshipMapping *watchingRelationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:nil toKeyPath:@"watching" withMapping:storyMapping];
-    [currentUserMapping addPropertyMapping:watchingRelationshipMapping];
+    [currentUserWatchingMapping addPropertyMapping:watchingRelationshipMapping];
     
-    RKResponseDescriptor *watchingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserMapping method:RKRequestMethodGET pathPattern:watchingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
+    RKResponseDescriptor *watchingResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:currentUserWatchingMapping method:RKRequestMethodGET pathPattern:watchingPath keyPath:nil statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [objectManager addResponseDescriptor:watchingResponseDescriptor];
     
     RKRoute *watchingRoute = [RKRoute routeWithName:kArgosWatchingStream pathPattern:watchingPath method:RKRequestMethodGET];
