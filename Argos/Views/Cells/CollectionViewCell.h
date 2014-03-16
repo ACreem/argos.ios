@@ -5,10 +5,11 @@
 //  Created by Francis Tseng on 2/24/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
-//  ==========================================================
-//  Abstract CollectionViewCell which others are based off of.
+//  ==========================================
+//  The primary CollectionViewCell with a full
+//  background image and text over it.
 //  This handles its own image cropping.
-//  ==========================================================
+//  ==========================================
 
 @class BaseEntity;
 

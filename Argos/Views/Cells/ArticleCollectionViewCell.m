@@ -14,7 +14,7 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        float padding = 10;
+        CGFloat padding = 10;
         
         // Unlike most other cell views, the ArticleCollectionViewCell does not have full-cell images.
         CGSize imageSize = CGSizeMake(CGRectGetHeight(self.frame) - 2*padding,

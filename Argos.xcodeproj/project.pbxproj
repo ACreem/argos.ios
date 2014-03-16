@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		227356C5D8D74AD5B091E0E3 /* libPods-ArgosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */; };
 		8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
 		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
@@ -42,12 +41,15 @@
 		F14603B418A41FB100A85E0F /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
 		F1601C0918ABDC3800C89590 /* ArgosObjectManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F1601C0818ABDC3800C89590 /* ArgosObjectManager.m */; };
 		F162C0A718B6EB9600B38A15 /* defaultPrefs.plist in Resources */ = {isa = PBXBuildFile; fileRef = F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */; };
+		F18F5CB818D6139D000AA42E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F14603B318A41FB100A85E0F /* SystemConfiguration.framework */; };
+		F18F5CBA18D61495000AA42E /* ScrollViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F18F5CB918D61495000AA42E /* ScrollViewTest.m */; };
 		F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F1915D5618D2B8F7005811E6 /* Argos.xcdatamodeld */; };
 		F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915D7818D2BA60005811E6 /* BaseEntity.m */; };
 		F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915DF918D2C3DC005811E6 /* Concept.m */; };
 		F1915E3718D35275005811E6 /* DetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915E3618D35275005811E6 /* DetailView.m */; };
 		F1915E5218D36875005811E6 /* Event+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915E5118D36875005811E6 /* Event+Management.m */; };
 		F1915E5618D36EB5005811E6 /* Story+Management.m in Sources */ = {isa = PBXBuildFile; fileRef = F1915E5518D36EB5005811E6 /* Story+Management.m */; };
+		F19199FD18D60E8700AB9F6D /* CollectionViewTest.m in Sources */ = {isa = PBXBuildFile; fileRef = F19199FC18D60E8700AB9F6D /* CollectionViewTest.m */; };
 		F194A56B18D2A0ED00792451 /* AnimatedTransitioning.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50418D2A0EC00792451 /* AnimatedTransitioning.m */; };
 		F194A56C18D2A0ED00792451 /* TransitionDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50618D2A0EC00792451 /* TransitionDelegate.m */; };
 		F194A56D18D2A0ED00792451 /* UIWindow+FauxStatusBar.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A50818D2A0EC00792451 /* UIWindow+FauxStatusBar.m */; };
@@ -147,6 +149,7 @@
 		F1601C0718ABDC3800C89590 /* ArgosObjectManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArgosObjectManager.h; sourceTree = "<group>"; };
 		F1601C0818ABDC3800C89590 /* ArgosObjectManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArgosObjectManager.m; sourceTree = "<group>"; };
 		F162C0A618B6EB9600B38A15 /* defaultPrefs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = defaultPrefs.plist; sourceTree = "<group>"; };
+		F18F5CB918D61495000AA42E /* ScrollViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollViewTest.m; sourceTree = "<group>"; };
 		F1915D5718D2B8F7005811E6 /* Argos.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Argos.xcdatamodel; sourceTree = "<group>"; };
 		F1915D7718D2BA60005811E6 /* BaseEntity.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseEntity.h; sourceTree = "<group>"; };
 		F1915D7818D2BA60005811E6 /* BaseEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseEntity.m; sourceTree = "<group>"; };
@@ -158,6 +161,7 @@
 		F1915E5118D36875005811E6 /* Event+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Event+Management.m"; sourceTree = "<group>"; };
 		F1915E5418D36EB5005811E6 /* Story+Management.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Story+Management.h"; sourceTree = "<group>"; };
 		F1915E5518D36EB5005811E6 /* Story+Management.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Story+Management.m"; sourceTree = "<group>"; };
+		F19199FC18D60E8700AB9F6D /* CollectionViewTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewTest.m; sourceTree = "<group>"; };
 		F194A50318D2A0EC00792451 /* AnimatedTransitioning.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnimatedTransitioning.h; sourceTree = "<group>"; };
 		F194A50418D2A0EC00792451 /* AnimatedTransitioning.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnimatedTransitioning.m; sourceTree = "<group>"; };
 		F194A50518D2A0EC00792451 /* TransitionDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransitionDelegate.h; sourceTree = "<group>"; };
@@ -263,11 +267,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F18F5CB818D6139D000AA42E /* SystemConfiguration.framework in Frameworks */,
 				F1405C3D18973C4C00A4819D /* XCTest.framework in Frameworks */,
 				F1405C3F18973C4C00A4819D /* UIKit.framework in Frameworks */,
 				F1405C3E18973C4C00A4819D /* Foundation.framework in Frameworks */,
 				8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */,
-				227356C5D8D74AD5B091E0E3 /* libPods-ArgosTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,6 +375,8 @@
 			isa = PBXGroup;
 			children = (
 				F1405C4318973C4C00A4819D /* Supporting Files */,
+				F19199FC18D60E8700AB9F6D /* CollectionViewTest.m */,
+				F18F5CB918D61495000AA42E /* ScrollViewTest.m */,
 			);
 			path = ArgosTests;
 			sourceTree = "<group>";
@@ -856,6 +862,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F19199FD18D60E8700AB9F6D /* CollectionViewTest.m in Sources */,
+				F18F5CBA18D61495000AA42E /* ScrollViewTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
