@@ -20,7 +20,7 @@
 
 @implementation MentionsViewController
 
-- (MentionsViewController*)initWithEntity:(BaseEntity*)concept withPredicate:(NSPredicate*)predicate
+- (MentionsViewController*)initWithEntity:(BaseEntity*)entity withPredicate:(NSPredicate*)predicate
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
@@ -32,7 +32,7 @@
     [flowLayout setItemSize:CGSizeMake(screenRect.size.width, kLargeCellHeight)];
     [flowLayout setSectionInset:UIEdgeInsetsZero];
     
-    self.managedObjectContext = concept.managedObjectContext;
+    self.managedObjectContext = entity.managedObjectContext;
     
     self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Concept" withPredicate:predicate];
     return self;
@@ -81,13 +81,21 @@
     [self handleImageForEntity:(id)concept forCell:cell atIndexPath:indexPath];
     
     cell.titleLabel.text = concept.title;
+    cell.titleLabel.font = [UIFont titleFontForSize:16];
     NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
     if (concept.summary) {
         summaryText = concept.summary;
     }
     cell.textLabel.text = summaryText;
+    cell.textLabel.font = [UIFont mediumFontForSize:12];
     
     return cell;
+}
+
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
+{
+    // In the simplest, most efficient, case, reload the table view.
+    [self.collectionView reloadData];
 }
 
 

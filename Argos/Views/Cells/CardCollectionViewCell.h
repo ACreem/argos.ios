@@ -9,8 +9,11 @@
 //  A view cell which is configured to look like a card.
 //  ====================================================
 
-#import "CollectionViewCell.h"
+@interface CardCollectionViewCell : UICollectionViewCell
 
-@interface CardCollectionViewCell : CollectionViewCell
+@property (nonatomic, strong) UIImageView *imageView;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *textLabel;
+@property (nonatomic, strong) UILabel *timeLabel;
 
 @end

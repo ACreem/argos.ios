@@ -9,10 +9,11 @@
 //  A simple cell for Articles.
 //  ===========================
 
-#import "CollectionViewCell.h"
+@interface ArticleCollectionViewCell : UICollectionViewCell
 
-@interface ArticleCollectionViewCell : CollectionViewCell
-
+@property (nonatomic, strong) UIImageView *imageView;
 @property (strong, nonatomic) UILabel *metaLabel;
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *timeLabel;
 
 @end

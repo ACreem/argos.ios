@@ -135,7 +135,9 @@
         
         [self.eventList handleImageForEntity:(id)event forCell:cell atIndexPath:indexPath];
         
+        cell.yPadding = 6;
         cell.titleLabel.text = event.title;
+        cell.titleLabel.font = [UIFont titleFontForSize:18];
         cell.timeLabel.text = [event.updatedAt timeAgo];
     }
     return cell;

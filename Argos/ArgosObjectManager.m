@@ -34,7 +34,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
 + (ArgosObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
     //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
     
     // Create an Argos OAuth2 client.

@@ -13,7 +13,6 @@
 
 @interface CollectionViewCell ()
 @property (nonatomic, assign) CGFloat xPadding;
-@property (nonatomic, assign) CGFloat yPadding;
 @end
 
 @implementation CollectionViewCell

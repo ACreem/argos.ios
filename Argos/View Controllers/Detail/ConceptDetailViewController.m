@@ -71,7 +71,9 @@
         
         [self.mentionList handleImageForEntity:(id)story forCell:cell atIndexPath:indexPath];
         
+        cell.yPadding = 6;
         cell.titleLabel.text = story.title;
+        cell.titleLabel.font = [UIFont titleFontForSize:18];
         cell.timeLabel.text = [story.updatedAt timeAgo];
     }
     return cell;

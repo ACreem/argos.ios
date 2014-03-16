@@ -8,9 +8,6 @@
 
 #import "ArticleCollectionViewCell.h"
 
-@interface ArticleCollectionViewCell ()
-@end
-
 @implementation ArticleCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
