@@ -30,6 +30,16 @@
 {
     [super viewDidLoad];
     
+    [[RKObjectManager sharedManager] getObject:self.entity path:self.entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+        [self setupView];
+    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed to load concept: %@", error);
+    }];
+}
+
+#pragma mark - Setup
+- (void)setupView
+{
     self.totalItems = self.entity.entities.count;
     
     if (!self.entity.summary) {

@@ -226,27 +226,18 @@
     NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
     NSArray *results = [moc executeFetchRequest:fetchRequest error:&error];
     
+    Concept *concept = nil;
     if (results.count > 0) {
-        Concept *concept = [results firstObject];
-        [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
-                                             animated:YES];
+        concept = [results firstObject];
         
-    // If none is found, create a new one and get its data.
+    // If none is found, create a new one.
     } else {
         NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Concept" inManagedObjectContext:moc];
-        Concept* concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-        [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
-                                             animated:YES];
-        [[RKObjectManager sharedManager] getObject:concept
-                                              path:[NSString stringWithFormat:@"/concepts/%@", conceptId]
-                                        parameters:nil
-                                           success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                                [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
-                                                                                     animated:YES];
-                                           } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                                                NSLog(@"Failure getting concept: %@", error);
-                                           }];
+        concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+        concept.conceptId = conceptId;
     }
+    [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
+                                         animated:YES];
 }
 
 
