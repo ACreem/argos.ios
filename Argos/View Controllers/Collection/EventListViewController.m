@@ -81,6 +81,7 @@
     
     [self handleImageForEntity:event forCell:cell atIndexPath:indexPath];
     
+    NSLog(@"%@", event.eventId);
     cell.titleLabel.text = event.title;
     cell.textLabel.text = event.summary;
     cell.timeLabel.text = [event.updatedAt timeAgo];

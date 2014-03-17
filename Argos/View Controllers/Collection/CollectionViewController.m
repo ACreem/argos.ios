@@ -198,11 +198,9 @@
     if (imageDownloader == nil) {
         imageDownloader = [[ImageDownloader alloc] initWithURL:imageUrl];
         [imageDownloader setCompletionHandler:^(UIImage *image) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                CollectionViewCell* cell = (CollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-                entity.image = image;
-                [cell setImageForEntity:entity];
-            });
+            CollectionViewCell* cell = (CollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
+            entity.image = image;
+            [cell setImageForEntity:entity];
         }];
         [self.imageDownloadsInProgress setObject:imageDownloader forKey:indexPath];
         [imageDownloader startDownload];
