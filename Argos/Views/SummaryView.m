@@ -117,16 +117,18 @@
                                                                          mention.name]];
     }
     
-    NSString *htmlTemplate = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
-    NSString *htmlString = [NSString stringWithContentsOfFile:htmlTemplate encoding:NSUTF8StringEncoding error:nil];
-    self.summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
-    
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    NSString *summaryHtml = [self styleSummaryHtml:self.summaryTextHtml
-                                          fontSize:[prefs floatForKey:@"fontSize"]
-                                          fontType:[prefs stringForKey:@"fontType"]
-                                          contrast:[prefs boolForKey:@"contrast"]];
-    [self.summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+    if (summaryText) {
+        NSString *htmlTemplate = [[NSBundle mainBundle] pathForResource:@"SummaryTemplate" ofType:@"html" inDirectory:nil];
+        NSString *htmlString = [NSString stringWithContentsOfFile:htmlTemplate encoding:NSUTF8StringEncoding error:nil];
+        self.summaryTextHtml = [htmlString stringByReplacingOccurrencesOfString:@"{{summary}}" withString:summaryText];
+        
+        NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+        NSString *summaryHtml = [self styleSummaryHtml:self.summaryTextHtml
+                                              fontSize:[prefs floatForKey:@"fontSize"]
+                                              fontType:[prefs stringForKey:@"fontType"]
+                                              contrast:[prefs boolForKey:@"contrast"]];
+        [self.summaryWebView loadHTMLString:summaryHtml baseURL:nil];
+    }
 }
 
 
