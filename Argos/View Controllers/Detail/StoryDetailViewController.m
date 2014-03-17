@@ -49,6 +49,7 @@
     [self addChildViewController:self.eventList];
     [self.view.scrollView addSubview:self.eventList.collectionView];
     [self.eventList didMoveToParentViewController:self];
+    [self.eventList.collectionView sizeToFit];
     [self getEntities:self.entity.events forCollectionView:self.eventList];
     
     [self getConcepts:self.entity.concepts];
@@ -133,7 +134,7 @@
     if (embeddedCollectionViewController == self.eventList) {
         Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
         
-        [self.eventList handleImageForEntity:(id)event forCell:cell atIndexPath:indexPath];
+        [self.eventList handleImageForEntity:event forCell:cell atIndexPath:indexPath];
         
         cell.yPadding = 6;
         cell.titleLabel.text = event.title;

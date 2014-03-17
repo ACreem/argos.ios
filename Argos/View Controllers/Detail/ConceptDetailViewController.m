@@ -30,16 +30,6 @@
 {
     [super viewDidLoad];
     
-    [[RKObjectManager sharedManager] getObject:self.entity path:self.entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-        [self setupView];
-    } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-        NSLog(@"Failed to load concept: %@", error);
-    }];
-}
-
-#pragma mark - Setup
-- (void)setupView
-{
     self.totalItems = self.entity.entities.count;
     
     if (!self.entity.summary) {
@@ -60,7 +50,11 @@
     [self addChildViewController:self.mentionList];
     [self.view.scrollView addSubview:self.mentionList.collectionView];
     [self.mentionList didMoveToParentViewController:self];
+    [self.mentionList.collectionView sizeToFit];
     [self getEntities:self.entity.entities forCollectionView:self.mentionList];
+    
+    // Refreshes the summary view.
+    self.view.entity = self.entity;
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate
@@ -69,7 +63,7 @@
     if (embeddedCollectionViewController == self.mentionList) {
         Story *story = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
         
-        [self.mentionList handleImageForEntity:(id)story forCell:cell atIndexPath:indexPath];
+        [self.mentionList handleImageForEntity:story forCell:cell atIndexPath:indexPath];
         
         cell.yPadding = 6;
         cell.titleLabel.text = story.title;

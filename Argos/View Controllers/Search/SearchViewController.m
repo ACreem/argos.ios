@@ -28,10 +28,10 @@
         SearchResultsViewController *eventResultsViewController = [[SearchResultsViewController alloc] initForEntityNamed:@"Event"];
         eventResultsViewController.title = @"Events";
         
-        SearchResultsViewController *entityResultsViewController = [[SearchResultsViewController alloc] initForEntityNamed:@"Entity"];
-        entityResultsViewController.title = @"Entities";
+        SearchResultsViewController *conceptResultsViewController = [[SearchResultsViewController alloc] initForEntityNamed:@"Concept"];
+        conceptResultsViewController.title = @"Concepts";
         
-        NSArray *array = [[NSArray alloc] initWithObjects:storyResultsViewController, eventResultsViewController, entityResultsViewController, nil];
+        NSArray *array = [[NSArray alloc] initWithObjects:storyResultsViewController, eventResultsViewController, conceptResultsViewController, nil];
         self.viewControllers = array;
         
         self.selectedViewController = storyResultsViewController;

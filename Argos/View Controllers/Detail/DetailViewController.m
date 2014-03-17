@@ -218,18 +218,35 @@
 # pragma mark - SummaryViewDelegate
 - (void)viewConcept:(NSString*)conceptId
 {
+    // First try to find an existing concept by this id.
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"Concept"];
+    NSPredicate *predicate = [NSPredicate predicateWithFormat:@"conceptId == %@", conceptId];
+    NSError *error = nil;
+    [fetchRequest setPredicate:predicate];
     NSManagedObjectContext* moc = [[[RKObjectManager sharedManager] managedObjectStore] mainQueueManagedObjectContext];
-    NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Concept" inManagedObjectContext:moc];
-    Concept* concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
-    [[RKObjectManager sharedManager] getObject:concept
-                                          path:[NSString stringWithFormat:@"/concepts/%@", conceptId]
-                                    parameters:nil
-                                       success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-                                           [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
-                                                                                animated:YES];
-                                       } failure:^(RKObjectRequestOperation *operation, NSError *error) {
-                                           NSLog(@"Failure getting concept: %@", error);
-                                       }];
+    NSArray *results = [moc executeFetchRequest:fetchRequest error:&error];
+    
+    if (results.count > 0) {
+        Concept *concept = [results firstObject];
+        [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
+                                             animated:YES];
+        
+    // If none is found, create a new one and get its data.
+    } else {
+        NSEntityDescription *entityDescription = [NSEntityDescription entityForName:@"Concept" inManagedObjectContext:moc];
+        Concept* concept = [[Concept alloc] initWithEntity:entityDescription insertIntoManagedObjectContext:moc];
+        [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
+                                             animated:YES];
+        [[RKObjectManager sharedManager] getObject:concept
+                                              path:[NSString stringWithFormat:@"/concepts/%@", conceptId]
+                                        parameters:nil
+                                           success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+                                                [self.navigationController pushViewController:[[ConceptDetailViewController alloc] initWithConcept:concept]
+                                                                                     animated:YES];
+                                           } failure:^(RKObjectRequestOperation *operation, NSError *error) {
+                                                NSLog(@"Failure getting concept: %@", error);
+                                           }];
+    }
 }
 
 
@@ -237,15 +254,15 @@
 // Fetch a set of entities.
 - (void)getEntities:(NSSet*)entities forCollectionView:(CollectionViewController*)cvc
 {
-    __block NSUInteger fetched_concept_count = 0;
-    for (BaseEntity* concept in entities) {
-        [[RKObjectManager sharedManager] getObject:concept path:concept.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
-            fetched_concept_count++;
+    __block NSUInteger fetched_entity_count = 0;
+    for (BaseEntity* entity in entities) {
+        [[RKObjectManager sharedManager] getObject:entity path:entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
+            fetched_entity_count++;
             
             self.loadedItems++;
             self.view.progress = self.loadedItems/self.totalItems;
             
-            if (fetched_concept_count == [entities count]) {
+            if (fetched_entity_count == [entities count]) {
                 [cvc.collectionView reloadData];
                 [cvc.collectionView sizeToFit];
                 [self.view.scrollView sizeToFit];
@@ -268,6 +285,7 @@
             self.view.progress = self.loadedItems/self.totalItems;
             
             if (fetched_concept_count == [concepts count]) {
+                // Refreshes the summary view.
                 self.view.entity = self.entity;
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {

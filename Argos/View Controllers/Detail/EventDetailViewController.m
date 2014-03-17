@@ -73,6 +73,7 @@
     [self addChildViewController:self.articleList];
     [self.view.scrollView addSubview:self.articleList.collectionView];
     [self.articleList didMoveToParentViewController:self];
+    [self.articleList.collectionView sizeToFit];
     
     [self getEntities:self.entity.articles forCollectionView:self.articleList];
 }

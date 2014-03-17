@@ -35,9 +35,10 @@ static NSString* const kArgosAPIClientSecret = @"test";
 
 + (ArgosObjectManager*)objectManagerWithManagedObjectStore:(RKManagedObjectStore*)mos
 {
+    RKLogConfigureByName("RestKit", RKLogLevelWarning);
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
     //RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
-    //RKLogConfigureByName("RestKit/Network", RKLogLevelWarning);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelOff);
     
     // Create an Argos OAuth2 client.
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
@@ -219,6 +220,7 @@ static NSString* const kArgosAPIClientSecret = @"test";
                                       // TODO: adapt this to a more generic "baseEntityMappings" or something.
                                       @"entities":   @{
                                               @"entity":      @"Story",
+                                              @"key":         @"stories",
                                               @"mappings":    [self storyMappings]}}
                            mappings:[self conceptMappings]];
 }
@@ -487,7 +489,9 @@ static NSString* const kArgosAPIClientSecret = @"test";
             }
         }
         
-        [entityMapping addRelationshipMappingWithSourceKeyPath:relationshipName mapping:relatedEntityMapping];
+        NSString* keyPath = relationships[relationshipName][@"key"] ? relationships[relationshipName][@"key"] : relationshipName;
+        RKRelationshipMapping *relationshipMapping = [RKRelationshipMapping relationshipMappingFromKeyPath:keyPath toKeyPath:relationshipName withMapping:relatedEntityMapping];
+        [entityMapping addPropertyMapping:relationshipMapping];
     }
     
     return entityMapping;
