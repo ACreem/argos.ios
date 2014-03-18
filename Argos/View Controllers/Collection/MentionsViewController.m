@@ -15,7 +15,7 @@
 #import "IIViewDeckController.h"
 
 @interface MentionsViewController ()
-
+@property (nonatomic, strong) UILabel *noteLabel;
 @end
 
 @implementation MentionsViewController
@@ -43,6 +43,7 @@
     [super viewDidLoad];
     
     [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:0.078 green:0.086 blue:0.114 alpha:1.0];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.alwaysBounceVertical = NO;
@@ -54,8 +55,8 @@
     // Account for view deck controller's ledge size, and also
     // set a top inset for the header bar (same size as the navigation bar +  status bar).
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    float ledgeSize = self.viewDeckController.rightSize;
-    float itemWidth = screenRect.size.width - ledgeSize;
+    CGFloat ledgeSize = self.viewDeckController.rightSize;
+    CGFloat itemWidth = screenRect.size.width - ledgeSize;
     [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:CGSizeMake(screenRect.size.width - ledgeSize, kLargeCellHeight)];
     [(UICollectionViewFlowLayout*)self.collectionViewLayout setSectionInset:UIEdgeInsetsMake(64, ledgeSize, 0, 0)];
     
@@ -69,6 +70,19 @@
     headerLabel.textColor = [UIColor whiteColor];
     [headerView addSubview:headerLabel];
     [self.view addSubview:headerView];
+    
+    if (self.fetchedResultsController.fetchedObjects.count == 0) {
+        CGRect screenRect = [UIScreen mainScreen].bounds;
+        CGFloat padding = 12;
+        self.noteLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding + ledgeSize, screenRect.size.height/2 - 36 - padding, screenRect.size.width - 2*padding - ledgeSize, 36)];
+        self.noteLabel.text = @"No concepts were mentioned here.";
+        self.noteLabel.font = [UIFont titleFontForSize:14.0];
+        self.noteLabel.textAlignment = NSTextAlignmentCenter;
+        self.noteLabel.backgroundColor = [UIColor actionColor];
+        self.noteLabel.textColor = [UIColor whiteColor];
+        [self.collectionView addSubview:self.noteLabel];
+        [self.collectionView bringSubviewToFront:self.noteLabel];
+    }
 }
 
 # pragma mark - UIControllerViewDelegate
@@ -94,7 +108,10 @@
 
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
-    // In the simplest, most efficient, case, reload the table view.
+    if (controller.fetchedObjects.count > 0) {
+        [self.noteLabel removeFromSuperview];
+        self.noteLabel = nil;
+    }
     [self.collectionView reloadData];
 }
 
