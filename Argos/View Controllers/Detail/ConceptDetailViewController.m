@@ -30,6 +30,8 @@
 {
     [super viewDidLoad];
     
+    NSLog(@"\n\n\n\n\n\n\n\n\n\n\nCONCEPT DETAIL VIEW CONTROLLER\n\n\n\n\n\n\n\n\n\n\n\n");
+    
     [[RKObjectManager sharedManager] getObject:self.entity path:self.entity.jsonUrl parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         [self setupView];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
@@ -40,7 +42,7 @@
 #pragma mark - Setup
 - (void)setupView
 {
-    self.totalItems = self.entity.entities.count;
+    self.totalItems = self.entity.stories.count;
     
     if (!self.entity.summary) {
         self.entity.summary = @"We have no summary for this entity yet. Please help by submitting one!";
@@ -50,7 +52,7 @@
     [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), kMidCellHeight)];
     
     // Mentions (story) list
-    self.mentionList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.entities]];
+    self.mentionList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
     self.mentionList.managedObjectContext = self.entity.managedObjectContext;
     self.mentionList.delegate = self;
     self.mentionList.title = @"Mentions";
@@ -61,7 +63,7 @@
     [self.view.scrollView addSubview:self.mentionList.collectionView];
     [self.mentionList didMoveToParentViewController:self];
     [self.mentionList.collectionView sizeToFit];
-    [self getEntities:self.entity.entities forCollectionView:self.mentionList];
+    [self getEntities:self.entity.stories forCollectionView:self.mentionList];
     
     // Refreshes the summary view.
     self.view.entity = self.entity;
@@ -85,7 +87,7 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    Story *story = [[self.entity.entities allObjects] objectAtIndex:indexPath.row];
+    Story *story = [[self.entity.stories allObjects] objectAtIndex:indexPath.row];
     [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 

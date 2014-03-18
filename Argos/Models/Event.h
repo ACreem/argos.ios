@@ -2,7 +2,7 @@
 //  Event.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/14/14.
+//  Created by Francis Tseng on 3/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 #import <CoreData/CoreData.h>
 #import "BaseEntity.h"
 
-@class Article, CurrentUser, Story;
+@class Article, Concept, CurrentUser, Story;
 
 @interface Event : BaseEntity
 
@@ -19,6 +19,7 @@
 @property (nonatomic, retain) NSSet *articles;
 @property (nonatomic, retain) NSSet *stories;
 @property (nonatomic, retain) CurrentUser *user;
+@property (nonatomic, retain) NSSet *concepts;
 @end
 
 @interface Event (CoreDataGeneratedAccessors)
@@ -32,5 +33,10 @@
 - (void)removeStoriesObject:(Story *)value;
 - (void)addStories:(NSSet *)values;
 - (void)removeStories:(NSSet *)values;
+
+- (void)addConceptsObject:(Concept *)value;
+- (void)removeConceptsObject:(Concept *)value;
+- (void)addConcepts:(NSSet *)values;
+- (void)removeConcepts:(NSSet *)values;
 
 @end

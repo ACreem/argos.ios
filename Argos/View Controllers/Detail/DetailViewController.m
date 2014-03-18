@@ -7,7 +7,7 @@
 //
 
 #import "DetailViewController.h"
-#import "BaseEntity.h"
+#import "BaseEntity+Concepts.h"
 
 // Sharing/font setting modals.
 #import "ShareViewController.h"

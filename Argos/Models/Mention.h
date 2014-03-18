@@ -2,7 +2,7 @@
 //  Mention.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/14/14.
+//  Created by Francis Tseng on 3/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -15,8 +15,8 @@
 
 @property (nonatomic, retain) NSNumber * mentionId;
 @property (nonatomic, retain) NSString * name;
-@property (nonatomic, retain) NSSet *entities;
 @property (nonatomic, retain) Concept *concept;
+@property (nonatomic, retain) NSSet *entities;
 @end
 
 @interface Mention (CoreDataGeneratedAccessors)

@@ -37,8 +37,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
 {
     RKLogConfigureByName("RestKit", RKLogLevelWarning);
     //RKLogConfigureByName("RestKit/Network", RKLogLevelTrace);
-    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelDebug);
-    //RKLogConfigureByName("RestKit/Network", RKLogLevelOff);
+    RKLogConfigureByName("RestKit/ObjectMapping", RKLogLevelTrace);
+    RKLogConfigureByName("RestKit/Network", RKLogLevelOff);
     
     // Create an Argos OAuth2 client.
     AFOAuth2Client *oauthClient = [AFOAuth2Client clientWithBaseURL:[NSURL URLWithString:kArgosAPIBaseURLString] clientID:kArgosAPIClientId secret:kArgosAPIClientSecret];
@@ -151,10 +151,9 @@ static NSString* const kArgosAPIClientSecret = @"test";
     // The search endpoint requires special handling,
     // since it returns representations of multiple different resources.
     RKDynamicMapping *searchMapping = [RKDynamicMapping new];
-    
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"event" objectMapping:[self eventMapping]]];
     [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"story" objectMapping:[self storyMapping]]];
-    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"entity" objectMapping:[self conceptMapping]]];
+    [searchMapping addMatcher:[RKObjectMappingMatcher matcherWithKeyPath:@"type" expectedValue:@"concept" objectMapping:[self conceptMapping]]];
     
     RKResponseDescriptor *searchResponseDescriptor = [RKResponseDescriptor responseDescriptorWithMapping:searchMapping method:RKRequestMethodGET pathPattern:@"/search/:query" keyPath:@"results" statusCodes:RKStatusCodeIndexSetForClass(RKStatusCodeClassSuccessful)];
     [self addResponseDescriptor:searchResponseDescriptor];
@@ -217,10 +216,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
     return [self setupEntityForName:@"Concept"
                          identifier:@"conceptId"
                       relationships:@{
-                                      // TODO: adapt this to a more generic "baseEntityMappings" or something.
-                                      @"entities":   @{
+                                      @"stories":   @{
                                               @"entity":      @"Story",
-                                              @"key":         @"stories",
                                               @"mappings":    [self storyMappings]}}
                            mappings:[self conceptMappings]];
 }
@@ -462,6 +459,8 @@ static NSString* const kArgosAPIClientSecret = @"test";
  */
 - (RKEntityMapping*)setupEntityForName:(NSString*)name identifier:(NSString*)identifier relationships:(NSDictionary*)relationships mappings:(NSDictionary*)mappings
 {
+    //NSLog(@"Creating mapping for entity named %@ with identifier %@ using mappings %@ and with relationships %@", name, identifier, mappings, relationships);
+    
     // Setup the entity mapping.
     RKEntityMapping *entityMapping = [RKEntityMapping mappingForEntityForName:name inManagedObjectStore:self.managedObjectStore];
     [entityMapping addAttributeMappingsFromDictionary:mappings];

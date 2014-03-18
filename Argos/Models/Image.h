@@ -2,7 +2,7 @@
 //  Image.h
 //  Argos
 //
-//  Created by Francis Tseng on 3/14/14.
+//  Created by Francis Tseng on 3/17/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
@@ -13,8 +13,8 @@
 
 @interface Image : NSManagedObject
 
-@property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) id image;
+@property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) NSSet *entities;
 @end
 

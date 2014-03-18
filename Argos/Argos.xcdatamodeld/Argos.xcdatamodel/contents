@@ -24,14 +24,16 @@
         <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" syncable="YES"/>
-        <relationship name="concepts" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Concept" inverseName="entities" inverseEntity="Concept" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Image" inverseName="entities" inverseEntity="Image" syncable="YES"/>
         <relationship name="mentions" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="Mention" inverseName="entities" inverseEntity="Mention" syncable="YES"/>
     </entity>
     <entity name="Concept" representedClassName="Concept" parentEntity="BaseEntity" syncable="YES">
         <attribute name="conceptId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="aliases" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Mention" inverseName="concept" inverseEntity="Mention" syncable="YES"/>
-        <relationship name="entities" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="BaseEntity" inverseName="concepts" inverseEntity="BaseEntity" syncable="YES"/>
+        <relationship name="concepts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Concept" inverseName="from_concepts" inverseEntity="Concept" syncable="YES"/>
+        <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="concepts" inverseEntity="Event" syncable="YES"/>
+        <relationship name="from_concepts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Concept" inverseName="concepts" inverseEntity="Concept" syncable="YES"/>
+        <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="concepts" inverseEntity="Story" syncable="YES"/>
     </entity>
     <entity name="CurrentUser" representedClassName="CurrentUser" syncable="YES">
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
@@ -42,6 +44,7 @@
         <attribute name="eventId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
         <relationship name="articles" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Article" inverseName="event" inverseEntity="Article" syncable="YES"/>
+        <relationship name="concepts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Concept" inverseName="events" inverseEntity="Concept" syncable="YES"/>
         <relationship name="stories" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Story" inverseName="events" inverseEntity="Story" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentUser" inverseName="bookmarked" inverseEntity="CurrentUser" syncable="YES"/>
     </entity>
@@ -65,18 +68,19 @@
     </entity>
     <entity name="Story" representedClassName="Story" parentEntity="BaseEntity" syncable="YES">
         <attribute name="storyId" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <relationship name="concepts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Concept" inverseName="stories" inverseEntity="Concept" syncable="YES"/>
         <relationship name="events" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Event" inverseName="stories" inverseEntity="Event" syncable="YES"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CurrentUser" inverseName="watching" inverseEntity="CurrentUser" syncable="YES"/>
     </entity>
     <elements>
         <element name="Article" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="CurrentUser" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="BaseEntity" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Concept" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="CurrentUser" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Event" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Mention" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Source" positionX="0" positionY="0" width="0" height="0"/>
         <element name="Story" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="BaseEntity" positionX="0" positionY="0" width="0" height="0"/>
-        <element name="Image" positionX="0" positionY="0" width="0" height="0"/>
     </elements>
 </model>

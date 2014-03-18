@@ -34,12 +34,12 @@
         title = @"Watching";
         
     } else if ([stream isEqualToString:kArgosLatestStream]) {
-        predicate = [NSPredicate predicateWithValue:YES];
+        predicate = [NSPredicate predicateWithFormat:@"createdAt != nil"];
         self.sortKey = @"createdAt";
         title = @"Latest";
         
     } else if ([stream isEqualToString:kArgosTrendingStream]) {
-        predicate = [NSPredicate predicateWithValue:YES];
+        predicate = [NSPredicate predicateWithFormat:@"score != nil"];
         self.sortKey = @"score";
         title = @"Trending";
         
@@ -72,7 +72,7 @@
 
 - (void)loadData
 {
-    // Create weak reference to self to use within the paginators completion block
+    // Create weak reference to self to use within the paginator's completion block
     __weak typeof(self) weakSelf = self;
     
     // Setup paginator
