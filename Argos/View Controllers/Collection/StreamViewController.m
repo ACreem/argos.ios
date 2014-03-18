@@ -91,10 +91,28 @@
             weakSelf.isLoading = NO;
             
         } failure:^(RKPaginator *paginator, NSError *error) {
-            NSLog(@"Failure getting page: %@", error);
             [weakSelf.refreshControl endRefreshing];
-            UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-            [alertView show];
+            NSInteger statusCode = [(NSHTTPURLResponse*)error.userInfo[@"AFNetworkingOperationFailingURLResponseErrorKey"] statusCode];
+            if (statusCode == 404 && paginator.currentPage == 1) {
+                CGRect screenRect = [UIScreen mainScreen].bounds;
+                CGFloat padding = 12;
+                UILabel *loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, screenRect.size.height/2 - 36 - padding, screenRect.size.width - 2*padding, 36)];
+                if ([weakSelf.stream isEqualToString:kArgosBookmarkedStream]) {
+                    loadingLabel.text = @"You don't have any bookmarks yet.";
+                } else if ([weakSelf.stream isEqualToString:kArgosWatchingStream]) {
+                    loadingLabel.text = @"You aren't watching any stories yet.";
+                }
+                loadingLabel.font = [UIFont titleFontForSize:14.0];
+                loadingLabel.textAlignment = NSTextAlignmentCenter;
+                loadingLabel.backgroundColor = [UIColor actionColor];
+                loadingLabel.textColor = [UIColor whiteColor];
+                [weakSelf.collectionView addSubview:loadingLabel];
+                [weakSelf.collectionView bringSubviewToFront:loadingLabel];
+            } else {
+                NSLog(@"Failure getting page: %@", error);
+                UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                [alertView show];
+            }
         }];
     }
     

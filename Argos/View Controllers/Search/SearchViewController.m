@@ -73,7 +73,7 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithCustomView:self.searchBar];
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    float padding = 12;
+    CGFloat padding = 12;
     
     self.loadingLabel = [[UILabel alloc] initWithFrame:CGRectMake(padding, screenRect.size.height + 36, screenRect.size.width - 2*padding, 36)];
     self.loadingLabel.text = @"Looking for results...";
