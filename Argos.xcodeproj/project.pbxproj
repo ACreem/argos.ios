@@ -96,6 +96,7 @@
 		F194A59818D2A0ED00792451 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56A18D2A0ED00792451 /* LoginView.m */; };
 		F194A59B18D2A4D300792451 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A59A18D2A4D300792451 /* WebViewController.m */; };
 		F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */; };
+		F1C0C03418D7DA05006F26C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C0C03318D7DA05006F26C7 /* SettingsViewController.m */; };
 		F6F156ABA0F24BC79905B54D /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -254,6 +255,8 @@
 		F194A59A18D2A4D300792451 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EAIntroView+ARIntro.h"; sourceTree = "<group>"; };
 		F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "EAIntroView+ARIntro.m"; sourceTree = "<group>"; };
+		F1C0C03218D7DA05006F26C7 /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsViewController.h; path = User/SettingsViewController.h; sourceTree = "<group>"; };
+		F1C0C03318D7DA05006F26C7 /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsViewController.m; path = User/SettingsViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -437,6 +440,8 @@
 				F194A53F18D2A0ED00792451 /* LoginViewController.m */,
 				F194A54018D2A0ED00792451 /* MenuViewController.h */,
 				F194A54118D2A0ED00792451 /* MenuViewController.m */,
+				F1C0C03218D7DA05006F26C7 /* SettingsViewController.h */,
+				F1C0C03318D7DA05006F26C7 /* SettingsViewController.m */,
 			);
 			name = User;
 			sourceTree = "<group>";
@@ -844,6 +849,7 @@
 				F194A57C18D2A0ED00792451 /* CollectionViewController.m in Sources */,
 				F1915E5218D36875005811E6 /* Event+Management.m in Sources */,
 				F194A59618D2A0ED00792451 /* GalleryImageViewCell.m in Sources */,
+				F1C0C03418D7DA05006F26C7 /* SettingsViewController.m in Sources */,
 				F194A59218D2A0ED00792451 /* CardCollectionViewCell.m in Sources */,
 				F194A59B18D2A4D300792451 /* WebViewController.m in Sources */,
 				F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */,

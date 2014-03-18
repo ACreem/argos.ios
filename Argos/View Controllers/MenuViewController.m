@@ -6,10 +6,11 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
+#import "AppDelegate.h"
 #import "MenuViewController.h"
 #import "StreamViewController.h"
-#import "AppDelegate.h"
 #import "SearchViewController.h"
+#import "SettingsViewController.h"
 #import "CurrentUser+Management.h"
 
 @interface MenuViewController ()
@@ -198,10 +199,13 @@
                     [self.navigationController pushViewController:svc animated:YES];
                     break;
                 }
-                case 1:
+                case 1: {
                     // Settings.
+                    SettingsViewController *svc = [[SettingsViewController alloc] init];
+                    [self.navigationController pushViewController:svc animated:YES];
                     break;
-                case 2:
+                }
+                case 2: {
                     // Logout.
                     [CurrentUser logout];
                     
@@ -214,6 +218,7 @@
                         weakSelf.viewDeckController.leftController = nil;
                     }];
                     break;
+                }
             }
     }
     
