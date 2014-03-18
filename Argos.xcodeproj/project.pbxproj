@@ -195,8 +195,8 @@
 		F194A51F18D2A0ED00792451 /* UIColor+ArgosColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ArgosColors.m"; sourceTree = "<group>"; };
 		F194A52018D2A0ED00792451 /* UIFont+ArgosFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+ArgosFonts.h"; sourceTree = "<group>"; };
 		F194A52118D2A0ED00792451 /* UIFont+ArgosFonts.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+ArgosFonts.m"; sourceTree = "<group>"; };
-		F194A52318D2A0ED00792451 /* EmbeddedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EmbeddedCollectionViewController.h; sourceTree = "<group>"; };
-		F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EmbeddedCollectionViewController.m; sourceTree = "<group>"; };
+		F194A52318D2A0ED00792451 /* EmbeddedCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EmbeddedCollectionViewController.h; path = ../EmbeddedCollectionViewController.h; sourceTree = "<group>"; };
+		F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EmbeddedCollectionViewController.m; path = ../EmbeddedCollectionViewController.m; sourceTree = "<group>"; };
 		F194A52518D2A0ED00792451 /* GalleryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GalleryViewController.h; sourceTree = "<group>"; };
 		F194A52618D2A0ED00792451 /* GalleryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GalleryViewController.m; sourceTree = "<group>"; };
 		F194A52B18D2A0ED00792451 /* CollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewController.h; sourceTree = "<group>"; };
@@ -536,8 +536,6 @@
 		F194A52218D2A0ED00792451 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F194A52318D2A0ED00792451 /* EmbeddedCollectionViewController.h */,
-				F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */,
 				F194A52518D2A0ED00792451 /* GalleryViewController.h */,
 				F194A52618D2A0ED00792451 /* GalleryViewController.m */,
 				F194A59918D2A4D300792451 /* WebViewController.h */,
@@ -556,6 +554,8 @@
 			children = (
 				F194A52B18D2A0ED00792451 /* CollectionViewController.h */,
 				F194A52C18D2A0ED00792451 /* CollectionViewController.m */,
+				F194A52318D2A0ED00792451 /* EmbeddedCollectionViewController.h */,
+				F194A52418D2A0ED00792451 /* EmbeddedCollectionViewController.m */,
 				F194A52D18D2A0ED00792451 /* MentionsViewController.h */,
 				F194A52E18D2A0ED00792451 /* MentionsViewController.m */,
 				F194A52F18D2A0ED00792451 /* EventListViewController.h */,

@@ -139,6 +139,10 @@
         cell.titleLabel.text = article.title;
         cell.metaLabel.text = article.source.name;
         cell.timeLabel.text = [article.createdAt timeAgo];
+        
+        if (!article.imageUrl) {
+            cell.imageView.hidden = YES;
+        }
     }
     return cell;
 }

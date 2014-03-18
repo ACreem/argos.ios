@@ -27,8 +27,8 @@
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
         [self addSubview:self.imageView];
         
-        float titleLabelHeight = 40;
-        float titleLabelOriginX = CGRectGetMinX(self.imageView.frame) + CGRectGetWidth(self.imageView.frame) + padding;
+        CGFloat titleLabelHeight = 40;
+        CGFloat titleLabelOriginX = CGRectGetMinX(self.imageView.frame) + CGRectGetWidth(self.imageView.frame) + padding;
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(titleLabelOriginX,
                                                                     padding/2,
                                                                     CGRectGetWidth(self.frame) - titleLabelOriginX - padding,
@@ -63,6 +63,25 @@
         [self.layer addSublayer:bottomBorder];
     }
     return self;
+}
+
+- (void)layoutSubviews {
+    [super layoutSubviews];
+    
+    if (self.imageView.isHidden) {
+        CGFloat padding = 10;
+        CGFloat titleLabelOriginX = padding;
+        CGRect titleFrame = self.titleLabel.frame;
+        titleFrame.origin.x = padding;
+        titleFrame.size.width = CGRectGetWidth(self.frame) - padding*2;
+        self.titleLabel.frame = titleFrame;
+        
+        CGRect frame = self.timeLabel.frame;
+        frame.origin.x = CGRectGetMinX(titleFrame);
+        frame.size.width = CGRectGetWidth(titleFrame);
+        self.timeLabel.frame = frame;
+        self.metaLabel.frame = frame;
+    }
 }
 
 @end
