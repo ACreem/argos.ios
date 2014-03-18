@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-@interface WebViewController : UIViewController
+@interface WebViewController : UIViewController <UIWebViewDelegate>
 
 - (instancetype)initWithURL:(NSString*)url;
 
