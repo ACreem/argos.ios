@@ -30,9 +30,7 @@
     [flowLayout setSectionInset:UIEdgeInsetsMake(_padding + [UIApplication sharedApplication].statusBarFrame.size.height, _padding, _padding, _padding)];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
-    //self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", story.events]];
-    // temporary: all events
-    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event"];
+    self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", story.events]];
     if (self) {
         _story = story;
         self.managedObjectContext = _story.managedObjectContext;
