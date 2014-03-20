@@ -21,7 +21,6 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, assign) CGFloat yPadding;
 
-- (UIImage*)cropImage:(UIImage*)image;
 - (void)setImageForEntity:(BaseEntity*)entity;
 
 @end
