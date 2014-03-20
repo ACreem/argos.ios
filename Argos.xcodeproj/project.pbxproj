@@ -693,7 +693,7 @@
 				ORGANIZATIONNAME = Argos;
 				TargetAttributes = {
 					F1405C1F18973C4C00A4819D = {
-						DevelopmentTeam = T26C3YG636;
+						DevelopmentTeam = 95X8VY6TB2;
 					};
 					F1405C3A18973C4C00A4819D = {
 						TestTargetID = F1405C1F18973C4C00A4819D;
@@ -1001,6 +1001,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -1018,6 +1019,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */;
 			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";

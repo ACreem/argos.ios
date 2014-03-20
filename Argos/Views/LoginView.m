@@ -66,6 +66,7 @@
         _passwordField.secureTextEntry = YES;
         _passwordField.font = [UIFont lightFontForSize:16.0];
         _passwordField.placeholder = @"password";
+        _passwordField.returnKeyType = UIReturnKeyDone;
         _passwordField.textAlignment = NSTextAlignmentCenter;
         [_formView addSubview:_passwordField];
         
@@ -73,6 +74,8 @@
         [_emailField setAutocapitalizationType:UITextAutocapitalizationTypeNone];
         _emailField.font = [UIFont lightFontForSize:16.0];
         _emailField.placeholder = @"email";
+        _emailField.keyboardType = UIKeyboardTypeEmailAddress;
+        _emailField.returnKeyType = UIReturnKeyNext;
         _emailField.textAlignment = NSTextAlignmentCenter;
         CALayer *bottomBorder = [CALayer layer];
         bottomBorder.frame = CGRectMake(0, fieldHeight-1, frameWidth, 1);

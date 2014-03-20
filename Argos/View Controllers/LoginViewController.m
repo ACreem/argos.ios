@@ -221,10 +221,20 @@ static int kSignUpTag = 1;
     }
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"Error: %@", error.localizedDescription);
+}
+
 # pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if (textField == self.view.emailField) {
+        [self.view.passwordField becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    
     return NO;
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
