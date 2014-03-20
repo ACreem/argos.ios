@@ -56,7 +56,7 @@ static int kSignUpTag = 1;
     MenuViewController* menuController = [[MenuViewController alloc] init];
     self.deckController.leftController = menuController;
     
-    StreamViewController *svc = [[StreamViewController alloc] initWithStream:@"latest"];
+    StreamViewController *svc = [[StreamViewController alloc] initWithStream:kArgosLatestStream];
     svc.managedObjectContext = self.managedObjectContext;
     
     // Set whether or not the user is new.
