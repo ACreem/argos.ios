@@ -16,7 +16,6 @@
 @interface CollectionViewController ()
 @property (nonatomic, strong) NSString *title;
 @property (nonatomic, strong) NSString *entityName;
-@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @end
 
 @implementation CollectionViewController
@@ -54,12 +53,6 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
-    // Terminate all pending download connections
-    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
-    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
-    
-    [self.imageDownloadsInProgress removeAllObjects];
 }
 
 # pragma mark - UICollectionViewDataSource

@@ -116,14 +116,12 @@
 
 - (void)configureCellForConcept:(Concept *)concept {
     _titleLabel.text = concept.title;
-    _titleLabel.font = [UIFont titleFontForSize:16];
     
     NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
     if (concept.summary) {
         summaryText = concept.summary;
     }
     _textLabel.text = summaryText;
-    _textLabel.font = [UIFont mediumFontForSize:12];
     
     [_imageView setImageWithURL:[NSURL URLWithString:concept.imageUrl]
                placeholderImage:[UIImage imageNamed:@"placeholder"]];

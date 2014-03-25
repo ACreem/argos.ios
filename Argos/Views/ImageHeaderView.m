@@ -75,11 +75,13 @@
     
     [self.imageView setImageWithURL:[NSURL URLWithString:url]
                           completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
-                              UIImage *blurred = [weakSelf.blurFilter imageByFilteringImage:image];
-                              [weakSelf.blurredImageView setImage:blurred];
-                              
-                              [weakSelf.imageView setContentMode:UIViewContentModeScaleAspectFill];
-                              [weakSelf.blurredImageView setContentMode:UIViewContentModeScaleAspectFill];
+                              if (image != nil) {
+                                  UIImage *blurred = [weakSelf.blurFilter imageByFilteringImage:image];
+                                  [weakSelf.blurredImageView setImage:blurred];
+                                  
+                                  [weakSelf.imageView setContentMode:UIViewContentModeScaleAspectFill];
+                                  [weakSelf.blurredImageView setContentMode:UIViewContentModeScaleAspectFill];
+                              }
                           }];
 }
 

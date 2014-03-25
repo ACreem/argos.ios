@@ -89,9 +89,12 @@
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
+    
     Concept* concept = [self.fetchedResultsController objectAtIndexPath:indexPath];
 
     [cell configureCellForConcept:concept];
+    cell.titleLabel.font = [UIFont titleFontForSize:16];
+    cell.textLabel.font = [UIFont mediumFontForSize:12];
     
     return cell;
 }
