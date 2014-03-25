@@ -134,12 +134,10 @@
     if (embeddedCollectionViewController == self.eventList) {
         Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
         
-        [self.eventList handleImageForEntity:event forCell:cell atIndexPath:indexPath];
+        [cell configureCellForEvent:event];
         
         cell.yPadding = 6;
-        cell.titleLabel.text = event.title;
         cell.titleLabel.font = [UIFont titleFontForSize:18];
-        cell.timeLabel.text = [event.updatedAt timeAgo];
     }
     return cell;
 }

@@ -7,8 +7,11 @@
 //
 
 #import "CollectionViewController.h"
-#import "ImageDownloader.h"
+
+#import <SDWebImage/SDWebImagePrefetcher.h>
+
 #import "BaseEntity.h"
+#import "Event.h"
 
 @interface CollectionViewController ()
 @property (nonatomic, strong) NSString *title;
@@ -129,111 +132,7 @@
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     // In the simplest, most efficient, case, reload the table view.
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 }
-
-#pragma mark - UIScrollViewDelegate
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (!decelerate)
-    {
-        [self loadImagesForOnscreenRows];
-    }
-}
-
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
-{
-    [self loadImagesForOnscreenRows];
-}
-
-# pragma mark - Image Loading
-- (void)loadImagesForOnscreenRows
-{
-    NSArray *visiblePaths = [self.collectionView indexPathsForVisibleItems];
-    for (NSIndexPath *indexPath in visiblePaths) {
-        BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
-        if (!entity.image && entity.imageUrl) {
-            [self downloadImageForEntity:entity forIndexPath:indexPath];
-        }
-    }
-    
-    // If only one cell is visible on screen,
-    // i.e. we have full screen cells,
-    // then preload the next and previous two images.
-    // Assumes one section.
-    if (visiblePaths.count == 1) {
-        NSIndexPath* indexPath = visiblePaths.firstObject;
-        int start = (int)indexPath.row;
-        
-        for (int i=1; i<=2; i++) {
-            int next = start + i;
-            if (next < self.fetchedResultsController.fetchedObjects.count) {
-                NSIndexPath* nextIndexPath = [NSIndexPath indexPathForRow:next inSection:0];
-                BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:nextIndexPath];
-                if (!entity.image) {
-                    [self downloadImageForEntity:entity forIndexPath:nextIndexPath];
-                }
-            }
-        }
-        
-        for (int i=1; i<=2; i++) {
-            int prev = start - i;
-            if (prev >= 0) {
-                NSIndexPath* prevIndexPath = [NSIndexPath indexPathForRow:prev inSection:0];
-                BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:prevIndexPath];
-                if (!entity.image) {
-                    [self downloadImageForEntity:entity forIndexPath:prevIndexPath];
-                }
-            }
-        }
-        
-    }
-}
-
-- (void)downloadImageForEntity:(BaseEntity*)entity forIndexPath:(NSIndexPath*)indexPath
-{
-    NSURL* imageUrl = [NSURL URLWithString:entity.imageUrl];
-    
-    ImageDownloader *imageDownloader = [self.imageDownloadsInProgress objectForKey:indexPath];
-    if (imageDownloader == nil) {
-        imageDownloader = [[ImageDownloader alloc] initWithURL:imageUrl];
-        [imageDownloader setCompletionHandler:^(UIImage *image) {
-            CollectionViewCell* cell = (CollectionViewCell*)[self.collectionView cellForItemAtIndexPath:indexPath];
-            entity.image = image;
-            [cell setImageForEntity:entity];
-        }];
-        [self.imageDownloadsInProgress setObject:imageDownloader forKey:indexPath];
-        [imageDownloader startDownload];
-    }
-}
-
-- (void)handleImageForEntity:(BaseEntity*)entity forCell:(CollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath
-{
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    screenRect.size.height -= ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height);
-    
-    // If there's no cached image for this event,
-    // consider loading it.
-    // Only entities with an imageUrl have an image to download.
-    if (entity.imageUrl.length > 0) {
-        if (!entity.image) {
-            // Only start loading images when scrolling stops.
-            if (self.collectionView.dragging == NO && self.collectionView.decelerating == NO) {
-                [self downloadImageForEntity:entity forIndexPath:indexPath];
-                
-            // Otherwise use the placeholder image.
-            } else {
-                cell.imageView.image = [UIImage imageNamed:@"placeholder"];
-            }
-            
-        // If there is a cached image, use it.
-        } else {
-            [cell setImageForEntity:entity];
-        }
-    } else {
-        cell.imageView.image = [UIImage imageNamed:@"noimage"];
-    }
-}
-
 
 @end

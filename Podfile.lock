@@ -30,6 +30,9 @@ PODS:
     - TransitionKit (= 2.0.0)
   - RestKit/Testing (0.22.0)
   - RKValueTransformers (1.0.1)
+  - SDWebImage (3.5.4):
+    - SDWebImage/Core
+  - SDWebImage/Core (3.5.4)
   - SOCKit (1.1)
   - TransitionKit (2.0.0)
   - VCTransitionsLibrary (1.4.0)
@@ -43,6 +46,7 @@ DEPENDENCIES:
   - NYXImagesKit
   - RestKit
   - RestKit/Testing
+  - SDWebImage
   - VCTransitionsLibrary
   - ViewDeck (~> 2.2.11)
 
@@ -56,6 +60,7 @@ SPEC CHECKSUMS:
   NYXImagesKit: bdcd82ed61e55ad95a2e95675c2f6b84f039c423
   RestKit: dc107a0aa4f962575ad0385bac5b3c5e4f591f4e
   RKValueTransformers: 1562d458b9c9d59ce777bfc5982f2e1aef2e9182
+  SDWebImage: 1a62010700adbba823b621fc217906739dbf6aa5
   SOCKit: 2f3bc4d07910de12dcc202815e07db68a3802581
   TransitionKit: 433284465abacdc07852d7db6dd0cc075010059a
   VCTransitionsLibrary: 328859e78311d45cf393a69a879417133a68c309

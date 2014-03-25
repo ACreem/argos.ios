@@ -89,19 +89,9 @@
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
     Concept* concept = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [self handleImageForEntity:(id)concept forCell:cell atIndexPath:indexPath];
-    
-    cell.titleLabel.text = concept.title;
-    cell.titleLabel.font = [UIFont titleFontForSize:16];
-    NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
-    if (concept.summary) {
-        summaryText = concept.summary;
-    }
-    cell.textLabel.text = summaryText;
-    cell.textLabel.font = [UIFont mediumFontForSize:12];
+
+    [cell configureCellForConcept:concept];
     
     return cell;
 }

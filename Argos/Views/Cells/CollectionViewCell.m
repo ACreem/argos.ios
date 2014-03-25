@@ -106,9 +106,45 @@
     self.titleLabel.frame = frame;
 }
 
-- (void)setImageForEntity:(BaseEntity*)entity
-{
-    self.imageView.image = entity.image;
+- (void)configureCellForEvent:(Event *)event {
+    _titleLabel.text = event.title;
+    _textLabel.text = event.summary;
+    _timeLabel.text = [event.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:event.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
+- (void)configureCellForConcept:(Concept *)concept {
+    _titleLabel.text = concept.title;
+    _titleLabel.font = [UIFont titleFontForSize:16];
+    
+    NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
+    if (concept.summary) {
+        summaryText = concept.summary;
+    }
+    _textLabel.text = summaryText;
+    _textLabel.font = [UIFont mediumFontForSize:12];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:concept.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
+- (void)configureCellForEntity:(BaseEntity *)entity {
+    _titleLabel.text = entity.title;
+    _timeLabel.text = [entity.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:entity.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
+- (void)configureCellForStory:(Story *)story {
+    
+    _titleLabel.text = story.title;
+    _timeLabel.text = [story.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:story.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 
 @end

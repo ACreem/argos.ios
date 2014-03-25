@@ -8,7 +8,6 @@
 
 #import "GalleryViewController.h"
 #import "GalleryImageViewCell.h"
-#import "ImageDownloader.h"
 
 @interface GalleryViewController ()
 @property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;

@@ -28,5 +28,6 @@
 @property (nonatomic, assign) float progress;
 
 - (void)setActionButtonTitle:(NSString*)title;
+- (void)setHeaderImageViewWithImageUrl:(NSString *)url;
 
 @end

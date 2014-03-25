@@ -58,13 +58,9 @@
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
-    
     BaseEntity* entity = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [self handleImageForEntity:entity forCell:cell atIndexPath:indexPath];
-    
-    cell.titleLabel.text = entity.title;
-    cell.timeLabel.text = [entity.updatedAt timeAgo];
+
+    [cell configureCellForEntity:entity];
     
     return cell;
 }

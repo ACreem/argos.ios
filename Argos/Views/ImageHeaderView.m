@@ -8,6 +8,7 @@
 
 #import "ImageHeaderView.h"
 #import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ImageHeaderView ()
 @property (nonatomic, strong) UIView *textGradientView;
@@ -64,6 +65,16 @@
         [self addSubview:_gradientView];
     }
     return self;
+}
+
+- (void)setHeaderImageViewWithImageUrl:(NSString *)url {
+    __weak typeof(self) weakSelf = self;
+    
+    [self.imageView setImageWithURL:[NSURL URLWithString:url]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                              UIImage *blurred = [image gaussianBlurWithBias:0];
+                              [weakSelf.blurredImageView setImage:blurred];
+                          }];
 }
 
 - (void)setImage:(UIImage*)image

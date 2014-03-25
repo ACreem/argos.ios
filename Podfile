@@ -6,6 +6,7 @@ pod 'MagicalRecord'
 pod 'NSDate+TimeAgo'
 pod 'NYXImagesKit'
 pod 'RestKit'
+pod 'SDWebImage'
 pod 'VCTransitionsLibrary'
 pod 'ViewDeck', '~> 2.2.11'
 

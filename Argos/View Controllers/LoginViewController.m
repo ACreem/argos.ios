@@ -36,15 +36,15 @@ static int kSignUpTag = 1;
     self.view.emailField.delegate = self;
     self.view.primaryButton.tag = kLoginTag;
 
-     [UIView animateWithDuration:0.45
-                           delay:0.22
-                         options:UIViewAnimationOptionCurveEaseOut
-                      animations:^{
-                          CGRect frame = self.view.formView.frame;
-                          frame.origin.y -= 100;
-                          self.view.formView.frame = frame;
-                      }
-                      completion:nil];
+    [UIView animateWithDuration:0.45
+                          delay:0.22
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         CGRect frame = self.view.formView.frame;
+                         frame.origin.y -= 100;
+                         self.view.formView.frame = frame;
+                     }
+                     completion:nil];
 }
 
 - (void)postLogin

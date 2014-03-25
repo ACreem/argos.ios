@@ -20,7 +20,6 @@
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName;
 - (id)initWithCollectionViewLayout:(UICollectionViewLayout*)collectionViewLayout forEntityNamed:(NSString*)entityName withPredicate:(NSPredicate*)predicate;
 - (void)downloadImageForEntity:(BaseEntity*)entity forIndexPath:(NSIndexPath*)indexPath;
-- (void)handleImageForEntity:(BaseEntity*)entity forCell:(CollectionViewCell*)cell atIndexPath:(NSIndexPath*)indexPath;
 - (void)loadImagesForOnscreenRows;
 
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;

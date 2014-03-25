@@ -13,4 +13,6 @@
 @property (nonatomic, strong) UIImageView *blurredImageView;
 @property (nonatomic, assign) CGRect cachedFrame;
 
+- (void)setHeaderImageViewWithImageUrl:(NSString *)url;
+
 @end

@@ -30,7 +30,7 @@
 
 // For downloading/processing images.
 #import "ImageDownloader.h"
-#import <NYXImagesKit/NYXImagesKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 #import "EmbeddedCollectionViewController.h"
 #import "GalleryViewController.h"
@@ -80,7 +80,7 @@
     self.view = [[DetailView alloc] initWithFrame:bounds];
     self.view.delegate = self;
     self.view.entity = self.entity;
-    [self loadHeaderImage];
+    [self.view.headerView setHeaderImageViewWithImageUrl:self.entity.imageUrl];
     
     self.loadedItems = 0;
     
@@ -136,35 +136,6 @@
     return @[ shareButton, paddingItem,
               fontButton, paddingItem ];
 }
-
-- (void)loadHeaderImage
-{
-    CGSize headerSize = self.view.headerView.cachedFrame.size;
-    headerSize.height *= 2;
-    headerSize.width *= 2;
-    
-    // Set the header image,
-    // downloading if necessary.
-    if (self.entity.imageHeader) {
-        self.view.image = self.entity.imageHeader;
-        
-    } else if (self.entity.image) {
-        UIImage *headerImage = [self.entity.image scaleToCoverSize:headerSize];
-        self.entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-        self.view.image = self.entity.imageHeader;
-        
-    } else if (self.entity.imageUrl) {
-        ImageDownloader* imageDownloader = [[ImageDownloader alloc] initWithURL:[NSURL URLWithString:self.entity.imageUrl]];
-        [imageDownloader setCompletionHandler:^(UIImage *image) {
-            self.entity.image = image;
-            UIImage *headerImage = [self.entity.image scaleToCoverSize:headerSize];
-            self.entity.imageHeader = [headerImage cropToSize:headerSize usingMode:NYXCropModeCenter];
-            self.view.image = self.entity.imageHeader;
-        }];
-        [imageDownloader startDownload];
-    }
-}
-
 
 # pragma mark - Actions
 - (void)share:(id)sender

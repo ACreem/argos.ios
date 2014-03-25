@@ -78,12 +78,7 @@
     CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [self handleImageForEntity:event forCell:cell atIndexPath:indexPath];
-    
-    cell.titleLabel.text = event.title;
-    cell.textLabel.text = event.summary;
-    cell.timeLabel.text = [event.updatedAt timeAgo];
+    [cell configureCellForEvent:event];
     
     return cell;
 }
