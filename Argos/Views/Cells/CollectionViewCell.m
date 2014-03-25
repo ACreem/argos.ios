@@ -133,6 +133,7 @@
         summaryText = concept.summary;
     }
     _textLabel.text = summaryText;
+    _textLabel.numberOfLines = 2;
     
     [_imageView setImageWithURL:[NSURL URLWithString:concept.imageUrl]
                placeholderImage:[UIImage imageNamed:@"placeholder"]];
