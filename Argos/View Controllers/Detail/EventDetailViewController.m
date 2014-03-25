@@ -44,8 +44,9 @@
         [self.view setActionButtonTitle:@"View the full story"];
         [self.view.actionButton addTarget:self action:@selector(viewStory:) forControlEvents:UIControlEventTouchUpInside];
         
-        // Otherwise show a list of stories.
     } else {
+        // Otherwise show a list of stories.
+        
         UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
         [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
         self.storyList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];

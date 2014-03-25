@@ -16,7 +16,6 @@
     #import <CoreData/CoreData.h>
     #import <CoreData+MagicalRecord.h>
     #import <RestKit/RestKit.h>
-    #import <NYXImagesKit/NYXImagesKit.h>
     #import "ArgosObjectManager.h"
     #import "UIColor+ArgosColors.h"
     #import "UIFont+ArgosFonts.h"

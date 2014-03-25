@@ -9,7 +9,6 @@
 #import "CardCollectionViewCell.h"
 #import "BaseEntity.h"
 #import <QuartzCore/QuartzCore.h>
-#import <NYXImagesKit/NYXImagesKit.h>
 #import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation CardCollectionViewCell

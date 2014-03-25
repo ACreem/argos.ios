@@ -8,7 +8,6 @@
 
 #import "CollectionViewCell.h"
 #import "BaseEntity.h"
-#import <NYXImagesKit/NYXImagesKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 @interface CollectionViewCell ()
