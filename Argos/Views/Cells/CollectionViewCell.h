@@ -27,6 +27,7 @@
 @property (nonatomic, assign) CGFloat yPadding;
 
 - (void) configureCellForEvent:(Event *)event;
+- (void) configureCellForStoryEvent:(Event *)event;
 - (void) configureCellForConcept:(Concept *)concept;
 - (void) configureCellForEntity:(BaseEntity *)entity;
 - (void) configureCellForStory:(Story *)story;

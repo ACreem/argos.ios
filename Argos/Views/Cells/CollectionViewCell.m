@@ -114,6 +114,17 @@
                placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 
+- (void)configureCellForStoryEvent:(Event *)event {
+    _titleLabel.text = event.title;
+    _titleLabel.font = [UIFont titleFontForSize:18];
+    _timeLabel.text = [event.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:event.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    self.yPadding = 6;
+}
+
 - (void)configureCellForConcept:(Concept *)concept {
     _titleLabel.text = concept.title;
     

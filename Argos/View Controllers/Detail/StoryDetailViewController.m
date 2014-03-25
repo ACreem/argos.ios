@@ -134,10 +134,8 @@
     if (embeddedCollectionViewController == self.eventList) {
         Event *event = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
         
-        [cell configureCellForEvent:event];
+        [cell configureCellForStoryEvent:event];
         
-        cell.yPadding = 6;
-        cell.titleLabel.font = [UIFont titleFontForSize:18];
     }
     return cell;
 }
