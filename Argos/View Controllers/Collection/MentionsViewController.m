@@ -95,6 +95,7 @@
     [cell configureCellForConcept:concept];
     cell.titleLabel.font = [UIFont titleFontForSize:16];
     cell.textLabel.font = [UIFont mediumFontForSize:12];
+    cell.clipsToBounds = YES;
     
     return cell;
 }
@@ -105,7 +106,7 @@
         [self.noteLabel removeFromSuperview];
         self.noteLabel = nil;
     }
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 }
 
 

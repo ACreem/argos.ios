@@ -249,6 +249,11 @@
             if (fetched_concept_count == [concepts count]) {
                 // Refreshes the summary view.
                 self.view.entity = self.entity;
+                if (self.navigationController.viewDeckController.rightController) {
+                
+                    MentionsViewController *dvc = (MentionsViewController *)self.navigationController.viewDeckController.rightController;
+                    [dvc.collectionView reloadData];
+                }
             }
         } failure:^(RKObjectRequestOperation *operation, NSError *error) {
             NSLog(@"Failure getting concepts: %@", error);
