@@ -48,6 +48,7 @@
     
     CGRect screenRect = [[UIScreen mainScreen] bounds];
     self.collectionView = [[CollectionView alloc] initWithFrame:screenRect collectionViewLayout:self.collectionViewLayout];
+    
 }
 
 - (void)didReceiveMemoryWarning
