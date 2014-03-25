@@ -261,6 +261,15 @@
     }
 }
 
+#pragma mark - UICollectionViewDelegate
+- (void)collectionView:(EmbeddedCollectionViewController *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    // Blank implementation
+}
+
+- (CollectionViewCell *)configureCell:(CollectionViewCell *)cell atIndexPath:(NSIndexPath *)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController {
+    return cell;
+}
+
 
 #pragma mark - UIScrollViewDelegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
@@ -377,16 +386,6 @@
         
         CGPoint center = CGPointMake(self.view.center.x - y/aspectRatio/2, self.view.headerView.center.y - y);
         self.view.headerView.center = center;
-    }
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate
-{
-    if (!decelerate)
-    {
-        for (EmbeddedCollectionViewController* ecvc in self.embeddedCollectionViewControllers) {
-            [ecvc loadImagesForOnscreenRows];
-        }
     }
 }
 

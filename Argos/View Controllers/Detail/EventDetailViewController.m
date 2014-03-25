@@ -132,7 +132,7 @@
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate
-- (CollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
+- (ArticleCollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.articleList) {
         Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
