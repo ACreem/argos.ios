@@ -8,10 +8,8 @@
 
 #import "GalleryViewController.h"
 #import "GalleryImageViewCell.h"
-#import "ImageDownloader.h"
 
 @interface GalleryViewController ()
-@property (nonatomic, strong) NSMutableDictionary *imageDownloadsInProgress;
 @end
 
 @implementation GalleryViewController
@@ -39,12 +37,7 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    
-    // terminate all pending download connections
-    NSArray *allDownloads = [self.imageDownloadsInProgress allValues];
-    [allDownloads makeObjectsPerformSelector:@selector(cancelDownload)];
-    
-    [self.imageDownloadsInProgress removeAllObjects];
+
 }
 
 # pragma mark - UICollectionViewDataSource

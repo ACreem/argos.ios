@@ -1,12 +1,14 @@
 link_with 'Argos', 'ArgosTests'
 
-pod 'ViewDeck', '~> 2.2.11'
-pod 'RestKit'
-pod 'NYXImagesKit'
-pod 'EAIntroView'
 pod 'AFOAuth2Client'
-pod 'VCTransitionsLibrary'
+pod 'EAIntroView'
+pod 'MagicalRecord'
 pod 'NSDate+TimeAgo'
+pod 'GPUImage'
+pod 'RestKit'
+pod 'SDWebImage'
+pod 'VCTransitionsLibrary'
+pod 'ViewDeck', '~> 2.2.11'
 
 target :ArgosTests, :exclusive => true do
     pod 'RestKit/Testing'

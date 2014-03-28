@@ -14,11 +14,6 @@
 @interface BaseEntity : NSManagedObject
 
 @property (nonatomic, retain) NSDate * createdAt;
-@property (nonatomic, retain) id image;
-@property (nonatomic, retain) id imageFull;
-@property (nonatomic, retain) id imageHeader;
-@property (nonatomic, retain) id imageLarge;
-@property (nonatomic, retain) id imageMid;
 @property (nonatomic, retain) NSString * imageUrl;
 @property (nonatomic, retain) id jsonUrl;
 @property (nonatomic, retain) NSString * searchQuery;

@@ -11,6 +11,11 @@
 //  This handles its own image cropping.
 //  ==========================================
 
+#import "BaseEntity.h"
+#import "Concept.h"
+#import "Event.h"
+#import "Story.h"
+
 @class BaseEntity;
 
 @interface CollectionViewCell : UICollectionViewCell
@@ -21,7 +26,10 @@
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, assign) CGFloat yPadding;
 
-- (UIImage*)cropImage:(UIImage*)image;
-- (void)setImageForEntity:(BaseEntity*)entity;
+- (void) configureCellForEvent:(Event *)event;
+- (void) configureCellForStoryEvent:(Event *)event;
+- (void) configureCellForConcept:(Concept *)concept;
+- (void) configureCellForEntity:(BaseEntity *)entity;
+- (void) configureCellForStory:(Story *)story;
 
 @end

@@ -91,17 +91,11 @@
     CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Concept* concept = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [self handleImageForEntity:(id)concept forCell:cell atIndexPath:indexPath];
-    
-    cell.titleLabel.text = concept.title;
+
+    [cell configureCellForConcept:concept];
     cell.titleLabel.font = [UIFont titleFontForSize:16];
-    NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
-    if (concept.summary) {
-        summaryText = concept.summary;
-    }
-    cell.textLabel.text = summaryText;
     cell.textLabel.font = [UIFont mediumFontForSize:12];
+    cell.clipsToBounds = YES;
     
     return cell;
 }
@@ -112,7 +106,7 @@
         [self.noteLabel removeFromSuperview];
         self.noteLabel = nil;
     }
-    [self.collectionView reloadData];
+//    [self.collectionView reloadData];
 }
 
 

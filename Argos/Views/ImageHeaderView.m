@@ -7,13 +7,16 @@
 //
 
 #import "ImageHeaderView.h"
+#import "GPUImage.h"
 #import <QuartzCore/QuartzCore.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @interface ImageHeaderView ()
 @property (nonatomic, strong) UIView *textGradientView;
 @property (nonatomic, strong) UIImageView *imageView;
 @property (nonatomic, assign) CAGradientLayer *textGradientLayer;
 @property (nonatomic, assign) CAGradientLayer *gradientLayer;
+@property (strong, nonatomic) GPUImageGaussianBlurFilter *blurFilter;
 @end
 
 @implementation ImageHeaderView
@@ -31,8 +34,7 @@
         [self addSubview:_imageView];
         
         // Header image blur
-        UIImage* blurred = [headerImage gaussianBlurWithBias:0];
-        _blurredImageView = [[UIImageView alloc] initWithImage:blurred];
+        _blurredImageView = [[UIImageView alloc] initWithFrame:frame];
         _blurredImageView.contentMode = UIViewContentModeScaleAspectFill;
         _blurredImageView.frame = frame;
         _blurredImageView.alpha = 0.0;
@@ -62,8 +64,25 @@
         _gradientLayer = gradient;
         _gradientView.alpha = 0.0;
         [self addSubview:_gradientView];
+        
+        self.blurFilter = [GPUImageGaussianBlurFilter new];
     }
     return self;
+}
+
+- (void)setHeaderImageViewWithImageUrl:(NSString *)url {
+    __weak typeof(self) weakSelf = self;
+    
+    [self.imageView setImageWithURL:[NSURL URLWithString:url]
+                          completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType) {
+                              if (image != nil) {
+                                  UIImage *blurred = [weakSelf.blurFilter imageByFilteringImage:image];
+                                  [weakSelf.blurredImageView setImage:blurred];
+                                  
+                                  [weakSelf.imageView setContentMode:UIViewContentModeScaleAspectFill];
+                                  [weakSelf.blurredImageView setContentMode:UIViewContentModeScaleAspectFill];
+                              }
+                          }];
 }
 
 - (void)setImage:(UIImage*)image
@@ -71,8 +90,7 @@
     _image = image;
     [self.imageView setImage:image];
     
-    UIImage* blurred = [image gaussianBlurWithBias:0];
-    [self.blurredImageView setImage:blurred];
+    [self.blurredImageView setImage:[self.blurFilter imageByFilteringImage:image]];
 }
 
 - (void)setFrame:(CGRect)frame

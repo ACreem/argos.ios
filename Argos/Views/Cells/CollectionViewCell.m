@@ -8,7 +8,6 @@
 
 #import "CollectionViewCell.h"
 #import "BaseEntity.h"
-#import <NYXImagesKit/NYXImagesKit.h>
 #import <QuartzCore/QuartzCore.h>
 
 @interface CollectionViewCell ()
@@ -28,6 +27,7 @@
                                                                        CGRectGetWidth(self.frame),
                                                                        CGRectGetHeight(self.frame))];
         _imageView.image = [UIImage imageNamed:@"placeholder"];
+        _imageView.contentMode = UIViewContentModeScaleAspectFill;
         [self addSubview:_imageView];
         
         // Text gradient (so the text is readable)
@@ -105,58 +105,55 @@
     self.titleLabel.frame = frame;
 }
 
-// Crops an image to the size needed by this cell.
-// Need to double dimensions for retina.
-- (UIImage*)cropImage:(UIImage*)image
-{
-    CGSize dimensions = CGSizeMake(CGRectGetWidth(self.imageView.frame)*2,
-                                   CGRectGetHeight(self.imageView.frame)*2);
-    UIImage *croppedImage = [image scaleToCoverSize:dimensions];
-    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-    return croppedImage;
+- (void)configureCellForEvent:(Event *)event {
+    _titleLabel.text = event.title;
+    _textLabel.text = event.summary;
+    _timeLabel.text = [event.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:event.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 
-- (void)setImageForEntity:(BaseEntity*)entity
-{
-    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    CGFloat frameHeight = CGRectGetHeight(self.frame);
-    if (frameHeight == screenSize.height) {
-        if (!entity.imageFull) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                UIImage *croppedImage = [self cropImage:entity.image];
-                entity.imageFull = croppedImage;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.imageView.image = entity.imageFull;
-                });
-            });
-        } else {
-            self.imageView.image = entity.imageFull;
-        }
-    } else if (frameHeight == kLargeCellHeight) {
-        if (!entity.imageLarge) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                UIImage *croppedImage = [self cropImage:entity.image];
-                entity.imageLarge = croppedImage;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.imageView.image = entity.imageLarge;
-                });
-            });
-        } else {
-            self.imageView.image = entity.imageLarge;
-        }
-    } else {
-        if (!entity.imageMid) {
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-                UIImage *croppedImage = [self cropImage:entity.image];
-                entity.imageMid = croppedImage;
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.imageView.image = entity.imageMid;
-                });
-            });
-        } else {
-            self.imageView.image = entity.imageMid;
-        }
+- (void)configureCellForStoryEvent:(Event *)event {
+    _titleLabel.text = event.title;
+    _titleLabel.font = [UIFont titleFontForSize:18];
+    _timeLabel.text = [event.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:event.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+    self.yPadding = 6;
+}
+
+- (void)configureCellForConcept:(Concept *)concept {
+    _titleLabel.text = concept.title;
+    
+    NSString *summaryText = @"We have no summary for this concept yet. Please help by submitting one!";
+    if (concept.summary) {
+        summaryText = concept.summary;
     }
+    _textLabel.text = summaryText;
+    _textLabel.numberOfLines = 2;
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:concept.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
+- (void)configureCellForEntity:(BaseEntity *)entity {
+    _titleLabel.text = entity.title;
+    _timeLabel.text = [entity.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:entity.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+}
+
+- (void)configureCellForStory:(Story *)story {
+    
+    _titleLabel.text = story.title;
+    _timeLabel.text = [story.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:story.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 
 @end

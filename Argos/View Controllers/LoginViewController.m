@@ -36,15 +36,15 @@ static int kSignUpTag = 1;
     self.view.emailField.delegate = self;
     self.view.primaryButton.tag = kLoginTag;
 
-     [UIView animateWithDuration:0.45
-                           delay:0.22
-                         options:UIViewAnimationOptionCurveEaseOut
-                      animations:^{
-                          CGRect frame = self.view.formView.frame;
-                          frame.origin.y -= 100;
-                          self.view.formView.frame = frame;
-                      }
-                      completion:nil];
+    [UIView animateWithDuration:0.45
+                          delay:0.22
+                        options:UIViewAnimationOptionCurveEaseOut
+                     animations:^{
+                         CGRect frame = self.view.formView.frame;
+                         frame.origin.y -= 100;
+                         self.view.formView.frame = frame;
+                     }
+                     completion:nil];
 }
 
 - (void)postLogin
@@ -56,7 +56,7 @@ static int kSignUpTag = 1;
     MenuViewController* menuController = [[MenuViewController alloc] init];
     self.deckController.leftController = menuController;
     
-    StreamViewController *svc = [[StreamViewController alloc] initWithStream:@"latest"];
+    StreamViewController *svc = [[StreamViewController alloc] initWithStream:kArgosLatestStream];
     svc.managedObjectContext = self.managedObjectContext;
     
     // Set whether or not the user is new.
@@ -221,10 +221,20 @@ static int kSignUpTag = 1;
     }
 }
 
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    NSLog(@"Error: %@", error.localizedDescription);
+}
+
 # pragma mark - UITextFieldDelegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [textField resignFirstResponder];
+    if (textField == self.view.emailField) {
+        [self.view.passwordField becomeFirstResponder];
+    } else {
+        [textField resignFirstResponder];
+    }
+    
     return NO;
 }
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event

@@ -65,6 +65,7 @@
 {
     [[RKObjectManager sharedManager] getObjectsAtPath:@"/events" parameters:nil success:^(RKObjectRequestOperation *operation, RKMappingResult *mappingResult) {
         [self.refreshControl endRefreshing];
+        [self.collectionView reloadData];
     } failure:^(RKObjectRequestOperation *operation, NSError *error) {
         [self.refreshControl endRefreshing];
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"An Error Has Occurred" message:[error localizedDescription] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -78,12 +79,7 @@
     CollectionViewCell *cell = (CollectionViewCell*)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
     Event *event = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    
-    [self handleImageForEntity:event forCell:cell atIndexPath:indexPath];
-    
-    cell.titleLabel.text = event.title;
-    cell.textLabel.text = event.summary;
-    cell.timeLabel.text = [event.updatedAt timeAgo];
+    [cell configureCellForEvent:event];
     
     return cell;
 }

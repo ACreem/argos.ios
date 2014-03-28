@@ -14,11 +14,6 @@
 @implementation BaseEntity
 
 @dynamic createdAt;
-@dynamic image;
-@dynamic imageFull;
-@dynamic imageHeader;
-@dynamic imageLarge;
-@dynamic imageMid;
 @dynamic imageUrl;
 @dynamic jsonUrl;
 @dynamic searchQuery;

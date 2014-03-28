@@ -9,7 +9,7 @@
 #import "CardCollectionViewCell.h"
 #import "BaseEntity.h"
 #import <QuartzCore/QuartzCore.h>
-#import <NYXImagesKit/NYXImagesKit.h>
+#import <SDWebImage/UIImageView+WebCache.h>
 
 @implementation CardCollectionViewCell
 
@@ -27,6 +27,7 @@
         
         self.imageView = [[UIImageView alloc] initWithFrame:headerView.frame];
         self.imageView.image = [UIImage imageNamed:@"placeholder"];
+        self.imageView.contentMode = UIViewContentModeScaleAspectFill;
         [headerView addSubview:self.imageView];
         
         // Text gradient (so the text is readable)
@@ -92,32 +93,20 @@
     return self;
 }
 
-- (UIImage*)cropImage:(UIImage*)image
-{
-    // Crop to same aspect ratio as detail view header images.
-    CGFloat aspectRatio = 1.6;
-    CGRect screenRect = [[UIScreen mainScreen] bounds];
-    CGSize dimensions = CGSizeMake(CGRectGetWidth(screenRect)*2,
-                                   (CGRectGetWidth(screenRect)/aspectRatio)*2);
-    UIImage *croppedImage = [image scaleToCoverSize:dimensions];
-    croppedImage = [croppedImage cropToSize:dimensions usingMode:NYXCropModeCenter];
-    return croppedImage;
-}
-
 - (void)setImageForEntity:(BaseEntity*)entity
 {
-    // Just re-use header images here.
-    if (!entity.imageHeader) {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
-            UIImage *croppedImage = [self cropImage:entity.image];
-            entity.imageHeader = croppedImage;
-            dispatch_async(dispatch_get_main_queue(), ^{
-                self.imageView.image = entity.imageHeader;
-            });
-        });
-    } else {
-        self.imageView.image = entity.imageHeader;
-    }
+    [_imageView setImageWithURL:[NSURL URLWithString:entity.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
+    
+}
+
+- (void)configureCellForEvent:(Event *)event {
+    _titleLabel.text = event.title;
+    _textLabel.text = event.summary;
+    _timeLabel.text = [event.updatedAt timeAgo];
+    
+    [_imageView setImageWithURL:[NSURL URLWithString:event.imageUrl]
+               placeholderImage:[UIImage imageNamed:@"placeholder"]];
 }
 
 @end
