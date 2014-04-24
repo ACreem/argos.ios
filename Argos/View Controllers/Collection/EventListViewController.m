@@ -8,7 +8,7 @@
 
 #import "EventListViewController.h"
 #import "EventDetailViewController.h"
-#import "CollectionViewCell.h"
+#import "EventViewCell.h"
 #import "Event.h"
 
 @interface EventListViewController ()
@@ -42,14 +42,13 @@
     // it is not pushed onto a navigation controller stack yet,
     // so self.navigationController is null.
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    screenRect.size.height -= ([UIApplication sharedApplication].statusBarFrame.size.height + self.navigationController.navigationBar.frame.size.height);
-    [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:screenRect.size];
+    [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:CGSizeMake(screenRect.size.width - 20, 100)];
     
-    [self.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    self.collectionView.backgroundColor = [UIColor colorWithRed:0.078 green:0.086 blue:0.114 alpha:1.0];
+    [self.collectionView registerClass:[EventViewCell class] forCellWithReuseIdentifier:@"Cell"];
+    self.collectionView.backgroundColor = [UIColor colorWithRed:0.918 green:0.918 blue:0.918 alpha:1.0];
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.showsHorizontalScrollIndicator = NO;
-    self.collectionView.pagingEnabled = YES;
+    self.collectionView.pagingEnabled = NO;
     self.collectionView.alwaysBounceVertical = YES; // necessary for pull-to-refresh
     
     self.refreshControl = [UIRefreshControl new];

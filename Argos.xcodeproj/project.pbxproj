@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2661848B0D3E47FBA1587BCF /* libPods-ArgosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */; };
 		8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
+		F10007A8190994E400F2784A /* EventViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007A7190994E400F2784A /* EventViewCell.m */; };
 		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
 		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
 		F1203A1818BD379400DCEB3A /* Graphik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */; };
@@ -115,6 +116,8 @@
 		4C8E5860754E44B8B98A352E /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ArgosTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		F10007A6190994E400F2784A /* EventViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewCell.h; sourceTree = "<group>"; };
+		F10007A7190994E400F2784A /* EventViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewCell.m; sourceTree = "<group>"; };
 		F1203A0418BD379400DCEB3A /* Graphik-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Black.otf"; sourceTree = "<group>"; };
 		F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BlackItalic.otf"; sourceTree = "<group>"; };
 		F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Bold.otf"; sourceTree = "<group>"; };
@@ -620,6 +623,8 @@
 		F194A55A18D2A0ED00792451 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				F10007A6190994E400F2784A /* EventViewCell.h */,
+				F10007A7190994E400F2784A /* EventViewCell.m */,
 				F194A55F18D2A0ED00792451 /* CollectionViewCell.h */,
 				F194A56018D2A0ED00792451 /* CollectionViewCell.m */,
 				F194A55B18D2A0ED00792451 /* ArticleCollectionViewCell.h */,
@@ -831,6 +836,7 @@
 				F194A57218D2A0ED00792451 /* Event.m in Sources */,
 				F194A57E18D2A0ED00792451 /* EventListViewController.m in Sources */,
 				F194A58018D2A0ED00792451 /* StreamViewController.m in Sources */,
+				F10007A8190994E400F2784A /* EventViewCell.m in Sources */,
 				F194A58618D2A0ED00792451 /* MenuViewController.m in Sources */,
 				F194A57018D2A0ED00792451 /* CurrentUser.m in Sources */,
 				F1915D7918D2BA60005811E6 /* BaseEntity.m in Sources */,

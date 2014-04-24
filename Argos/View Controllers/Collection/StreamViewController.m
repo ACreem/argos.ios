@@ -22,8 +22,8 @@
 {
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:0.0f];
-    [flowLayout setSectionInset:UIEdgeInsetsZero];
+    [flowLayout setMinimumLineSpacing:10.0f];
+    [flowLayout setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     NSPredicate *predicate;

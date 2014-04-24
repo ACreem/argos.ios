@@ -32,7 +32,7 @@
 
 + (UIColor*)mutedColor
 {
-    return [UIColor colorWithRed:0.573 green:0.58 blue:0.592 alpha:1.0];
+    return [UIColor colorWithRed:0.8 green:0.8 blue:0.8 alpha:1.0];
 }
 
 + (UIColor*)mutedAltColor

@@ -45,6 +45,9 @@ static int kSignUpTag = 1;
                          self.view.formView.frame = frame;
                      }
                      completion:nil];
+    
+    // Temporary
+    [self postLogin];
 }
 
 - (void)postLogin
