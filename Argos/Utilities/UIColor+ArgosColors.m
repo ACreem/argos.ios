@@ -22,7 +22,7 @@
 
 + (UIColor*)headerColor
 {
-    return [UIColor colorWithRed:0.125 green:0.137 blue:0.176 alpha:1.0];
+    return [UIColor colorWithRed:0.878 green:0.878 blue:0.878 alpha:1.0];
 }
 
 + (UIColor*)actionColor

@@ -41,7 +41,7 @@
     self.navigationController.navigationBar.barTintColor = [UIColor headerColor];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    [self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor whiteColor],
+    [self.navigationController.navigationBar setTitleTextAttributes: @{NSForegroundColorAttributeName: [UIColor blackColor],
                                                                        NSFontAttributeName: [UIFont lightFontForSize:16]}];
     
     // Custom back button image.
