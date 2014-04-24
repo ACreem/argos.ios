@@ -22,9 +22,11 @@
     #import "NSDate+TimeAgo.h"
 
     #ifdef DEBUG
-        static NSString* const kArgosAPIBaseURLString = @"http://54.225.4.27:5000";
+        static NSString* const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
     #else
-        static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com";
+        //static NSString* const kArgosAPIBaseURLString = @"http://api.argos.com";
+        static NSString* const kArgosAPIBaseURLString = @"http://0.0.0.0:5000";
+
     #endif
     static CGFloat const kMidCellHeight = 120.0;
     static CGFloat const kLargeCellHeight = 220.0;

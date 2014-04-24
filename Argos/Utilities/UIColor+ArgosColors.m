@@ -17,7 +17,7 @@
 
 + (UIColor*)secondaryColor
 {
-    return [UIColor colorWithRed:0.514 green:0.851 blue:0.514 alpha:1.0];
+    return [UIColor colorWithRed:0.141 green:0.49 blue:0.875 alpha:1.0];
 }
 
 + (UIColor*)headerColor

@@ -70,7 +70,6 @@
     
     if (self.imageView.isHidden) {
         CGFloat padding = 10;
-        CGFloat titleLabelOriginX = padding;
         CGRect titleFrame = self.titleLabel.frame;
         titleFrame.origin.x = padding;
         titleFrame.size.width = CGRectGetWidth(self.frame) - padding*2;
