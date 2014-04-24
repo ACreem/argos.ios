@@ -10,6 +10,9 @@
 		2661848B0D3E47FBA1587BCF /* libPods-ArgosTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C57EBB5C03F44897A85B5ED5 /* libPods-ArgosTests.a */; };
 		8E626A194CF4457686BA28D2 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C8E5860754E44B8B98A352E /* libPods.a */; };
 		F10007A8190994E400F2784A /* EventViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007A7190994E400F2784A /* EventViewCell.m */; };
+		F10007AB1909B1DE00F2784A /* EventSummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007AA1909B1DE00F2784A /* EventSummaryView.m */; };
+		F10007AE1909B50900F2784A /* EventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007AD1909B50900F2784A /* EventDetailView.m */; };
+		F10007B21909B93700F2784A /* ConceptDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007B11909B93700F2784A /* ConceptDetailView.m */; };
 		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
 		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
 		F1203A1818BD379400DCEB3A /* Graphik-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */; };
@@ -118,6 +121,12 @@
 		E8A5646DE71C4BB8A4462DA0 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		F10007A6190994E400F2784A /* EventViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventViewCell.h; sourceTree = "<group>"; };
 		F10007A7190994E400F2784A /* EventViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventViewCell.m; sourceTree = "<group>"; };
+		F10007A91909B1DE00F2784A /* EventSummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventSummaryView.h; sourceTree = "<group>"; };
+		F10007AA1909B1DE00F2784A /* EventSummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventSummaryView.m; sourceTree = "<group>"; };
+		F10007AC1909B50900F2784A /* EventDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDetailView.h; sourceTree = "<group>"; };
+		F10007AD1909B50900F2784A /* EventDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDetailView.m; sourceTree = "<group>"; };
+		F10007B01909B93700F2784A /* ConceptDetailView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConceptDetailView.h; sourceTree = "<group>"; };
+		F10007B11909B93700F2784A /* ConceptDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConceptDetailView.m; sourceTree = "<group>"; };
 		F1203A0418BD379400DCEB3A /* Graphik-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Black.otf"; sourceTree = "<group>"; };
 		F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-BlackItalic.otf"; sourceTree = "<group>"; };
 		F1203A0618BD379400DCEB3A /* Graphik-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Bold.otf"; sourceTree = "<group>"; };
@@ -291,6 +300,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F10007AF1909B8DD00F2784A /* Summary */ = {
+			isa = PBXGroup;
+			children = (
+				F194A55818D2A0ED00792451 /* SummaryView.h */,
+				F194A55918D2A0ED00792451 /* SummaryView.m */,
+				F10007A91909B1DE00F2784A /* EventSummaryView.h */,
+				F10007AA1909B1DE00F2784A /* EventSummaryView.m */,
+			);
+			name = Summary;
+			sourceTree = "<group>";
+		};
 		F1203A0318BD379400DCEB3A /* graphik */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,7 +387,6 @@
 				F194A51B18D2A0ED00792451 /* Utilities */,
 				F194A52218D2A0ED00792451 /* View Controllers */,
 				F194A54D18D2A0ED00792451 /* Views */,
-				F1C6D6D918B2E29500129552 /* Fonts */,
 				F1405C2A18973C4C00A4819D /* Supporting Files */,
 			);
 			path = Argos;
@@ -465,12 +484,10 @@
 			children = (
 				F1915E3518D35275005811E6 /* DetailView.h */,
 				F1915E3618D35275005811E6 /* DetailView.m */,
-				F194A55418D2A0ED00792451 /* ImageHeaderView.h */,
-				F194A55518D2A0ED00792451 /* ImageHeaderView.m */,
-				F194A55618D2A0ED00792451 /* ScrollView.h */,
-				F194A55718D2A0ED00792451 /* ScrollView.m */,
-				F194A55818D2A0ED00792451 /* SummaryView.h */,
-				F194A55918D2A0ED00792451 /* SummaryView.m */,
+				F10007AC1909B50900F2784A /* EventDetailView.h */,
+				F10007AD1909B50900F2784A /* EventDetailView.m */,
+				F10007B01909B93700F2784A /* ConceptDetailView.h */,
+				F10007B11909B93700F2784A /* ConceptDetailView.m */,
 			);
 			name = Detail;
 			sourceTree = "<group>";
@@ -611,11 +628,17 @@
 		F194A54D18D2A0ED00792451 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				F194A55418D2A0ED00792451 /* ImageHeaderView.h */,
+				F194A55518D2A0ED00792451 /* ImageHeaderView.m */,
+				F194A55618D2A0ED00792451 /* ScrollView.h */,
+				F194A55718D2A0ED00792451 /* ScrollView.m */,
 				F194A55A18D2A0ED00792451 /* Cells */,
 				F1915E3418D34B5E005811E6 /* Elements */,
 				F1915E7018D37F24005811E6 /* User */,
 				F1915E7118D39201005811E6 /* Detail */,
+				F1C6D6D918B2E29500129552 /* Fonts */,
 				F19199FB18D5623100AB9F6D /* Collection */,
+				F10007AF1909B8DD00F2784A /* Summary */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -642,7 +665,8 @@
 			children = (
 				F1203A0318BD379400DCEB3A /* graphik */,
 			);
-			path = Fonts;
+			name = Fonts;
+			path = ../Fonts;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -843,6 +867,7 @@
 				F194A57418D2A0ED00792451 /* Source.m in Sources */,
 				F194A57518D2A0ED00792451 /* Story.m in Sources */,
 				F194A56E18D2A0ED00792451 /* Article.m in Sources */,
+				F10007B21909B93700F2784A /* ConceptDetailView.m in Sources */,
 				F194A58418D2A0ED00792451 /* StoryDetailViewController.m in Sources */,
 				F194A58D18D2A0ED00792451 /* CollectionView.m in Sources */,
 				F1915D5818D2B8F7005811E6 /* Argos.xcdatamodeld in Sources */,
@@ -853,11 +878,13 @@
 				F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */,
 				F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */,
 				F194A57C18D2A0ED00792451 /* CollectionViewController.m in Sources */,
+				F10007AE1909B50900F2784A /* EventDetailView.m in Sources */,
 				F1915E5218D36875005811E6 /* Event+Management.m in Sources */,
 				F194A59618D2A0ED00792451 /* GalleryImageViewCell.m in Sources */,
 				F1C0C03418D7DA05006F26C7 /* SettingsViewController.m in Sources */,
 				F194A59218D2A0ED00792451 /* CardCollectionViewCell.m in Sources */,
 				F194A59B18D2A4D300792451 /* WebViewController.m in Sources */,
+				F10007AB1909B1DE00F2784A /* EventSummaryView.m in Sources */,
 				F194A58918D2A0ED00792451 /* SearchResultsViewController.m in Sources */,
 				F194A57818D2A0ED00792451 /* UIFont+ArgosFonts.m in Sources */,
 				F1915DFA18D2C3DC005811E6 /* Concept.m in Sources */,

@@ -19,4 +19,6 @@
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 
+- (void)configureCellForEvent:(Event *)event;
+
 @end

@@ -8,7 +8,6 @@
 
 #import "ScrollView.h"
 #import "SummaryView.h"
-#import "ImageHeaderView.h"
 #import "EmbeddedCollectionViewController.h"
 
 @class BaseEntity;
@@ -20,13 +19,10 @@
 
 @property (nonatomic, weak) id <DetailViewProtocol> delegate;
 @property (nonatomic, strong) BaseEntity* entity;
-@property (nonatomic, strong) UIImage *image;
-@property (nonatomic, strong) UILabel *titleLabel;
-@property (nonatomic, strong) UIButton *actionButton;
-@property (nonatomic, strong) ImageHeaderView *headerView;
 @property (nonatomic, strong) ScrollView *scrollView;
+@property (nonatomic, strong) SummaryView *summaryView;
+@property (nonatomic, strong) UIView *headerView;
+@property (nonatomic, strong) UIProgressView *progressView;
 @property (nonatomic, assign) float progress;
-
-- (void)setActionButtonTitle:(NSString*)title;
 
 @end

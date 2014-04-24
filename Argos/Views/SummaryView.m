@@ -115,6 +115,7 @@
                                                              withString:[NSString stringWithFormat:@" <a href='#' onclick='objc(\"%@\");'>%@</a>",
                                                                          mention.concept.conceptId,
                                                                          mention.name]];
+        summaryText = [self processSummaryText:summaryText];
     }
     
     if (summaryText) {
@@ -129,6 +130,11 @@
                                               contrast:[prefs boolForKey:@"contrast"]];
         [self.summaryWebView loadHTMLString:summaryHtml baseURL:nil];
     }
+}
+
+// Override this if subclasses need additional processing.
+- (NSString*)processSummaryText:(NSString*)summaryText {
+    return summaryText;
 }
 
 

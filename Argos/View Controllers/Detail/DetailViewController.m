@@ -75,25 +75,16 @@
                                                                             action:nil];
     self.navigationItem.rightBarButtonItems = [self navigationItems];
     
+    self.loadedItems = 0;
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
     self.view = [[DetailView alloc] initWithFrame:bounds];
     self.view.delegate = self;
     self.view.entity = self.entity;
-    [self.view.headerView setHeaderImageViewWithImageUrl:self.entity.imageUrl];
     
-    self.loadedItems = 0;
+    // not all detail views have header images now
+    //[self.view.headerView setHeaderImageViewWithImageUrl:self.entity.imageUrl];
     
-    // Setup the image gallery, if there are images.
-    if ([self.entity.images count] > 0) {
-        GalleryViewController *galleryViewController = [[GalleryViewController alloc] initWithImages:self.entity.images];
-        CGSize gallerySize = CGSizeMake(CGRectGetWidth(self.view.frame), 220);
-        [self addChildViewController:galleryViewController];
-        [self.view.scrollView addSubview:galleryViewController.collectionView];
-        [galleryViewController didMoveToParentViewController:self];
-        galleryViewController.collectionView.frame = CGRectMake(0, 0, gallerySize.width, gallerySize.height);
-        [(UICollectionViewFlowLayout*)galleryViewController.collectionViewLayout setItemSize:gallerySize];
-    }
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -128,13 +119,8 @@
     UIBarButtonItem *shareButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction
                                                                                  target:self
                                                                                  action:@selector(share:)];
-    UIBarButtonItem *fontButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_font"]
-                                                                   style:UIBarButtonItemStylePlain
-                                                                  target:self
-                                                                  action:@selector(font:)];
     
-    return @[ shareButton, paddingItem,
-              fontButton, paddingItem ];
+    return @[ shareButton, paddingItem ];
 }
 
 # pragma mark - Actions
@@ -277,18 +263,15 @@
     // Parallax
     float y = scrollView.contentOffset.y;
     CGRect headerFrame = self.view.headerView.frame;
-    CGRect titleFrame = self.view.titleLabel.frame;
     
     // Scrolling down/pulling up.
     if (y >= 0) {
         headerFrame.origin.y = -y/6;
         self.view.headerView.frame = headerFrame;
-        titleFrame.origin.y = CGRectGetHeight(self.view.headerView.bounds) - CGRectGetHeight(titleFrame) - y/1.4;
-        self.view.titleLabel.frame = titleFrame;
         
         // Gradient and blur opacity
-        self.view.headerView.gradientView.alpha = y*1.5/CGRectGetHeight(self.view.frame);
-        self.view.headerView.blurredImageView.alpha = y*4/CGRectGetHeight(self.view.frame);
+        //self.view.headerView.gradientView.alpha = y*1.5/CGRectGetHeight(self.view.frame);
+        //self.view.headerView.blurredImageView.alpha = y*4/CGRectGetHeight(self.view.frame);
         
         // Sticky header
         // Look for the header that needs to be stuck.
@@ -371,13 +354,9 @@
         
         // Scrolling up/pulling down.
     } else {
-        // Make the title label scroll down with the scroll view.
-        CGRect titleLabelFrame = self.view.titleLabel.frame;
-        titleLabelFrame.origin.y = CGRectGetHeight(self.view.headerView.frame) - CGRectGetHeight(titleLabelFrame);
-        self.view.titleLabel.frame = titleLabelFrame;
-        
         // Stretchy header
         // NB: since we are pulling down, y is negative.
+        /*
         CGFloat aspectRatio = CGRectGetWidth(self.view.headerView.cachedFrame)/CGRectGetHeight(self.view.headerView.cachedFrame);
         CGRect frame = CGRectMake(0, y,
                                   CGRectGetWidth(self.view.headerView.cachedFrame) - y*aspectRatio,
@@ -386,6 +365,7 @@
         
         CGPoint center = CGPointMake(self.view.center.x - y/aspectRatio/2, self.view.headerView.center.y - y);
         self.view.headerView.center = center;
+         */
     }
 }
 

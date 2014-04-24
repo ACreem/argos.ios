@@ -54,8 +54,9 @@
     
     [self getConcepts:self.entity.concepts];
     
-    [self.view setActionButtonTitle:@"View the full timeline"];
-    [self.view.actionButton addTarget:self action:@selector(viewTimeline:) forControlEvents:UIControlEventTouchUpInside];
+    // temp
+    //[self.view setActionButtonTitle:@"View the full timeline"];
+    //[self.view.actionButton addTarget:self action:@selector(viewTimeline:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewTimeline:(id)sender

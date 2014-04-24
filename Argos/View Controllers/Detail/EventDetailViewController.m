@@ -20,6 +20,8 @@
 
 #import "EventListViewController.h"
 
+#import "EventDetailView.h"
+
 @interface EventDetailViewController ()
 @property (nonatomic, strong) EmbeddedCollectionViewController *articleList;
 @property (nonatomic, strong) EmbeddedCollectionViewController *storyList;
@@ -37,12 +39,15 @@
 {
     [super viewDidLoad];
     
+    CGRect bounds = [[UIScreen mainScreen] bounds];
+    self.view = [[EventDetailView alloc] initWithFrame:bounds];
+    self.view.delegate = self;
+    self.view.entity = self.entity;
+    
     self.totalItems = self.entity.stories.count + self.entity.articles.count + self.entity.concepts.count;
     
     // Show story button if this event belongs to only one story.
     if ([self.entity.stories count] == 1) {
-        [self.view setActionButtonTitle:@"View the full story"];
-        [self.view.actionButton addTarget:self action:@selector(viewStory:) forControlEvents:UIControlEventTouchUpInside];
         
     } else {
         // Otherwise show a list of stories.
@@ -85,6 +90,11 @@
     UIBarButtonItem *paddingItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
                                                                                  target:nil
                                                                                  action:nil];
+    
+    // TO DO: need to implement functionality for promote button
+    UIBarButtonItem *promoteButton;
+    promoteButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_promote"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
+    
     UIBarButtonItem *bookmarkButton;
     if ([self.entity isBookmarked]) {
         bookmarkButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_bookmarked"] style:UIBarButtonItemStylePlain target:self action:@selector(bookmark:)];
@@ -105,7 +115,29 @@
         bookmarkButton.enabled = YES;
     }];
     
-    [navItems insertObjects:@[ bookmarkButton, paddingItem ] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 2)]];
+    UIBarButtonItem *watchingButton;
+    //if ([self.entity isWatched]) {
+    if ([self.entity isWatched]) {
+        watchingButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watched"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+        watchingButton.tag = 1;
+    } else {
+        watchingButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"nav_watch"] style:UIBarButtonItemStylePlain target:self action:@selector(watch:)];
+        watchingButton.tag = 0;
+    }
+    
+    // Disable the button while we update the watched status.
+    watchingButton.enabled = NO;
+    [self.entity checkWatched:^(Story *story) {
+        watchingButton.image = [UIImage imageNamed:@"nav_watched"];
+        watchingButton.tag = 1;
+        watchingButton.enabled = YES;
+    } notWatched:^(Story *story) {
+        watchingButton.image = [UIImage imageNamed:@"nav_watch"];
+        watchingButton.tag = 0;
+        watchingButton.enabled = YES;
+    }];
+    
+    [navItems insertObjects:@[ promoteButton, paddingItem, bookmarkButton, paddingItem, watchingButton, paddingItem ] atIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 6)]];
     return navItems;
 }
 

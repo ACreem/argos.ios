@@ -14,5 +14,7 @@
 - (void)unbookmark;
 - (BOOL)isBookmarked;
 - (void)checkBookmarked:(void (^)(Event *))bookmarked notBookmarked:(void (^)(Event *))notBookmarked;
+- (BOOL)isWatched;
+- (void)checkWatched:(void (^)(Story *))watched notWatched:(void (^)(Story *))notWatched;
 
 @end

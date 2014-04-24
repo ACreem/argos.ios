@@ -56,4 +56,30 @@
     }];
 }
 
+
+// TO DO : NEED TO BE REWRITTEN FOR EVENTS
+- (BOOL)isWatched
+{
+    return [[CurrentUser currentUser].watching containsObject:self];
+}
+
+- (void)checkWatched:(void (^)(Story *))watched notWatched:(void (^)(Story *))notWatched
+{
+    [[[ArgosObjectManager sharedManager] client] getPath:[NSString stringWithFormat:@"/user/watching/%@", self.eventId] parameters:nil success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        [[CurrentUser currentUser] addWatchingObject:self];
+        if (watched) {
+            watched(self);
+        }
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        if ([operation.response statusCode] == 404) {
+            [[CurrentUser currentUser] removeWatchingObject:self];
+            if (notWatched) {
+                notWatched(self);
+            }
+        } else {
+            NSLog(@"Watching checking failed with non-404 error: %@", error);
+        }
+    }];
+}
+
 @end
