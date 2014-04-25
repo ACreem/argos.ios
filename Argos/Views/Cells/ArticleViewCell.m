@@ -1,14 +1,14 @@
 //
-//  ArticleCollectionViewCell.m
+//  ArticleViewCell.m
 //  Argos
 //
 //  Created by Francis Tseng on 2/24/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "ArticleCollectionViewCell.h"
+#import "ArticleViewCell.h"
 
-@implementation ArticleCollectionViewCell
+@implementation ArticleViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -16,7 +16,7 @@
     if (self) {
         CGFloat padding = 10;
         
-        // Unlike most other cell views, the ArticleCollectionViewCell does not have full-cell images.
+        // Unlike most other cell views, the ArticleViewCell does not have full-cell images.
         CGSize imageSize = CGSizeMake(CGRectGetHeight(self.frame) - 2*padding,
                                       CGRectGetHeight(self.frame) - 2*padding);
         

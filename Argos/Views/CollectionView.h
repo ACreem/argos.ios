@@ -13,10 +13,6 @@
 //  collection view controller).
 //  ==========================================
 
-@class CollectionHeaderView;
-
 @interface CollectionView : UICollectionView
-
-@property (nonatomic, strong) CollectionHeaderView* headerView;
 
 @end

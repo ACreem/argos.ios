@@ -11,7 +11,7 @@
 //#import "WebViewController.h"
 
 #import "EmbeddedCollectionViewController.h"
-#import "ArticleCollectionViewCell.h"
+#import "ArticleViewCell.h"
 #import "CollectionViewCell.h"
 
 #import "Article.h"
@@ -147,7 +147,7 @@
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate
-- (ArticleCollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
+- (ArticleViewCell*)configureCell:(ArticleViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.articleList) {
         Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

@@ -10,7 +10,7 @@
 
 #import "Article.h"
 #import "Source.h"
-#import "ArticleCollectionViewCell.h"
+#import "ArticleViewCell.h"
 
 @interface SummaryArticlesViewController ()
 @property (nonatomic, strong) SummaryView *summaryView;
@@ -44,7 +44,7 @@
         _articleList.collectionView.backgroundColor = [UIColor colorWithRed:0.918 green:0.918 blue:0.918 alpha:1.0];
         _articleList.delegate = self;
         
-        [_articleList.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
+        [_articleList.collectionView registerClass:[ArticleViewCell class] forCellWithReuseIdentifier:@"Cell"];
         
         [self addChildViewController:_articleList];
         [self.view addSubview:_articleList.collectionView];
@@ -104,7 +104,7 @@
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate
-- (ArticleCollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
+- (ArticleViewCell*)configureCell:(ArticleViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
     if (embeddedCollectionViewController == self.articleList) {
         Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];

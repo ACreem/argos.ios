@@ -9,9 +9,8 @@
 #import "DetailViewController.h"
 #import "BaseEntity+Concepts.h"
 
-// Sharing/font setting modals.
+// Sharing modal.
 #import "ShareViewController.h"
-#import "FontViewController.h"
 #import "TransitionDelegate.h"
 #import "UIWindow+FauxStatusBar.h"
 
@@ -19,9 +18,7 @@
 #import "Concept.h"
 #import "ConceptDetailViewController.h"
 
-// For sticky headers.
 #import "CollectionView.h"
-#import "CollectionHeaderView.h"
 
 // For the mentions pull-out.
 #import "IIViewDeckController.h"
@@ -42,11 +39,6 @@
 
 // For the progress bar.
 @property (nonatomic, assign) int loadedItems;
-
-// For keeping track of sticky headers.
-@property (nonatomic, strong) CollectionHeaderView *stuckSectionHeaderView;
-@property (nonatomic, strong) UIView *stuckSectionHeaderSuperview;
-@property (nonatomic, assign) CGRect stuckSectionHeaderViewFrame;
 @end
 
 @implementation DetailViewController
@@ -127,10 +119,6 @@
 - (void)share:(id)sender
 {
     [self presentModalViewController:[[ShareViewController alloc] init]];
-}
-- (void)font:(id)sender
-{
-    [self presentModalViewController:[[FontViewController alloc] init]];
 }
 
 # pragma mark - UIViewController
@@ -269,90 +257,7 @@
         headerFrame.origin.y = -y/6;
         self.view.headerView.frame = headerFrame;
         
-        // Gradient and blur opacity
-        //self.view.headerView.gradientView.alpha = y*1.5/CGRectGetHeight(self.view.frame);
-        //self.view.headerView.blurredImageView.alpha = y*4/CGRectGetHeight(self.view.frame);
-        
-        // Sticky header
-        // Look for the header that needs to be stuck.
-        CollectionHeaderView* selectedHeader;
-        for (UIView* subview in self.view.scrollView.subviews) {
-            
-            if ([subview isKindOfClass:[CollectionView class]]) {
-                CollectionView* colview = (CollectionView*)subview;
-                if (y > CGRectGetMinY(subview.frame) && self.stuckSectionHeaderView != colview.headerView) {
-                    selectedHeader = colview.headerView;
-                }
-            }
-        }
-        
-        // If a new header to stick was found, swap it.
-        if (selectedHeader) {
-            
-            // Restore old header to position in UIScrollView
-            if (self.stuckSectionHeaderView) {
-                self.stuckSectionHeaderView.frame = self.stuckSectionHeaderViewFrame;
-                [self.stuckSectionHeaderView removeFromSuperview];
-                [self.stuckSectionHeaderSuperview addSubview:self.stuckSectionHeaderView];
-                
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
-                    self.stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
-                }];
-            }
-            
-            // Setup new header
-            // We need to keep track of:
-            //  - the header view itself
-            //  - the header view's superview (which could be the scroll view itself)
-            //  - the original frame of the header view
-            CGRect headerFrame = selectedHeader.frame;
-            self.stuckSectionHeaderView = selectedHeader;
-            self.stuckSectionHeaderViewFrame = headerFrame;
-            self.stuckSectionHeaderSuperview = selectedHeader.superview;
-            
-            // Remove the new header from its original superview.
-            [selectedHeader removeFromSuperview];
-            
-            // Set up its frame to be placed at the top,
-            // then add it to the main view.
-            headerFrame.origin = CGPointMake(0, 0);
-            selectedHeader.frame = headerFrame;
-            [self.view addSubview:selectedHeader];
-            
-            [UIView animateWithDuration:0.2 animations:^{
-                selectedHeader.backgroundColor = [UIColor secondaryColor];
-                selectedHeader.titleLabel.textColor = [UIColor whiteColor];
-            }];
-            
-            // Otherwise, check if it's a header that needs to be removed.
-        } else {
-            // Check if the stuck header view has scrolled off.
-            // If it's superview is the scroll view itself, it needs
-            // to be checked relative to its own original frame,
-            // otherwise it needs to be checked relative to its original
-            // superview's frame.
-            float threshold;
-            if (self.stuckSectionHeaderSuperview == self.view.scrollView) {
-                threshold = CGRectGetMinY(self.stuckSectionHeaderViewFrame);
-            } else {
-                threshold = CGRectGetMinY(self.stuckSectionHeaderSuperview.frame);
-            }
-            if (y < threshold) {
-                self.stuckSectionHeaderView.frame = self.stuckSectionHeaderViewFrame;
-                [self.stuckSectionHeaderView removeFromSuperview];
-                [self.stuckSectionHeaderSuperview addSubview:self.stuckSectionHeaderView];
-                
-                [UIView animateWithDuration:0.2 animations:^{
-                    self.stuckSectionHeaderView.backgroundColor = [UIColor whiteColor];
-                    self.stuckSectionHeaderView.titleLabel.textColor = [UIColor lightGrayColor];
-                }];
-                
-                self.stuckSectionHeaderView = nil;
-            }
-        }
-        
-        // Scrolling up/pulling down.
+    // Scrolling up/pulling down.
     } else {
         // Stretchy header
         // NB: since we are pulling down, y is negative.

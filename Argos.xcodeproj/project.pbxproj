@@ -16,12 +16,10 @@
 		F10007C41909D9DC00F2784A /* SummaryArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C31909D9DC00F2784A /* SummaryArticlesViewController.m */; };
 		F10007C91909DD5800F2784A /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C61909DD5800F2784A /* CollectionView.m */; };
 		F10007CA1909DD5800F2784A /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C81909DD5800F2784A /* CollectionViewCell.m */; };
-		F10007CD1909DD6600F2784A /* CollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007CC1909DD6600F2784A /* CollectionHeaderView.m */; };
 		F10007D01909DD9100F2784A /* ImageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007CF1909DD9100F2784A /* ImageHeaderView.m */; };
 		F10007D51909DDD200F2784A /* SearchResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007D21909DDD200F2784A /* SearchResultsViewController.m */; };
 		F10007D61909DDD200F2784A /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007D41909DDD200F2784A /* SearchViewController.m */; };
 		F10007E61909E2B900F2784A /* CircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007E11909E2B900F2784A /* CircleButton.m */; };
-		F10007E71909E2B900F2784A /* FontViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007E31909E2B900F2784A /* FontViewController.m */; };
 		F10007E81909E2B900F2784A /* ShareViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007E51909E2B900F2784A /* ShareViewController.m */; };
 		F1203A1618BD379400DCEB3A /* Graphik-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0418BD379400DCEB3A /* Graphik-Black.otf */; };
 		F1203A1718BD379400DCEB3A /* Graphik-BlackItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = F1203A0518BD379400DCEB3A /* Graphik-BlackItalic.otf */; };
@@ -92,7 +90,7 @@
 		F194A58618D2A0ED00792451 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A54118D2A0ED00792451 /* MenuViewController.m */; };
 		F194A58F18D2A0ED00792451 /* ScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55718D2A0ED00792451 /* ScrollView.m */; };
 		F194A59018D2A0ED00792451 /* SummaryView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55918D2A0ED00792451 /* SummaryView.m */; };
-		F194A59118D2A0ED00792451 /* ArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */; };
+		F194A59118D2A0ED00792451 /* ArticleViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A55C18D2A0ED00792451 /* ArticleViewCell.m */; };
 		F194A59818D2A0ED00792451 /* LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A56A18D2A0ED00792451 /* LoginView.m */; };
 		F194A5A418D2A78600792451 /* EAIntroView+ARIntro.m in Sources */ = {isa = PBXBuildFile; fileRef = F194A5A318D2A78600792451 /* EAIntroView+ARIntro.m */; };
 		F1C0C03418D7DA05006F26C7 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C0C03318D7DA05006F26C7 /* SettingsViewController.m */; };
@@ -128,18 +126,14 @@
 		F10007C61909DD5800F2784A /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
 		F10007C71909DD5800F2784A /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
 		F10007C81909DD5800F2784A /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
-		F10007CB1909DD6600F2784A /* CollectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionHeaderView.h; sourceTree = "<group>"; };
-		F10007CC1909DD6600F2784A /* CollectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionHeaderView.m; sourceTree = "<group>"; };
 		F10007CE1909DD9100F2784A /* ImageHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageHeaderView.h; sourceTree = "<group>"; };
 		F10007CF1909DD9100F2784A /* ImageHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageHeaderView.m; sourceTree = "<group>"; };
 		F10007D11909DDD200F2784A /* SearchResultsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchResultsViewController.h; sourceTree = "<group>"; };
 		F10007D21909DDD200F2784A /* SearchResultsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchResultsViewController.m; sourceTree = "<group>"; };
 		F10007D31909DDD200F2784A /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
 		F10007D41909DDD200F2784A /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
-		F10007E01909E2B900F2784A /* CircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CircleButton.h; sourceTree = "<group>"; };
-		F10007E11909E2B900F2784A /* CircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CircleButton.m; sourceTree = "<group>"; };
-		F10007E21909E2B900F2784A /* FontViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FontViewController.h; sourceTree = "<group>"; };
-		F10007E31909E2B900F2784A /* FontViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FontViewController.m; sourceTree = "<group>"; };
+		F10007E01909E2B900F2784A /* CircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CircleButton.h; path = "../View Controllers/CircleButton.h"; sourceTree = "<group>"; };
+		F10007E11909E2B900F2784A /* CircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CircleButton.m; path = "../View Controllers/CircleButton.m"; sourceTree = "<group>"; };
 		F10007E41909E2B900F2784A /* ShareViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShareViewController.h; sourceTree = "<group>"; };
 		F10007E51909E2B900F2784A /* ShareViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShareViewController.m; sourceTree = "<group>"; };
 		F1203A0418BD379400DCEB3A /* Graphik-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Graphik-Black.otf"; sourceTree = "<group>"; };
@@ -246,8 +240,8 @@
 		F194A55718D2A0ED00792451 /* ScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScrollView.m; sourceTree = "<group>"; };
 		F194A55818D2A0ED00792451 /* SummaryView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryView.h; sourceTree = "<group>"; };
 		F194A55918D2A0ED00792451 /* SummaryView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryView.m; sourceTree = "<group>"; };
-		F194A55B18D2A0ED00792451 /* ArticleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleCollectionViewCell.h; path = Cells/ArticleCollectionViewCell.h; sourceTree = "<group>"; };
-		F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleCollectionViewCell.m; path = Cells/ArticleCollectionViewCell.m; sourceTree = "<group>"; };
+		F194A55B18D2A0ED00792451 /* ArticleViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ArticleViewCell.h; path = Cells/ArticleViewCell.h; sourceTree = "<group>"; };
+		F194A55C18D2A0ED00792451 /* ArticleViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ArticleViewCell.m; path = Cells/ArticleViewCell.m; sourceTree = "<group>"; };
 		F194A56918D2A0ED00792451 /* LoginView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginView.h; sourceTree = "<group>"; };
 		F194A56A18D2A0ED00792451 /* LoginView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginView.m; sourceTree = "<group>"; };
 		F194A5A218D2A78600792451 /* EAIntroView+ARIntro.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "EAIntroView+ARIntro.h"; sourceTree = "<group>"; };
@@ -305,21 +299,41 @@
 				F10007C61909DD5800F2784A /* CollectionView.m */,
 				F10007C71909DD5800F2784A /* CollectionViewCell.h */,
 				F10007C81909DD5800F2784A /* CollectionViewCell.m */,
-				F10007CB1909DD6600F2784A /* CollectionHeaderView.h */,
-				F10007CC1909DD6600F2784A /* CollectionHeaderView.m */,
+				F10007E01909E2B900F2784A /* CircleButton.h */,
+				F10007E11909E2B900F2784A /* CircleButton.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
 		};
-		F10007B51909CDC100F2784A /* Event */ = {
+		F10007B51909CDC100F2784A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
 				F10007A6190994E400F2784A /* EventViewCell.h */,
 				F10007A7190994E400F2784A /* EventViewCell.m */,
-				F194A55B18D2A0ED00792451 /* ArticleCollectionViewCell.h */,
-				F194A55C18D2A0ED00792451 /* ArticleCollectionViewCell.m */,
+				F194A55B18D2A0ED00792451 /* ArticleViewCell.h */,
+				F194A55C18D2A0ED00792451 /* ArticleViewCell.m */,
 			);
-			name = Event;
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		F11857C3190A036C00C3B16A /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				F10007D11909DDD200F2784A /* SearchResultsViewController.h */,
+				F10007D21909DDD200F2784A /* SearchResultsViewController.m */,
+				F10007D31909DDD200F2784A /* SearchViewController.h */,
+				F10007D41909DDD200F2784A /* SearchViewController.m */,
+			);
+			name = Search;
+			sourceTree = "<group>";
+		};
+		F11857C4190A042D00C3B16A /* Modals */ = {
+			isa = PBXGroup;
+			children = (
+				F10007E41909E2B900F2784A /* ShareViewController.h */,
+				F10007E51909E2B900F2784A /* ShareViewController.m */,
+			);
+			name = Modals;
 			sourceTree = "<group>";
 		};
 		F1203A0318BD379400DCEB3A /* graphik */ = {
@@ -548,19 +562,11 @@
 		F194A52218D2A0ED00792451 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				F10007D11909DDD200F2784A /* SearchResultsViewController.h */,
-				F10007D21909DDD200F2784A /* SearchResultsViewController.m */,
-				F10007D31909DDD200F2784A /* SearchViewController.h */,
-				F10007D41909DDD200F2784A /* SearchViewController.m */,
-				F10007E01909E2B900F2784A /* CircleButton.h */,
-				F10007E11909E2B900F2784A /* CircleButton.m */,
-				F10007E21909E2B900F2784A /* FontViewController.h */,
-				F10007E31909E2B900F2784A /* FontViewController.m */,
-				F10007E41909E2B900F2784A /* ShareViewController.h */,
-				F10007E51909E2B900F2784A /* ShareViewController.m */,
+				F11857C3190A036C00C3B16A /* Search */,
+				F1915E6F18D37F16005811E6 /* User */,
+				F11857C4190A042D00C3B16A /* Modals */,
 				F194A52A18D2A0ED00792451 /* Collection */,
 				F194A53518D2A0ED00792451 /* Detail */,
-				F1915E6F18D37F16005811E6 /* User */,
 				F10007B91909D02C00F2784A /* EventTabBarController.h */,
 				F10007BA1909D02C00F2784A /* EventTabBarController.m */,
 				F10007C21909D9DC00F2784A /* SummaryArticlesViewController.h */,
@@ -602,9 +608,9 @@
 		F194A54D18D2A0ED00792451 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F10007B41909CDB600F2784A /* Common */,
-				F10007B51909CDC100F2784A /* Event */,
 				F1915E7018D37F24005811E6 /* User */,
+				F10007B41909CDB600F2784A /* Common */,
+				F10007B51909CDC100F2784A /* Cells */,
 				F1915E7118D39201005811E6 /* Detail */,
 				F10007AF1909B8DD00F2784A /* Summary */,
 			);
@@ -824,7 +830,6 @@
 				F1405C3418973C4C00A4819D /* AppDelegate.m in Sources */,
 				F1405C3018973C4C00A4819D /* main.m in Sources */,
 				F10007D51909DDD200F2784A /* SearchResultsViewController.m in Sources */,
-				F10007CD1909DD6600F2784A /* CollectionHeaderView.m in Sources */,
 				F10007D01909DD9100F2784A /* ImageHeaderView.m in Sources */,
 				F194A58218D2A0ED00792451 /* ConceptDetailViewController.m in Sources */,
 				F194A57718D2A0ED00792451 /* UIColor+ArgosColors.m in Sources */,
@@ -851,12 +856,11 @@
 				F194A59818D2A0ED00792451 /* LoginView.m in Sources */,
 				F1601C0918ABDC3800C89590 /* ArgosObjectManager.m in Sources */,
 				F194A56F18D2A0ED00792451 /* CurrentUser+Management.m in Sources */,
-				F10007E71909E2B900F2784A /* FontViewController.m in Sources */,
 				F10007E61909E2B900F2784A /* CircleButton.m in Sources */,
 				F194A56C18D2A0ED00792451 /* TransitionDelegate.m in Sources */,
 				F194A57618D2A0ED00792451 /* ImageDownloader.m in Sources */,
 				F194A57D18D2A0ED00792451 /* MentionsViewController.m in Sources */,
-				F194A59118D2A0ED00792451 /* ArticleCollectionViewCell.m in Sources */,
+				F194A59118D2A0ED00792451 /* ArticleViewCell.m in Sources */,
 				F194A58F18D2A0ED00792451 /* ScrollView.m in Sources */,
 				F194A58518D2A0ED00792451 /* LoginViewController.m in Sources */,
 			);

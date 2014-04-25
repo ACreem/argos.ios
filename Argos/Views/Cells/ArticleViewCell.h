@@ -1,5 +1,5 @@
 //
-//  ArticleCollectionViewCell.h
+//  ArticleViewCell.h
 //  Argos
 //
 //  Created by Francis Tseng on 2/24/14.
@@ -9,7 +9,7 @@
 //  A simple cell for Articles.
 //  ===========================
 
-@interface ArticleCollectionViewCell : UICollectionViewCell
+@interface ArticleViewCell : UICollectionViewCell
 
 @property (nonatomic, strong) UIImageView *imageView;
 @property (strong, nonatomic) UILabel *metaLabel;
