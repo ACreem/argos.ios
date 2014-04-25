@@ -33,7 +33,7 @@
 #import <SDWebImage/UIImageView+WebCache.h>
 
 #import "EmbeddedCollectionViewController.h"
-#import "GalleryViewController.h"
+//#import "GalleryViewController.h"
 
 
 @interface DetailViewController ()

@@ -51,6 +51,9 @@
         contentRect = CGRectUnion(contentRect, view.frame);
     }
     contentRect.size.height += self.yOffset;
+     
+    CGRect screenRect = [[UIScreen mainScreen] bounds];
+    contentRect.size.height = screenRect.size.height + self.yOffset;
     self.contentSize = contentRect.size;
 }
 

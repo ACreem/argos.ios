@@ -13,7 +13,6 @@
 //  =======================================
 
 #import "CollectionViewController.h"
-#import "CollectionHeaderView.h"
 
 @class EmbeddedCollectionViewController;
 
@@ -25,7 +24,6 @@
 @interface EmbeddedCollectionViewController : CollectionViewController
 
 @property (nonatomic, assign) id <EmbeddedCollectionViewControllerDelegate> delegate;
-@property (nonatomic, strong) CollectionHeaderView* headerView;
 
 @end
 

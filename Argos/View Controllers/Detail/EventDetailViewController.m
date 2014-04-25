@@ -7,8 +7,8 @@
 //
 
 #import "EventDetailViewController.h"
-#import "StoryDetailViewController.h"
-#import "WebViewController.h"
+//#import "StoryDetailViewController.h"
+//#import "WebViewController.h"
 
 #import "EmbeddedCollectionViewController.h"
 #import "ArticleCollectionViewCell.h"
@@ -19,6 +19,7 @@
 #import "Event+Management.h"
 
 #import "EventListViewController.h"
+#import "EventTabBarController.h"
 
 #import "EventDetailView.h"
 
@@ -40,9 +41,8 @@
     [super viewDidLoad];
     
     CGRect bounds = [[UIScreen mainScreen] bounds];
-    self.view = [[EventDetailView alloc] initWithFrame:bounds];
+    self.view = [[EventDetailView alloc] initWithFrame:bounds forEvent:self.entity];
     self.view.delegate = self;
-    self.view.entity = self.entity;
     
     self.totalItems = self.entity.stories.count + self.entity.articles.count + self.entity.concepts.count;
     
@@ -67,21 +67,12 @@
     
     [self getConcepts:self.entity.concepts];
     
-    UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-    [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
-    self.articleList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Article" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.articles]];
-    self.articleList.managedObjectContext = self.entity.managedObjectContext;
-    self.articleList.delegate = self;
-    self.articleList.title = @"In Greater Depth";
-    
-    [self.articleList.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-    
-    [self addChildViewController:self.articleList];
-    [self.view.scrollView addSubview:self.articleList.collectionView];
-    [self.articleList didMoveToParentViewController:self];
-    [self.articleList.collectionView sizeToFit];
-    
-    [self getEntities:self.entity.articles forCollectionView:self.articleList];
+    //[self getEntities:self.entity.articles forCollectionView:self.articleList];
+        // Tab bar
+    EventTabBarController *eventTabBarController = [[EventTabBarController alloc] initWithEvent:self.entity];
+    [self.view.scrollView addSubview:eventTabBarController.view];
+    [self addChildViewController:eventTabBarController];
+    [eventTabBarController didMoveToParentViewController:self];
 }
 
 - (NSArray*)navigationItems
@@ -155,14 +146,6 @@
     }
 }
 
-# pragma mark - Actions
-- (void)viewStory:(id)sender
-{
-    // Called if there is one story.
-    Story* story = [[self.entity.stories allObjects] firstObject];
-    [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
-}
-
 # pragma mark - EmbeddedCollectionViewControllerDelegate
 - (ArticleCollectionViewCell*)configureCell:(ArticleCollectionViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
 {
@@ -184,8 +167,10 @@
 {
     if (collectionView == self.articleList.collectionView) {
         Article *article = [[self.entity.articles allObjects] objectAtIndex:indexPath.row];
+        /*
         WebViewController *webView = [[WebViewController alloc] initWithURL:article.extUrl];
         [self.navigationController pushViewController:webView animated:YES];
+         */
     }
 }
 

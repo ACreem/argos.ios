@@ -7,8 +7,8 @@
 //
 
 #import "EventDetailView.h"
-#import "EventSummaryView.h"
 #import "EventViewCell.h"
+#import "EventTabBarController.h"
 
 @interface EventDetailView ()
 @property (nonatomic, strong) EventViewCell *cellView;
@@ -16,7 +16,7 @@
 
 @implementation EventDetailView
 
-- (id)initWithFrame:(CGRect)frame
+- (id)initWithFrame:(CGRect)frame forEvent:(Event*)event
 {
     self = [super initWithFrame:frame];
     if (self) {
@@ -24,6 +24,7 @@
         
         // Scroll view
         self.scrollView = [[ScrollView alloc] initWithFrame:frame verticalOffset:140];
+        self.scrollView.scrollEnabled = NO;
         
         // Header view
         self.headerView = [[UIView alloc] initWithFrame:CGRectMake(CGRectGetMinX(frame),
@@ -41,13 +42,10 @@
         self.progressView.trackTintColor = [UIColor mutedColor];
         [self.scrollView addSubview:self.progressView];
         
-        // Summary view
-        CGPoint summaryOrigin = CGPointMake(0, CGRectGetHeight(self.headerView.frame));
-        self.summaryView = [[EventSummaryView alloc] initWithOrigin:summaryOrigin];
-        [self.scrollView addSubview:self.summaryView];
-        
         [self addSubview:self.scrollView];
         [self.scrollView sizeToFit];
+        
+        self.entity = event;
     }
     return self;
 }
@@ -56,7 +54,6 @@
 {
     [super setEntity:entity];
     [_cellView configureCellForEvent:entity];
-    self.summaryView.entity = entity;
 }
 
 @end

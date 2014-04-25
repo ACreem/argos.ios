@@ -18,10 +18,11 @@
 
 - (id)initWithTitle:(NSString*)title
 {
+    CGFloat padding = 10;
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:0.0f];
-    [flowLayout setSectionInset:UIEdgeInsetsZero];
+    [flowLayout setMinimumLineSpacing:padding];
+    [flowLayout setSectionInset:UIEdgeInsetsMake(padding, padding, padding, padding)];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     self = [super initWithCollectionViewLayout:flowLayout forEntityNamed:@"Event"];
@@ -41,8 +42,9 @@
     // This is not in the initialize because when this view controller is initialized,
     // it is not pushed onto a navigation controller stack yet,
     // so self.navigationController is null.
+    CGFloat padding = 10;
     CGRect screenRect = [[UIScreen mainScreen] bounds];
-    [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:CGSizeMake(screenRect.size.width - 20, 100)];
+    [(UICollectionViewFlowLayout*)self.collectionViewLayout setItemSize:CGSizeMake(screenRect.size.width - padding*2, 100)];
     
     [self.collectionView registerClass:[EventViewCell class] forCellWithReuseIdentifier:@"Cell"];
     self.collectionView.backgroundColor = [UIColor colorWithRed:0.918 green:0.918 blue:0.918 alpha:1.0];

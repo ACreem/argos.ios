@@ -7,7 +7,6 @@
 //
 
 #import "EmbeddedCollectionViewController.h"
-#import "CollectionHeaderView.h"
 
 #import <objc/message.h>
 
@@ -32,10 +31,7 @@
 {
     [super viewDidLoad];
     
-    self.collectionView.scrollEnabled = NO;
-    [self.collectionView registerClass:[CollectionHeaderView class]
-            forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                   withReuseIdentifier:@"Header"];
+    self.collectionView.scrollEnabled = YES;
 }
 
 - (UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -46,23 +42,6 @@
     return objc_msgSend(self.delegate,
                         @selector(configureCell:atIndexPath:forEmbeddedCollectionViewController:),
                         cell, indexPath, self);
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView
-           viewForSupplementaryElementOfKind:(NSString *)kind
-                                 atIndexPath:(NSIndexPath *)indexPath {
-    
-    CollectionHeaderView *reusableview = nil;
-    
-    if (kind == UICollectionElementKindSectionHeader) {
-        self.headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader
-                                                             withReuseIdentifier:@"Header"
-                                                                    forIndexPath:indexPath];
-        self.headerView.titleLabel.text = self.title;
-        self.collectionView.headerView = self.headerView;
-        reusableview = self.headerView;
-    }
-    return reusableview;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

@@ -8,11 +8,11 @@
 
 #import "Event.h"
 #import "DetailView.h"
-#import "EventSummaryView.h"
 
 @interface EventDetailView : DetailView
 
 @property (nonatomic, strong) Event* entity;
-@property (nonatomic, strong) EventSummaryView *summaryView;
+
+- (id)initWithFrame:(CGRect)frame forEvent:(Event*)event;
 
 @end

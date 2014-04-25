@@ -7,7 +7,7 @@
 //
 
 #import "ConceptDetailViewController.h"
-#import "StoryDetailViewController.h"
+//#import "StoryDetailViewController.h"
 
 #import "EmbeddedCollectionViewController.h"
 #import "CollectionViewCell.h"
@@ -85,7 +85,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     Story *story = [[self.entity.stories allObjects] objectAtIndex:indexPath.row];
-    [self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
+    //[self.navigationController pushViewController:[[StoryDetailViewController alloc] initWithStory:story] animated:YES];
 }
 
 

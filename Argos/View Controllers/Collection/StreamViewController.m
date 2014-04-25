@@ -20,10 +20,11 @@
 
 - (instancetype)initWithStream:(NSString *)stream
 {
+    CGFloat padding = 10;
     UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
     [flowLayout setMinimumInteritemSpacing:0.0f];
-    [flowLayout setMinimumLineSpacing:10.0f];
-    [flowLayout setSectionInset:UIEdgeInsetsMake(10, 10, 10, 10)];
+    [flowLayout setMinimumLineSpacing:padding];
+    [flowLayout setSectionInset:UIEdgeInsetsMake(padding, padding, padding, padding)];
     [flowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
     
     NSPredicate *predicate;

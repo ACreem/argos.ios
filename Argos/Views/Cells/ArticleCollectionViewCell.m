@@ -57,10 +57,14 @@
         self.metaLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:self.metaLabel];
         
-        CALayer *bottomBorder = [CALayer layer];
-        bottomBorder.frame = CGRectMake(0, CGRectGetHeight(self.frame) - 1, CGRectGetWidth(self.frame), 1.0f);
-        bottomBorder.backgroundColor = [UIColor colorWithWhite:0 alpha:0.05].CGColor;
-        [self.layer addSublayer:bottomBorder];
+        // Drop shadow
+        self.layer.shadowOffset = CGSizeMake(1, 1);
+        self.layer.shadowColor = [[UIColor blackColor] CGColor];
+        self.layer.shadowRadius = 0;
+        self.layer.shadowOpacity = .1;
+        CGRect shadowFrame = self.layer.bounds;
+        CGPathRef shadowPath = [UIBezierPath bezierPathWithRect:shadowFrame].CGPath;
+        self.layer.shadowPath = shadowPath;
     }
     return self;
 }
