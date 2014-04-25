@@ -13,7 +13,7 @@
 		F10007AE1909B50900F2784A /* EventDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007AD1909B50900F2784A /* EventDetailView.m */; };
 		F10007B21909B93700F2784A /* ConceptDetailView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007B11909B93700F2784A /* ConceptDetailView.m */; };
 		F10007BB1909D02C00F2784A /* EventTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007BA1909D02C00F2784A /* EventTabBarController.m */; };
-		F10007C41909D9DC00F2784A /* SummaryArticlesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C31909D9DC00F2784A /* SummaryArticlesViewController.m */; };
+		F10007C41909D9DC00F2784A /* EventSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C31909D9DC00F2784A /* EventSummaryViewController.m */; };
 		F10007C91909DD5800F2784A /* CollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C61909DD5800F2784A /* CollectionView.m */; };
 		F10007CA1909DD5800F2784A /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007C81909DD5800F2784A /* CollectionViewCell.m */; };
 		F10007D01909DD9100F2784A /* ImageHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = F10007CF1909DD9100F2784A /* ImageHeaderView.m */; };
@@ -120,8 +120,8 @@
 		F10007B11909B93700F2784A /* ConceptDetailView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConceptDetailView.m; sourceTree = "<group>"; };
 		F10007B91909D02C00F2784A /* EventTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventTabBarController.h; path = "Argos/View Controllers/EventTabBarController.h"; sourceTree = SOURCE_ROOT; };
 		F10007BA1909D02C00F2784A /* EventTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventTabBarController.m; path = "Argos/View Controllers/EventTabBarController.m"; sourceTree = SOURCE_ROOT; };
-		F10007C21909D9DC00F2784A /* SummaryArticlesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SummaryArticlesViewController.h; sourceTree = "<group>"; };
-		F10007C31909D9DC00F2784A /* SummaryArticlesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SummaryArticlesViewController.m; sourceTree = "<group>"; };
+		F10007C21909D9DC00F2784A /* EventSummaryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EventSummaryViewController.h; path = ../EventSummaryViewController.h; sourceTree = "<group>"; };
+		F10007C31909D9DC00F2784A /* EventSummaryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EventSummaryViewController.m; path = ../EventSummaryViewController.m; sourceTree = "<group>"; };
 		F10007C51909DD5800F2784A /* CollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionView.h; sourceTree = "<group>"; };
 		F10007C61909DD5800F2784A /* CollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionView.m; sourceTree = "<group>"; };
 		F10007C71909DD5800F2784A /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
@@ -334,6 +334,19 @@
 				F10007E51909E2B900F2784A /* ShareViewController.m */,
 			);
 			name = Modals;
+			sourceTree = "<group>";
+		};
+		F11857C5190A081E00C3B16A /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				F194A53A18D2A0ED00792451 /* EventDetailViewController.h */,
+				F194A53B18D2A0ED00792451 /* EventDetailViewController.m */,
+				F10007B91909D02C00F2784A /* EventTabBarController.h */,
+				F10007BA1909D02C00F2784A /* EventTabBarController.m */,
+				F10007C21909D9DC00F2784A /* EventSummaryViewController.h */,
+				F10007C31909D9DC00F2784A /* EventSummaryViewController.m */,
+			);
+			name = Event;
 			sourceTree = "<group>";
 		};
 		F1203A0318BD379400DCEB3A /* graphik */ = {
@@ -567,10 +580,6 @@
 				F11857C4190A042D00C3B16A /* Modals */,
 				F194A52A18D2A0ED00792451 /* Collection */,
 				F194A53518D2A0ED00792451 /* Detail */,
-				F10007B91909D02C00F2784A /* EventTabBarController.h */,
-				F10007BA1909D02C00F2784A /* EventTabBarController.m */,
-				F10007C21909D9DC00F2784A /* SummaryArticlesViewController.h */,
-				F10007C31909D9DC00F2784A /* SummaryArticlesViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -597,8 +606,7 @@
 			children = (
 				F194A53618D2A0ED00792451 /* DetailViewController.h */,
 				F194A53718D2A0ED00792451 /* DetailViewController.m */,
-				F194A53A18D2A0ED00792451 /* EventDetailViewController.h */,
-				F194A53B18D2A0ED00792451 /* EventDetailViewController.m */,
+				F11857C5190A081E00C3B16A /* Event */,
 				F194A53818D2A0ED00792451 /* ConceptDetailViewController.h */,
 				F194A53918D2A0ED00792451 /* ConceptDetailViewController.m */,
 			);
@@ -850,7 +858,7 @@
 				F194A58118D2A0ED00792451 /* DetailViewController.m in Sources */,
 				F194A56B18D2A0ED00792451 /* AnimatedTransitioning.m in Sources */,
 				F194A57318D2A0ED00792451 /* Mention.m in Sources */,
-				F10007C41909D9DC00F2784A /* SummaryArticlesViewController.m in Sources */,
+				F10007C41909D9DC00F2784A /* EventSummaryViewController.m in Sources */,
 				F194A59018D2A0ED00792451 /* SummaryView.m in Sources */,
 				F194A56D18D2A0ED00792451 /* UIWindow+FauxStatusBar.m in Sources */,
 				F194A59818D2A0ED00792451 /* LoginView.m in Sources */,

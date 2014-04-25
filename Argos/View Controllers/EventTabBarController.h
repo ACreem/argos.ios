@@ -8,8 +8,11 @@
 
 #import "Event.h"
 
+#import "DetailView.h"
+
 @interface EventTabBarController : UITabBarController
 
+@property (nonatomic, weak) id <DetailViewProtocol> detailDelegate;
 @property (nonatomic, strong) Event *event;
 
 - (instancetype)initWithEvent:(Event*)event;

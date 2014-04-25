@@ -1,5 +1,5 @@
 //
-//  SummaryArticlesViewController.h
+//  EventSummaryViewController.h
 //  Argos
 //
 //  Created by Francis Tseng on 4/24/14.
@@ -10,10 +10,13 @@
 #import "SummaryView.h"
 #import "EmbeddedCollectionViewController.h"
 
-@interface SummaryArticlesViewController : UIViewController <EmbeddedCollectionViewControllerDelegate>
+#import "DetailView.h"
+
+@interface EventSummaryViewController : UIViewController <EmbeddedCollectionViewControllerDelegate>
 
 @property (nonatomic, strong) Event *event;
 @property (nonatomic, strong) UIScrollView *view;
+@property (nonatomic, weak) id <DetailViewProtocol> delegate;
 
 - (instancetype)initWithEvent:(Event*)event;
 

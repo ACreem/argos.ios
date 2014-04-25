@@ -1,23 +1,23 @@
 //
-//  SummaryArticlesViewController.m
+//  EventSummaryViewController.m
 //  Argos
 //
 //  Created by Francis Tseng on 4/24/14.
 //  Copyright (c) 2014 Argos. All rights reserved.
 //
 
-#import "SummaryArticlesViewController.h"
+#import "EventSummaryViewController.h"
 
 #import "Article.h"
 #import "Source.h"
 #import "ArticleViewCell.h"
 
-@interface SummaryArticlesViewController ()
+@interface EventSummaryViewController ()
 @property (nonatomic, strong) SummaryView *summaryView;
 @property (nonatomic, strong) EmbeddedCollectionViewController *articleList;
 @end
 
-@implementation SummaryArticlesViewController
+@implementation EventSummaryViewController
 
 - (instancetype)initWithEvent:(Event*)event {
     self = [super init];
@@ -101,6 +101,12 @@
 {
     _event = event;
     _summaryView.entity = event;
+}
+
+- (void)setDelegate:(id <DetailViewProtocol>)delegate
+{
+    _delegate = delegate;
+    self.summaryView.delegate = delegate;
 }
 
 # pragma mark - EmbeddedCollectionViewControllerDelegate

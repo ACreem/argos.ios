@@ -9,10 +9,10 @@
 #import "EventTabBarController.h"
 #import "EventListViewController.h"
 
-#import "SummaryArticlesViewController.h"
+#import "EventSummaryViewController.h"
 
 @interface EventTabBarController ()
-@property (nonatomic, strong) SummaryArticlesViewController *summaryViewController;
+@property (nonatomic, strong) EventSummaryViewController *summaryViewController;
 @property (nonatomic, strong) EventListViewController *eventListViewController;
 @end
 
@@ -25,7 +25,7 @@
         // Initialize view controllers.
         //EventListViewController *siblingEventsViewController = [[EventListViewController alloc] initWithTitle:@"Previous updates in this story"];
         //siblingEventsViewController.managedObjectContext = event.managedObjectContext;
-        _summaryViewController = [[SummaryArticlesViewController alloc] initWithEvent:event];
+        _summaryViewController = [[EventSummaryViewController alloc] initWithEvent:event];
         _summaryViewController.title = @"In Greater Depth";
         
         _eventListViewController = [[EventListViewController alloc] initWithTitle:@"Previous updates in this story"];
@@ -70,6 +70,12 @@
 {
     _event = event;
     _summaryViewController.event = event;
+}
+
+- (void)setDetailDelegate:(id<DetailViewProtocol>)detailDelegate
+{
+    _detailDelegate = detailDelegate;
+    self.summaryViewController.delegate = detailDelegate;
 }
 
 @end

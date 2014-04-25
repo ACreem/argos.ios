@@ -44,35 +44,18 @@
     self.view = [[EventDetailView alloc] initWithFrame:bounds forEvent:self.entity];
     self.view.delegate = self;
     
-    self.totalItems = self.entity.stories.count + self.entity.articles.count + self.entity.concepts.count;
-    
-    // Show story button if this event belongs to only one story.
-    if ([self.entity.stories count] == 1) {
-        
-    } else {
-        // Otherwise show a list of stories.
-        
-        UICollectionViewFlowLayout* flowLayout = [[UICollectionViewFlowLayout alloc] init];
-        [flowLayout setItemSize:CGSizeMake(CGRectGetWidth(self.view.frame), 80)];
-        self.storyList = [[EmbeddedCollectionViewController alloc] initWithCollectionViewLayout:flowLayout forEntityNamed:@"Story" withPredicate:[NSPredicate predicateWithFormat:@"SELF IN %@", self.entity.stories]];
-        self.storyList.managedObjectContext = self.entity.managedObjectContext;
-        self.storyList.delegate = self;
-        self.storyList.title = @"Stories";
-        [self.storyList.collectionView registerClass:[CollectionViewCell class] forCellWithReuseIdentifier:@"Cell"];
-        [self addChildViewController:self.storyList];
-        [self.view.scrollView addSubview:self.storyList.view];
-        [self.storyList didMoveToParentViewController:self];
-    }
-    [self getEntities:self.entity.stories forCollectionView:self.storyList];
+    self.totalItems = self.entity.articles.count + self.entity.concepts.count;
     
     [self getConcepts:self.entity.concepts];
     
-    //[self getEntities:self.entity.articles forCollectionView:self.articleList];
-        // Tab bar
+    // Tab bar
     EventTabBarController *eventTabBarController = [[EventTabBarController alloc] initWithEvent:self.entity];
+    eventTabBarController.detailDelegate = self;
     [self.view.scrollView addSubview:eventTabBarController.view];
     [self addChildViewController:eventTabBarController];
     [eventTabBarController didMoveToParentViewController:self];
+    
+    [self.view.scrollView sizeToFit];
 }
 
 - (NSArray*)navigationItems
@@ -145,34 +128,5 @@
         [self.entity unbookmark];
     }
 }
-
-# pragma mark - EmbeddedCollectionViewControllerDelegate
-- (ArticleViewCell*)configureCell:(ArticleViewCell *)cell atIndexPath:(NSIndexPath*)indexPath forEmbeddedCollectionViewController:(EmbeddedCollectionViewController *)embeddedCollectionViewController
-{
-    if (embeddedCollectionViewController == self.articleList) {
-        Article *article = [embeddedCollectionViewController.fetchedResultsController objectAtIndexPath:indexPath];
-        
-        cell.titleLabel.text = article.title;
-        cell.metaLabel.text = article.source.name;
-        cell.timeLabel.text = [article.createdAt timeAgo];
-        
-        if (!article.imageUrl) {
-            cell.imageView.hidden = YES;
-        }
-    }
-    return cell;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (collectionView == self.articleList.collectionView) {
-        Article *article = [[self.entity.articles allObjects] objectAtIndex:indexPath.row];
-        /*
-        WebViewController *webView = [[WebViewController alloc] initWithURL:article.extUrl];
-        [self.navigationController pushViewController:webView animated:YES];
-         */
-    }
-}
-
 
 @end
